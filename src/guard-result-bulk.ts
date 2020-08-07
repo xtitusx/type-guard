@@ -26,13 +26,13 @@ export class GuardResultBulk {
 
     /**
      * Méthode qui retourne le résultat de :
-     * - soit la première garde en échec.
-     * - soit une garde de succès générique.
+     * - soit la première garde en échec de la liste.
+     * - soit une garde en succès.
      * @return GuardResult
      */
     public combine(): GuardResult {
         for (const guardResult of this.guardResults) {
-            if (guardResult && !guardResult.isSuccess()) {
+            if (!guardResult?.isSuccess()) {
                 return guardResult;
             }
         }
@@ -43,7 +43,7 @@ export class GuardResultBulk {
     /**
      * Méthode qui retourne :
      * - soit les résultats des gardes en échec.
-     * - soit le résultat d'une garde de succès générique.
+     * - soit le résultat d'une garde en succès générique.
      * @todo
      * @return GuardResult | Array<GuardResult>
      */
