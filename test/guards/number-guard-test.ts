@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { NumberGuard } from '../../src/guard/number-guard';
+import { NumberGuard } from '../../src/guards/number-guard';
 
 describe('Number-Guard', () => {
     describe('#equals()', () => {

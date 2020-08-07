@@ -25,9 +25,9 @@ export class GuardResultBulk {
     }
 
     /**
-     * Méthode qui retourne le résultat de :
+     * Méthode qui retourne en résultat :
      * - soit la première garde en échec de la liste.
-     * - soit une garde en succès.
+     * - soit un succès.
      * @return GuardResult
      */
     public combine(): GuardResult {
@@ -41,9 +41,9 @@ export class GuardResultBulk {
     }
 
     /**
-     * Méthode qui retourne :
-     * - soit les résultats des gardes en échec.
-     * - soit le résultat d'une garde en succès générique.
+     * Méthode qui retourne en résultat :
+     * - soit les gardes en échec de la liste.
+     * - soit un succès.
      * @todo
      * @return GuardResult | Array<GuardResult>
      */

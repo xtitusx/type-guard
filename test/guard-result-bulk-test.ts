@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { StringGuard } from '../src/guard/string-guard';
+import { StringGuard } from '../src/guards/string-guard';
 import { GuardResultBulk } from '../src/guard-result-bulk';
 
 describe('Result-Bulk', () => {
