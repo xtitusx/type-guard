@@ -23,7 +23,7 @@ export abstract class Guard<T extends Rule> {
     public abstract checkRule(rule: T, value: unknown): GuardResult;
 
     /**
-     * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son typage est conforme à la garde utilisée.
+     * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son typage est approuvé par la garde utilisée.
      */
     protected abstract guardType(): void;
 
@@ -44,8 +44,7 @@ export abstract class Guard<T extends Rule> {
      * @param value unknown
      */
     protected addRule(rule: T): Array<T> {
-        const filtered = this.rules.filter((r) => r.type !== rule.type);
-        return [...filtered, rule];
+        return [...this.rules.filter((r) => r.type !== rule.type), rule];
     }
 
     /**

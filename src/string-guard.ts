@@ -173,7 +173,7 @@ export class StringGuard extends Guard<StringRule> {
      * @override
      */
     protected guardType(): void {
-        if (this.propertyValue === null || this.propertyValue === undefined) {
+        if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a string but received ${this.propertyValue}`

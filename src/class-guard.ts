@@ -42,7 +42,7 @@ export class ClassGuard extends Guard<ClassRule> {
      * @override
      */
     protected guardType(): void {
-        if (this.propertyValue === null || this.propertyValue === undefined) {
+        if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a class instance but received ${this.propertyValue}`

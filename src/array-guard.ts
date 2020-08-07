@@ -137,7 +137,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @override
      */
     protected guardType(): void {
-        if (this.propertyValue === null || this.propertyValue === undefined) {
+        if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected an Array object but received ${this.propertyValue}`

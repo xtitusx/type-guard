@@ -2,10 +2,9 @@
   "name": "type-guard",
   "version": "1.0.0",
   "description": "type-guard",
-  "main": "index.js",
   "scripts": {
     "build": "rimraf build && tsc",
-    "test": "mocha ./dest/test/**/*-test.js",
+    "test": "mocha ./dist/test/**/*-test.js",
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "prettier:check": "prettier --check  './**/*.{ts,md}'",
