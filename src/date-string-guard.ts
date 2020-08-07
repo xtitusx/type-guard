@@ -7,7 +7,12 @@ dayjs.extend(isSameOrAfter);
 import { GuardResult } from './guard-result';
 import { Guard } from './guard';
 
-type DateStringRule = { type: 'isSameOrBefore'; value: string } | { type: 'isSameOrAfter'; value: string };
+type DateStringRule =
+    | { type: 'isSame'; value: string }
+    | { type: 'isSameOrBefore'; value: string }
+    | { type: 'isSameOrAfter'; value: string }
+    | { type: 'isBefore'; value: string }
+    | { type: 'isAfter'; value: string };
 
 /** @class DateStringGuard
  * @extends {Guard<DAteStringRule>}
@@ -15,6 +20,16 @@ type DateStringRule = { type: 'isSameOrBefore'; value: string } | { type: 'isSam
 export class DateStringGuard extends Guard<DateStringRule> {
     constructor(rules?: DateStringRule[]) {
         super(rules);
+    }
+
+    /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une date est égale à une autre date.
+     * @param value string
+     */
+    public isSame(value: string): this {
+        this.rules = this.addRule({ type: 'isSame', value: value });
+        return this;
     }
 
     /**
@@ -38,12 +53,41 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une date est antérieure à une autre date.
+     * @param value string
+     */
+    public isBefore(value: string): this {
+        this.rules = this.addRule({ type: 'isBefore', value: value });
+        return this;
+    }
+
+    /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une date est postérieure à une autre date.
+     * @param value string
+     */
+    public isAfter(value: string): this {
+        this.rules = this.addRule({ type: 'isAfter', value: value });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule DateStringRule
      * @param value string
      */
     public checkRule(rule: DateStringRule, value: string): GuardResult {
         switch (rule.type) {
+            case 'isSame':
+                return dayjs(value).isSame(rule.value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `dateString is expected to be the same that ${rule.value} but is different ${value}`
+                          )
+                          .build();
             case 'isSameOrBefore':
                 return dayjs(value).isSameOrBefore(rule.value)
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -61,6 +105,20 @@ export class DateStringGuard extends Guard<DateStringRule> {
                           .withMessage(
                               `dateString is expected to be the same or after ${rule.value} but is before ${value}`
                           )
+                          .build();
+            case 'isBefore':
+                return dayjs(value).isBefore(rule.value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`dateString is expected to be before ${rule.value} but is after ${value}`)
+                          .build();
+            case 'isAfter':
+                return dayjs(value).isAfter(rule.value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`dateString is expected to be after ${rule.value} but is before ${value}`)
                           .build();
         }
     }
