@@ -1,4 +1,4 @@
-import { GuardResult } from './guard-result';
+import { GuardResult } from '../guard-result';
 import { Guard } from './guard';
 
 type NumberRule =

@@ -1,4 +1,4 @@
-import { GuardResult } from './guard-result';
+import { GuardResult } from '../guard-result';
 
 type Rule = { type: string };
 
@@ -23,7 +23,7 @@ export abstract class Guard<T extends Rule> {
     public abstract checkRule(rule: T, value: unknown): GuardResult;
 
     /**
-     * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son typage est approuvé par la garde utilisée.
+     * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son type est approuvé par la garde utilisée.
      */
     protected abstract guardType(): void;
 

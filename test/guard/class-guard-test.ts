@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { ClassGuard } from '../src/class-guard';
+import { ClassGuard } from '../../src/guard/class-guard';
 
 describe('Class-Guard', () => {
     describe('#isInstanceOf()', () => {

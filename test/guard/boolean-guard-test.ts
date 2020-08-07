@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { BooleanGuard } from '../src/boolean-guard';
+import { BooleanGuard } from '../../src/guard/boolean-guard';
 
 describe('Boolean-Guard', () => {
     describe('#isTrue()', () => {

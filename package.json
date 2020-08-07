@@ -4,7 +4,7 @@
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
   "scripts": {
     "build": "rimraf build && tsc",
-    "test": "mocha ./dist/test/**/*-test.js",
+    "test": "mocha ./build/test/**/**/*-test.js",
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "prettier:check": "prettier --check  './**/*.{ts,md}'",

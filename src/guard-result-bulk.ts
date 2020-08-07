@@ -2,7 +2,7 @@ import { GuardResult } from './guard-result';
 
 /**
  * @class GuardResultBulk
- * @description Collection des résultats de garde.
+ * @description Collection de résultats de garde.
  */
 export class GuardResultBulk {
     private guardResults: Array<GuardResult>;

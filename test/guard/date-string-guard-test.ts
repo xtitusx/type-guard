@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { DateStringGuard } from '../src/date-string-guard';
+import { DateStringGuard } from '../../src/guard/date-string-guard';
 
 describe('DateString-Guard', () => {
     describe('#isSameOrBefore()', () => {

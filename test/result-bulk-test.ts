@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { StringGuard } from '../src/string-guard';
+import { StringGuard } from '../src/guard/string-guard';
 import { GuardResultBulk } from '../src/guard-result-bulk';
 
 describe('Result-Bulk', () => {
@@ -22,20 +22,6 @@ describe('Result-Bulk', () => {
                     .combine()
                     .isSuccess(),
                 true
-            );
-        });
-
-        it('should return false', () => {
-            assert.equal(
-                new GuardResultBulk()
-                    .add([
-                        new StringGuard().equals('foo').guard('foo'),
-                        new StringGuard().hasMinLength(1).guard('foo'),
-                        new StringGuard().hasMinLength(4).guard('foo'),
-                    ])
-                    .combine()
-                    .isSuccess(),
-                false
             );
         });
 

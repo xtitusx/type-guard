@@ -1,5 +1,5 @@
-import { GuardResult } from './guard-result';
 import { Guard } from './guard';
+import { GuardResult } from '../guard-result';
 
 type StringRule =
     | { type: 'equals'; value: string }
