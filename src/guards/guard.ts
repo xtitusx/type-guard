@@ -43,7 +43,7 @@ export abstract class Guard<T extends Rule> {
      * @param rule T
      * @param value unknown
      */
-    protected addRule(rule: T): Array<T> {
+    protected addRule(rule: T): T[] {
         return [...this.rules.filter((r) => r.type !== rule.type), rule];
     }
 
@@ -53,6 +53,7 @@ export abstract class Guard<T extends Rule> {
      * - l'ensemble des règles chaînées.
      * @param propertyValue unknown
      * @param propertyName string (optionnel)
+     * @return GuardResult
      */
     public guard(propertyValue: unknown, propertyName?: string): GuardResult {
         this.propertyValue = propertyValue;

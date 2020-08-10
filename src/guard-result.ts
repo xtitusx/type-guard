@@ -1,13 +1,12 @@
-/**
- * @class GuardResult
- */
-
 interface IGuardResult {
     success: boolean;
     message?: string;
     propertyName?: string;
 }
 
+/**
+ * @class GuardResult
+ */
 export class GuardResult implements IGuardResult {
     success: boolean;
     message?: string;

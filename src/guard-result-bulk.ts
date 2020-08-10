@@ -5,7 +5,7 @@ import { GuardResult } from './guard-result';
  * @description Collection de résultats de garde.
  */
 export class GuardResultBulk {
-    private guardResults: Array<GuardResult>;
+    private guardResults: GuardResult[];
 
     constructor() {
         this.guardResults = [];
@@ -13,9 +13,9 @@ export class GuardResultBulk {
 
     /**
      * Méthode qui empile les résultats de garde.
-     * @param guardResults GuardResult | Array<GuardResult>
+     * @param guardResults GuardResult | GuardResult[]
      */
-    public add(guardResults: GuardResult | Array<GuardResult>): this {
+    public add(guardResults: GuardResult | GuardResult[]): this {
         if (guardResults) {
             Array.isArray(guardResults)
                 ? this.guardResults.push(...(guardResults as []))
@@ -26,7 +26,7 @@ export class GuardResultBulk {
 
     /**
      * Méthode qui retourne en résultat :
-     * - soit la première garde en échec de la liste.
+     * - soit la première garde de la liste en échec.
      * - soit un succès.
      * @return GuardResult
      */
@@ -42,12 +42,13 @@ export class GuardResultBulk {
 
     /**
      * Méthode qui retourne en résultat :
-     * - soit les gardes en échec de la liste.
+     * - soit les gardes de la liste en échec.
      * - soit un succès.
-     * @todo
-     * @return GuardResult | Array<GuardResult>
+     * @return GuardResult[]
      */
-    public stack(): GuardResult | Array<GuardResult> {
-        throw new Error('Method not implemented.');
+    public stack(): GuardResult[] {
+        const fails = [...this.guardResults.filter((guardResult) => !guardResult?.isSuccess())];
+
+        return fails.length ? fails : [...fails, new GuardResult.Builder().withSuccess(true).build()];
     }
 }
