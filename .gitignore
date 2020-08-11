@@ -27,8 +27,10 @@ $RECYCLE.BIN/
 
 # IDE - VSCode
 .vscode/**
+!.vscode/extensions.json
+!.vscode/settings.json
 !.vscode/tasks.json
-!.vscode/launch.json
+!.vscode/*-workspace
 
 # IDE - IntelliJ
 .idea
