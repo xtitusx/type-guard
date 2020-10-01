@@ -17,7 +17,7 @@ export class ClassGuard extends Guard<ClassRule> {
      * @param value number
      */
     public isInstanceOf(value: Function): this {
-        this.rules = this.addRule({ type: 'isInstanceOf', value: value });
+        this.addRule({ type: 'isInstanceOf', value: value });
         return this;
     }
 

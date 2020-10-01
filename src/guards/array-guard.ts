@@ -22,7 +22,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @description Règle qui vérifie si un objet Array est vide.
      */
     public isEmpty(): this {
-        this.rules = this.addRule({ type: 'isEmpty' });
+        this.addRule({ type: 'isEmpty' });
         return this;
     }
 
@@ -31,7 +31,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @description Règle qui vérifie si un objet Array n'est pas vide.
      */
     public isNotEmpty(): this {
-        this.rules = this.addRule({ type: 'isNotEmpty' });
+        this.addRule({ type: 'isNotEmpty' });
         return this;
     }
 
@@ -41,7 +41,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @param value number
      */
     public hasSize(value: number): this {
-        this.rules = this.addRule({ type: 'hasSize', value: value });
+        this.addRule({ type: 'hasSize', value: value });
         return this;
     }
 
@@ -51,7 +51,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @param min number
      */
     public hasMinSize(min: number): this {
-        this.rules = this.addRule({ type: 'hasMinSize', min: min });
+        this.addRule({ type: 'hasMinSize', min: min });
         return this;
     }
 
@@ -61,7 +61,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @param max number
      */
     public hasMaxSize(max: number): this {
-        this.rules = this.addRule({ type: 'hasMaxSize', max: max });
+        this.addRule({ type: 'hasMaxSize', max: max });
         return this;
     }
 
@@ -71,7 +71,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @param value any
      */
     public contains(value: unknown): this {
-        this.rules = this.addRule({ type: 'contains', value: value });
+        this.addRule({ type: 'contains', value: value });
         return this;
     }
 

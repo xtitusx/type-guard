@@ -16,7 +16,7 @@ export class BooleanGuard extends Guard<BooleanRule> {
      * @description Règle qui vérifie si un booléen est vrai.
      */
     public isTrue(): this {
-        this.rules = this.addRule({ type: 'isTrue', value: true });
+        this.addRule({ type: 'isTrue', value: true });
         return this;
     }
 
@@ -25,7 +25,7 @@ export class BooleanGuard extends Guard<BooleanRule> {
      * @description Règle qui vérifie si un booléen est faux.
      */
     public isFalse(): this {
-        this.rules = this.addRule({ type: 'isFalse', value: false });
+        this.addRule({ type: 'isFalse', value: false });
         return this;
     }
 

@@ -28,7 +28,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param value string
      */
     public isSame(value: string): this {
-        this.rules = this.addRule({ type: 'isSame', value: value });
+        this.addRule({ type: 'isSame', value: value });
         return this;
     }
 
@@ -38,7 +38,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param value string
      */
     public isSameOrBefore(value: string): this {
-        this.rules = this.addRule({ type: 'isSameOrBefore', value: value });
+        this.addRule({ type: 'isSameOrBefore', value: value });
         return this;
     }
 
@@ -48,7 +48,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param value string
      */
     public isSameOrAfter(value: string): this {
-        this.rules = this.addRule({ type: 'isSameOrAfter', value: value });
+        this.addRule({ type: 'isSameOrAfter', value: value });
         return this;
     }
 
@@ -58,7 +58,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param value string
      */
     public isBefore(value: string): this {
-        this.rules = this.addRule({ type: 'isBefore', value: value });
+        this.addRule({ type: 'isBefore', value: value });
         return this;
     }
 
@@ -68,7 +68,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param value string
      */
     public isAfter(value: string): this {
-        this.rules = this.addRule({ type: 'isAfter', value: value });
+        this.addRule({ type: 'isAfter', value: value });
         return this;
     }
 

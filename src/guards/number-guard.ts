@@ -21,7 +21,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @param value number
      */
     public equals(value: number): this {
-        this.rules = this.addRule({ type: 'equals', value: value });
+        this.addRule({ type: 'equals', value: value });
         return this;
     }
 
@@ -31,7 +31,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @param min number
      */
     public isMin(min: number): this {
-        this.rules = this.addRule({ type: 'isMin', min: min });
+        this.addRule({ type: 'isMin', min: min });
         return this;
     }
 
@@ -41,7 +41,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @param max number
      */
     public isMax(max: number): this {
-        this.rules = this.addRule({ type: 'isMax', max: max });
+        this.addRule({ type: 'isMax', max: max });
         return this;
     }
 
@@ -52,7 +52,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @param max number
      */
     public isIn(min: number, max: number): this {
-        this.rules = this.addRule({ type: 'isIn', min: min, max: max });
+        this.addRule({ type: 'isIn', min: min, max: max });
         return this;
     }
 

@@ -25,7 +25,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param value string
      */
     public equals(value: string): this {
-        this.rules = this.addRule({ type: 'equals', value: value });
+        this.addRule({ type: 'equals', value: value });
         return this;
     }
 
@@ -35,7 +35,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param value string
      */
     public contains(value: string): this {
-        this.rules = this.addRule({ type: 'contains', value: value });
+        this.addRule({ type: 'contains', value: value });
         return this;
     }
 
@@ -45,7 +45,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param value RegExp
      */
     public matches(value: RegExp): this {
-        this.rules = this.addRule({ type: 'matches', value: value });
+        this.addRule({ type: 'matches', value: value });
         return this;
     }
 
@@ -54,7 +54,7 @@ export class StringGuard extends Guard<StringRule> {
      * @description Règle qui vérifie si une chaîne de caractères est vide ("").
      */
     public isEmpty(): this {
-        this.rules = this.addRule({ type: 'isEmpty' });
+        this.addRule({ type: 'isEmpty' });
         return this;
     }
 
@@ -63,7 +63,7 @@ export class StringGuard extends Guard<StringRule> {
      * @description Règle qui vérifie si une chaîne de caractères n'est pas vide.
      */
     public isNotEmpty(): this {
-        this.rules = this.addRule({ type: 'isNotEmpty' });
+        this.addRule({ type: 'isNotEmpty' });
         return this;
     }
 
@@ -73,7 +73,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param value number
      */
     public hasLength(value: number): this {
-        this.rules = this.addRule({ type: 'hasLength', value: value });
+        this.addRule({ type: 'hasLength', value: value });
         return this;
     }
 
@@ -83,7 +83,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param min number
      */
     public hasMinLength(min: number): this {
-        this.rules = this.addRule({ type: 'hasMinLength', min: min });
+        this.addRule({ type: 'hasMinLength', min: min });
         return this;
     }
 
@@ -93,7 +93,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param max number
      */
     public hasMaxLength(max: number): this {
-        this.rules = this.addRule({ type: 'hasMaxLength', max: max });
+        this.addRule({ type: 'hasMaxLength', max: max });
         return this;
     }
 

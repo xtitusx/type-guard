@@ -37,14 +37,13 @@ export abstract class Guard<T extends Rule> {
     }
 
     /**
-     * Méthode qui ajoute une règle à la liste de règles, ou remplace une règle déjà existante.
+     * Méthode qui ajoute un type de règle à la liste de règles, ou remplace un type de règle déjà existant.
      *
      * Un seul type de règle est donc retenu dans la garde.
      * @param rule T
-     * @param value unknown
      */
-    protected addRule(rule: T): T[] {
-        return [...this.rules.filter((r) => r.type !== rule.type), rule];
+    protected addRule(rule: T): void {
+        this.rules = [...this.rules.filter((r) => r.type !== rule.type), rule];
     }
 
     /**
