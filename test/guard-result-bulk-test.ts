@@ -55,7 +55,7 @@ describe('Guard-Result-Bulk', () => {
     });
 
     describe('#stack()', () => {
-        it('should return true', () => {
+        it('should return [ true ]', () => {
             assert.equal(
                 new GuardResultBulk()
                     .add([new StringGuard().equals('foo').guard('foo')])
@@ -65,23 +65,33 @@ describe('Guard-Result-Bulk', () => {
             );
         });
 
-        it('should return true', () => {
-            assert.equal(
-                new GuardResultBulk()
-                    .add([new StringGuard().equals('foo').guard('foo'), new StringGuard().equals('bar').guard('bar')])
-                    .stack()[0]
-                    .isSuccess(),
-                true
-            );
-        });
-
-        it('should return false', () => {
+        it('should return [ false ]', () => {
             assert.equal(
                 (new GuardResultBulk()
                     .add([new StringGuard().equals('foo').guard('bar', 'toto')])
                     .stack() as GuardResult[])[0].isSuccess(),
                 false
             );
+        });
+
+        it('should return [ false ]', () => {
+            const guardResultBulk = new GuardResultBulk()
+                .add([new StringGuard().equals('foo').guard('foo'), new StringGuard().equals('foo').guard('bar')])
+                .stack();
+
+            assert.equal(guardResultBulk[0].isSuccess(), false);
+        });
+
+        it('should return [ false, false ]', () => {
+            const guardResultBulk = new GuardResultBulk()
+                .add([
+                    new StringGuard().equals('foo').guard('foo'),
+                    new StringGuard().equals('foo').guard('bar'),
+                    new StringGuard().equals('foo').guard('bar'),
+                ])
+                .stack();
+            assert.equal(guardResultBulk[0].isSuccess(), false);
+            assert.equal(guardResultBulk[1].isSuccess(), false);
         });
     });
 });

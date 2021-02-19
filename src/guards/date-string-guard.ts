@@ -15,7 +15,7 @@ type DateStringRule =
     | { type: 'isAfter'; value: string };
 
 /** @class DateStringGuard
- * @extends {Guard<DAteStringRule>}
+ * @extends {Guard<DateStringRule>}
  */
 export class DateStringGuard extends Guard<DateStringRule> {
     constructor(rules?: DateStringRule[]) {

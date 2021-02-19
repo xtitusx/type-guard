@@ -45,9 +45,7 @@ export class GuardResult implements IGuardResult {
 
     constructor(build?: IGuardResult) {
         if (build) {
-            this.success = build.success;
-            this.message = build.message;
-            this.propertyName = build.propertyName;
+            Object.assign(this, build);
         }
     }
 
