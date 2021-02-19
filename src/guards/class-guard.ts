@@ -33,7 +33,7 @@ export class ClassGuard extends Guard<ClassRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`Value is expected to be an instance of ${rule.value.name}`)
+                          .withMessage(`Value is expected to be an instance of: ${rule.value.name}`)
                           .build();
         }
     }
@@ -45,12 +45,12 @@ export class ClassGuard extends Guard<ClassRule> {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a class instance but received ${this.propertyValue}`
+                `${this.constructor.name} expected a class instance but received: ${this.propertyValue}`
             );
         } else if (typeof this.propertyValue !== 'object') {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a class instance but received ${typeof this.propertyValue}`
+                `${this.constructor.name} expected a class instance but received: ${typeof this.propertyValue}`
             );
         } else if (!this.propertyValue.constructor && !this.propertyValue.constructor.name) {
             this.getCombinedGuardResult().setSuccess(false);

@@ -170,4 +170,68 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().hasMaxLength(1).guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isAlphaNumeric()', () => {
+        it("should return true when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isAlphaNum().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isAlphaNum().guard(undefined).isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'foo '", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('foo ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'foo1'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('foo1').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'foo$'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('foo$').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'foo\\'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('foo\\').isSuccess(), false);
+        });
+    });
+
+    describe('#isNumeric()', () => {
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1234567890'", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('1234567890').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isNumeric().guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isAlphaNum().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isAlphaNum().guard(undefined).isSuccess(), false);
+        });
+
+        it("should return false when tested value is '123 '", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('123 ').isSuccess(), false);
+        });
+    });
 });

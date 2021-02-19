@@ -36,7 +36,7 @@ describe('Guard-Result-Bulk', () => {
                 .combine();
 
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'string is expected to have min length of 4 but has length of 3');
+            assert.equal(guardResult.getMessage(), 'string is expected to have min length of 4 but has length of: 3');
         });
 
         it('should return false from second bulked guard', () => {
@@ -50,7 +50,7 @@ describe('Guard-Result-Bulk', () => {
                 .combine();
 
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'string is expected to have min length of 4 but has length of 3');
+            assert.equal(guardResult.getMessage(), 'string is expected to have min length of 4 but has length of: 3');
         });
     });
 

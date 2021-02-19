@@ -40,7 +40,9 @@ export class BooleanGuard extends Guard<BooleanRule> {
             case 'isFalse':
                 return value === rule.value
                     ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder().withSuccess(false).withMessage(`boolean is not ${rule.value}`).build();
+                    : new GuardResult.Builder()
+                          .withMessage(`boolean is expected to be ${rule.value} but is not: ${value}`)
+                          .build();
         }
     }
 
@@ -51,12 +53,12 @@ export class BooleanGuard extends Guard<BooleanRule> {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a boolean but received ${this.propertyValue}`
+                `${this.constructor.name} expected a boolean but received: ${this.propertyValue}`
             );
         } else if (typeof this.propertyValue !== 'boolean') {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a boolean but received ${typeof this.propertyValue}`
+                `${this.constructor.name} expected a boolean but received: ${typeof this.propertyValue}`
             );
         }
     }

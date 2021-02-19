@@ -87,14 +87,14 @@ export class ArrayGuard extends Guard<ArrayRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`Array object is expected to be empty but has length of ${value.length}`)
+                          .withMessage(`Array object is expected to be empty but has length of: ${value.length}`)
                           .build();
             case 'isNotEmpty':
                 return value.length !== 0
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`Array object is expected to not be empty but has length of ${value.length}`)
+                          .withMessage(`Array object is expected to not be empty but has length of: ${value.length}`)
                           .build();
             case 'hasSize':
                 return value.length === rule.value
@@ -102,7 +102,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `Array object is expected to have length of ${rule.value} but has length of ${value.length}`
+                              `Array object is expected to have length of ${rule.value} but has length of: ${value.length}`
                           )
                           .build();
             case 'hasMinSize':
@@ -111,7 +111,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `Array object is expected to have min length of ${rule.min} but has length of ${value.length}`
+                              `Array object is expected to have min length of ${rule.min} but has length of: ${value.length}`
                           )
                           .build();
             case 'hasMaxSize':
@@ -120,7 +120,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `Array object is expected to have max length of ${rule.max} but has length of ${value.length}`
+                              `Array object is expected to have max length of ${rule.max} but has length of: ${value.length}`
                           )
                           .build();
             case 'contains':
@@ -128,7 +128,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`Array object does not contain ${rule.value} value`)
+                          .withMessage(`Array object is expected to contain ${rule.value} value but is not`)
                           .build();
         }
     }
@@ -140,12 +140,12 @@ export class ArrayGuard extends Guard<ArrayRule> {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected an Array object but received ${this.propertyValue}`
+                `${this.constructor.name} expected an Array object but received: ${this.propertyValue}`
             );
         } else if (!Array.isArray(this.propertyValue)) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected an Array object but received ${typeof this.propertyValue}`
+                `${this.constructor.name} expected an Array object but received: ${typeof this.propertyValue}`
             );
         }
     }

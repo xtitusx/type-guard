@@ -68,7 +68,7 @@ export class NumberGuard extends Guard<NumberRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`number is expected to be ${rule.value} but is ${value}`)
+                          .withMessage(`number is expected to be ${rule.value} but is not: ${value}`)
                           .build();
             case 'isMin':
                 return value >= rule.min
@@ -76,7 +76,7 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `number is expected to be equal or greater than ${rule.min} but is smaller ${value}`
+                              `number is expected to be equal or greater than ${rule.min} but is smaller: ${value}`
                           )
                           .build();
             case 'isMax':
@@ -85,7 +85,7 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `number is expected to be equal or smaller than ${rule.max} but is greater ${value}`
+                              `number is expected to be equal or smaller than ${rule.max} but is greater: ${value}`
                           )
                           .build();
             case 'isIn':
@@ -94,7 +94,7 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `number is expected to be within range ${rule.min} to ${rule.max} but is ${value}`
+                              `number is expected to be within range ${rule.min} to ${rule.max} but is not: ${value}`
                           )
                           .build();
         }
@@ -107,12 +107,12 @@ export class NumberGuard extends Guard<NumberRule> {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a number but received ${this.propertyValue}`
+                `${this.constructor.name} expected a number but received: ${this.propertyValue}`
             );
         } else if (typeof this.propertyValue !== 'number') {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a number but received ${typeof this.propertyValue}`
+                `${this.constructor.name} expected a number but received: ${typeof this.propertyValue}`
             );
         }
     }

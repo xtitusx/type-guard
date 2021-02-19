@@ -9,7 +9,9 @@ type StringRule =
     | { type: 'isNotEmpty' }
     | { type: 'hasLength'; value: number }
     | { type: 'hasMinLength'; min: number }
-    | { type: 'hasMaxLength'; max: number };
+    | { type: 'hasMaxLength'; max: number }
+    | { type: 'isAlphaNum' }
+    | { type: 'isNumeric' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -98,6 +100,24 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une chaîne de caractères ne contient que des caractères alphanumériques.
+     */
+    public isAlphaNum(): this {
+        this.addRule({ type: 'isAlphaNum' });
+        return this;
+    }
+
+    /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une chaîne de caractères ne contient que des caractères numériques.
+     */
+    public isNumeric(): this {
+        this.addRule({ type: 'isNumeric' });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule StringRule
      * @param value string
@@ -109,35 +129,35 @@ export class StringGuard extends Guard<StringRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to be ${rule.value} but is ${value}`)
+                          .withMessage(`string is expected to be ${rule.value} but is not: ${value}`)
                           .build();
             case 'contains':
                 return value.indexOf(rule.value) !== -1
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to contain ${rule.value} but is ${value}`)
+                          .withMessage(`string is expected to contain ${rule.value} but is not: ${value}`)
                           .build();
             case 'matches':
                 return value.match(rule.value) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to match ${rule.value} regex but is ${value}`)
+                          .withMessage(`string is expected to match ${rule.value} regex but is not: ${value}`)
                           .build();
             case 'isEmpty':
                 return value.length === 0
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to be empty but has length of ${value.length}`)
+                          .withMessage(`string is expected to be empty but has length of: ${value.length}`)
                           .build();
             case 'isNotEmpty':
                 return value.length !== 0
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to not be empty but has length of ${value.length}`)
+                          .withMessage(`string is expected to not be empty but has length of: ${value.length}`)
                           .build();
             case 'hasLength':
                 return value.length === rule.value
@@ -145,7 +165,7 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to have length of ${rule.value} but has length of ${value.length}`
+                              `string is expected to have length of ${rule.value} but has length of: ${value.length}`
                           )
                           .build();
             case 'hasMinLength':
@@ -154,7 +174,7 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to have min length of ${rule.min} but has length of ${value.length}`
+                              `string is expected to have min length of ${rule.min} but has length of: ${value.length}`
                           )
                           .build();
             case 'hasMaxLength':
@@ -163,8 +183,24 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to have max length of ${rule.max} but has length of ${value.length}`
+                              `string is expected to have max length of ${rule.max} but has length of: ${value.length}`
                           )
+                          .build();
+            case 'isAlphaNum':
+                return value.match(/^[0-9a-zA-Z]+$/) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain alphanumeric characters but is not: ${value}`
+                          )
+                          .build();
+            case 'isNumeric':
+                return value.match(/^[0-9]+$/) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
                           .build();
         }
     }
