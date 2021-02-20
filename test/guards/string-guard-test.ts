@@ -234,4 +234,46 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isAlphaNum().guard('123 ').isSuccess(), false);
         });
     });
+
+    describe('#isObjectId()', () => {
+        it("should return true when tested value is '507f1f77bcf86cd799439011'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd799439011').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '507F1F77BCF86CD799439011'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('507F1F77BCF86CD799439011').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '112345679065574883030833'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('112345679065574883030833').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'FFFFFFFFFFFFFFFFFFFFFFFF'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('FFFFFFFFFFFFFFFFFFFFFFFF').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd79943901'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd79943901').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd79943901g'", () => {
+            assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd79943901g').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isObjectId().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isObjectId().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isObjectId().guard(undefined).isSuccess(), false);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd799439011 '", () => {
+            assert.equal(new StringGuard().isAlphaNum().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
+        });
+    });
 });

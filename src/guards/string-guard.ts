@@ -11,7 +11,8 @@ type StringRule =
     | { type: 'hasMinLength'; min: number }
     | { type: 'hasMaxLength'; max: number }
     | { type: 'isAlphaNum' }
-    | { type: 'isNumeric' };
+    | { type: 'isNumeric' }
+    | { type: 'isObjectId' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -118,6 +119,16 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si une chaîne de caractères est au format ObjectId.
+     * @param max number
+     */
+    public isObjectId(): this {
+        this.addRule({ type: 'isObjectId' });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule StringRule
      * @param value string
@@ -202,6 +213,13 @@ export class StringGuard extends Guard<StringRule> {
                           .withSuccess(false)
                           .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
                           .build();
+            case 'isObjectId':
+                return value.match(/^[a-f\d]{24}$/i) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to be an ObjectId but is not: ${value}`)
+                          .build();
         }
     }
 
@@ -212,12 +230,12 @@ export class StringGuard extends Guard<StringRule> {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a string but received ${this.propertyValue}`
+                `${this.constructor.name} expected a string but received: ${this.propertyValue}`
             );
         } else if (typeof this.propertyValue !== 'string') {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a string but received ${typeof this.propertyValue}`
+                `${this.constructor.name} expected a string but received: ${typeof this.propertyValue}`
             );
         }
     }
