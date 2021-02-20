@@ -174,4 +174,34 @@ describe('Number-Guard', () => {
             assert.equal(new NumberGuard().isNegative().guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isWhole()', () => {
+        it('should return true when tested value is 1', () => {
+            assert.equal(new NumberGuard().isWhole().guard(1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is -1', () => {
+            assert.equal(new NumberGuard().isWhole().guard(-1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 0', () => {
+            assert.equal(new NumberGuard().isWhole().guard(0).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isWhole().guard(1.1).isSuccess(), false);
+        });
+
+        it('should return true when tested value is 1.0', () => {
+            assert.equal(new NumberGuard().isWhole().guard(1.0).isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isWhole().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isWhole().guard(undefined).isSuccess(), false);
+        });
+    });
 });

@@ -7,7 +7,8 @@ type NumberRule =
     | { type: 'isMax'; max: number }
     | { type: 'isIn'; min: number; max: number }
     | { type: 'isPositive' }
-    | { type: 'isNegative' };
+    | { type: 'isNegative' }
+    | { type: 'isWhole' };
 
 /** @class NumberGuard
  * @extends {Guard<NumberRule>}
@@ -77,6 +78,15 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si un nombre est entier.
+     */
+    public isWhole(): this {
+        this.addRule({ type: 'isWhole' });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule NumberRule
      * @param value number
@@ -130,6 +140,13 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`number is expected to be smaller than zero but is greater: ${value}`)
+                          .build();
+            case 'isWhole':
+                return Number.isInteger(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a whole number but is not: ${value}`)
                           .build();
         }
     }
