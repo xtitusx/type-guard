@@ -8,6 +8,10 @@ describe('Number-Guard', () => {
             assert.equal(new NumberGuard().equals(1).guard(1).isSuccess(), true);
         });
 
+        it('should return true when param is 1.1 and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().equals(1.1).guard(1.1).isSuccess(), true);
+        });
+
         it('should return false when param is 2 and tested value is 1', () => {
             assert.equal(new NumberGuard().equals(2).guard(1).isSuccess(), false);
         });
@@ -24,6 +28,10 @@ describe('Number-Guard', () => {
     describe('#isMin()', () => {
         it('should return true when param is 3 and tested value is 4', () => {
             assert.equal(new NumberGuard().isMin(3).guard(4).isSuccess(), true);
+        });
+
+        it('should return true when param is 3.1 and tested value is 4.1', () => {
+            assert.equal(new NumberGuard().isMin(3.1).guard(4.1).isSuccess(), true);
         });
 
         it('should return true when param is 3 and tested value is 3', () => {
@@ -46,9 +54,14 @@ describe('Number-Guard', () => {
             assert.equal(new NumberGuard().isMin(1).guard(undefined).isSuccess(), false);
         });
     });
+
     describe('#isMax()', () => {
         it('should return true when param is 4 and tested value is 3', () => {
             assert.equal(new NumberGuard().isMax(4).guard(3).isSuccess(), true);
+        });
+
+        it('should return true when param is 4.1 and tested value is 3.1', () => {
+            assert.equal(new NumberGuard().isMax(4.1).guard(3.1).isSuccess(), true);
         });
 
         it('should return true when param is 3 and tested value is 3', () => {
@@ -77,6 +90,10 @@ describe('Number-Guard', () => {
             assert.equal(new NumberGuard().isIn(1, 3).guard(2).isSuccess(), true);
         });
 
+        it('should return true when params are 1.1 and 3.1, and tested value is 2.1', () => {
+            assert.equal(new NumberGuard().isIn(1.1, 3.1).guard(2.1).isSuccess(), true);
+        });
+
         it('should return true when params are 1 and 3, and tested value is 1', () => {
             assert.equal(new NumberGuard().isIn(1, 3).guard(1).isSuccess(), true);
         });
@@ -103,6 +120,58 @@ describe('Number-Guard', () => {
 
         it('should return false when param  are 1 and 1, and tested value is undefined', () => {
             assert.equal(new NumberGuard().isIn(1, 1).guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isPositive()', () => {
+        it('should return true when tested value is 1', () => {
+            assert.equal(new NumberGuard().isPositive().guard(1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isPositive().guard(1.1).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 0', () => {
+            assert.equal(new NumberGuard().isPositive().guard(0).isSuccess(), false);
+        });
+
+        it('should return false when tested value is -1', () => {
+            assert.equal(new NumberGuard().isPositive().guard(-1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isPositive().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isPositive().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isNegative()', () => {
+        it('should return true when tested value is -1', () => {
+            assert.equal(new NumberGuard().isNegative().guard(-1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is -1.1', () => {
+            assert.equal(new NumberGuard().isNegative().guard(-1.1).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 0', () => {
+            assert.equal(new NumberGuard().isNegative().guard(0).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 1', () => {
+            assert.equal(new NumberGuard().isNegative().guard(1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isNegative().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isNegative().guard(undefined).isSuccess(), false);
         });
     });
 });

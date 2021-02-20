@@ -5,7 +5,9 @@ type NumberRule =
     | { type: 'equals'; value: number }
     | { type: 'isMin'; min: number }
     | { type: 'isMax'; max: number }
-    | { type: 'isIn'; min: number; max: number };
+    | { type: 'isIn'; min: number; max: number }
+    | { type: 'isPositive' }
+    | { type: 'isNegative' };
 
 /** @class NumberGuard
  * @extends {Guard<NumberRule>}
@@ -57,6 +59,24 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si un nombre est supérieur à zéro.
+     */
+    public isPositive(): this {
+        this.addRule({ type: 'isPositive' });
+        return this;
+    }
+
+    /**
+     * @summary Méthode chainable.
+     * @description Règle qui vérifie si un nombre est inférieur à zéro.
+     */
+    public isNegative(): this {
+        this.addRule({ type: 'isNegative' });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule NumberRule
      * @param value number
@@ -96,6 +116,20 @@ export class NumberGuard extends Guard<NumberRule> {
                           .withMessage(
                               `number is expected to be within range ${rule.min} to ${rule.max} but is not: ${value}`
                           )
+                          .build();
+            case 'isPositive':
+                return value > 0
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be greater than zero but is smaller: ${value}`)
+                          .build();
+            case 'isNegative':
+                return value < 0
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be smaller than zero but is greater: ${value}`)
                           .build();
         }
     }
