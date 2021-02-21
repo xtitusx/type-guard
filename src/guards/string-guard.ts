@@ -14,6 +14,7 @@ type StringRule =
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
+    | { type: 'isHex' }
     | { type: 'isObjectId' };
 
 /** @class StringGuard
@@ -131,8 +132,16 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
+     * @description Checks if string is a representation of a hexadecimal number.
+     */
+    public isHex(): this {
+        this.addRule({ type: 'isHex' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
      * @description Checks if string is a representation of an ObjectId (24 byte hex).
-     * @param max number
      */
     public isObjectId(): this {
         this.addRule({ type: 'isObjectId' });
@@ -230,6 +239,13 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
+                          .build();
+            case 'isHex':
+                return value.match(/^[a-f\d]+$/i) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to be a hexadecimal number but is not: ${value}`)
                           .build();
             case 'isObjectId':
                 return value.match(/^[a-f\d]{24}$/i) !== null

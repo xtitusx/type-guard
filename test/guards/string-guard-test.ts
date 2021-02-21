@@ -269,6 +269,48 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isHex()', () => {
+        it("should return true when tested value is '5'", () => {
+            assert.equal(new StringGuard().isHex().guard('51').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '507f1'", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '507F1'", () => {
+            assert.equal(new StringGuard().isHex().guard('507F1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '112345679065574883030833'", () => {
+            assert.equal(new StringGuard().isHex().guard('112345679065574883030833').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'FFFFFFFFFFFFFFFFFFFFFFFF'", () => {
+            assert.equal(new StringGuard().isHex().guard('FFFFFFFFFFFFFFFFFFFFFFFF').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd79943901g'", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd79943901g').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd799439011 '", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isHex().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isHex().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isHex().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isObjectId()', () => {
         it("should return true when tested value is '507f1f77bcf86cd799439011'", () => {
             assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd799439011').isSuccess(), true);
@@ -294,12 +336,12 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd79943901g').isSuccess(), false);
         });
 
-        it("should return false when tested value is ''", () => {
-            assert.equal(new StringGuard().isObjectId().guard('').isSuccess(), false);
-        });
-
         it("should return false when tested value is '507f1f77bcf86cd799439011 '", () => {
             assert.equal(new StringGuard().isObjectId().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isObjectId().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
