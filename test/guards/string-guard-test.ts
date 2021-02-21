@@ -352,4 +352,46 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isObjectId().guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isHexColor()', () => {
+        it("should return true when tested value is '#000000'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('#000000').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '#FFFFFF'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('#FFFFFF').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '#AA33FF'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('#AA33FF').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '#aa33ff'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('#aa33ff').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '000000'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('000000').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '#AA33FFA'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('AA33FFA').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '#AA33FG'", () => {
+            assert.equal(new StringGuard().isHexColor().guard('AA33FG').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isHexColor().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isHexColor().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isHexColor().guard(undefined).isSuccess(), false);
+        });
+    });
 });

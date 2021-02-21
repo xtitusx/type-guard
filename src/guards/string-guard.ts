@@ -15,7 +15,8 @@ type StringRule =
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
     | { type: 'isHex' }
-    | { type: 'isObjectId' };
+    | { type: 'isObjectId' }
+    | { type: 'isHexColor' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -142,9 +143,20 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * @summary Chainable method.
      * @description Checks if string is a representation of an ObjectId (24 byte hex).
+     * @example 507f1f77bcf86cd799439011, 507F1F77BCF86CD799439011
      */
     public isObjectId(): this {
         this.addRule({ type: 'isObjectId' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string is a representation of a hexadecimal color number.
+     * @example #000000, #ffffff
+     */
+    public isHexColor(): this {
+        this.addRule({ type: 'isHexColor' });
         return this;
     }
 
@@ -253,6 +265,13 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to be an ObjectId but is not: ${value}`)
+                          .build();
+            case 'isHexColor':
+                return value.match(/^#[0-9A-F]{6}$/i) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to be a hexadecimal color number but is not: ${value}`)
                           .build();
         }
     }
