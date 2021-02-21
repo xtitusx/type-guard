@@ -68,6 +68,13 @@ describe('DateString-Guard', () => {
             );
         });
 
+        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is 'foo'", () => {
+            assert.equal(
+                new DateStringGuard().isSameOrBefore('2015-01-20T00:00:00+02:00').guard('foo').isSuccess(),
+                false
+            );
+        });
+
         it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is null", () => {
             assert.equal(
                 new DateStringGuard().isSameOrBefore('2015-01-20T00:00:00+02:00').guard(null).isSuccess(),
@@ -78,13 +85,6 @@ describe('DateString-Guard', () => {
         it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is undefined", () => {
             assert.equal(
                 new DateStringGuard().isSameOrBefore('2015-01-20T00:00:00+02:00').guard(undefined).isSuccess(),
-                false
-            );
-        });
-
-        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is 'foo'", () => {
-            assert.equal(
-                new DateStringGuard().isSameOrBefore('2015-01-20T00:00:00+02:00').guard('foo').isSuccess(),
                 false
             );
         });
@@ -117,20 +117,6 @@ describe('DateString-Guard', () => {
                     .isSameOrAfter('2015-01-20T00:00:01+02:00')
                     .guard('2015-01-20T00:00:00+02:00')
                     .isSuccess(),
-                false
-            );
-        });
-
-        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is null", () => {
-            assert.equal(
-                new DateStringGuard().isSameOrAfter('2015-01-20T00:00:00+02:00').guard(null).isSuccess(),
-                false
-            );
-        });
-
-        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is undefined", () => {
-            assert.equal(
-                new DateStringGuard().isSameOrAfter('2015-01-20T00:00:00+02:00').guard(undefined).isSuccess(),
                 false
             );
         });
@@ -198,6 +184,20 @@ describe('DateString-Guard', () => {
                     .isAfter('2015-01-20T00:00:01+02:00')
                     .guard('2015-01-20T00:00:00+02:00')
                     .isSuccess(),
+                false
+            );
+        });
+
+        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is null", () => {
+            assert.equal(
+                new DateStringGuard().isSameOrAfter('2015-01-20T00:00:00+02:00').guard(null).isSuccess(),
+                false
+            );
+        });
+
+        it("should return false when param is '2015-01-20T00:00:00+02:00' and tested value is undefined", () => {
+            assert.equal(
+                new DateStringGuard().isSameOrAfter('2015-01-20T00:00:00+02:00').guard(undefined).isSuccess(),
                 false
             );
         });

@@ -11,7 +11,8 @@ type StringRule =
     | { type: 'hasLength'; value: number }
     | { type: 'hasMinLength'; min: number }
     | { type: 'hasMaxLength'; max: number }
-    | { type: 'isAlphaNum' }
+    | { type: 'isAlphaNumeric' }
+    | { type: 'isAlpha' }
     | { type: 'isNumeric' }
     | { type: 'isObjectId' };
 
@@ -105,8 +106,17 @@ export class StringGuard extends Guard<StringRule> {
      * @summary Chainable method.
      * @description Checks if string contains only letters and numbers.
      */
-    public isAlphaNum(): this {
-        this.addRule({ type: 'isAlphaNum' });
+    public isAlphaNumeric(): this {
+        this.addRule({ type: 'isAlphaNumeric' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string contains only letters.
+     */
+    public isAlpha(): this {
+        this.addRule({ type: 'isAlpha' });
         return this;
     }
 
@@ -121,7 +131,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a string representation of an ObjectId (24 byte hex).
+     * @description Checks if string is a representation of an ObjectId (24 byte hex).
      * @param max number
      */
     public isObjectId(): this {
@@ -198,7 +208,7 @@ export class StringGuard extends Guard<StringRule> {
                               `string is expected to have max length of ${rule.max} but has length of: ${value.length}`
                           )
                           .build();
-            case 'isAlphaNum':
+            case 'isAlphaNumeric':
                 return value.match(/^[0-9a-zA-Z]+$/) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
@@ -206,6 +216,13 @@ export class StringGuard extends Guard<StringRule> {
                           .withMessage(
                               `string is expected to only contain alphanumeric characters but is not: ${value}`
                           )
+                          .build();
+            case 'isAlpha':
+                return value.match(/^[a-zA-Z]+$/) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to only contain alpha characters but is not: ${value}`)
                           .build();
             case 'isNumeric':
                 return value.match(/^[0-9]+$/) !== null
