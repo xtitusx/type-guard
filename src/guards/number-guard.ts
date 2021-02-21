@@ -11,11 +11,11 @@ type NumberRule =
     | { type: 'isPositive' }
     | { type: 'isNegative' }
     | { type: 'isWhole' }
-    | { type: 'isComposite' }
     | { type: 'isDecimal' }
     | { type: 'isEven' }
     | { type: 'isOdd' }
     | { type: 'isPrime' }
+    | { type: 'isComposite' }
     | { type: 'isFibonacci' }
     | { type: 'isNegaFibonacci' };
 

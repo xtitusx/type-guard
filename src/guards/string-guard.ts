@@ -16,7 +16,8 @@ type StringRule =
     | { type: 'isNumeric' }
     | { type: 'isHex' }
     | { type: 'isObjectId' }
-    | { type: 'isHexColor'; digits?: 3 | 6 };
+    | { type: 'isHexColor'; digits?: 3 | 6 }
+    | { type: 'isUuidv4' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -133,7 +134,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a representation of a hexadecimal number.
+     * @description Checks if string is a hexadecimal number.
      */
     public isHex(): this {
         this.addRule({ type: 'isHex' });
@@ -152,12 +153,22 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a representation of a hexadecimal color.
+     * @description Checks if string is a hexadecimal color.
      * @param digits 3 | 6 (optional).
      * @example #000000, #ffffff, #000
      */
     public isHexColor(digits?: 3 | 6): this {
         this.addRule({ type: 'isHexColor', digits: digits });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string is an Universally unique identifier v4 .
+     * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
+     */
+    public isUuidv4(): this {
+        this.addRule({ type: 'isUuidv4' });
         return this;
     }
 
@@ -295,6 +306,13 @@ export class StringGuard extends Guard<StringRule> {
                                   .withMessage(`string is expected to be a hexadecimal color but is not: ${value}`)
                                   .build();
                 }
+            case 'isUuidv4':
+                return value.match(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to be an Uuid v4 but is not: ${value}`)
+                          .build();
         }
     }
 
