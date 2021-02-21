@@ -11,6 +11,7 @@ type NumberRule =
     | { type: 'isPositive' }
     | { type: 'isNegative' }
     | { type: 'isWhole' }
+    | { type: 'isComposite' }
     | { type: 'isDecimal' }
     | { type: 'isEven' }
     | { type: 'isOdd' }
@@ -132,6 +133,16 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * @see https://en.wikipedia.org/wiki/Composite_number
+     * @summary Chainable method.
+     * @description Checks if number is a composite number.
+     */
+    public isComposite(): this {
+        this.addRule({ type: 'isComposite' });
+        return this;
+    }
+
+    /**
      * @see https://en.wikipedia.org/wiki/Fibonacci_number
      * @summary Chainable method.
      * @description Checks if number is a Fibonacci number.
@@ -240,6 +251,13 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`number is expected to be a prime number but is not: ${value}`)
+                          .build();
+            case 'isComposite':
+                return NumberUtils.isComposite(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a composite number but is not: ${value}`)
                           .build();
             case 'isFibonacci':
                 return NumberUtils.isFibonacci(value)

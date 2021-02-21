@@ -389,6 +389,84 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#isComposite()', () => {
+        it('should return true when tested value is 4', () => {
+            assert.equal(new NumberGuard().isComposite().guard(4).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 6', () => {
+            assert.equal(new NumberGuard().isComposite().guard(6).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 8', () => {
+            assert.equal(new NumberGuard().isComposite().guard(8).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 9', () => {
+            assert.equal(new NumberGuard().isComposite().guard(9).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 10', () => {
+            assert.equal(new NumberGuard().isComposite().guard(10).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 12', () => {
+            assert.equal(new NumberGuard().isComposite().guard(12).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 14', () => {
+            assert.equal(new NumberGuard().isComposite().guard(14).isSuccess(), true);
+        });
+
+        it('should return false when tested value is -1', () => {
+            assert.equal(new NumberGuard().isComposite().guard(-1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 0', () => {
+            assert.equal(new NumberGuard().isComposite().guard(0).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 1', () => {
+            assert.equal(new NumberGuard().isComposite().guard(1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isComposite().guard(1.1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 2', () => {
+            assert.equal(new NumberGuard().isComposite().guard(2).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 3', () => {
+            assert.equal(new NumberGuard().isComposite().guard(3).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 5', () => {
+            assert.equal(new NumberGuard().isComposite().guard(5).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 7', () => {
+            assert.equal(new NumberGuard().isComposite().guard(7).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 11', () => {
+            assert.equal(new NumberGuard().isComposite().guard(11).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 13', () => {
+            assert.equal(new NumberGuard().isComposite().guard(13).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isComposite().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isComposite().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isFibonacci()', () => {
         it('should return true when tested value is 0', () => {
             assert.equal(new NumberGuard().isFibonacci().guard(0).isSuccess(), true);

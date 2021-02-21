@@ -1,6 +1,6 @@
 export class NumberUtils {
     /**
-     * A prime number (or a prime) is a natural number greater than 1 that is not a product of two smaller natural numbers.
+     * A prime number is a positive integer that is not a product of two smaller natural numbers.
      */
     public static isPrime(value: number): boolean {
         if (!Number.isInteger(value) || value < 2) {
@@ -13,6 +13,22 @@ export class NumberUtils {
         }
 
         return true;
+    }
+
+    /**
+     * A composite number is a positive integer that can be formed by multiplying two smaller positive integers.
+     */
+    public static isComposite(value: number): boolean {
+        if (!Number.isInteger(value) || value < 4) {
+            return false;
+        }
+        for (let whole = 2; whole < value; whole++) {
+            if (value % whole === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
