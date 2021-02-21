@@ -12,6 +12,8 @@ type NumberRule =
     | { type: 'isNegative' }
     | { type: 'isWhole' }
     | { type: 'isDecimal' }
+    | { type: 'isEven' }
+    | { type: 'isOdd' }
     | { type: 'isPrime' }
     | { type: 'isFibonacci' }
     | { type: 'isNegaFibonacci' };
@@ -98,6 +100,24 @@ export class NumberGuard extends Guard<NumberRule> {
      */
     public isDecimal(): this {
         this.addRule({ type: 'isDecimal' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if number is even.
+     */
+    public isEven(): this {
+        this.addRule({ type: 'isEven' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if number is odd.
+     */
+    public isOdd(): this {
+        this.addRule({ type: 'isOdd' });
         return this;
     }
 
@@ -199,6 +219,20 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`number is expected to be a decimal number but is not: ${value}`)
+                          .build();
+            case 'isEven':
+                return value % 2 === 0
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be even but is not: ${value}`)
+                          .build();
+            case 'isOdd':
+                return Number.isInteger(value) && value % 2 !== 0
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be odd but is not: ${value}`)
                           .build();
             case 'isPrime':
                 return NumberUtils.isPrime(value)

@@ -227,11 +227,91 @@ describe('Number-Guard', () => {
         });
 
         it('should return false when tested value is null', () => {
-            assert.equal(new NumberGuard().isWhole().guard(null).isSuccess(), false);
+            assert.equal(new NumberGuard().isDecimal().guard(null).isSuccess(), false);
         });
 
         it('should return false when tested value is undefined', () => {
-            assert.equal(new NumberGuard().isWhole().guard(undefined).isSuccess(), false);
+            assert.equal(new NumberGuard().isDecimal().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isEven()', () => {
+        it('should return true when tested value is 0', () => {
+            assert.equal(new NumberGuard().isEven().guard(0).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 2', () => {
+            assert.equal(new NumberGuard().isEven().guard(2).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 4', () => {
+            assert.equal(new NumberGuard().isEven().guard(4).isSuccess(), true);
+        });
+
+        it('should return true when tested value is -2', () => {
+            assert.equal(new NumberGuard().isEven().guard(-2).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 1', () => {
+            assert.equal(new NumberGuard().isEven().guard(1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 3', () => {
+            assert.equal(new NumberGuard().isEven().guard(3).isSuccess(), false);
+        });
+
+        it('should return true when tested value is 2.1', () => {
+            assert.equal(new NumberGuard().isEven().guard(2.1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isEven().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isEven().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isOdd()', () => {
+        it('should return true when tested value is 1', () => {
+            assert.equal(new NumberGuard().isOdd().guard(1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 3', () => {
+            assert.equal(new NumberGuard().isOdd().guard(3).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 5', () => {
+            assert.equal(new NumberGuard().isOdd().guard(5).isSuccess(), true);
+        });
+
+        it('should return true when tested value is -1', () => {
+            assert.equal(new NumberGuard().isOdd().guard(-1).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 0', () => {
+            assert.equal(new NumberGuard().isOdd().guard(0).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 2', () => {
+            assert.equal(new NumberGuard().isOdd().guard(2).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 4', () => {
+            assert.equal(new NumberGuard().isOdd().guard(4).isSuccess(), false);
+        });
+
+        it('should return true when tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isOdd().guard(1.1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isOdd().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isOdd().guard(undefined).isSuccess(), false);
         });
     });
 
