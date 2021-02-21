@@ -16,7 +16,7 @@ type StringRule =
     | { type: 'isNumeric' }
     | { type: 'isHex' }
     | { type: 'isObjectId' }
-    | { type: 'isHexColor' };
+    | { type: 'isHexColor'; digits?: 3 | 6 };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -152,11 +152,12 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a representation of a hexadecimal color number.
-     * @example #000000, #ffffff
+     * @description Checks if string is a representation of a hexadecimal color.
+     * @param digits 3 | 6 (optional).
+     * @example #000000, #ffffff, #000
      */
-    public isHexColor(): this {
-        this.addRule({ type: 'isHexColor' });
+    public isHexColor(digits?: 3 | 6): this {
+        this.addRule({ type: 'isHexColor', digits: digits });
         return this;
     }
 
@@ -267,12 +268,33 @@ export class StringGuard extends Guard<StringRule> {
                           .withMessage(`string is expected to be an ObjectId but is not: ${value}`)
                           .build();
             case 'isHexColor':
-                return value.match(/^#[0-9A-F]{6}$/i) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be a hexadecimal color number but is not: ${value}`)
-                          .build();
+                switch (rule.digits) {
+                    case 3:
+                        return value.match(/^#[0-9A-F]{3}$/i) !== null
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `string is expected to be a 3 digits hexadecimal color but is not: ${value}`
+                                  )
+                                  .build();
+                    case 6:
+                        return value.match(/^#[0-9A-F]{6}$/i) !== null
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `string is expected to be a 6 digits hexadecimal color but is not: ${value}`
+                                  )
+                                  .build();
+                    default:
+                        return value.match(/^#([0-9A-F]{3}|[0-9A-F]{6})$/i) !== null
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(`string is expected to be a hexadecimal color but is not: ${value}`)
+                                  .build();
+                }
         }
     }
 
