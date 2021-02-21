@@ -634,4 +634,74 @@ describe('Number-Guard', () => {
             assert.equal(new NumberGuard().isNegaFibonacci().guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isNetworkPort()', () => {
+        it("should return true when param is 'well-known' and tested value is 1", () => {
+            assert.equal(new NumberGuard().isNetworkPort('well-known').guard(1).isSuccess(), true);
+        });
+
+        it("should return true when param is 'well-known' and tested value is 1023", () => {
+            assert.equal(new NumberGuard().isNetworkPort('well-known').guard(1023).isSuccess(), true);
+        });
+
+        it("should return false when  param is 'well-known' and tested value is 1.1", () => {
+            assert.equal(new NumberGuard().isNetworkPort('well-known').guard(1.1).isSuccess(), false);
+        });
+
+        it("should return false when param is 'well-known' and tested value is 0", () => {
+            assert.equal(new NumberGuard().isNetworkPort('well-known').guard(0).isSuccess(), false);
+        });
+
+        it("should return false when param is 'well-known' and tested value is 1024", () => {
+            assert.equal(new NumberGuard().isNetworkPort('well-known').guard(1024).isSuccess(), false);
+        });
+
+        it("should return true when param is 'registered' and tested value is 1024", () => {
+            assert.equal(new NumberGuard().isNetworkPort('registered').guard(1024).isSuccess(), true);
+        });
+
+        it("should return true when param is 'registered' and tested value is 49151", () => {
+            assert.equal(new NumberGuard().isNetworkPort('registered').guard(49151).isSuccess(), true);
+        });
+
+        it("should return false when  param is 'registered' and tested value is 1024.1", () => {
+            assert.equal(new NumberGuard().isNetworkPort('registered').guard(1024.1).isSuccess(), false);
+        });
+
+        it("should return false when param is 'registered' and tested value is 1023", () => {
+            assert.equal(new NumberGuard().isNetworkPort('registered').guard(1023).isSuccess(), false);
+        });
+
+        it("should return false when param is 'registered' and tested value is 49152", () => {
+            assert.equal(new NumberGuard().isNetworkPort('registered').guard(49152).isSuccess(), false);
+        });
+
+        it("should return false when param is 'private' and tested value is 49152", () => {
+            assert.equal(new NumberGuard().isNetworkPort('private').guard(49152).isSuccess(), true);
+        });
+
+        it("should return false when param is 'private' and tested value is 65535", () => {
+            assert.equal(new NumberGuard().isNetworkPort('private').guard(65535).isSuccess(), true);
+        });
+
+        it("should return false when  param is 'private' and tested value is 49152.1", () => {
+            assert.equal(new NumberGuard().isNetworkPort('private').guard(49152.1).isSuccess(), false);
+        });
+
+        it("should return false when param is 'private' and tested value is 49151", () => {
+            assert.equal(new NumberGuard().isNetworkPort('private').guard(49151).isSuccess(), false);
+        });
+
+        it("should return false when param is 'private' and tested value is 65536", () => {
+            assert.equal(new NumberGuard().isNetworkPort('private').guard(65536).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isNetworkPort().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isNetworkPort().guard(undefined).isSuccess(), false);
+        });
+    });
 });

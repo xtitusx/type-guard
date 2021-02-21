@@ -17,7 +17,10 @@ type NumberRule =
     | { type: 'isPrime' }
     | { type: 'isComposite' }
     | { type: 'isFibonacci' }
-    | { type: 'isNegaFibonacci' };
+    | { type: 'isNegaFibonacci' }
+    | { type: 'isNetworkPort'; range?: NetworkPortRange };
+
+type NetworkPortRange = 'well-known' | 'registered' | 'private';
 
 /** @class NumberGuard
  * @extends {Guard<NumberRule>}
@@ -163,6 +166,16 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * @summary Chainable method.
+     * @description Checks if number is a Network Port.
+     * @param range 'well-known' | 'registered' | 'private' (optional).
+     */
+    public isNetworkPort(range?: NetworkPortRange): this {
+        this.addRule({ type: 'isNetworkPort', range });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule NumberRule
      * @param value number
@@ -273,6 +286,46 @@ export class NumberGuard extends Guard<NumberRule> {
                           .withSuccess(false)
                           .withMessage(`number is expected to be a NegaFibonacci number but is not: ${value}`)
                           .build();
+
+            case 'isNetworkPort':
+                switch (rule.range) {
+                    case 'well-known':
+                        return Number.isInteger(value) && value >= 1 && value <= 1023
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `number is expected to be a well-known network port (1-1023) but is not: ${value}`
+                                  )
+                                  .build();
+                    case 'registered':
+                        return Number.isInteger(value) && value >= 1024 && value <= 49151
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `number is expected to be a registered network port (1024-49151) but is not: ${value}`
+                                  )
+                                  .build();
+                    case 'private':
+                        return Number.isInteger(value) && value >= 49152 && value <= 65535
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `number is expected to be a private network port (1024-49151) but is not: ${value}`
+                                  )
+                                  .build();
+                    default:
+                        return Number.isInteger(value) && value >= 1 && value <= 65535
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `number is expected to be a private network port (49152-65535) but is not: ${value}`
+                                  )
+                                  .build();
+                }
         }
     }
 
