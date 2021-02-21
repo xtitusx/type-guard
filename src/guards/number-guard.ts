@@ -11,6 +11,7 @@ type NumberRule =
     | { type: 'isPositive' }
     | { type: 'isNegative' }
     | { type: 'isWhole' }
+    | { type: 'isDecimal' }
     | { type: 'isPrime' }
     | { type: 'isFibonacci' }
     | { type: 'isNegaFibonacci' };
@@ -88,6 +89,15 @@ export class NumberGuard extends Guard<NumberRule> {
      */
     public isWhole(): this {
         this.addRule({ type: 'isWhole' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if number is a decimal number.
+     */
+    public isDecimal(): this {
+        this.addRule({ type: 'isDecimal' });
         return this;
     }
 
@@ -183,12 +193,19 @@ export class NumberGuard extends Guard<NumberRule> {
                           .withSuccess(false)
                           .withMessage(`number is expected to be a whole number but is not: ${value}`)
                           .build();
+            case 'isDecimal':
+                return !Number.isInteger(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a decimal number but is not: ${value}`)
+                          .build();
             case 'isPrime':
                 return NumberUtils.isPrime(value)
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`number is expected to be a rime number but is not: ${value}`)
+                          .withMessage(`number is expected to be a prime number but is not: ${value}`)
                           .build();
             case 'isFibonacci':
                 return NumberUtils.isFibonacci(value)

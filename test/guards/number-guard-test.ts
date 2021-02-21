@@ -205,6 +205,36 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#isDecimal()', () => {
+        it('should return true when tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isDecimal().guard(1.1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is -1.1', () => {
+            assert.equal(new NumberGuard().isDecimal().guard(-1.1).isSuccess(), true);
+        });
+
+        it('should return true when tested value is 0.11', () => {
+            assert.equal(new NumberGuard().isDecimal().guard(0.11).isSuccess(), true);
+        });
+
+        it('should return false when tested value is 1', () => {
+            assert.equal(new NumberGuard().isDecimal().guard(1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 1.0', () => {
+            assert.equal(new NumberGuard().isDecimal().guard(1.0).isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new NumberGuard().isWhole().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new NumberGuard().isWhole().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isPrime()', () => {
         it('should return true when tested value is 2', () => {
             assert.equal(new NumberGuard().isPrime().guard(2).isSuccess(), true);
