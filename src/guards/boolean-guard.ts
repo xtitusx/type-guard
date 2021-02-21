@@ -1,4 +1,5 @@
 import { Guard } from './guard';
+
 import { GuardResult } from '../guard-result';
 
 type BooleanRule = { type: 'isTrue'; value: true } | { type: 'isFalse'; value: false };
@@ -12,8 +13,8 @@ export class BooleanGuard extends Guard<BooleanRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un booléen est vrai.
+     * @summary Chainable method.
+     * @description Checks if value is a true boolean.
      */
     public isTrue(): this {
         this.addRule({ type: 'isTrue', value: true });
@@ -21,8 +22,8 @@ export class BooleanGuard extends Guard<BooleanRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un booléen est faux.
+     * @summary Chainable method.
+     * @description Checks if value is a false boolean.
      */
     public isFalse(): this {
         this.addRule({ type: 'isFalse', value: false });

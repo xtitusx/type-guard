@@ -1,5 +1,7 @@
-import { GuardResult } from '../guard-result';
 import { Guard } from './guard';
+
+import { GuardResult } from '../guard-result';
+import { NumberUtils } from '../utils/number-utils';
 
 type NumberRule =
     | { type: 'equals'; value: number }
@@ -8,7 +10,10 @@ type NumberRule =
     | { type: 'isIn'; min: number; max: number }
     | { type: 'isPositive' }
     | { type: 'isNegative' }
-    | { type: 'isWhole' };
+    | { type: 'isWhole' }
+    | { type: 'isPrime' }
+    | { type: 'isFibonacci' }
+    | { type: 'isNegaFibonacci' };
 
 /** @class NumberGuard
  * @extends {Guard<NumberRule>}
@@ -19,8 +24,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie une égalité de nombres.
+     * @summary Chainable method.
+     * @description Checks if two numbers are equals.
      * @param value number
      */
     public equals(value: number): this {
@@ -29,8 +34,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la valeur minimale d'un nombre.
+     * @summary Chainable method.
+     * @description Checks if number is equal or greater than to the specified number.
      * @param min number
      */
     public isMin(min: number): this {
@@ -39,8 +44,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la valeur maximale d'un nombre.
+     * @summary Chainable method.
+     * @description Checks if number is equal or smaller than to the specified number.
      * @param max number
      */
     public isMax(max: number): this {
@@ -49,8 +54,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie l'appartenance d'un nombre à un intervalle fermé.
+     * @summary Chainable method.
+     * @description Checks if number is within a closed interval.
      * @param min number
      * @param max number
      */
@@ -60,8 +65,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un nombre est supérieur à zéro.
+     * @summary Chainable method.
+     * @description Checks if number is greater than zero.
      */
     public isPositive(): this {
         this.addRule({ type: 'isPositive' });
@@ -69,8 +74,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un nombre est inférieur à zéro.
+     * @summary Chainable method.
+     * @description Checks if number is smaller than zero.
      */
     public isNegative(): this {
         this.addRule({ type: 'isNegative' });
@@ -78,11 +83,41 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un nombre est entier.
+     * @summary Chainable method.
+     * @description Checks if number is a whole number.
      */
     public isWhole(): this {
         this.addRule({ type: 'isWhole' });
+        return this;
+    }
+
+    /**
+     * @see https://en.wikipedia.org/wiki/Prime_number
+     * @summary Chainable method.
+     * @description Checks if number is a prime number.
+     */
+    public isPrime(): this {
+        this.addRule({ type: 'isPrime' });
+        return this;
+    }
+
+    /**
+     * @see https://en.wikipedia.org/wiki/Fibonacci_number
+     * @summary Chainable method.
+     * @description Checks if number is a Fibonacci number.
+     */
+    public isFibonacci(): this {
+        this.addRule({ type: 'isFibonacci' });
+        return this;
+    }
+
+    /**
+     * @see https://en.wikipedia.org/wiki/NegaFibonacci_coding
+     * @summary Chainable method.
+     * @description Checks if number is a NegaFibonacci number.
+     */
+    public isNegaFibonacci(): this {
+        this.addRule({ type: 'isNegaFibonacci' });
         return this;
     }
 
@@ -147,6 +182,27 @@ export class NumberGuard extends Guard<NumberRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`number is expected to be a whole number but is not: ${value}`)
+                          .build();
+            case 'isPrime':
+                return NumberUtils.isPrime(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a rime number but is not: ${value}`)
+                          .build();
+            case 'isFibonacci':
+                return NumberUtils.isFibonacci(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a Fibonacci number but is not: ${value}`)
+                          .build();
+            case 'isNegaFibonacci':
+                return NumberUtils.isNegaFibonacci(value)
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`number is expected to be a NegaFibonacci number but is not: ${value}`)
                           .build();
         }
     }

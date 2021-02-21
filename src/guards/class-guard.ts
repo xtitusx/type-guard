@@ -1,4 +1,5 @@
 import { Guard } from './guard';
+
 import { GuardResult } from '../guard-result';
 
 type ClassRule = { type: 'isInstanceOf'; value: Function };
@@ -12,8 +13,8 @@ export class ClassGuard extends Guard<ClassRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un objet possède, dans sa chaîne de prototype, la propriété prototype d'un certain constructeur.
+     * @summary Chainable method.
+     * @description Checks if the prototype property of a constructor appears anywhere in the prototype chain of the specified object.
      * @param value number
      */
     public isInstanceOf(value: Function): this {

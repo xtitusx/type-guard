@@ -1,4 +1,5 @@
 import { Guard } from './guard';
+
 import { GuardResult } from '../guard-result';
 
 type StringRule =
@@ -23,8 +24,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie une égalité de chaînes de caractères.
+     * @summary Chainable method.
+     * @description Checks if two string are equals.
      * @param value string
      */
     public equals(value: string): this {
@@ -33,8 +34,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères contient une sous-chaîne de caractères.
+     * @summary Chainable method.
+     * @description Checks if string contains the specified substring.
      * @param value string
      */
     public contains(value: string): this {
@@ -43,8 +44,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères correspond à la description donnée par l'expression régulière.
+     * @summary Chainable method.
+     * @description Checks if string matches the specified regex.
      * @param value RegExp
      */
     public matches(value: RegExp): this {
@@ -53,8 +54,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères est vide ("").
+     * @summary Chainable method.
+     * @description Checks if string is empty (=== "").
      */
     public isEmpty(): this {
         this.addRule({ type: 'isEmpty' });
@@ -62,8 +63,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères n'est pas vide.
+     * @summary Chainable method.
+     * @description Checks if string is not empty (!== "").
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
@@ -71,8 +72,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la longueur exacte d'une chaîne de caractères.
+     * @summary Chainable method.
+     * @description Checks if string's length is equal to the specified number.
      * @param value number
      */
     public hasLength(value: number): this {
@@ -81,8 +82,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la longueur minimale d'une chaîne de caractères.
+     * @summary Chainable method.
+     * @description Checks if string's length is equal or greater than to the specified number.
      * @param min number
      */
     public hasMinLength(min: number): this {
@@ -91,8 +92,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la longueur maximale d'une chaîne de caractères.
+     * @summary Chainable method.
+     * @description Checks if string's length is equal or smaller than the specified number.
      * @param max number
      */
     public hasMaxLength(max: number): this {
@@ -101,8 +102,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères ne contient que des caractères alphanumériques.
+     * @summary Chainable method.
+     * @description Checks if string contains only letters and numbers.
      */
     public isAlphaNum(): this {
         this.addRule({ type: 'isAlphaNum' });
@@ -110,8 +111,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères ne contient que des caractères numériques.
+     * @summary Chainable method.
+     * @description Checks if string contains only numbers.
      */
     public isNumeric(): this {
         this.addRule({ type: 'isNumeric' });
@@ -119,8 +120,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une chaîne de caractères est au format ObjectId.
+     * @summary Chainable method.
+     * @description Checks if string is a string representation of an ObjectId (24 byte hex).
      * @param max number
      */
     public isObjectId(): this {

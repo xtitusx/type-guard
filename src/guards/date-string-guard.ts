@@ -5,6 +5,7 @@ dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
 import { Guard } from './guard';
+
 import { GuardResult } from '../guard-result';
 
 type DateStringRule =
@@ -23,8 +24,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une date est égale à une autre date.
+     * @summary Chainable method.
+     * @description Checks if a string representation of a date is the same that the specified date.
      * @param value string
      */
     public isSame(value: string): this {
@@ -33,8 +34,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une date est égale ou antérieure à une autre date.
+     * @summary Chainable method.
+     * @description Checks if a string representation of a date is the same or before the specified date.
      * @param value string
      */
     public isSameOrBefore(value: string): this {
@@ -43,8 +44,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une date est égale ou postérieure à une autre date.
+     * @summary Chainable method.
+     * @description Checks if a string representation of a date is the same or after the specified date.
      * @param value string
      */
     public isSameOrAfter(value: string): this {
@@ -53,8 +54,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une date est antérieure à une autre date.
+     * @summary Chainable method.
+     * @description Checks if a string representation of a date is strictly before the specified date.
      * @param value string
      */
     public isBefore(value: string): this {
@@ -63,8 +64,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si une date est postérieure à une autre date.
+     * @summary Chainable method.
+     * @description Checks if a string representation of a date is strictly after the specified date.
      * @param value string
      */
     public isAfter(value: string): this {

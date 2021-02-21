@@ -1,4 +1,5 @@
 import { Guard } from './guard';
+
 import { GuardResult } from '../guard-result';
 
 type ArrayRule =
@@ -18,8 +19,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un objet Array est vide.
+     * @summary Chainable method.
+     * @description Check if array is empty.
      */
     public isEmpty(): this {
         this.addRule({ type: 'isEmpty' });
@@ -27,8 +28,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un objet Array n'est pas vide.
+     * @summary Chainable method.
+     * @description Check if array is not empty.
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
@@ -36,8 +37,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la taille exacte d'un objet Array.
+     * @summary Chainable method.
+     * @description Checks if array's length is equal to the specified number.
      * @param value number
      */
     public hasSize(value: number): this {
@@ -46,8 +47,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la taille minimale d'un objet Array.
+     * @summary Chainable method.
+     * @description Checks if array's length is equal or greater than to the specified number.
      * @param min number
      */
     public hasMinSize(min: number): this {
@@ -56,8 +57,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie la taille maximale d'un objet Array.
+     * @summary Chainable method.
+     * @description Checks if array's length is equal or smaller than the specified number.
      * @param max number
      */
     public hasMaxSize(max: number): this {
@@ -66,9 +67,9 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Méthode chainable.
-     * @description Règle qui vérifie si un objet Array contient un élément.
-     * @param value any
+     * @summary Chainable method.
+     * @description Checks if array contains the specified number.
+     * @param value unknown
      */
     public contains(value: unknown): this {
         this.addRule({ type: 'contains', value: value });
