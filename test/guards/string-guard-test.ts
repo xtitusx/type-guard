@@ -34,6 +34,10 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().contains('foo').guard('foobar').isSuccess(), true);
         });
 
+        it("should return true when param is '' and tested value is ''", () => {
+            assert.equal(new StringGuard().contains('').guard('').isSuccess(), true);
+        });
+
         it("should return false when param is 'foobar' and tested value is 'foo'", () => {
             assert.equal(new StringGuard().contains('foobar').guard('foo').isSuccess(), false);
         });
@@ -48,6 +52,32 @@ describe('String-Guard', () => {
 
         it("should return false when param 'foo' and tested value is undefined", () => {
             assert.equal(new StringGuard().contains('foo').guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#notContains()', () => {
+        it("should return true when param is 'foo' and tested value is 'bar'", () => {
+            assert.equal(new StringGuard().notContains('foo').guard('bar').isSuccess(), true);
+        });
+
+        it("should return true when param is 'foobar' and tested value is 'fooba'", () => {
+            assert.equal(new StringGuard().notContains('foobar').guard('fooba').isSuccess(), true);
+        });
+
+        it("should return true when param is 'foo' and tested value is ''", () => {
+            assert.equal(new StringGuard().notContains('foo').guard('').isSuccess(), true);
+        });
+
+        it("should return false when param is 'foo' and tested value is 'foobar'", () => {
+            assert.equal(new StringGuard().notContains('foo').guard('foobar').isSuccess(), false);
+        });
+
+        it("should return false when param 'foo' and tested value is null", () => {
+            assert.equal(new StringGuard().notContains('foo').guard(null).isSuccess(), false);
+        });
+
+        it("should return false when param 'foo' and tested value is undefined", () => {
+            assert.equal(new StringGuard().notContains('foo').guard(undefined).isSuccess(), false);
         });
     });
 

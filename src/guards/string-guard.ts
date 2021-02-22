@@ -5,6 +5,7 @@ import { GuardResult } from '../guard-result';
 type StringRule =
     | { type: 'equals'; value: string }
     | { type: 'contains'; value: string }
+    | { type: 'notContains'; value: string }
     | { type: 'matches'; value: RegExp }
     | { type: 'isEmpty' }
     | { type: 'isNotEmpty' }
@@ -45,6 +46,16 @@ export class StringGuard extends Guard<StringRule> {
      */
     public contains(value: string): this {
         this.addRule({ type: 'contains', value: value });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string does not contain the specified substring.
+     * @param value string
+     */
+    public notContains(value: string): this {
+        this.addRule({ type: 'notContains', value: value });
         return this;
     }
 
@@ -224,6 +235,13 @@ export class StringGuard extends Guard<StringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to contain ${rule.value} but is not: ${value}`)
+                          .build();
+            case 'notContains':
+                return value.indexOf(rule.value) === -1
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is not expected to contain ${rule.value} but is: ${value}`)
                           .build();
             case 'matches':
                 return value.match(rule.value) !== null
