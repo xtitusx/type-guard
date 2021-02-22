@@ -17,7 +17,8 @@ type StringRule =
     | { type: 'isHex' }
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }
-    | { type: 'isUuidv4' };
+    | { type: 'isUuidv4' }
+    | { type: 'isMACAddress' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -135,6 +136,10 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * @summary Chainable method.
      * @description Checks if string is a hexadecimal number.
+     *
+     * Rules :
+     * - not case sensitive.
+      @example F061A, f061a
      */
     public isHex(): this {
         this.addRule({ type: 'isHex' });
@@ -143,7 +148,11 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a representation of an ObjectId (24 byte hex).
+     * @description Checks if string is a representation of an ObjectId.
+     *
+     * Rules :
+     * - 24 hex digits.
+     * - not case sensitive.
      * @example 507f1f77bcf86cd799439011, 507F1F77BCF86CD799439011
      */
     public isObjectId(): this {
@@ -154,8 +163,12 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * @summary Chainable method.
      * @description Checks if string is a hexadecimal color.
+     *
+     * Rules :
+     * - Starts with hastag (#) and is followed by 3 or 6 digits.
+     * - not case sensitive.
      * @param digits 3 | 6 (optional).
-     * @example #000000, #ffffff, #000
+     * @example #000000, #FFFFFF, #000, #fff
      */
     public isHexColor(digits?: 3 | 6): this {
         this.addRule({ type: 'isHexColor', digits: digits });
@@ -164,11 +177,30 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is an Universally unique identifier v4 .
+     * @description Checks if string is an Universally unique identifier v4.
+     *
+     * Rules :
+     * - case sensitive: https://tools.ietf.org/html/rfc4122#section-3
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
         this.addRule({ type: 'isUuidv4' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string is a MAC Address.
+     *
+     * Rules :
+     * - 12 hex degits (6 groups of 2 digits).
+     * - ieee802-types definition: dash separator, upper case.
+     * - ietf-yang-types definition: colon separator, lower case.
+     * @see https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf
+     * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
+     */
+    public isMACAddress(): this {
+        this.addRule({ type: 'isMACAddress' });
         return this;
     }
 
@@ -307,11 +339,18 @@ export class StringGuard extends Guard<StringRule> {
                                   .build();
                 }
             case 'isUuidv4':
-                return value.match(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i) !== null
+                return value.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to be an Uuid v4 but is not: ${value}`)
+                          .build();
+            case 'isMACAddress':
+                return value.match(/^((([0-9A-F]{2}-){5})|(([0-9a-f]{2}:){5}))[0-9a-f]{2}$/) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is expected to be a MAC Address but is not: ${value}`)
                           .build();
         }
     }

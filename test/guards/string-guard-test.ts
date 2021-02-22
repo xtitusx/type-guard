@@ -444,8 +444,8 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isUuidv4().guard('9b8d710e-8a83-4a6f-ac58-500ab7e4d302').isSuccess(), true);
         });
 
-        it("should return true when tested value is '9B8D710E-8A83-4A6F-aC58-500AB7E4D302'", () => {
-            assert.equal(new StringGuard().isUuidv4().guard('9B8D710E-8A83-4A6F-aC58-500AB7E4D302').isSuccess(), true);
+        it("should return false when tested value is '9B8D710E-8A83-4A6F-aC58-500AB7E4D302'", () => {
+            assert.equal(new StringGuard().isUuidv4().guard('9B8D710E-8A83-4A6F-aC58-500AB7E4D302').isSuccess(), false);
         });
 
         it("should return false when tested value is '123e4567-e89b-12d3-a456-426614174000'", () => {
@@ -462,6 +462,52 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isUuidv4().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isMACAddress()', () => {
+        it("should return true when tested value is '00-0A-95-9D-68-16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00-0A-95-9D-68-16').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '00:0a:95:9d:68:16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00:0a:95:9d:68:16').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '00-0a-95-9d-68-16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00-0a-95-9d-68-16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '00:0A:95:9D:68:16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00:0A:95:9D:68:16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '00-0A-95-9G-68-16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00-0A-95-9G-68-16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''00:0a:95:9d:68:1'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00:0a:95:9d:68:1').isSuccess(), false);
+        });
+
+        it("should return false when testedvalue is '000a959d6816'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('000a959d6816').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '00:0a:95:9d:68-16'", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('00:0a:95:9d:68-16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isMACAddress().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isMACAddress().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isMACAddress().guard(undefined).isSuccess(), false);
         });
     });
 });

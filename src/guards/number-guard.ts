@@ -126,9 +126,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @see https://en.wikipedia.org/wiki/Prime_number
      * @summary Chainable method.
      * @description Checks if number is a prime number.
+     * @see https://en.wikipedia.org/wiki/Prime_number
      */
     public isPrime(): this {
         this.addRule({ type: 'isPrime' });
@@ -136,9 +136,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @see https://en.wikipedia.org/wiki/Composite_number
      * @summary Chainable method.
      * @description Checks if number is a composite number.
+     * @see https://en.wikipedia.org/wiki/Composite_number
      */
     public isComposite(): this {
         this.addRule({ type: 'isComposite' });
@@ -146,9 +146,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @see https://en.wikipedia.org/wiki/Fibonacci_number
      * @summary Chainable method.
      * @description Checks if number is a Fibonacci number.
+     * @see https://en.wikipedia.org/wiki/Fibonacci_number
      */
     public isFibonacci(): this {
         this.addRule({ type: 'isFibonacci' });
@@ -156,9 +156,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @see https://en.wikipedia.org/wiki/NegaFibonacci_coding
      * @summary Chainable method.
      * @description Checks if number is a NegaFibonacci number.
+     * @see https://en.wikipedia.org/wiki/NegaFibonacci_coding
      */
     public isNegaFibonacci(): this {
         this.addRule({ type: 'isNegaFibonacci' });
