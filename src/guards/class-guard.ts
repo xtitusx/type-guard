@@ -27,7 +27,7 @@ export class ClassGuard extends Guard<ClassRule> {
      * @param rule ClassRule
      * @param value unknown
      */
-    public checkRule(rule: ClassRule, value: unknown): GuardResult {
+    protected checkRule(rule: ClassRule, value: unknown): GuardResult {
         switch (rule.type) {
             case 'isInstanceOf':
                 return value instanceof rule.value

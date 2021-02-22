@@ -220,7 +220,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param rule StringRule
      * @param value string
      */
-    public checkRule(rule: StringRule, value: string): GuardResult {
+    protected checkRule(rule: StringRule, value: string): GuardResult {
         switch (rule.type) {
             case 'equals':
                 return value === rule.value

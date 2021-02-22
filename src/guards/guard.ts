@@ -12,15 +12,11 @@ export abstract class Guard<T extends Rule> {
     }
 
     /**
-     * Méthode qui applique une règle sur une valeur dont le typage est de "confiance", conforme à ce que la garde attend.
-     *
-     * Si le typage de la valeur est incertain, variant, donc sûrement incorrect, alors une erreur risque fortement d'être levée.
-     *
-     * Le cas échéant, il est préférable d'appeler la méthode guard(), qui applique un contrôle du typage.
+     * Checks the rule on a trusted property (after type guarding).
      * @param rule T
      * @param value unknown
      */
-    public abstract checkRule(rule: T, value: unknown): GuardResult;
+    protected abstract checkRule(rule: T, value: unknown): GuardResult;
 
     /**
      * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son type est approuvé par la garde utilisée.

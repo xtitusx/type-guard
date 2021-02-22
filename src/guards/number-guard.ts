@@ -180,7 +180,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @param rule NumberRule
      * @param value number
      */
-    public checkRule(rule: NumberRule, value: number): GuardResult {
+    protected checkRule(rule: NumberRule, value: number): GuardResult {
         switch (rule.type) {
             case 'equals':
                 return value === rule.value

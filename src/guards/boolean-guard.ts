@@ -35,7 +35,7 @@ export class BooleanGuard extends Guard<BooleanRule> {
      * @param rule BooleanRule
      * @param value boolean
      */
-    public checkRule(rule: BooleanRule, value: boolean): GuardResult {
+    protected checkRule(rule: BooleanRule, value: boolean): GuardResult {
         switch (rule.type) {
             case 'isTrue':
             case 'isFalse':

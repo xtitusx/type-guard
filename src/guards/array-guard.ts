@@ -81,7 +81,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
      * @param rule ArrayRule
      * @param value unknown[]
      */
-    public checkRule(rule: ArrayRule, value: unknown[]): GuardResult {
+    protected checkRule(rule: ArrayRule, value: unknown[]): GuardResult {
         switch (rule.type) {
             case 'isEmpty':
                 return value.length === 0

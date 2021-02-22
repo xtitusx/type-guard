@@ -78,7 +78,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @param rule DateStringRule
      * @param value string
      */
-    public checkRule(rule: DateStringRule, value: string): GuardResult {
+    protected checkRule(rule: DateStringRule, value: string): GuardResult {
         switch (rule.type) {
             case 'isSame':
                 return dayjs(value).isSame(rule.value)
