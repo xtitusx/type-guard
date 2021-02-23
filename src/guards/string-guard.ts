@@ -4,6 +4,7 @@ import { GuardResult } from '../guard-result';
 
 type StringRule =
     | { type: 'equals'; value: string }
+    | { type: 'notEquals'; value: string }
     | { type: 'contains'; value: string }
     | { type: 'notContains'; value: string }
     | { type: 'matches'; value: RegExp }
@@ -39,6 +40,16 @@ export class StringGuard extends Guard<StringRule> {
      */
     public equals(value: string): this {
         this.addRule({ type: 'equals', value: value });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if two string are not equals.
+     * @param value string
+     */
+    public notEquals(value: string): this {
+        this.addRule({ type: 'notEquals', value: value });
         return this;
     }
 
@@ -262,6 +273,13 @@ export class StringGuard extends Guard<StringRule> {
                           .withSuccess(false)
                           .withMessage(`string is expected to be ${rule.value} but is not: ${value}`)
                           .build();
+            case 'notEquals':
+                return value !== rule.value
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(`string is not expected to be ${rule.value} but is: ${value}`)
+                          .build();
             case 'contains':
                 return value.indexOf(rule.value) !== -1
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -274,7 +292,7 @@ export class StringGuard extends Guard<StringRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is not expected to contain ${rule.value} but does not: ${value}`)
+                          .withMessage(`string is not expected to contain ${rule.value} but does: ${value}`)
                           .build();
             case 'matches':
                 return value.match(rule.value) !== null

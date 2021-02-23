@@ -8,12 +8,20 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().equals('foo').guard('foo').isSuccess(), true);
         });
 
-        it("should return false when param is 'foobar' and tested value is 'foo'", () => {
-            assert.equal(new StringGuard().equals('foobar').guard('foo').isSuccess(), false);
-        });
-
         it("should return true when param is 'foobar' then 'foo' and tested value is 'foo'", () => {
             assert.equal(new StringGuard().equals('foobar').equals('foo').guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when param is 'FOO' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().equals('FOO').guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param is 'f' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().equals('f').guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param is 'foobar' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().equals('foo').equals('foobar').guard('foo').isSuccess(), false);
         });
 
         it("should return false when param 'foo' and tested value is null", () => {
@@ -22,6 +30,32 @@ describe('String-Guard', () => {
 
         it("should return false when param 'foo' and tested value is undefined", () => {
             assert.equal(new StringGuard().equals('foo').guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#notEquals()', () => {
+        it("should return true when param is 'foobar' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().notEquals('foobar').guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when param is 'foo ' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().notEquals('foo ').guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when param is 'FOO' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().notEquals('FOO').guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when param is 'f' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().notEquals('f').guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when param 'foo' and tested value is null", () => {
+            assert.equal(new StringGuard().notEquals('foo').guard(null).isSuccess(), false);
+        });
+
+        it("should return false when param 'foo' and tested value is undefined", () => {
+            assert.equal(new StringGuard().notEquals('foo').guard(undefined).isSuccess(), false);
         });
     });
 
