@@ -8,6 +8,10 @@ import {
     HEX_PATTERN,
     EMAIL_ADDRESS_PATTERN,
     OBJECTID_PATTERN,
+    THREE_DIGITS_HEX_COLOR_PATTERN,
+    SIX_DIGITS_HEX_COLOR_PATTERN,
+    UUIDV4_PATTERN,
+    MAC_ADDRESS_PATTERN,
 } from '../utils/pattern-constant';
 
 type StringRule =
@@ -430,7 +434,7 @@ export class StringGuard extends Guard<StringRule> {
             case 'isHexColor':
                 switch (rule.digits) {
                     case 3:
-                        return value.match(/^#[0-9A-F]{3}$/i) !== null
+                        return value.match(new RegExp(THREE_DIGITS_HEX_COLOR_PATTERN)) !== null
                             ? new GuardResult.Builder().withSuccess(true).build()
                             : new GuardResult.Builder()
                                   .withSuccess(false)
@@ -439,7 +443,7 @@ export class StringGuard extends Guard<StringRule> {
                                   )
                                   .build();
                     case 6:
-                        return value.match(/^#[0-9A-F]{6}$/i) !== null
+                        return value.match(new RegExp(SIX_DIGITS_HEX_COLOR_PATTERN)) !== null
                             ? new GuardResult.Builder().withSuccess(true).build()
                             : new GuardResult.Builder()
                                   .withSuccess(false)
@@ -448,7 +452,9 @@ export class StringGuard extends Guard<StringRule> {
                                   )
                                   .build();
                     default:
-                        return value.match(/^#([0-9A-F]{3}|[0-9A-F]{6})$/i) !== null
+                        return value.match(
+                            new RegExp(`${THREE_DIGITS_HEX_COLOR_PATTERN}|${SIX_DIGITS_HEX_COLOR_PATTERN}`)
+                        ) !== null
                             ? new GuardResult.Builder().withSuccess(true).build()
                             : new GuardResult.Builder()
                                   .withSuccess(false)
@@ -456,14 +462,14 @@ export class StringGuard extends Guard<StringRule> {
                                   .build();
                 }
             case 'isUuidv4':
-                return value.match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/) !== null
+                return value.match(new RegExp(UUIDV4_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to be an Uuid v4 but is not: ${value}`)
                           .build();
             case 'isMACAddress':
-                return value.match(/^((([0-9A-F]{2}-){5})|(([0-9a-f]{2}:){5}))[0-9a-f]{2}$/) !== null
+                return value.match(new RegExp(MAC_ADDRESS_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
