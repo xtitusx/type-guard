@@ -1,6 +1,14 @@
 import { Guard } from './guard';
 
 import { GuardResult } from '../guard-result';
+import {
+    ALPHA_NUMERIC_PATTERN,
+    ALPHA_PATTERN,
+    NUMERIC_PATTERN,
+    HEX_PATTERN,
+    EMAIL_ADDRESS_PATTERN,
+    OBJECTID_PATTERN,
+} from '../utils/pattern-constant';
 
 type StringRule =
     | { type: 'equals'; value: string }
@@ -19,6 +27,7 @@ type StringRule =
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
     | { type: 'isHex' }
+    | { type: 'isEmailAddress' }
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }
     | { type: 'isUuidv4' }
@@ -57,8 +66,8 @@ export class StringGuard extends Guard<StringRule> {
      * @summary Chainable method.
      * @description Checks if string contains the specified substring.
      *
-     * Rules :
-     * - case sensitive.
+     * Rule :
+     * - Case sensitive.
      * @param value string
      */
     public contains(value: string): this {
@@ -70,8 +79,8 @@ export class StringGuard extends Guard<StringRule> {
      * @summary Chainable method.
      * @description Checks if string does not contain the specified substring.
      *
-     * Rules :
-     * - case sensitive.
+     * Rule :
+     * - Case sensitive.
      * @param value string
      */
     public notContains(value: string): this {
@@ -203,6 +212,17 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
+     * @description Checks if string follows all RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 syntactic rules.
+     * @see https://en.wikipedia.org/wiki/Email_address#Syntax
+     * @example `John.Doe@example.com`
+     */
+    public isEmailAddress(): this {
+        this.addRule({ type: 'isEmailAddress' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
      * @description Checks if string is a representation of a MongoDB ObjectId.
      *
      * Rules :
@@ -235,7 +255,8 @@ export class StringGuard extends Guard<StringRule> {
      * @description Checks if string is an Universally unique identifier v4.
      *
      * Rule :
-     * - Case sensitive: https://tools.ietf.org/html/rfc4122#section-3.
+     * - Case sensitive.
+     * @see https://tools.ietf.org/html/rfc4122#section-3.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
@@ -249,8 +270,8 @@ export class StringGuard extends Guard<StringRule> {
      *
      * Rules :
      * - 12 hex degits (6 groups of 2 digits).
-     * - ieee802-types definition: dash separator, uppercase.
-     * - ietf-yang-types definition: colon separator, lowercase.
+     * - IEEE802-types definition: dash separator, uppercase.
+     * - IETF-yang-types definition: colon separator, lowercase.
      * @see https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf
      * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
      */
@@ -361,7 +382,7 @@ export class StringGuard extends Guard<StringRule> {
                           )
                           .build();
             case 'isAlphaNumeric':
-                return value.match(/^[0-9a-zA-Z]+$/) !== null
+                return value.match(new RegExp(ALPHA_NUMERIC_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -370,28 +391,37 @@ export class StringGuard extends Guard<StringRule> {
                           )
                           .build();
             case 'isAlpha':
-                return value.match(/^[a-zA-Z]+$/) !== null
+                return value.match(new RegExp(ALPHA_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to only contain alpha characters but is not: ${value}`)
                           .build();
             case 'isNumeric':
-                return value.match(/^[0-9]+$/) !== null
+                return value.match(new RegExp(NUMERIC_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
                           .build();
+            case 'isEmailAddress':
+                return value.match(new RegExp(EMAIL_ADDRESS_PATTERN)) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to follow email address RFC syntactic rules but does not: ${value}`
+                          )
+                          .build();
             case 'isHex':
-                return value.match(/^[a-f\d]+$/i) !== null
+                return value.match(new RegExp(HEX_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to be a hexadecimal number but is not: ${value}`)
                           .build();
             case 'isObjectId':
-                return value.match(/^[a-f\d]{24}$/i) !== null
+                return value.match(new RegExp(OBJECTID_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)

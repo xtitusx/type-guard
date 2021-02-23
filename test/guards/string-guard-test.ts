@@ -392,12 +392,140 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isNumeric().guard('foo').isSuccess(), false);
         });
 
+        it("should return false when tested value is '123 '", () => {
+            assert.equal(new StringGuard().isNumeric().guard('123 ').isSuccess(), false);
+        });
+
         it("should return false when tested value is ''", () => {
             assert.equal(new StringGuard().isNumeric().guard('').isSuccess(), false);
         });
 
-        it("should return false when tested value is '123 '", () => {
-            assert.equal(new StringGuard().isNumeric().guard('123 ').isSuccess(), false);
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isNumeric().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isNumeric().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isEmailAddress()', () => {
+        it("should return true when tested value is 'simple@example.com'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('simple@example.com').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'very.common@example.com'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('very.common@example.com').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'disposable.style.email.with+symbol@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('disposable.style.email.with+symbol@example.com').isSuccess(),
+                true
+            );
+        });
+
+        it("should return true when tested value is 'other.email-with-hyphen@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('other.email-with-hyphen@example.com').isSuccess(),
+                true
+            );
+        });
+
+        it("should return true when tested value is 'fully-qualified-domain@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('fully-qualified-domain@example.com').isSuccess(),
+                true
+            );
+        });
+
+        it("should return true when tested value is 'user.name+tag+sorting@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('user.name+tag+sorting@example.com').isSuccess(),
+                true
+            );
+        });
+
+        it("should return true when tested value is 'x@example.com'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('x@example.com').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'example-indeed@strange-example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('example-indeed@strange-example.com').isSuccess(),
+                true
+            );
+        });
+
+        it('should return true when tested value is \'" "@example.org\'', () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('" "@example.org').isSuccess(), true);
+        });
+
+        it('should return true when tested value is \'"john..doe"@example.org\'', () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('"john..doe"@example.org').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'mailhost!username@example.org'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('mailhost!username@example.org').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'user%example.com@example.org'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('user%example.com@example.org').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'user-@example.org'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('user-@example.org').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'Abc.example.com'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('Abc.example.com').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'A@b@c@example.com'", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('A@b@c@example.com').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'a\"b(c)d,e:f;g<h>i[jk]l@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('a"b(c)d,e:f;g<h>i[jk]l@example.com').isSuccess(),
+                false
+            );
+        });
+
+        it('should return false when tested value is \'just"not"right@example.com\'', () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('just"not"right@example.com').isSuccess(), false);
+        });
+
+        it("should return true when tested value is 'this is\"not\\allowed@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('this is"not\\allowed@example.com').isSuccess(),
+                true
+            );
+        });
+
+        it("should return false when tested value is 'this\\ still\\\"not\\\\allowed@example.com'", () => {
+            assert.equal(
+                new StringGuard().isEmailAddress().guard('this\\ still\\"not\\\\allowed@example.com').isSuccess(),
+                false
+            );
+        });
+
+        it("should return false when tested value is 'i_like_underscore@but_its_not_allowed_in_this_part.example.com'", () => {
+            assert.equal(
+                new StringGuard()
+                    .isEmailAddress()
+                    .guard('i_like_underscore@but_its_not_allowed_in_this_part.example.com')
+                    .isSuccess(),
+                false
+            );
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isNumeric().guard('').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isNumeric().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
