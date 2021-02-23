@@ -226,12 +226,50 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isUpperCase().guard('Foo').isSuccess(), false);
         });
 
+        it("should return false when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('foo').isSuccess(), false);
+        });
+
         it('should return false when tested value is null', () => {
             assert.equal(new StringGuard().isUpperCase().guard(null).isSuccess(), false);
         });
 
         it('should return false tested value is undefined', () => {
             assert.equal(new StringGuard().isUpperCase().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isLowerCase()', () => {
+        it("should return true when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'foo1'", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('foo1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'foo1 ='", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('foo1 =').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('1').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'Foo'", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('Foo').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'FOO'", () => {
+            assert.equal(new StringGuard().isLowerCase().guard('FOO').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isLowerCase().guard(null).isSuccess(), false);
+        });
+
+        it('should return false tested value is undefined', () => {
+            assert.equal(new StringGuard().isLowerCase().guard(undefined).isSuccess(), false);
         });
     });
 

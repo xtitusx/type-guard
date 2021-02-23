@@ -80,7 +80,10 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is empty (=== "").
+     * @description Checks if string is empty.
+     *
+     * Rule :
+     * - Equals "".
      */
     public isEmpty(): this {
         this.addRule({ type: 'isEmpty' });
@@ -89,7 +92,10 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is not empty (!== "").
+     * @description Checks if string is not empty.
+     *
+     * Rule :
+     * - Not equals "".
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
@@ -137,7 +143,16 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string only contains letters and/or numbers.
+     * @description Checks if string does not contain any uppercase alpha characters.
+     */
+    public isLowerCase(): this {
+        this.addRule({ type: 'isLowerCase' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string only contains alpha characters and/or numbers.
      */
     public isAlphaNumeric(): this {
         this.addRule({ type: 'isAlphaNumeric' });
@@ -146,7 +161,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string only contains letters.
+     * @description Checks if string only contains alpha characters.
      */
     public isAlpha(): this {
         this.addRule({ type: 'isAlpha' });
@@ -166,8 +181,8 @@ export class StringGuard extends Guard<StringRule> {
      * @summary Chainable method.
      * @description Checks if string is a hexadecimal number.
      *
-     * Rules :
-     * - not case sensitive.
+     * Rule :
+     * - Not case sensitive.
       @example F061A, f061a
      */
     public isHex(): this {
@@ -181,7 +196,7 @@ export class StringGuard extends Guard<StringRule> {
      *
      * Rules :
      * - 24 hex digits.
-     * - not case sensitive.
+     * - Not case sensitive.
      * @example 507f1f77bcf86cd799439011, 507F1F77BCF86CD799439011
      */
     public isObjectId(): this {
@@ -195,7 +210,7 @@ export class StringGuard extends Guard<StringRule> {
      *
      * Rules :
      * - Starts with hastag (#) and is followed by 3 or 6 digits.
-     * - not case sensitive.
+     * - Not case sensitive.
      * @param digits 3 | 6 (optional).
      * @example #000000, #FFFFFF, #000, #fff
      */
@@ -208,8 +223,8 @@ export class StringGuard extends Guard<StringRule> {
      * @summary Chainable method.
      * @description Checks if string is an Universally unique identifier v4.
      *
-     * Rules :
-     * - case sensitive: https://tools.ietf.org/html/rfc4122#section-3.
+     * Rule :
+     * - Case sensitive: https://tools.ietf.org/html/rfc4122#section-3.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
@@ -223,8 +238,8 @@ export class StringGuard extends Guard<StringRule> {
      *
      * Rules :
      * - 12 hex degits (6 groups of 2 digits).
-     * - ieee802-types definition: dash separator, upper case.
-     * - ietf-yang-types definition: colon separator, lower case.
+     * - ieee802-types definition: dash separator, uppercase.
+     * - ietf-yang-types definition: colon separator, lowercase.
      * @see https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf
      * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
      */
@@ -316,6 +331,15 @@ export class StringGuard extends Guard<StringRule> {
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to not have lowercase alpha characters but has: ${value.length}`
+                          )
+                          .build();
+            case 'isLowerCase':
+                return value.toLowerCase() === value
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to not have uppercase alpha characters but has: ${value.length}`
                           )
                           .build();
             case 'isAlphaNumeric':
