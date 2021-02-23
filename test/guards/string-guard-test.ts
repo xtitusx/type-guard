@@ -64,6 +64,10 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().notContains('foobar').guard('fooba').isSuccess(), true);
         });
 
+        it("should return true when param is 'Foo' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().notContains('Foo').guard('foo').isSuccess(), true);
+        });
+
         it("should return true when param is 'foo' and tested value is ''", () => {
             assert.equal(new StringGuard().notContains('foo').guard('').isSuccess(), true);
         });
@@ -201,9 +205,47 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isUpperCase()', () => {
+        it("should return true when tested value is 'FOO'", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('FOO').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'FOO1'", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('FOO1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'FOO1 ='", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('FOO1 =').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('1').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'Foo'", () => {
+            assert.equal(new StringGuard().isUpperCase().guard('Foo').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isUpperCase().guard(null).isSuccess(), false);
+        });
+
+        it('should return false tested value is undefined', () => {
+            assert.equal(new StringGuard().isUpperCase().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isAlphaNumeric()', () => {
         it("should return true when tested value is 'foo'", () => {
             assert.equal(new StringGuard().isAlphaNumeric().guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'foo1'", () => {
+            assert.equal(new StringGuard().isAlphaNumeric().guard('foo1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isAlphaNumeric().guard('1').isSuccess(), true);
         });
 
         it("should return false when tested value is ''", () => {
@@ -212,10 +254,6 @@ describe('String-Guard', () => {
 
         it("should return false when tested value is 'foo '", () => {
             assert.equal(new StringGuard().isAlphaNumeric().guard('foo ').isSuccess(), false);
-        });
-
-        it("should return false when tested value is 'foo1'", () => {
-            assert.equal(new StringGuard().isAlphaNumeric().guard('foo1').isSuccess(), true);
         });
 
         it("should return false when tested value is 'foo$'", () => {

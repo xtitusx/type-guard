@@ -12,6 +12,8 @@ type StringRule =
     | { type: 'hasLength'; value: number }
     | { type: 'hasMinLength'; min: number }
     | { type: 'hasMaxLength'; max: number }
+    | { type: 'isUpperCase' }
+    | { type: 'isLowerCase' }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
@@ -19,7 +21,8 @@ type StringRule =
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }
     | { type: 'isUuidv4' }
-    | { type: 'isMACAddress' };
+    | { type: 'isMACAddress' }
+    | { type: 'isIPAddress' };
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -42,6 +45,9 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * @summary Chainable method.
      * @description Checks if string contains the specified substring.
+     *
+     * Rules :
+     * - case sensitive.
      * @param value string
      */
     public contains(value: string): this {
@@ -52,6 +58,9 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * @summary Chainable method.
      * @description Checks if string does not contain the specified substring.
+     *
+     * Rules :
+     * - case sensitive.
      * @param value string
      */
     public notContains(value: string): this {
@@ -119,7 +128,16 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string contains only letters and numbers.
+     * @description Checks if string does not contain any lowercase alpha characters.
+     */
+    public isUpperCase(): this {
+        this.addRule({ type: 'isUpperCase' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string only contains letters and/or numbers.
      */
     public isAlphaNumeric(): this {
         this.addRule({ type: 'isAlphaNumeric' });
@@ -128,7 +146,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string contains only letters.
+     * @description Checks if string only contains letters.
      */
     public isAlpha(): this {
         this.addRule({ type: 'isAlpha' });
@@ -137,7 +155,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string contains only numbers.
+     * @description Checks if string only contains numbers.
      */
     public isNumeric(): this {
         this.addRule({ type: 'isNumeric' });
@@ -159,7 +177,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a representation of an ObjectId.
+     * @description Checks if string is a representation of a MongoDB ObjectId.
      *
      * Rules :
      * - 24 hex digits.
@@ -191,7 +209,7 @@ export class StringGuard extends Guard<StringRule> {
      * @description Checks if string is an Universally unique identifier v4.
      *
      * Rules :
-     * - case sensitive: https://tools.ietf.org/html/rfc4122#section-3
+     * - case sensitive: https://tools.ietf.org/html/rfc4122#section-3.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
@@ -234,21 +252,21 @@ export class StringGuard extends Guard<StringRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to contain ${rule.value} but is not: ${value}`)
+                          .withMessage(`string is expected to contain ${rule.value} but does not: ${value}`)
                           .build();
             case 'notContains':
                 return value.indexOf(rule.value) === -1
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is not expected to contain ${rule.value} but is: ${value}`)
+                          .withMessage(`string is not expected to contain ${rule.value} but does not: ${value}`)
                           .build();
             case 'matches':
                 return value.match(rule.value) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to match ${rule.value} regex but is not: ${value}`)
+                          .withMessage(`string is expected to match ${rule.value} regex but does not: ${value}`)
                           .build();
             case 'isEmpty':
                 return value.length === 0
@@ -289,6 +307,15 @@ export class StringGuard extends Guard<StringRule> {
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to have max length of ${rule.max} but has length of: ${value.length}`
+                          )
+                          .build();
+            case 'isUpperCase':
+                return value.toUpperCase() === value
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to not have lowercase alpha characters but has: ${value.length}`
                           )
                           .build();
             case 'isAlphaNumeric':
