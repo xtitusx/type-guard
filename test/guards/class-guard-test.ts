@@ -15,6 +15,7 @@ describe('Class-Guard', () => {
         it('should return true when tested value is [1]', () => {
             assert.equal(new ClassGuard().guard(['1']).isSuccess(), true);
         });
+
         it('should return true when tested value is new Array([1])', () => {
             assert.equal(new ClassGuard().guard(new Array(['1'])).isSuccess(), true);
         });
@@ -50,6 +51,7 @@ describe('Class-Guard', () => {
             assert.equal(guardResult.isSuccess(), false);
             assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: number');
         });
+
         it('should return false when tested value is true', () => {
             const guardResult = new ClassGuard().guard(true);
             assert.equal(guardResult.isSuccess(), false);
@@ -64,6 +66,46 @@ describe('Class-Guard', () => {
 
         it('should return true when param is Object and when tested value is new Number(1)', () => {
             assert.equal(new ClassGuard().isInstanceOf(Object).guard(new Number(1)).isSuccess(), true);
+        });
+
+        it('should return true when param is Array and tested value is new Array([1])', () => {
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .guard(new Array(['1']))
+                    .isSuccess(),
+                true
+            );
+        });
+
+        it("should return true when param is Map and tested value is new Map([['k', 'v']]", () => {
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Map)
+                    .guard(new Map([['k', 'v']]))
+                    .isSuccess(),
+                true
+            );
+        });
+
+        it('should return true when param is Set and tested value is new Set([1]', () => {
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Set)
+                    .guard(new Set([1]))
+                    .isSuccess(),
+                true
+            );
+        });
+
+        it('should return false when param is Map and tested value is new Array([1])', () => {
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Map)
+                    .guard(new Array(['1']))
+                    .isSuccess(),
+                true
+            );
         });
 
         it('should return false when param is Number and tested value is new String("foo")', () => {
