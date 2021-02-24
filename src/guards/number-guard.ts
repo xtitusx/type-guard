@@ -333,7 +333,7 @@ export class NumberGuard extends Guard<NumberRule> {
      * @override
      */
     protected typeGuard(): void {
-        if (this.propertyValue === null || undefined) {
+        if (this.propertyValue === undefined || this.propertyValue === null) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a number but received: ${this.propertyValue}`

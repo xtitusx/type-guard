@@ -34,7 +34,7 @@ export class ClassGuard extends Guard<ClassRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`Value is expected to be an instance of: ${rule.value.name}`)
+                          .withMessage(`value is expected to be an instance of: ${rule.value.name}`)
                           .build();
         }
     }
@@ -43,7 +43,7 @@ export class ClassGuard extends Guard<ClassRule> {
      * @override
      */
     protected typeGuard(): void {
-        if (this.propertyValue === null || undefined) {
+        if (this.propertyValue === undefined || this.propertyValue === null) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a class instance but received: ${this.propertyValue}`
@@ -52,6 +52,11 @@ export class ClassGuard extends Guard<ClassRule> {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a class instance but received: ${typeof this.propertyValue}`
+            );
+        } else if (Array.isArray(this.propertyValue)) {
+            this.getCombinedGuardResult().setSuccess(false);
+            this.getCombinedGuardResult().setMessage(
+                `${this.constructor.name} expected a class instance but received: array object`
             );
         } else if (!this.propertyValue.constructor && !this.propertyValue.constructor.name) {
             this.getCombinedGuardResult().setSuccess(false);

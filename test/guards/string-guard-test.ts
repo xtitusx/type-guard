@@ -3,6 +3,30 @@ import { assert } from 'chai';
 import { StringGuard } from '../../src/guards/string-guard';
 
 describe('String-Guard', () => {
+    describe('#guard()', () => {
+        it("should return true when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().guard('foo').isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            const guardResult = new StringGuard().guard(null);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'StringGuard expected a string but received: null');
+        });
+
+        it('should return false when tested value is undefined', () => {
+            const guardResult = new StringGuard().guard(undefined);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'StringGuard expected a string but received: undefined');
+        });
+
+        it('should return false when tested value is 1', () => {
+            const guardResult = new StringGuard().guard(1);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'StringGuard expected a string but received: number');
+        });
+    });
+
     describe('#equals()', () => {
         it("should return true when param is 'foo' and tested value is 'foo'", () => {
             assert.equal(new StringGuard().equals('foo').guard('foo').isSuccess(), true);

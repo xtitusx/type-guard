@@ -86,7 +86,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `dateString is expected to be the same that ${rule.value} but is different: ${value}`
+                              `date string is expected to be the same that ${rule.value} but is different: ${value}`
                           )
                           .build();
             case 'isSameOrBefore':
@@ -95,7 +95,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `dateString is expected to be the same or before ${rule.value} but is after: ${value}`
+                              `date string is expected to be the same or before ${rule.value} but is after: ${value}`
                           )
                           .build();
             case 'isSameOrAfter':
@@ -104,7 +104,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `dateString is expected to be the same or after ${rule.value} but is before: ${value}`
+                              `date string is expected to be the same or after ${rule.value} but is before: ${value}`
                           )
                           .build();
             case 'isBefore':
@@ -112,14 +112,14 @@ export class DateStringGuard extends Guard<DateStringRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`dateString is expected to be before ${rule.value} but is after: ${value}`)
+                          .withMessage(`date string is expected to be before ${rule.value} but is after: ${value}`)
                           .build();
             case 'isAfter':
                 return dayjs(value).isAfter(rule.value)
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`dateString is expected to be after ${rule.value} but is before: ${value}`)
+                          .withMessage(`date string is expected to be after ${rule.value} but is before: ${value}`)
                           .build();
         }
     }
@@ -128,7 +128,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
      * @override
      */
     protected typeGuard(): void {
-        if (this.propertyValue === null || undefined) {
+        if (this.propertyValue === undefined || this.propertyValue === null) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a string but received: ${this.propertyValue}`
@@ -136,7 +136,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
         } else if (typeof this.propertyValue !== 'string' || !dayjs(this.propertyValue).isValid()) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a dateString but received: ${typeof this.propertyValue}`
+                `${this.constructor.name} expected a date string but received: ${typeof this.propertyValue}`
             );
         }
     }

@@ -51,7 +51,7 @@ export class BooleanGuard extends Guard<BooleanRule> {
      * @override
      */
     protected typeGuard(): void {
-        if (this.propertyValue === null || undefined) {
+        if (this.propertyValue === undefined || this.propertyValue === null) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a boolean but received: ${this.propertyValue}`

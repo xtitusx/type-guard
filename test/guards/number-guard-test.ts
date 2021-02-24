@@ -3,6 +3,30 @@ import { assert } from 'chai';
 import { NumberGuard } from '../../src/guards/number-guard';
 
 describe('Number-Guard', () => {
+    describe('#guard()', () => {
+        it('should return true when tested value is 1', () => {
+            assert.equal(new NumberGuard().guard(1).isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            const guardResult = new NumberGuard().guard(null);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'NumberGuard expected a number but received: null');
+        });
+
+        it('should return false when tested value is undefined', () => {
+            const guardResult = new NumberGuard().guard(undefined);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'NumberGuard expected a number but received: undefined');
+        });
+
+        it("should return false when tested value is 'foo''", () => {
+            const guardResult = new NumberGuard().guard('foo');
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'NumberGuard expected a number but received: string');
+        });
+    });
+
     describe('#equals()', () => {
         it('should return true when param is 1 and tested value is 1', () => {
             assert.equal(new NumberGuard().equals(1).guard(1).isSuccess(), true);

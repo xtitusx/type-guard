@@ -259,7 +259,7 @@ export class StringGuard extends Guard<StringRule> {
      * @description Checks if string is an Universally unique identifier v4.
      *
      * Rule :
-     * - Case sensitive.
+     * - Lowercase.
      * @see https://tools.ietf.org/html/rfc4122#section-3.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
@@ -482,7 +482,7 @@ export class StringGuard extends Guard<StringRule> {
      * @override
      */
     protected typeGuard(): void {
-        if (this.propertyValue === null || undefined) {
+        if (this.propertyValue === undefined || this.propertyValue === null) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a string but received: ${this.propertyValue}`

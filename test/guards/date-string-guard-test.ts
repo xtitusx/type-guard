@@ -3,6 +3,29 @@ import { assert } from 'chai';
 import { DateStringGuard } from '../../src/guards/date-string-guard';
 
 describe('DateString-Guard', () => {
+    describe('#guard()', () => {
+        it("should return true when tested value is '2015-01-20T00:00:00+02:00'", () => {
+            assert.equal(new DateStringGuard().guard('2015-01-20T00:00:00+02:00').isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            const guardResult = new DateStringGuard().guard(null);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'DateStringGuard expected a string but received: null');
+        });
+
+        it('should return false when tested value is undefined', () => {
+            const guardResult = new DateStringGuard().guard(undefined);
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'DateStringGuard expected a string but received: undefined');
+        });
+
+        it("should return false when tested value is 'foo'", () => {
+            const guardResult = new DateStringGuard().guard('foo');
+            assert.equal(guardResult.isSuccess(), false);
+            assert.equal(guardResult.getMessage(), 'DateStringGuard expected a date string but received: string');
+        });
+    });
     describe('#isSameOrBefore()', () => {
         it("should return true when param is '2015-01-20T00:00:00+02:00' and tested value is '2015-01-20T00:00:00+02:00'", () => {
             assert.equal(
