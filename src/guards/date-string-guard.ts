@@ -4,9 +4,8 @@ import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
-import { Guard } from './guard';
-
-import { GuardResult } from '../guard-result';
+import { Guard } from '../core/guard';
+import { GuardResult } from '../core/guard-result';
 
 type DateStringRule =
     | { type: 'isSame'; value: string }

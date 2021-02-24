@@ -1,4 +1,4 @@
-import { GuardResult } from '../guard-result';
+import { GuardResult } from './guard-result';
 
 type Rule = { type: string };
 

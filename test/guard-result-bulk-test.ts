@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 
 import { StringGuard } from '../src/guards/string-guard';
-import { GuardResultBulk } from '../src/guard-result-bulk';
-import { GuardResult } from '../src/guard-result';
+import { GuardResultBulk } from '../src/core/guard-result-bulk';
+import { GuardResult } from '../src/core/guard-result';
 
 describe('Guard-Result-Bulk', () => {
     describe('#combine()', () => {

@@ -1,6 +1,5 @@
-import { Guard } from './guard';
-
-import { GuardResult } from '../guard-result';
+import { Guard } from '../core/guard';
+import { GuardResult } from '../core/guard-result';
 
 type ArrayRule =
     | { type: 'isEmpty' }
