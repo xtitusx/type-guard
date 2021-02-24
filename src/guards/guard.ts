@@ -12,14 +12,14 @@ export abstract class Guard<T extends Rule> {
     }
 
     /**
-     * Checks the rule on a trusted property (after type guarding).
+     * Checks the rule on a trusted property after type guarding.
      * @param rule T
      * @param value unknown
      */
     protected abstract checkRule(rule: T, value: unknown): GuardResult;
 
     /**
-     * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son type est approuvé par la garde utilisée.
+     * Checks the type or others conditions of a non trusted property before rules checking.
      */
     protected abstract typeGuard(): void;
 
