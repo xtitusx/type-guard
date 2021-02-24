@@ -14,8 +14,9 @@ export class ClassGuard extends Guard<ClassRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if the prototype property of a constructor appears anywhere in the prototype chain of the specified object.
-     * @param value number
+     * @description Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.
+     * @param value Function
+     * @see https://javascript.info/instanceof
      */
     public isInstanceOf(value: Function): this {
         this.addRule({ type: 'isInstanceOf', value: value });
@@ -48,19 +49,11 @@ export class ClassGuard extends Guard<ClassRule> {
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a class instance but received: ${this.propertyValue}`
             );
-        } else if (typeof this.propertyValue !== 'object') {
+        } else if (!(this.propertyValue instanceof Object)) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(
                 `${this.constructor.name} expected a class instance but received: ${typeof this.propertyValue}`
             );
-        } else if (Array.isArray(this.propertyValue)) {
-            this.getCombinedGuardResult().setSuccess(false);
-            this.getCombinedGuardResult().setMessage(
-                `${this.constructor.name} expected a class instance but received: array object`
-            );
-        } else if (!this.propertyValue.constructor && !this.propertyValue.constructor.name) {
-            this.getCombinedGuardResult().setSuccess(false);
-            this.getCombinedGuardResult().setMessage(`${this.constructor.name} expected a constructor name`);
         }
     }
 }

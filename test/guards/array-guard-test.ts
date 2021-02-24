@@ -40,7 +40,7 @@ describe('Array-Guard', () => {
     });
 
     describe('#hasSize()', () => {
-        it('should return true when param is 1 and tested value is [foo]', () => {
+        it("should return true when param is 1 and tested value is ['foo']", () => {
             assert.equal(new ArrayGuard().hasSize(1).guard(['foo']).isSuccess(), true);
         });
 
