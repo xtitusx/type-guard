@@ -50,7 +50,7 @@ export class BooleanGuard extends Guard<BooleanRule> {
     /**
      * @override
      */
-    protected guardType(): void {
+    protected typeGuard(): void {
         if (this.propertyValue === null || undefined) {
             this.getCombinedGuardResult().setSuccess(false);
             this.getCombinedGuardResult().setMessage(

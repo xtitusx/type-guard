@@ -21,7 +21,7 @@ export abstract class Guard<T extends Rule> {
     /**
      * Méthode qui vérifie que la valeur n'est ni 'null', ni 'undefined', et que son type est approuvé par la garde utilisée.
      */
-    protected abstract guardType(): void;
+    protected abstract typeGuard(): void;
 
     /**
      * Méthode qui renvoie le résultat de la méthode guard().
@@ -54,7 +54,7 @@ export abstract class Guard<T extends Rule> {
         this.propertyValue = propertyValue;
         this.combinedGuardResult = new GuardResult.Builder().withSuccess(true).withPropertyName(propertyName).build();
 
-        this.guardType();
+        this.typeGuard();
 
         if (!this.getCombinedGuardResult().isSuccess()) {
             return this.getCombinedGuardResult();
