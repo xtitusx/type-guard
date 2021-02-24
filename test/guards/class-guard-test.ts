@@ -83,11 +83,11 @@ describe('Class-Guard', () => {
         });
 
         it('should return false when param is undefined and tested value is undefined', () => {
-            assert.equal(new ClassGuard().isInstanceOf(undefined).guard(undefined).isSuccess(), false);
+            assert.equal(new ClassGuard().isInstanceOf(Number).guard(undefined).isSuccess(), false);
         });
 
         it('should return false when param is null and tested value is null', () => {
-            assert.equal(new ClassGuard().isInstanceOf(null).guard(null).isSuccess(), false);
+            assert.equal(new ClassGuard().isInstanceOf(Number).guard(null).isSuccess(), false);
         });
     });
 });

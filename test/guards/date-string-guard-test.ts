@@ -26,6 +26,7 @@ describe('DateString-Guard', () => {
             assert.equal(guardResult.getMessage(), 'DateStringGuard expected a date string but received: string');
         });
     });
+
     describe('#isSameOrBefore()', () => {
         it("should return true when param is '2015-01-20T00:00:00+02:00' and tested value is '2015-01-20T00:00:00+02:00'", () => {
             assert.equal(

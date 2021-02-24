@@ -35,7 +35,7 @@ export class ClassGuard extends Guard<ClassRule> {
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`value is expected to be an instance of: ${rule.value.name}`)
+                          .withMessage(`value is expected to be a class instance of: ${rule.value.name}`)
                           .build();
         }
     }
