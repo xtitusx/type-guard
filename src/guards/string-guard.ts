@@ -5,7 +5,8 @@ import {
     ALPHA_PATTERN,
     NUMERIC_PATTERN,
     HEX_PATTERN,
-    EMAIL_ADDRESS_PATTERN,
+    QUICK_EMAIL_ADDRESS_PATTERN,
+    RFC5322_EMAIL_ADDRESS_PATTERN,
     OBJECTID_PATTERN,
     THREE_DIGITS_HEX_COLOR_PATTERN,
     SIX_DIGITS_HEX_COLOR_PATTERN,
@@ -30,12 +31,14 @@ type StringRule =
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
     | { type: 'isHex' }
-    | { type: 'isEmailAddress' }
+    | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }
     | { type: 'isUuidv4' }
     | { type: 'isMACAddress' }
     | { type: 'isIPAddress' };
+
+type EmailAddressDefinition = 'quick' | 'rfc5322';
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -215,12 +218,21 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string follows all RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 syntactic rules.
-     * @see https://en.wikipedia.org/wiki/Email_address#Syntax
+     * @description Definition :
+     * - quick : Common implementation matching 99% of all email addresses in actual use today.
+     * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
+     *
+     * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting :
+     * - IP addresses.
+     * - domain-specific addresses.
+     * - the syntax using double quotes and square brackets.
+     *
+     * @see https://en.wikipedia.org/wiki/Email_address#Syntax, http://www.regular-expressions.info/email.html
+     *  @param def 'quick' | 'rfc5322' (optional). Default is 'quick'.
      * @example `John.Doe@example.com`
      */
-    public isEmailAddress(): this {
-        this.addRule({ type: 'isEmailAddress' });
+    public isEmailAddress(def?: EmailAddressDefinition): this {
+        this.addRule({ type: 'isEmailAddress', def: def });
         return this;
     }
 
@@ -408,14 +420,27 @@ export class StringGuard extends Guard<StringRule> {
                           .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
                           .build();
             case 'isEmailAddress':
-                return value.match(new RegExp(EMAIL_ADDRESS_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to follow email address RFC syntactic rules but does not: ${value}`
-                          )
-                          .build();
+                switch (rule.def) {
+                    case 'rfc5322':
+                        return value.match(new RegExp(RFC5322_EMAIL_ADDRESS_PATTERN)) !== null
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `string is expected to match lightened RFC5322 syntactic rules but does not: ${value}`
+                                  )
+                                  .build();
+                    case 'quick':
+                    default:
+                        return value.match(new RegExp(QUICK_EMAIL_ADDRESS_PATTERN)) !== null
+                            ? new GuardResult.Builder().withSuccess(true).build()
+                            : new GuardResult.Builder()
+                                  .withSuccess(false)
+                                  .withMessage(
+                                      `string is expected to match common syntactic rules but does not: ${value}`
+                                  )
+                                  .build();
+                }
             case 'isHex':
                 return value.match(new RegExp(HEX_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()

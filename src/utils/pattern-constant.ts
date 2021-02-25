@@ -19,11 +19,26 @@ export const ALPHA_PATTERN = '^[a-zA-Z]+$';
 export const HEX_PATTERN = '^[a-fA-F\\d]+$';
 
 /**
- * Email address pattern.
- * @see https://en.wikipedia.org/wiki/Email_address#Syntax
+ * Email address pattern matching 99% of email addresses.
  */
 // prettier-ignore
-export const EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+export const QUICK_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$';
+
+/**
+ * RFC5322 email address pattern.
+ * @see https://en.wikipedia.org/wiki/Email_address#Syntax
+ */
+
+/**
+ * Email address pattern matching 99.9% of email addresses.
+ *
+ * Lightened RFC 5322 implementation omitting :
+ * - IP addresses.
+ * - domain-specific addresses.
+ * - the syntax using double quotes and square brackets.
+ */
+// prettier-ignore
+export const RFC5322_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+(?:[.][a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$';
 
 /**
  * ObjectId pattern.
