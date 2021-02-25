@@ -1,44 +1,29 @@
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
-import {
-    ALPHA_NUMERIC_PATTERN,
-    ALPHA_PATTERN,
-    NUMERIC_PATTERN,
-    HEX_PATTERN,
-    QUICK_EMAIL_ADDRESS_PATTERN,
-    RFC5322_EMAIL_ADDRESS_PATTERN,
-    OBJECTID_PATTERN,
-    THREE_DIGITS_HEX_COLOR_PATTERN,
-    SIX_DIGITS_HEX_COLOR_PATTERN,
-    UUIDV4_PATTERN,
-    MAC_ADDRESS_PATTERN,
-} from '../utils/pattern-constant';
 
-type StringRule =
-    | { type: 'equals'; value: string }
-    | { type: 'notEquals'; value: string }
-    | { type: 'contains'; value: string }
-    | { type: 'notContains'; value: string }
-    | { type: 'matches'; value: RegExp }
-    | { type: 'isEmpty' }
-    | { type: 'isNotEmpty' }
-    | { type: 'hasLength'; value: number }
-    | { type: 'hasMinLength'; min: number }
-    | { type: 'hasMaxLength'; max: number }
-    | { type: 'isUpperCase' }
-    | { type: 'isLowerCase' }
-    | { type: 'isAlphaNumeric' }
-    | { type: 'isAlpha' }
-    | { type: 'isNumeric' }
-    | { type: 'isHex' }
-    | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
-    | { type: 'isObjectId' }
-    | { type: 'isHexColor'; digits?: 3 | 6 }
-    | { type: 'isUuidv4' }
-    | { type: 'isMACAddress' }
-    | { type: 'isIPAddress' };
-
-type EmailAddressDefinition = 'quick' | 'rfc5322';
+import { StringRule, EmailAddressDefinition } from './string/types';
+import { Equals } from './string/equals';
+import { NotEquals } from './string/not-equals';
+import { Contains } from './string/contains';
+import { NotContains } from './string/not-contains';
+import { Matches } from './string/matches';
+import { IsEmpty } from './string/is-empty';
+import { IsNotEmpty } from './string/is-not-empty';
+import { HasLength } from './string/has-length';
+import { HasMinLength } from './string/has-min-length';
+import { HasMaxLength } from './string/has-max-length';
+import { IsUppercase } from './string/is-uppercase';
+import { IsLowercase } from './string/is-lowercase';
+import { IsAlphaNumeric } from './string/is-alpha-numeric';
+import { IsAlpha } from './string/is-alpha';
+import { IsNumeric } from './string/is-numeric';
+import { IsEmailAddress } from './string/is-email-address';
+import { IsHex } from './string/is-hex';
+import { IsObjectId } from './string/is-object-id';
+import { IsHexColor } from './string/is-hex-color';
+import { IsUuidv4 } from './string/is-uuid-v4';
+import { IsMACAddress } from './string/is-mac-address';
+import { IsIPAddress } from './string/is-ip-address';
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
@@ -303,202 +288,49 @@ export class StringGuard extends Guard<StringRule> {
     protected checkRule(rule: StringRule, value: string): GuardResult {
         switch (rule.type) {
             case 'equals':
-                return value === rule.value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be ${rule.value} but is not: ${value}`)
-                          .build();
+                return new Equals(rule, value).exec();
             case 'notEquals':
-                return value !== rule.value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is not expected to be ${rule.value} but is: ${value}`)
-                          .build();
+                return new NotEquals(rule, value).exec();
             case 'contains':
-                return value.indexOf(rule.value) !== -1
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to contain ${rule.value} but does not: ${value}`)
-                          .build();
+                return new Contains(rule, value).exec();
             case 'notContains':
-                return value.indexOf(rule.value) === -1
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is not expected to contain ${rule.value} but does: ${value}`)
-                          .build();
+                return new NotContains(rule, value).exec();
             case 'matches':
-                return value.match(rule.value) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to match ${rule.value} regex but does not: ${value}`)
-                          .build();
+                return new Matches(rule, value).exec();
             case 'isEmpty':
-                return value.length === 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be empty but has length of: ${value.length}`)
-                          .build();
+                return new IsEmpty(rule, value).exec();
             case 'isNotEmpty':
-                return value.length !== 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to not be empty but has length of: ${value.length}`)
-                          .build();
+                return new IsNotEmpty(rule, value).exec();
             case 'hasLength':
-                return value.length === rule.value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to have length of ${rule.value} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasLength(rule, value).exec();
             case 'hasMinLength':
-                return value.length >= rule.min
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to have min length of ${rule.min} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasMinLength(rule, value).exec();
             case 'hasMaxLength':
-                return value.length <= rule.max
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to have max length of ${rule.max} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasMaxLength(rule, value).exec();
             case 'isUpperCase':
-                return value.toUpperCase() === value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to not have lowercase alpha characters but has: ${value.length}`
-                          )
-                          .build();
+                return new IsUppercase(rule, value).exec();
             case 'isLowerCase':
-                return value.toLowerCase() === value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to not have uppercase alpha characters but has: ${value.length}`
-                          )
-                          .build();
+                return new IsLowercase(rule, value).exec();
             case 'isAlphaNumeric':
-                return value.match(new RegExp(ALPHA_NUMERIC_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to only contain alphanumeric characters but is not: ${value}`
-                          )
-                          .build();
+                return new IsAlphaNumeric(rule, value).exec();
             case 'isAlpha':
-                return value.match(new RegExp(ALPHA_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to only contain alpha characters but is not: ${value}`)
-                          .build();
+                return new IsAlpha(rule, value).exec();
             case 'isNumeric':
-                return value.match(new RegExp(NUMERIC_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to only contain numeric characters but is not: ${value}`)
-                          .build();
+                return new IsNumeric(rule, value).exec();
             case 'isEmailAddress':
-                switch (rule.def) {
-                    case 'rfc5322':
-                        return value.match(new RegExp(RFC5322_EMAIL_ADDRESS_PATTERN)) !== null
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `string is expected to match lightened RFC5322 syntactic rules but does not: ${value}`
-                                  )
-                                  .build();
-                    case 'quick':
-                    default:
-                        return value.match(new RegExp(QUICK_EMAIL_ADDRESS_PATTERN)) !== null
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `string is expected to match common syntactic rules but does not: ${value}`
-                                  )
-                                  .build();
-                }
+                return new IsEmailAddress(rule, value).exec();
             case 'isHex':
-                return value.match(new RegExp(HEX_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be a hexadecimal number but is not: ${value}`)
-                          .build();
+                return new IsHex(rule, value).exec();
             case 'isObjectId':
-                return value.match(new RegExp(OBJECTID_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be an ObjectId but is not: ${value}`)
-                          .build();
+                return new IsObjectId(rule, value).exec();
             case 'isHexColor':
-                switch (rule.digits) {
-                    case 3:
-                        return value.match(new RegExp(THREE_DIGITS_HEX_COLOR_PATTERN)) !== null
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `string is expected to be a 3 digits hexadecimal color but is not: ${value}`
-                                  )
-                                  .build();
-                    case 6:
-                        return value.match(new RegExp(SIX_DIGITS_HEX_COLOR_PATTERN)) !== null
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `string is expected to be a 6 digits hexadecimal color but is not: ${value}`
-                                  )
-                                  .build();
-                    default:
-                        return value.match(
-                            new RegExp(`${THREE_DIGITS_HEX_COLOR_PATTERN}|${SIX_DIGITS_HEX_COLOR_PATTERN}`)
-                        ) !== null
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(`string is expected to be a hexadecimal color but is not: ${value}`)
-                                  .build();
-                }
+                return new IsHexColor(rule, value).exec();
             case 'isUuidv4':
-                return value.match(new RegExp(UUIDV4_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be an Uuid v4 but is not: ${value}`)
-                          .build();
+                return new IsUuidv4(rule, value).exec();
             case 'isMACAddress':
-                return value.match(new RegExp(MAC_ADDRESS_PATTERN)) !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`string is expected to be a MAC Address but is not: ${value}`)
-                          .build();
+                return new IsMACAddress(rule, value).exec();
+            case 'isIPAddress':
+                return new IsIPAddress(rule, value).exec();
         }
     }
 

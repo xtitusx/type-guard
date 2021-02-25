@@ -1,7 +1,10 @@
 import { GuardResult } from './guard-result';
 
-type Rule = { type: string };
+export type Rule = { type: string };
 
+/**
+ * @class Guard
+ */
 export abstract class Guard<T extends Rule> {
     protected rules?: T[];
     protected propertyValue: unknown;
