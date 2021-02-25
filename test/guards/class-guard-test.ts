@@ -31,31 +31,37 @@ describe('Class-Guard', () => {
         it('should return false when tested value is null', () => {
             const guardResult = new ClassGuard().guard(null);
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: null');
+            assert.equal(guardResult.getMessage(), 'ClassGuard expected an Object class instance but received: null');
         });
 
         it('should return false when tested value is undefined', () => {
             const guardResult = new ClassGuard().guard(undefined);
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: undefined');
+            assert.equal(
+                guardResult.getMessage(),
+                'ClassGuard expected an Object class instance but received: undefined'
+            );
         });
 
         it("should return false when tested value is 'foo''", () => {
             const guardResult = new ClassGuard().guard('foo');
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: string');
+            assert.equal(guardResult.getMessage(), 'ClassGuard expected an Object class instance but received: string');
         });
 
         it('should return false when tested value is 1', () => {
             const guardResult = new ClassGuard().guard(1);
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: number');
+            assert.equal(guardResult.getMessage(), 'ClassGuard expected an Object class instance but received: number');
         });
 
         it('should return false when tested value is true', () => {
             const guardResult = new ClassGuard().guard(true);
             assert.equal(guardResult.isSuccess(), false);
-            assert.equal(guardResult.getMessage(), 'ClassGuard expected a class instance but received: boolean');
+            assert.equal(
+                guardResult.getMessage(),
+                'ClassGuard expected an Object class instance but received: boolean'
+            );
         });
     });
 
@@ -104,7 +110,7 @@ describe('Class-Guard', () => {
                     .isInstanceOf(Map)
                     .guard(new Array(['1']))
                     .isSuccess(),
-                true
+                false
             );
         });
 
