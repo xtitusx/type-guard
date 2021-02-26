@@ -1,13 +1,13 @@
+import { ArrayRule } from './array/types';
+import { IsEmpty } from './array/is-empty';
+import { IsNotEmpty } from './array/is-not-empty';
+import { HasSize } from './array/has-size';
+import { HasMinSize } from './array/has-min-size';
+import { HasMaxSize } from './array/has-max-size';
+import { Contains } from './array/contains';
+
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
-
-type ArrayRule =
-    | { type: 'isEmpty' }
-    | { type: 'isNotEmpty' }
-    | { type: 'hasSize'; value: number }
-    | { type: 'hasMinSize'; min: number }
-    | { type: 'hasMaxSize'; max: number }
-    | { type: 'contains'; value: any };
 
 /** @class ArrayGuard
  * @extends {Guard<ArrayRule>}
@@ -83,53 +83,17 @@ export class ArrayGuard extends Guard<ArrayRule> {
     protected checkRule(rule: ArrayRule, value: unknown[]): GuardResult {
         switch (rule.type) {
             case 'isEmpty':
-                return value.length === 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`array object is expected to be empty but has length of: ${value.length}`)
-                          .build();
+                return new IsEmpty(rule, value).exec();
             case 'isNotEmpty':
-                return value.length !== 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`array object is expected to not be empty but has length of: ${value.length}`)
-                          .build();
+                return new IsNotEmpty(rule, value).exec();
             case 'hasSize':
-                return value.length === rule.value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `array object is expected to have length of ${rule.value} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasSize(rule, value).exec();
             case 'hasMinSize':
-                return value.length >= rule.min
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `array object is expected to have min length of ${rule.min} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasMinSize(rule, value).exec();
             case 'hasMaxSize':
-                return value.length <= rule.max
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `array object is expected to have max length of ${rule.max} but has length of: ${value.length}`
-                          )
-                          .build();
+                return new HasMaxSize(rule, value).exec();
             case 'contains':
-                return Object.values(value).includes(rule.value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`array object is expected to contain ${rule.value} value but is not`)
-                          .build();
+                return new Contains(rule, value).exec();
         }
     }
 
