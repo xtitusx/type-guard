@@ -1,4 +1,4 @@
-import { NumberRule } from './types';
+import { NumberRule } from './number-types';
 
 import { RuleChecker } from '../../core/rule-checker';
 

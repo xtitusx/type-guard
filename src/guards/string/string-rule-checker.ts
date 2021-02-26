@@ -1,4 +1,4 @@
-import { StringRule } from './types';
+import { StringRule } from './string-types';
 
 import { RuleChecker } from '../../core/rule-checker';
 

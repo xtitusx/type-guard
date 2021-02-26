@@ -1,19 +1,19 @@
-import { NumberRule, NetworkPortRange } from './number/types';
-import { Equals } from './number/equals';
-import { IsIn } from './number/is-in';
-import { IsMax } from './number/is-max';
-import { IsMin } from './number/is-min';
-import { IsPositive } from './number/is-positive';
-import { IsNegative } from './number/is-negative';
-import { IsWhole } from './number/is-whole';
-import { IsDecimal } from './number/is-decimal';
-import { IsEven } from './number/is-even';
-import { IsOdd } from './number/is-odd';
-import { IsPrime } from './number/is-prime';
-import { IsComposite } from './number/is-composite';
-import { IsFibonacci } from './number/is-fibonacci';
-import { IsNegaFibonacci } from './number/is-nega-fibonacci';
-import { IsNetworkPort } from './number/is-network-port';
+import { NumberRule, NetworkPortRange } from './number/number-types';
+import { NumberEquals } from './number/number-equals';
+import { NumberIsIn } from './number/number-is-in';
+import { NumberIsMax } from './number/number-is-max';
+import { NumberIsMin } from './number/number-is-min';
+import { NumberIsPositive } from './number/number-is-positive';
+import { NumberIsNegative } from './number/number-is-negative';
+import { NumberIsWhole } from './number/number-is-whole';
+import { NumberIsDecimal } from './number/number-is-decimal';
+import { NumberIsEven } from './number/number-is-even';
+import { NumberIsOdd } from './number/number-is-odd';
+import { NumberIsPrime } from './number/number-is-prime';
+import { NumberIsComposite } from './number/number-is-composite';
+import { NumberIsFibonacci } from './number/number-is-fibonacci';
+import { NumberIsNegaFibonacci } from './number/number-is-nega-fibonacci';
+import { NumberIsNetworkPort } from './number/number-is-network-port';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -179,35 +179,35 @@ export class NumberGuard extends Guard<NumberRule> {
     protected checkRule(rule: NumberRule, value: number): GuardResult {
         switch (rule.type) {
             case 'equals':
-                return new Equals(rule, value).exec();
+                return new NumberEquals(rule, value).exec();
             case 'isMin':
-                return new IsMin(rule, value).exec();
+                return new NumberIsMin(rule, value).exec();
             case 'isMax':
-                return new IsMax(rule, value).exec();
+                return new NumberIsMax(rule, value).exec();
             case 'isIn':
-                return new IsIn(rule, value).exec();
+                return new NumberIsIn(rule, value).exec();
             case 'isPositive':
-                return new IsPositive(rule, value).exec();
+                return new NumberIsPositive(rule, value).exec();
             case 'isNegative':
-                return new IsNegative(rule, value).exec();
+                return new NumberIsNegative(rule, value).exec();
             case 'isWhole':
-                return new IsWhole(rule, value).exec();
+                return new NumberIsWhole(rule, value).exec();
             case 'isDecimal':
-                return new IsDecimal(rule, value).exec();
+                return new NumberIsDecimal(rule, value).exec();
             case 'isEven':
-                return new IsEven(rule, value).exec();
+                return new NumberIsEven(rule, value).exec();
             case 'isOdd':
-                return new IsOdd(rule, value).exec();
+                return new NumberIsOdd(rule, value).exec();
             case 'isPrime':
-                return new IsPrime(rule, value).exec();
+                return new NumberIsPrime(rule, value).exec();
             case 'isComposite':
-                return new IsComposite(rule, value).exec();
+                return new NumberIsComposite(rule, value).exec();
             case 'isFibonacci':
-                return new IsFibonacci(rule, value).exec();
+                return new NumberIsFibonacci(rule, value).exec();
             case 'isNegaFibonacci':
-                return new IsNegaFibonacci(rule, value).exec();
+                return new NumberIsNegaFibonacci(rule, value).exec();
             case 'isNetworkPort':
-                return new IsNetworkPort(rule, value).exec();
+                return new NumberIsNetworkPort(rule, value).exec();
         }
     }
 

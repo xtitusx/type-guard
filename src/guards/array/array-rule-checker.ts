@@ -1,4 +1,4 @@
-import { ArrayRule } from './types';
+import { ArrayRule } from './array-types';
 
 import { RuleChecker } from '../../core/rule-checker';
 

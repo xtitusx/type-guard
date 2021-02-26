@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { DateStringRule } from './date-string/types';
+import { DateStringRule } from './date-string/date-string-types';
 import { DateStringIsSame } from './date-string/date-string-is-same';
 import { DateStringIsSameOrBefore } from './date-string/date-string-is-same-or-before';
 import { DateStringIsSameOrAfter } from './date-string/date-string-is-same-or-after';

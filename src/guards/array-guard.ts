@@ -1,10 +1,10 @@
-import { ArrayRule } from './array/types';
-import { IsEmpty } from './array/is-empty';
-import { IsNotEmpty } from './array/is-not-empty';
-import { HasSize } from './array/has-size';
-import { HasMinSize } from './array/has-min-size';
-import { HasMaxSize } from './array/has-max-size';
-import { Contains } from './array/contains';
+import { ArrayRule } from './array/array-types';
+import { ArrayIsEmpty } from './array/array-is-empty';
+import { ArrayIsNotEmpty } from './array/array-is-not-empty';
+import { ArrayHasSize } from './array/array-has-size';
+import { ArrayHasMinSize } from './array/array-has-min-size';
+import { ArrayHasMaxSize } from './array/array-has-max-size';
+import { ArrayContains } from './array/array-contains';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -83,17 +83,17 @@ export class ArrayGuard extends Guard<ArrayRule> {
     protected checkRule(rule: ArrayRule, value: unknown[]): GuardResult {
         switch (rule.type) {
             case 'isEmpty':
-                return new IsEmpty(rule, value).exec();
+                return new ArrayIsEmpty(rule, value).exec();
             case 'isNotEmpty':
-                return new IsNotEmpty(rule, value).exec();
+                return new ArrayIsNotEmpty(rule, value).exec();
             case 'hasSize':
-                return new HasSize(rule, value).exec();
+                return new ArrayHasSize(rule, value).exec();
             case 'hasMinSize':
-                return new HasMinSize(rule, value).exec();
+                return new ArrayHasMinSize(rule, value).exec();
             case 'hasMaxSize':
-                return new HasMaxSize(rule, value).exec();
+                return new ArrayHasMaxSize(rule, value).exec();
             case 'contains':
-                return new Contains(rule, value).exec();
+                return new ArrayContains(rule, value).exec();
         }
     }
 

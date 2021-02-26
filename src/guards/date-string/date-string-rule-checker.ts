@@ -1,4 +1,4 @@
-import { DateStringRule } from './types';
+import { DateStringRule } from './date-string-types';
 
 import { RuleChecker } from '../../core/rule-checker';
 

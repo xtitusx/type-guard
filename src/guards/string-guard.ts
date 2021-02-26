@@ -1,26 +1,26 @@
-import { StringRule, EmailAddressDefinition } from './string/types';
-import { Equals } from './string/equals';
-import { NotEquals } from './string/not-equals';
-import { Contains } from './string/contains';
-import { NotContains } from './string/not-contains';
-import { Matches } from './string/matches';
-import { IsEmpty } from './string/is-empty';
-import { IsNotEmpty } from './string/is-not-empty';
-import { HasLength } from './string/has-length';
-import { HasMinLength } from './string/has-min-length';
-import { HasMaxLength } from './string/has-max-length';
-import { IsUppercase } from './string/is-uppercase';
-import { IsLowercase } from './string/is-lowercase';
-import { IsAlphaNumeric } from './string/is-alpha-numeric';
-import { IsAlpha } from './string/is-alpha';
-import { IsNumeric } from './string/is-numeric';
-import { IsEmailAddress } from './string/is-email-address';
-import { IsHex } from './string/is-hex';
-import { IsObjectId } from './string/is-object-id';
-import { IsHexColor } from './string/is-hex-color';
-import { IsUuidv4 } from './string/is-uuid-v4';
-import { IsMACAddress } from './string/is-mac-address';
-import { IsIPAddress } from './string/is-ip-address';
+import { StringRule, EmailAddressDefinition } from './string/string-types';
+import { StringEquals } from './string/string-equals';
+import { StringNotEquals } from './string/string-not-equals';
+import { StringContains } from './string/string-contains';
+import { StringNotContains } from './string/string-not-contains';
+import { StringMatches } from './string/string-matches';
+import { StringIsEmpty } from './string/string-is-empty';
+import { StringIsNotEmpty } from './string/string-is-not-empty';
+import { StringHasLength } from './string/string-has-length';
+import { StringHasMinLength } from './string/string-has-min-length';
+import { StringHasMaxLength } from './string/string-has-max-length';
+import { StringIsUppercase } from './string/string-is-uppercase';
+import { StringIsLowercase } from './string/string-is-lowercase';
+import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
+import { StringIsAlpha } from './string/string-is-alpha';
+import { StringIsNumeric } from './string/string-is-numeric';
+import { StringIsEmailAddress } from './string/string-is-email-address';
+import { StringIsHex } from './string/string-is-hex';
+import { StringIsObjectId } from './string/string-is-object-id';
+import { StringIsHexColor } from './string/string-is-hex-color';
+import { StringIsUuidv4 } from './string/string-is-uuid-v4';
+import { StringIsMACAddress } from './string/string-is-mac-address';
+import { StringIsIPAddress } from './string/string-is-ip-address';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -288,49 +288,49 @@ export class StringGuard extends Guard<StringRule> {
     protected checkRule(rule: StringRule, value: string): GuardResult {
         switch (rule.type) {
             case 'equals':
-                return new Equals(rule, value).exec();
+                return new StringEquals(rule, value).exec();
             case 'notEquals':
-                return new NotEquals(rule, value).exec();
+                return new StringNotEquals(rule, value).exec();
             case 'contains':
-                return new Contains(rule, value).exec();
+                return new StringContains(rule, value).exec();
             case 'notContains':
-                return new NotContains(rule, value).exec();
+                return new StringNotContains(rule, value).exec();
             case 'matches':
-                return new Matches(rule, value).exec();
+                return new StringMatches(rule, value).exec();
             case 'isEmpty':
-                return new IsEmpty(rule, value).exec();
+                return new StringIsEmpty(rule, value).exec();
             case 'isNotEmpty':
-                return new IsNotEmpty(rule, value).exec();
+                return new StringIsNotEmpty(rule, value).exec();
             case 'hasLength':
-                return new HasLength(rule, value).exec();
+                return new StringHasLength(rule, value).exec();
             case 'hasMinLength':
-                return new HasMinLength(rule, value).exec();
+                return new StringHasMinLength(rule, value).exec();
             case 'hasMaxLength':
-                return new HasMaxLength(rule, value).exec();
+                return new StringHasMaxLength(rule, value).exec();
             case 'isUpperCase':
-                return new IsUppercase(rule, value).exec();
+                return new StringIsUppercase(rule, value).exec();
             case 'isLowerCase':
-                return new IsLowercase(rule, value).exec();
+                return new StringIsLowercase(rule, value).exec();
             case 'isAlphaNumeric':
-                return new IsAlphaNumeric(rule, value).exec();
+                return new StringIsAlphaNumeric(rule, value).exec();
             case 'isAlpha':
-                return new IsAlpha(rule, value).exec();
+                return new StringIsAlpha(rule, value).exec();
             case 'isNumeric':
-                return new IsNumeric(rule, value).exec();
+                return new StringIsNumeric(rule, value).exec();
             case 'isEmailAddress':
-                return new IsEmailAddress(rule, value).exec();
+                return new StringIsEmailAddress(rule, value).exec();
             case 'isHex':
-                return new IsHex(rule, value).exec();
+                return new StringIsHex(rule, value).exec();
             case 'isObjectId':
-                return new IsObjectId(rule, value).exec();
+                return new StringIsObjectId(rule, value).exec();
             case 'isHexColor':
-                return new IsHexColor(rule, value).exec();
+                return new StringIsHexColor(rule, value).exec();
             case 'isUuidv4':
-                return new IsUuidv4(rule, value).exec();
+                return new StringIsUuidv4(rule, value).exec();
             case 'isMACAddress':
-                return new IsMACAddress(rule, value).exec();
+                return new StringIsMACAddress(rule, value).exec();
             case 'isIPAddress':
-                return new IsIPAddress(rule, value).exec();
+                return new StringIsIPAddress(rule, value).exec();
         }
     }
 
