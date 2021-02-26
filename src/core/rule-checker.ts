@@ -14,7 +14,7 @@ export abstract class RuleChecker<T extends Rule> {
     }
 
     /**
-     * Runs implementation.
+     * Runs check implementation.
      */
     public abstract exec(): GuardResult;
 }

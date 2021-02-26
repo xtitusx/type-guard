@@ -1,25 +1,22 @@
+import { NumberRule, NetworkPortRange } from './number/types';
+import { Equals } from './number/equals';
+import { IsIn } from './number/is-in';
+import { IsMax } from './number/is-max';
+import { IsMin } from './number/is-min';
+import { IsPositive } from './number/is-positive';
+import { IsNegative } from './number/is-negative';
+import { IsWhole } from './number/is-whole';
+import { IsDecimal } from './number/is-decimal';
+import { IsEven } from './number/is-even';
+import { IsOdd } from './number/is-odd';
+import { IsPrime } from './number/is-prime';
+import { IsComposite } from './number/is-composite';
+import { IsFibonacci } from './number/is-fibonacci';
+import { IsNegaFibonacci } from './number/is-nega-fibonacci';
+import { IsNetworkPort } from './number/is-network-port';
+
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
-import { NumberUtils } from '../utils/number-utils';
-
-type NumberRule =
-    | { type: 'equals'; value: number }
-    | { type: 'isMin'; min: number }
-    | { type: 'isMax'; max: number }
-    | { type: 'isIn'; min: number; max: number }
-    | { type: 'isPositive' }
-    | { type: 'isNegative' }
-    | { type: 'isWhole' }
-    | { type: 'isDecimal' }
-    | { type: 'isEven' }
-    | { type: 'isOdd' }
-    | { type: 'isPrime' }
-    | { type: 'isComposite' }
-    | { type: 'isFibonacci' }
-    | { type: 'isNegaFibonacci' }
-    | { type: 'isNetworkPort'; range?: NetworkPortRange };
-
-type NetworkPortRange = 'well-known' | 'registered' | 'private';
 
 /** @class NumberGuard
  * @extends {Guard<NumberRule>}
@@ -182,149 +179,35 @@ export class NumberGuard extends Guard<NumberRule> {
     protected checkRule(rule: NumberRule, value: number): GuardResult {
         switch (rule.type) {
             case 'equals':
-                return value === rule.value
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be ${rule.value} but is not: ${value}`)
-                          .build();
+                return new Equals(rule, value).exec();
             case 'isMin':
-                return value >= rule.min
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `number is expected to be equal or greater than ${rule.min} but is smaller: ${value}`
-                          )
-                          .build();
+                return new IsMin(rule, value).exec();
             case 'isMax':
-                return value <= rule.max
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `number is expected to be equal or smaller than ${rule.max} but is greater: ${value}`
-                          )
-                          .build();
+                return new IsMax(rule, value).exec();
             case 'isIn':
-                return value >= rule.min && value <= rule.max
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `number is expected to be within range ${rule.min} to ${rule.max} but is not: ${value}`
-                          )
-                          .build();
+                return new IsIn(rule, value).exec();
             case 'isPositive':
-                return value > 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be greater than zero but is smaller: ${value}`)
-                          .build();
+                return new IsPositive(rule, value).exec();
             case 'isNegative':
-                return value < 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be smaller than zero but is greater: ${value}`)
-                          .build();
+                return new IsNegative(rule, value).exec();
             case 'isWhole':
-                return Number.isInteger(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a whole number but is not: ${value}`)
-                          .build();
+                return new IsWhole(rule, value).exec();
             case 'isDecimal':
-                return !Number.isInteger(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a decimal number but is not: ${value}`)
-                          .build();
+                return new IsDecimal(rule, value).exec();
             case 'isEven':
-                return value % 2 === 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be even but is not: ${value}`)
-                          .build();
+                return new IsEven(rule, value).exec();
             case 'isOdd':
-                return Number.isInteger(value) && value % 2 !== 0
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be odd but is not: ${value}`)
-                          .build();
+                return new IsOdd(rule, value).exec();
             case 'isPrime':
-                return NumberUtils.isPrime(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a prime number but is not: ${value}`)
-                          .build();
+                return new IsPrime(rule, value).exec();
             case 'isComposite':
-                return NumberUtils.isComposite(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a composite number but is not: ${value}`)
-                          .build();
+                return new IsComposite(rule, value).exec();
             case 'isFibonacci':
-                return NumberUtils.isFibonacci(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a Fibonacci number but is not: ${value}`)
-                          .build();
+                return new IsFibonacci(rule, value).exec();
             case 'isNegaFibonacci':
-                return NumberUtils.isNegaFibonacci(value)
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`number is expected to be a NegaFibonacci number but is not: ${value}`)
-                          .build();
-
+                return new IsNegaFibonacci(rule, value).exec();
             case 'isNetworkPort':
-                switch (rule.range) {
-                    case 'well-known':
-                        return Number.isInteger(value) && value >= 1 && value <= 1023
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `number is expected to be a well-known network port (1-1023) but is not: ${value}`
-                                  )
-                                  .build();
-                    case 'registered':
-                        return Number.isInteger(value) && value >= 1024 && value <= 49151
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `number is expected to be a registered network port (1024-49151) but is not: ${value}`
-                                  )
-                                  .build();
-                    case 'private':
-                        return Number.isInteger(value) && value >= 49152 && value <= 65535
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `number is expected to be a private network port (1024-49151) but is not: ${value}`
-                                  )
-                                  .build();
-                    default:
-                        return Number.isInteger(value) && value >= 1 && value <= 65535
-                            ? new GuardResult.Builder().withSuccess(true).build()
-                            : new GuardResult.Builder()
-                                  .withSuccess(false)
-                                  .withMessage(
-                                      `number is expected to be a private network port (49152-65535) but is not: ${value}`
-                                  )
-                                  .build();
-                }
+                return new IsNetworkPort(rule, value).exec();
         }
     }
 

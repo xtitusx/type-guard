@@ -1,6 +1,3 @@
-import { Guard } from '../core/guard';
-import { GuardResult } from '../core/guard-result';
-
 import { StringRule, EmailAddressDefinition } from './string/types';
 import { Equals } from './string/equals';
 import { NotEquals } from './string/not-equals';
@@ -24,6 +21,8 @@ import { IsHexColor } from './string/is-hex-color';
 import { IsUuidv4 } from './string/is-uuid-v4';
 import { IsMACAddress } from './string/is-mac-address';
 import { IsIPAddress } from './string/is-ip-address';
+import { Guard } from '../core/guard';
+import { GuardResult } from '../core/guard-result';
 
 /** @class StringGuard
  * @extends {Guard<StringRule>}
