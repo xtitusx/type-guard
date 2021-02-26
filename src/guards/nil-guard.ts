@@ -1,13 +1,13 @@
+import { NilRule } from './nil/nil-types';
+import { NilIsUndefined } from './nil/nil-is-undefined';
+import { NilIsNotUndefined } from './nil/nil-is-not-undefined';
+import { NilIsNull } from './nil/nil-is-null';
+import { NilIsNotNull } from './nil/nil-is-not-null';
+import { NilIsNil } from './nil/nil-is-nil';
+import { NilIsNotNil } from './nil/nil-is-not-nil';
+
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
-
-type NilRule =
-    | { type: 'isUndefined' }
-    | { type: 'isNotUndefined' }
-    | { type: 'isNull' }
-    | { type: 'isNotNull' }
-    | { type: 'isNil' }
-    | { type: 'isNotNil' };
 
 /** @class NilGuard
  * @extends {Guard<NilRule>}
@@ -79,47 +79,17 @@ export class NilGuard extends Guard<NilRule> {
     protected checkRule(rule: NilRule, value: unknown): GuardResult {
         switch (rule.type) {
             case 'isUndefined':
-                return value === undefined
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is expected to be undefined but is not: ${typeof value}`)
-                          .build();
+                return new NilIsUndefined(rule, value).exec();
             case 'isNotUndefined':
-                return value !== undefined
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is not expected to be undefined but is: ${typeof value}`)
-                          .build();
+                return new NilIsNotUndefined(rule, value).exec();
             case 'isNull':
-                return value === null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is expected to be null but is not: ${typeof value}`)
-                          .build();
+                return new NilIsNull(rule, value).exec();
             case 'isNotNull':
-                return value !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is not expected to be null but is: ${typeof value}`)
-                          .build();
+                return new NilIsNotNull(rule, value).exec();
             case 'isNil':
-                return value === undefined || value === null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is expected to be undefined or null but is not: ${typeof value}`)
-                          .build();
+                return new NilIsNil(rule, value).exec();
             case 'isNotNil':
-                return value !== undefined && value !== null
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(`value is not expected to be undefined or null but is: ${typeof value}`)
-                          .build();
+                return new NilIsNotNil(rule, value).exec();
         }
     }
 
