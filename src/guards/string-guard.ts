@@ -207,7 +207,7 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string is an email address number.
      * @remarks Chainable method.
      * ```ts
-     * EmailAddressDefinition:
+     * def:
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
      * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
      *
@@ -219,7 +219,7 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax} for syntax.
      * @see {@link http://www.regular-expressions.info/email.html} for regex details.
-     * @param def Default is 'quick'.
+     * @param def  'quick' | 'rfc5322'. Default is 'quick'.
      * @example `John.Doe@example.com`
      */
     public isEmailAddress(def?: EmailAddressDefinition): this {

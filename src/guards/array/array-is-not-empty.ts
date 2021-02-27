@@ -2,9 +2,6 @@ import { ArrayRuleChecker } from './array-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class ArrayIsNotEmpty
- */
 export class ArrayIsNotEmpty extends ArrayRuleChecker<{ type: 'isNotEmpty' }> {
     constructor(rule: { type: 'isNotEmpty' }, value: unknown[]) {
         super(rule, value);

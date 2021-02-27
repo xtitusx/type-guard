@@ -2,9 +2,6 @@ import { ArrayRuleChecker } from './array-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class ArrayHasMinSize
- */
 export class ArrayHasMinSize extends ArrayRuleChecker<{ type: 'hasMinSize'; min: number }> {
     constructor(rule: { type: 'hasMinSize'; min: number }, value: unknown[]) {
         super(rule, value);

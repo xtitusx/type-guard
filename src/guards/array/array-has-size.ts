@@ -2,9 +2,6 @@ import { ArrayRuleChecker } from './array-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class ArrayHasSize
- */
 export class ArrayHasSize extends ArrayRuleChecker<{ type: 'hasSize'; value: number }> {
     constructor(rule: { type: 'hasSize'; value: number }, value: unknown[]) {
         super(rule, value);

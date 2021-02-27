@@ -4,9 +4,6 @@ import { DateStringRuleChecker } from './date-string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class DateStringIsBefore
- */
 export class DateStringIsBefore extends DateStringRuleChecker<{ type: 'isBefore'; value: string }> {
     constructor(rule: { type: 'isBefore'; value: string }, value: string) {
         super(rule, value);

@@ -1,9 +1,6 @@
 import { Rule } from './guard';
 import { GuardResult } from './guard-result';
 
-/**
- * @class RuleChecker
- */
 export abstract class RuleChecker<T extends Rule> {
     protected rule: T;
     protected value: unknown;

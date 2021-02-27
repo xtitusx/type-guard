@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsMax
- */
 export class NumberIsMax extends NumberRuleChecker<{ type: 'isMax'; max: number }> {
     constructor(rule: { type: 'isMax'; max: number }, value: number) {
         super(rule, value);

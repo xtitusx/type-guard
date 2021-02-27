@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsDecimal
- */
 export class NumberIsDecimal extends NumberRuleChecker<{ type: 'isDecimal' }> {
     constructor(rule: { type: 'isDecimal' }, value: number) {
         super(rule, value);

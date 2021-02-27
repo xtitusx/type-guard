@@ -10,19 +10,15 @@ import { DateStringIsAfter } from './date-string/date-string-is-after';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/**
- * @class DateStringGuard
- * @extends {Guard<DateStringRule>}
- */
 export class DateStringGuard extends Guard<DateStringRule> {
     constructor(rules?: DateStringRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if a string representation of a date is the same that the specified date.
-     * @param value string
+     * Checks if a string representation of a date is the same that the specified date.
+     * @remarks Chainable method.
+     * @param value
      */
     public isSame(value: string): this {
         this.addRule({ type: 'isSame', value: value });
@@ -30,9 +26,9 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if a string representation of a date is the same or before the specified date.
-     * @param value string
+     * Checks if a string representation of a date is the same or before the specified date.
+     * @remarks Chainable method.
+     * @param value
      */
     public isSameOrBefore(value: string): this {
         this.addRule({ type: 'isSameOrBefore', value: value });
@@ -40,9 +36,9 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if a string representation of a date is the same or after the specified date.
-     * @param value string
+     * Checks if a string representation of a date is the same or after the specified date.
+     * @remarks Chainable method.
+     * @param value
      */
     public isSameOrAfter(value: string): this {
         this.addRule({ type: 'isSameOrAfter', value: value });
@@ -50,9 +46,9 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if a string representation of a date is strictly before the specified date.
-     * @param value string
+     * Checks if a string representation of a date is strictly before the specified date.
+     * @remarks Chainable method.
+     * @param value
      */
     public isBefore(value: string): this {
         this.addRule({ type: 'isBefore', value: value });
@@ -60,9 +56,9 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if a string representation of a date is strictly after the specified date.
-     * @param value string
+     * Checks if a string representation of a date is strictly after the specified date.
+     * @remarks Chainable method.
+     * @param value
      */
     public isAfter(value: string): this {
         this.addRule({ type: 'isAfter', value: value });
@@ -71,8 +67,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
 
     /**
      * @override
-     * @param rule DateStringRule
-     * @param value string
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: DateStringRule, value: string): GuardResult {
         switch (rule.type) {

@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsOdd
- */
 export class NumberIsOdd extends NumberRuleChecker<{ type: 'isOdd' }> {
     constructor(rule: { type: 'isOdd' }, value: number) {
         super(rule, value);

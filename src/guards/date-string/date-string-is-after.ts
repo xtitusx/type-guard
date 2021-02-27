@@ -4,9 +4,6 @@ import { DateStringRuleChecker } from './date-string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class DateStringIsAfter
- */
 export class DateStringIsAfter extends DateStringRuleChecker<{ type: 'isAfter'; value: string }> {
     constructor(rule: { type: 'isAfter'; value: string }, value: string) {
         super(rule, value);

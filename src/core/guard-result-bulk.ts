@@ -1,9 +1,5 @@
 import { GuardResult } from './guard-result';
 
-/**
- * @class GuardResultBulk
- * @description GuardResult collection.
- */
 export class GuardResultBulk {
     private guardResults: GuardResult[];
 
@@ -13,7 +9,7 @@ export class GuardResultBulk {
 
     /**
      * Méthode qui empile les résultats de garde.
-     * @param guardResults GuardResult | GuardResult[]
+     * @param guardResults
      */
     public add(guardResults: GuardResult | GuardResult[]): this {
         if (guardResults) {
@@ -28,7 +24,6 @@ export class GuardResultBulk {
      * Méthode qui retourne en résultat :
      * - soit la première garde de la liste en échec.
      * - soit un succès.
-     * @return GuardResult
      */
     public combine(): GuardResult {
         for (const guardResult of this.guardResults) {
@@ -44,7 +39,6 @@ export class GuardResultBulk {
      * Méthode qui retourne en résultat :
      * - soit les gardes de la liste en échec.
      * - soit un succès.
-     * @return GuardResult[]
      */
     public stack(): GuardResult[] {
         const fails = [...this.guardResults.filter((guardResult) => !guardResult?.isSuccess())];

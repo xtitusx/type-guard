@@ -3,9 +3,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { NumberUtils } from '../../utils/number-utils';
 
-/**
- * @class NumberIsComposite
- */
 export class NumberIsComposite extends NumberRuleChecker<{ type: 'isComposite' }> {
     constructor(rule: { type: 'isComposite' }, value: number) {
         super(rule, value);

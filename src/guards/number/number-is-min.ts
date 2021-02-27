@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsMin
- */
 export class NumberIsMin extends NumberRuleChecker<{ type: 'isMin'; min: number }> {
     constructor(rule: { type: 'isMin'; min: number }, value: number) {
         super(rule, value);

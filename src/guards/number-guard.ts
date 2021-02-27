@@ -18,19 +18,15 @@ import { NumberIsNetworkPort } from './number/number-is-network-port';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/**
- * @class NumberGuard
- * @extends {Guard<NumberRule>}
- */
 export class NumberGuard extends Guard<NumberRule> {
     constructor(rules?: NumberRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if two numbers are equals.
-     * @param value number
+     * Checks if two numbers are equals.
+     * @remarks Chainable method.
+     * @param value
      */
     public equals(value: number): this {
         this.addRule({ type: 'equals', value: value });
@@ -38,9 +34,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is equal or greater than to the specified number.
-     * @param min number
+     * Checks if number is equal or greater than to the specified number.
+     * @remarks Chainable method.
+     * @param min
      */
     public isMin(min: number): this {
         this.addRule({ type: 'isMin', min: min });
@@ -48,9 +44,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is equal or smaller than to the specified number.
-     * @param max number
+     * Checks if number is equal or smaller than to the specified number.
+     * @remarks Chainable method.
+     * @param max
      */
     public isMax(max: number): this {
         this.addRule({ type: 'isMax', max: max });
@@ -58,10 +54,10 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is within a closed interval.
-     * @param min number
-     * @param max number
+     * Checks if number is within a closed interval.
+     * @remarks Chainable method.
+     * @param min
+     * @param max
      */
     public isIn(min: number, max: number): this {
         this.addRule({ type: 'isIn', min: min, max: max });
@@ -69,8 +65,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is greater than zero.
+     * Checks if number is greater than zero.
+     * @remarks Chainable method.
      */
     public isPositive(): this {
         this.addRule({ type: 'isPositive' });
@@ -78,8 +74,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is smaller than zero.
+     * Checks if number is smaller than zero.
+     * @remarks Chainable method.
      */
     public isNegative(): this {
         this.addRule({ type: 'isNegative' });
@@ -87,8 +83,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a whole number.
+     * Checks if number is a whole number.
+     * @remarks Chainable method.
      */
     public isWhole(): this {
         this.addRule({ type: 'isWhole' });
@@ -96,8 +92,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a decimal number.
+     * Checks if number is a decimal number.
+     * @remarks Chainable method.
      */
     public isDecimal(): this {
         this.addRule({ type: 'isDecimal' });
@@ -105,8 +101,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is even.
+     * Checks if number is even.
+     * @remarks Chainable method.
      */
     public isEven(): this {
         this.addRule({ type: 'isEven' });
@@ -114,8 +110,8 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is odd.
+     * Checks if number is odd.
+     * @remarks Chainable method.
      */
     public isOdd(): this {
         this.addRule({ type: 'isOdd' });
@@ -123,9 +119,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a prime number.
-     * @see https://en.wikipedia.org/wiki/Prime_number
+     * Checks if number is a prime number.
+     * @remarks Chainable method.
+     * @see {@link https://en.wikipedia.org/wiki/Prime_number}
      */
     public isPrime(): this {
         this.addRule({ type: 'isPrime' });
@@ -133,9 +129,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a composite number.
-     * @see https://en.wikipedia.org/wiki/Composite_number
+     * Checks if number is a composite number.
+     * @remarks Chainable method.
+     * @see {@link https://en.wikipedia.org/wiki/Composite_number}
      */
     public isComposite(): this {
         this.addRule({ type: 'isComposite' });
@@ -143,9 +139,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a Fibonacci number.
-     * @see https://en.wikipedia.org/wiki/Fibonacci_number
+     * Checks if number is a Fibonacci number.
+     * @remarks Chainable method.
+     * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number}
      */
     public isFibonacci(): this {
         this.addRule({ type: 'isFibonacci' });
@@ -153,9 +149,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a NegaFibonacci number.
-     * @see https://en.wikipedia.org/wiki/NegaFibonacci_coding
+     * Checks if number is a NegaFibonacci number.
+     * @remarks Chainable method.
+     * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding}
      */
     public isNegaFibonacci(): this {
         this.addRule({ type: 'isNegaFibonacci' });
@@ -163,9 +159,9 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if number is a Network Port.
-     * @param range 'well-known' | 'registered' | 'private' (optional).
+     * Checks if number is a Network Port.
+     * @remarks Chainable method.
+     * @param range 'well-known' | 'registered' | 'private'
      */
     public isNetworkPort(range?: NetworkPortRange): this {
         this.addRule({ type: 'isNetworkPort', range });
@@ -174,8 +170,8 @@ export class NumberGuard extends Guard<NumberRule> {
 
     /**
      * @override
-     * @param rule NumberRule
-     * @param value number
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: NumberRule, value: number): GuardResult {
         switch (rule.type) {

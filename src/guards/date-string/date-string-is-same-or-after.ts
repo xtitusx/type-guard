@@ -6,9 +6,6 @@ import { DateStringRuleChecker } from './date-string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class DateStringIsSameOrAfter
- */
 export class DateStringIsSameOrAfter extends DateStringRuleChecker<{ type: 'isSameOrAfter'; value: string }> {
     constructor(rule: { type: 'isSameOrAfter'; value: string }, value: string) {
         super(rule, value);

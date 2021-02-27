@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberEquals
- */
 export class NumberEquals extends NumberRuleChecker<{ type: 'equals'; value: number }> {
     constructor(rule: { type: 'equals'; value: number }, value: number) {
         super(rule, value);

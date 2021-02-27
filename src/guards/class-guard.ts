@@ -3,20 +3,16 @@ import { GuardResult } from '../core/guard-result';
 
 type ClassRule = { type: 'isInstanceOf'; value: Function };
 
-/**
- * @class ClassGuard
- * @extends {Guard<ClassRule>}
- */
 export class ClassGuard extends Guard<ClassRule> {
     constructor(rules?: ClassRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.
-     * @param value Function
-     * @see https://javascript.info/instanceof
+     * Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.
+     * @remarks Chainable method.
+     * @param value
+     * @see {@link https://javascript.info/instanceof}
      */
     public isInstanceOf(value: Function): this {
         this.addRule({ type: 'isInstanceOf', value: value });
@@ -25,8 +21,8 @@ export class ClassGuard extends Guard<ClassRule> {
 
     /**
      * @override
-     * @param rule ClassRule
-     * @param value unknown
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: ClassRule, value: unknown): GuardResult {
         switch (rule.type) {

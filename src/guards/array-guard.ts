@@ -9,18 +9,14 @@ import { ArrayContains } from './array/array-contains';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/**
- *  @class ArrayGuard
- * @extends {Guard<ArrayRule>}
- */
 export class ArrayGuard extends Guard<ArrayRule> {
     constructor(rules?: ArrayRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Check if array is empty.
+     * Check if array is empty.
+     * @remarks Chainable method.
      */
     public isEmpty(): this {
         this.addRule({ type: 'isEmpty' });
@@ -28,8 +24,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Check if array is not empty.
+     * Check if array is not empty.
+     * @remarks Chainable method.
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
@@ -37,9 +33,9 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if array's length is equal to the specified number.
-     * @param value number
+     * Checks if array's length is equal to the specified number.
+     * @remarks Chainable method.
+     * @param value
      */
     public hasSize(value: number): this {
         this.addRule({ type: 'hasSize', value: value });
@@ -47,9 +43,9 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if array's length is equal or greater than to the specified number.
-     * @param min number
+     * Checks if array's length is equal or greater than to the specified number.
+     * @remarks Chainable method.
+     * @param min
      */
     public hasMinSize(min: number): this {
         this.addRule({ type: 'hasMinSize', min: min });
@@ -57,9 +53,9 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if array's length is equal or smaller than the specified number.
-     * @param max number
+     * Checks if array's length is equal or smaller than the specified number.
+     * @remarks Chainable method.
+     * @param max
      */
     public hasMaxSize(max: number): this {
         this.addRule({ type: 'hasMaxSize', max: max });
@@ -67,9 +63,9 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if array contains the specified number.
-     * @param value unknown
+     * Checks if array contains the specified number.
+     * @remarks Chainable method.
+     * @param value
      */
     public contains(value: unknown): this {
         this.addRule({ type: 'contains', value: value });
@@ -78,8 +74,8 @@ export class ArrayGuard extends Guard<ArrayRule> {
 
     /**
      * @override
-     * @param rule ArrayRule
-     * @param value unknown[]
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: ArrayRule, value: unknown[]): GuardResult {
         switch (rule.type) {

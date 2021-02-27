@@ -4,9 +4,6 @@ interface IGuardResult {
     propertyName?: string;
 }
 
-/**
- * @class GuardResult
- */
 export class GuardResult implements IGuardResult {
     success: boolean;
     message?: string;
@@ -22,7 +19,6 @@ export class GuardResult implements IGuardResult {
 
     /**
      * Méthode qui retourne la raison de l'échec de la garde.
-     *
      * @remarks Le message est préfixé avec le nom de la propriété si disponible.
      */
     public getMessage(): string {

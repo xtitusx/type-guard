@@ -3,9 +3,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { NumberUtils } from '../../utils/number-utils';
 
-/**
- * @class NumberIsFibonacci
- */
 export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci' }> {
     constructor(rule: { type: 'isFibonacci' }, value: number) {
         super(rule, value);

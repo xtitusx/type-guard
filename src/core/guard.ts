@@ -2,9 +2,6 @@ import { GuardResult } from './guard-result';
 
 export type Rule = { type: string };
 
-/**
- * @class Guard
- */
 export abstract class Guard<T extends Rule> {
     protected rules?: T[];
     protected propertyValue: unknown;
@@ -16,8 +13,8 @@ export abstract class Guard<T extends Rule> {
 
     /**
      * Checks the rule on a trusted property after type guarding.
-     * @param rule T
-     * @param value unknown
+     * @param rule
+     * @param value
      */
     protected abstract checkRule(rule: T, value: unknown): GuardResult;
 
@@ -39,7 +36,7 @@ export abstract class Guard<T extends Rule> {
      * Méthode qui ajoute un type de règle à la liste de règles, ou remplace un type de règle déjà existant.
      *
      * Un seul type de règle est donc retenu dans la garde.
-     * @param rule T
+     * @param rule
      */
     protected addRule(rule: T): void {
         this.rules = [...this.rules.filter((r) => r.type !== rule.type), rule];

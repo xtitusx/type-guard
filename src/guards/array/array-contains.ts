@@ -2,9 +2,6 @@ import { ArrayRuleChecker } from './array-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class ArrayContains
- */
 export class ArrayContains extends ArrayRuleChecker<{ type: 'contains'; value: any }> {
     constructor(rule: { type: 'contains'; value: any }, value: unknown[]) {
         super(rule, value);

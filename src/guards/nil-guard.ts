@@ -9,18 +9,14 @@ import { NilIsNotNil } from './nil/nil-is-not-nil';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/**
- * @class NilGuard
- * @extends {Guard<NilRule>}
- */
 export class NilGuard extends Guard<NilRule> {
     constructor(rules?: NilRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is undefined.
+     * Checks if value is undefined.
+     * @remarks Chainable method.
      */
     public isUndefined(): this {
         this.addRule({ type: 'isUndefined' });
@@ -28,8 +24,8 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is not undefined.
+     * Checks if value is not undefined.
+     * @remarks Chainable method.
      */
     public isNotUndefined(): this {
         this.addRule({ type: 'isNotUndefined' });
@@ -37,8 +33,8 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is null.
+     * Checks if value is null.
+     * @remarks Chainable method.
      */
     public isNull(): this {
         this.addRule({ type: 'isNull' });
@@ -46,8 +42,8 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is not null.
+     * Checks if value is not null.
+     * @remarks Chainable method.
      */
     public isNotNull(): this {
         this.addRule({ type: 'isNotNull' });
@@ -55,8 +51,8 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is undefined or null.
+     * Checks if value is undefined or null.
+     * @remarks Chainable method.
      */
     public isNil(): this {
         this.addRule({ type: 'isNil' });
@@ -64,8 +60,8 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if value is neither undefined nor null.
+     * Checks if value is neither undefined nor null.
+     * @remarks Chainable method.
      */
     public isNotNil(): this {
         this.addRule({ type: 'isNotNil' });
@@ -74,8 +70,8 @@ export class NilGuard extends Guard<NilRule> {
 
     /**
      * @override
-     * @param rule NilRule
-     * @param value unknown
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: NilRule, value: unknown): GuardResult {
         switch (rule.type) {

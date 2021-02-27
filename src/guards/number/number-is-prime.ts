@@ -3,9 +3,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { NumberUtils } from '../../utils/number-utils';
 
-/**
- * @class NumberIsPrime
- */
 export class NumberIsPrime extends NumberRuleChecker<{ type: 'isPrime' }> {
     constructor(rule: { type: 'isPrime' }, value: number) {
         super(rule, value);

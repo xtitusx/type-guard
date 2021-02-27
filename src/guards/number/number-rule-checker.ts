@@ -2,9 +2,6 @@ import { NumberRule } from './number-types';
 
 import { RuleChecker } from '../../core/rule-checker';
 
-/**
- * @class NumberRuleChecker
- */
 export abstract class NumberRuleChecker<T extends NumberRule> extends RuleChecker<T> {
     protected value: number;
 

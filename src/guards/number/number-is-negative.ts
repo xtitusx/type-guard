@@ -2,9 +2,6 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsNegative
- */
 export class NumberIsNegative extends NumberRuleChecker<{ type: 'isNegative' }> {
     constructor(rule: { type: 'isNegative' }, value: number) {
         super(rule, value);

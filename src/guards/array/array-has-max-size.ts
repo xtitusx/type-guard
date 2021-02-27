@@ -2,9 +2,6 @@ import { ArrayRuleChecker } from './array-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class ArrayHasMaxSize
- */
 export class ArrayHasMaxSize extends ArrayRuleChecker<{ type: 'hasMaxSize'; max: number }> {
     constructor(rule: { type: 'hasMaxSize'; max: number }, value: unknown[]) {
         super(rule, value);

@@ -3,9 +3,6 @@ import { NetworkPortRange } from './number-types';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class NumberIsNetworkPort
- */
 export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPort'; range?: NetworkPortRange }> {
     constructor(rule: { type: 'isNetworkPort'; range?: NetworkPortRange }, value: number) {
         super(rule, value);
