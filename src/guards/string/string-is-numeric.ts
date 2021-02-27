@@ -1,7 +1,7 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { NUMERIC_PATTERN } from '../../utils/pattern-constant';
+import { NUMERIC_PATTERN } from '../../utils/pattern-constants';
 
 export class StringIsNumeric extends StringRuleChecker<{ type: 'isNumeric' }> {
     constructor(rule: { type: 'isNumeric' }, value: string) {
