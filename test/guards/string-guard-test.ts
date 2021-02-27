@@ -898,4 +898,118 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isMACAddress().guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isIPAddress()', () => {
+        it("should return true when tested value is '10.0.0.0'", () => {
+            assert.equal(new StringGuard().isIPAddress().guard('10.0.0.0').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1:2:3:4:5:6:7:8'", () => {
+            assert.equal(new StringGuard().isIPAddress().guard('1:2:3:4:5:6:7:8').isSuccess(), true);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isIPAddress().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isIPAddress().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isIPAddress().guard(undefined).isSuccess(), false);
+        });
+
+        describe('#isIPAddress(4)', () => {
+            it("should return true when param is 4 and tested value is '0.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('0.0.0.0').isSuccess(), true);
+            });
+
+            it("should return true when param is 4 and tested value is '10.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('10.0.0.0').isSuccess(), true);
+            });
+
+            it("should return true when param is 4 and tested value is '127.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('127.0.0.0').isSuccess(), true);
+            });
+
+            it("should return true when param is 4 and tested value is '192.168.0.1'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('192.168.0.1').isSuccess(), true);
+            });
+
+            it("should return true when param is 4 and tested value is '224.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('224.0.0.0').isSuccess(), true);
+            });
+
+            it("should return true when param is 4 and tested value is '255.255.255.255'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('255.255.255.255').isSuccess(), true);
+            });
+
+            it("should return false when param is 4 and tested value is '010.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('010.0.0.0').isSuccess(), false);
+            });
+
+            it("should return false when param is 4 and tested value is '001.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('001.0.0.0').isSuccess(), false);
+            });
+
+            it("should return false when param is 4 and tested value is 'x127.0.0.0'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('x127.0.0.0').isSuccess(), false);
+            });
+
+            it("should return false when param is 4 and tested value is '127.0.0.0x'", () => {
+                assert.equal(new StringGuard().isIPAddress(4).guard('127.0.0.0x').isSuccess(), false);
+            });
+        });
+
+        describe('#isIPAddress(6)', () => {
+            it("should return true when param is 6 and tested value is '1:2:3:4:5:6:7:8'", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1:2:3:4:5:6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::'", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::8'", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::7:8'", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::6:7:8", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::5:6:7:8", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::5:6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::4:5:6:7:8", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::4:5:6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '1::3:4:5:6:7:8", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('1::3:4:5:6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '::2:3:4:5:6:7:8", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('::2:3:4:5:6:7:8').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is 'fe80::7:8%eth0", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('fe80::7:8%eth0').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '::255.255.255.255", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('::255.255.255.255').isSuccess(), true);
+            });
+
+            it("should return true when param is 6 and tested value is '2001:db8:3:4::192.0.2.33", () => {
+                assert.equal(new StringGuard().isIPAddress(6).guard('2001:db8:3:4::192.0.2.33').isSuccess(), true);
+            });
+        });
+    });
 });

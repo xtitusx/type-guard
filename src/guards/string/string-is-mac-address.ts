@@ -19,7 +19,7 @@ export class StringIsMACAddress extends StringRuleChecker<{ type: 'isMACAddress'
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to be a MAC Address but is not: ${this.value}`)
+                  .withMessage(`string is expected to be a MAC address but is not: ${this.value}`)
                   .build();
     }
 }

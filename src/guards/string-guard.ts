@@ -207,13 +207,14 @@ export class StringGuard extends Guard<StringRule> {
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
      * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
      *
+     * Rules:
+     *
      * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting :
      * - IP addresses.
      * - domain-specific addresses.
      * - the syntax using double quotes and square brackets.
-     *
      * @see https://en.wikipedia.org/wiki/Email_address#Syntax, http://www.regular-expressions.info/email.html
-     *  @param def 'quick' | 'rfc5322' (optional). Default is 'quick'.
+     * @param def 'quick' | 'rfc5322' (optional). Default is 'quick'.
      * @example `John.Doe@example.com`
      */
     public isEmailAddress(def?: EmailAddressDefinition): this {
@@ -266,7 +267,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @summary Chainable method.
-     * @description Checks if string is a MAC Address.
+     * @description Checks if string is a MAC address.
      *
      * Rules :
      * - 12 hex degits (6 groups of 2 digits).
@@ -277,6 +278,27 @@ export class StringGuard extends Guard<StringRule> {
      */
     public isMACAddress(): this {
         this.addRule({ type: 'isMACAddress' });
+        return this;
+    }
+
+    /**
+     * @summary Chainable method.
+     * @description Checks if string is an IP address.
+     *
+     * Rules:
+     *
+     * IP address v6 pattern matching:
+     *  - IPv6 addresses.
+     *  - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
+     *  - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
+     *  - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
+     *  - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
+     *  - IPv4-translated addresses (section 2.1 of rfc2765).
+     * @param version 4 | 6 (optional).
+     * @example 192.168.0.1, fde5:a773:d01a:0b6d
+     */
+    public isIPAddress(version?: 4 | 6): this {
+        this.addRule({ type: 'isIPAddress', version: version });
         return this;
     }
 
