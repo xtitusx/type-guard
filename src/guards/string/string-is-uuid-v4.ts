@@ -3,9 +3,6 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { UUIDV4_PATTERN } from '../../utils/pattern-constant';
 
-/**
- * @class StringIsUuidv4
- */
 export class StringIsUuidv4 extends StringRuleChecker<{ type: 'isUuidv4' }> {
     constructor(rule: { type: 'isUuidv4' }, value: string) {
         super(rule, value);

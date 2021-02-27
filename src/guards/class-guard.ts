@@ -3,7 +3,8 @@ import { GuardResult } from '../core/guard-result';
 
 type ClassRule = { type: 'isInstanceOf'; value: Function };
 
-/** @class ClassGuard
+/**
+ * @class ClassGuard
  * @extends {Guard<ClassRule>}
  */
 export class ClassGuard extends Guard<ClassRule> {

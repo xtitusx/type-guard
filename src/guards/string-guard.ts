@@ -25,18 +25,15 @@ import { StringIsIPAddress } from './string/string-is-ip-address';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/** @class StringGuard
- * @extends {Guard<StringRule>}
- */
 export class StringGuard extends Guard<StringRule> {
     constructor(rules?: StringRule[]) {
         super(rules);
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if two string are equals.
-     * @param value string
+     * Checks if two string are equals.
+     * @remarks Chainable method.
+     * @param value
      */
     public equals(value: string): this {
         this.addRule({ type: 'equals', value: value });
@@ -44,9 +41,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if two string are not equals.
-     * @param value string
+     * Checks if two string are not equals.
+     * @remarks Chainable method.
+     * @param value
      */
     public notEquals(value: string): this {
         this.addRule({ type: 'notEquals', value: value });
@@ -54,12 +51,13 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string contains the specified substring.
-     *
-     * Rule :
+     * Checks if string contains the specified substring.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
      * - Case sensitive.
-     * @param value string
+     * ```
+     * @param value
      */
     public contains(value: string): this {
         this.addRule({ type: 'contains', value: value });
@@ -67,12 +65,13 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string does not contain the specified substring.
-     *
-     * Rule :
+     * Checks if string does not contain the specified substring.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
      * - Case sensitive.
-     * @param value string
+     * ```
+     * @param value
      */
     public notContains(value: string): this {
         this.addRule({ type: 'notContains', value: value });
@@ -80,9 +79,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string matches the specified regex.
-     * @param value RegExp
+     * Checks if string matches the specified regex.
+     * @remarks Chainable method.
+     * @param value
      */
     public matches(value: RegExp): this {
         this.addRule({ type: 'matches', value: value });
@@ -90,11 +89,12 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is empty.
-     *
-     * Rule :
+     * Checks if string is empty.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
      * - Equals "".
+     * ```
      */
     public isEmpty(): this {
         this.addRule({ type: 'isEmpty' });
@@ -102,11 +102,12 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is not empty.
-     *
-     * Rule :
+     * Checks if string is not empty.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
      * - Not equals "".
+     * ```
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
@@ -114,9 +115,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string's length is equal to the specified number.
-     * @param value number
+     * Checks if string's length is equal to the specified number.
+     * @remarks Chainable method.
+     * @param value
      */
     public hasLength(value: number): this {
         this.addRule({ type: 'hasLength', value: value });
@@ -124,9 +125,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string's length is equal or greater than to the specified number.
-     * @param min number
+     * Checks if string's length is equal or greater than to the specified number.
+     * @remarks Chainable method.
+     * @param min
      */
     public hasMinLength(min: number): this {
         this.addRule({ type: 'hasMinLength', min: min });
@@ -134,9 +135,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string's length is equal or smaller than the specified number.
-     * @param max number
+     * Checks if string's length is equal or smaller than the specified number.
+     * @remarks Chainable method.
+     * @param max
      */
     public hasMaxLength(max: number): this {
         this.addRule({ type: 'hasMaxLength', max: max });
@@ -144,8 +145,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string does not contain any lowercase alpha characters.
+     * Checks if string does not contain any lowercase alpha characters.
+     * @remarks Chainable method.
      */
     public isUpperCase(): this {
         this.addRule({ type: 'isUpperCase' });
@@ -153,8 +154,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string does not contain any uppercase alpha characters.
+     * Checks if string does not contain any uppercase alpha characters.
+     * @remarks Chainable method.
      */
     public isLowerCase(): this {
         this.addRule({ type: 'isLowerCase' });
@@ -162,8 +163,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string only contains alpha characters and/or numbers.
+     * Checks if string only contains alpha characters and/or numbers.
+     * @remarks Chainable method.
      */
     public isAlphaNumeric(): this {
         this.addRule({ type: 'isAlphaNumeric' });
@@ -171,8 +172,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string only contains alpha characters.
+     * Checks if string only contains alpha characters.
+     * @remarks Chainable method.
      */
     public isAlpha(): this {
         this.addRule({ type: 'isAlpha' });
@@ -180,8 +181,8 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string only contains numbers.
+     * Checks if string only contains numbers.
+     * @remarks Chainable method.
      */
     public isNumeric(): this {
         this.addRule({ type: 'isNumeric' });
@@ -189,12 +190,13 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is a hexadecimal number.
-     *
-     * Rule :
+     * Checks if string is a hexadecimal number.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
      * - Not case sensitive.
-      @example F061A, f061a
+     * ```
+     * @example F061A, f061a
      */
     public isHex(): this {
         this.addRule({ type: 'isHex' });
@@ -202,19 +204,22 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Definition :
+     * Checks if string is an email address number.
+     * @remarks Chainable method.
+     * ```ts
+     * EmailAddressDefinition:
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
      * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
      *
      * Rules:
-     *
      * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting :
      * - IP addresses.
      * - domain-specific addresses.
      * - the syntax using double quotes and square brackets.
-     * @see https://en.wikipedia.org/wiki/Email_address#Syntax, http://www.regular-expressions.info/email.html
-     * @param def 'quick' | 'rfc5322' (optional). Default is 'quick'.
+     * ```
+     * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax} for syntax.
+     * @see {@link http://www.regular-expressions.info/email.html} for regex details.
+     * @param def Default is 'quick'.
      * @example `John.Doe@example.com`
      */
     public isEmailAddress(def?: EmailAddressDefinition): this {
@@ -223,12 +228,13 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is a representation of a MongoDB ObjectId.
-     *
-     * Rules :
+     * Checks if string is a representation of a MongoDB ObjectId.
+     * @remarks Chainable method.
+     * ```ts
+     * Rules:
      * - 24 hex digits.
      * - Not case sensitive.
+     * ```
      * @example 507f1f77bcf86cd799439011, 507F1F77BCF86CD799439011
      */
     public isObjectId(): this {
@@ -237,13 +243,14 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is a hexadecimal color.
-     *
-     * Rules :
+     * Checks if string is a hexadecimal color.
+     * @remarks Chainable method.
+     * ```ts
+     * Rules:
      * - Starts with hastag (#) and is followed by 3 or 6 digits.
      * - Not case sensitive.
-     * @param digits 3 | 6 (optional).
+     * ```
+     * @param digits.
      * @example #000000, #FFFFFF, #000, #fff
      */
     public isHexColor(digits?: 3 | 6): this {
@@ -252,12 +259,13 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is an Universally unique identifier v4.
-     *
-     * Rule :
+     * Checks if string is an Universally unique identifier v4.
+     * @remakrs Chainable method.
+     * ```ts
+     * Rule:
      * - Lowercase.
-     * @see https://tools.ietf.org/html/rfc4122#section-3.
+     * ```
+     * @see {@link https://tools.ietf.org/html/rfc4122#section-3} for syntax.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
@@ -266,14 +274,15 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is a MAC address.
-     *
-     * Rules :
+     * Checks if string is a MAC address.
+     * @remarks Chainable method.
+     * ```ts
+     * Rules:
      * - 12 hex degits (6 groups of 2 digits).
      * - IEEE802-types definition: dash separator, uppercase.
      * - IETF-yang-types definition: colon separator, lowercase.
-     * @see https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf
+     * ```
+     * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
      * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
      */
     public isMACAddress(): this {
@@ -282,9 +291,9 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * @summary Chainable method.
-     * @description Checks if string is an IP address.
-     *
+     * Checks if string is an IP address.
+     * @remarks Chainable method.
+     * ```ts
      * Rules:
      *
      * IP address v6 pattern matching:
@@ -294,7 +303,8 @@ export class StringGuard extends Guard<StringRule> {
      *  - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
      *  - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
      *  - IPv4-translated addresses (section 2.1 of rfc2765).
-     * @param version 4 | 6 (optional).
+     * ```
+     * @param version
      * @example 192.168.0.1, fde5:a773:d01a:0b6d
      */
     public isIPAddress(version?: 4 | 6): this {
@@ -304,8 +314,8 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * @override
-     * @param rule StringRule
-     * @param value string
+     * @param rule
+     * @param value
      */
     protected checkRule(rule: StringRule, value: string): GuardResult {
         switch (rule.type) {

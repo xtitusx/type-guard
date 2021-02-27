@@ -10,7 +10,8 @@ import { DateStringIsAfter } from './date-string/date-string-is-after';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/** @class DateStringGuard
+/**
+ * @class DateStringGuard
  * @extends {Guard<DateStringRule>}
  */
 export class DateStringGuard extends Guard<DateStringRule> {

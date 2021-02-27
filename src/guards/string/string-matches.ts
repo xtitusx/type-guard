@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringMatches
- */
 export class StringMatches extends StringRuleChecker<{ type: 'matches'; value: RegExp }> {
     constructor(rule: { type: 'matches'; value: RegExp }, value: string) {
         super(rule, value);

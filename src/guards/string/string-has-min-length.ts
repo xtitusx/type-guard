@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringHasMinLength
- */
 export class StringHasMinLength extends StringRuleChecker<{ type: 'hasMinLength'; min: number }> {
     constructor(rule: { type: 'hasMinLength'; min: number }, value: string) {
         super(rule, value);

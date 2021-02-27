@@ -9,7 +9,8 @@ import { NilIsNotNil } from './nil/nil-is-not-nil';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/** @class NilGuard
+/**
+ * @class NilGuard
  * @extends {Guard<NilRule>}
  */
 export class NilGuard extends Guard<NilRule> {

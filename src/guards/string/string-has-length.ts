@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringHasLength
- */
 export class StringHasLength extends StringRuleChecker<{ type: 'hasLength'; value: number }> {
     constructor(rule: { type: 'hasLength'; value: number }, value: string) {
         super(rule, value);

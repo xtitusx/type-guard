@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringNotContains
- */
 export class StringNotContains extends StringRuleChecker<{ type: 'notContains'; value: string }> {
     constructor(rule: { type: 'notContains'; value: string }, value: string) {
         super(rule, value);

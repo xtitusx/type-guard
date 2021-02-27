@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringHasMaxLength
- */
 export class StringHasMaxLength extends StringRuleChecker<{ type: 'hasMaxLength'; max: number }> {
     constructor(rule: { type: 'hasMaxLength'; max: number }, value: string) {
         super(rule, value);

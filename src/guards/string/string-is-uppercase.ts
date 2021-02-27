@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringIsUppercase
- */
 export class StringIsUppercase extends StringRuleChecker<{ type: 'isUpperCase' }> {
     constructor(rule: { type: 'isUpperCase' }, value: string) {
         super(rule, value);

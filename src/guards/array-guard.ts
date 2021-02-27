@@ -9,7 +9,8 @@ import { ArrayContains } from './array/array-contains';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/** @class ArrayGuard
+/**
+ *  @class ArrayGuard
  * @extends {Guard<ArrayRule>}
  */
 export class ArrayGuard extends Guard<ArrayRule> {

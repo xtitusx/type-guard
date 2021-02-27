@@ -3,9 +3,6 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { ALPHA_NUMERIC_PATTERN } from '../../utils/pattern-constant';
 
-/**
- * @class StringIsAlphaNumeric
- */
 export class StringIsAlphaNumeric extends StringRuleChecker<{ type: 'isAlphaNumeric' }> {
     constructor(rule: { type: 'isAlphaNumeric' }, value: string) {
         super(rule, value);

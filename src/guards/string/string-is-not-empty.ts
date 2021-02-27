@@ -2,9 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-/**
- * @class StringIsNotEmpty
- */
 export class StringIsNotEmpty extends StringRuleChecker<{ type: 'isNotEmpty' }> {
     constructor(rule: { type: 'isNotEmpty' }, value: string) {
         super(rule, value);

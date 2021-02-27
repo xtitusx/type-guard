@@ -4,9 +4,6 @@ import { EmailAddressDefinition } from './string-types';
 import { GuardResult } from '../../core/guard-result';
 import { RFC5322_EMAIL_ADDRESS_PATTERN, QUICK_EMAIL_ADDRESS_PATTERN } from '../../utils/pattern-constant';
 
-/**
- * @class StringIsEmailAddress
- */
 export class StringIsEmailAddress extends StringRuleChecker<{ type: 'isEmailAddress'; def?: EmailAddressDefinition }> {
     constructor(rule: { type: 'isEmailAddress'; def?: EmailAddressDefinition }, value: string) {
         super(rule, value);

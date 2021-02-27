@@ -3,9 +3,6 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { HEX_PATTERN } from '../../utils/pattern-constant';
 
-/**
- * @class StringIsHex
- */
 export class StringIsHex extends StringRuleChecker<{ type: 'isHex' }> {
     constructor(rule: { type: 'isHex' }, value: string) {
         super(rule, value);

@@ -18,7 +18,8 @@ import { NumberIsNetworkPort } from './number/number-is-network-port';
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-/** @class NumberGuard
+/**
+ * @class NumberGuard
  * @extends {Guard<NumberRule>}
  */
 export class NumberGuard extends Guard<NumberRule> {

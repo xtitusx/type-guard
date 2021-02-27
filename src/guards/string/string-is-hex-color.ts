@@ -3,9 +3,6 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { SIX_DIGITS_HEX_COLOR_PATTERN, THREE_DIGITS_HEX_COLOR_PATTERN } from '../../utils/pattern-constant';
 
-/**
- * @class StringIsHexColor
- */
 export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; digits?: 3 | 6 }> {
     constructor(rule: { type: 'isHexColor'; digits?: 3 | 6 }, value: string) {
         super(rule, value);

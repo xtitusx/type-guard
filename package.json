@@ -8,7 +8,8 @@
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "prettier:check": "prettier --check  './**/*.{ts,md}'",
-    "prettier:fix": "prettier --write './**/*.{ts,md}'"
+    "prettier:fix": "prettier --write './**/*.{ts,md}'",
+    "typedoc": "typedoc ./src/guards/*-guard.ts"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   },
   "tags": [
     "typescript",
-    "validation"
+    "validation",
+    "guard"
   ],
   "homepage": "https://github.com/xtitusx/type-guard#readme",
   "dependencies": {
@@ -40,6 +42,7 @@
     "mocha": "^6.1.4",
     "prettier": "^2.0.5",
     "rimraf": "3.0.2",
+    "typedoc": "^0.20.28",
     "typescript": "^3.9.7"
   }
 }
