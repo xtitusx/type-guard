@@ -24,18 +24,16 @@ export abstract class Guard<T extends Rule> {
     protected abstract typeGuard(): void;
 
     /**
-     * Méthode qui renvoie le résultat de la méthode guard().
-     *
-     * La garde court-circuite la vérification dès qu'une règle n'est pas observée.
+     * Returns the result of guard() method.
+     * @remarks The guard bypasses the check as soon as a rule is not observed.
      */
     protected getCombinedGuardResult(): GuardResult {
         return this.combinedGuardResult;
     }
 
     /**
-     * Méthode qui ajoute un type de règle à la liste de règles, ou remplace un type de règle déjà existant.
-     *
-     * Un seul type de règle est donc retenu dans la garde.
+     * Adds a rule type to the rule list, or replaces an already existing rule type.
+     * @remarks A single type of rule is therefore retained in the guard.
      * @param rule
      */
     protected addRule(rule: T): void {
@@ -43,12 +41,11 @@ export abstract class Guard<T extends Rule> {
     }
 
     /**
-     * Méthode qui vérifie :
-     * - le typage.
-     * - l'ensemble des règles chaînées.
-     * @param propertyValue unknown
-     * @param propertyName string (optionnel)
-     * @return GuardResult
+     * Checks :
+     * - Type.
+     * - The set of chained rules.
+     * @param propertyValue
+     * @param propertyName
      */
     public guard(propertyValue: unknown, propertyName?: string): GuardResult {
         this.propertyValue = propertyValue;

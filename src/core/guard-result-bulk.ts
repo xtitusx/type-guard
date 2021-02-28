@@ -8,7 +8,7 @@ export class GuardResultBulk {
     }
 
     /**
-     * Méthode qui empile les résultats de garde.
+     * Stacks guardResult(s) in bulk.
      * @param guardResults
      */
     public add(guardResults: GuardResult | GuardResult[]): this {
@@ -21,9 +21,9 @@ export class GuardResultBulk {
     }
 
     /**
-     * Méthode qui retourne en résultat :
-     * - soit la première garde de la liste en échec.
-     * - soit un succès.
+     * @returns
+     * - Either the first fail in bulk.
+     * - Or only one success.
      */
     public combine(): GuardResult {
         for (const guardResult of this.guardResults) {
@@ -36,9 +36,9 @@ export class GuardResultBulk {
     }
 
     /**
-     * Méthode qui retourne en résultat :
-     * - soit les gardes de la liste en échec.
-     * - soit un succès.
+     * @returns
+     * - Either all fails in bulk.
+     * - Or only one success.
      */
     public stack(): GuardResult[] {
         const fails = [...this.guardResults.filter((guardResult) => !guardResult?.isSuccess())];

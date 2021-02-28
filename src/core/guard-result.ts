@@ -18,8 +18,8 @@ export class GuardResult implements IGuardResult {
     }
 
     /**
-     * Méthode qui retourne la raison de l'échec de la garde.
-     * @remarks Le message est préfixé avec le nom de la propriété si disponible.
+     * @remarks The message is prefixed with the name of the property if available.
+     * @returns The reason for the failure of the guard.
      */
     public getMessage(): string {
         return this.propertyName
