@@ -331,6 +331,44 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isTrimmed()', () => {
+        it("should return true when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isTrimmed().guard('foo').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'foo bar'", () => {
+            assert.equal(new StringGuard().isTrimmed().guard('foo bar').isSuccess(), true);
+        });
+
+        it("should return true when tested value is ''", () => {
+            assert.equal(new StringGuard().isTrimmed().guard('').isSuccess(), true);
+        });
+
+        it("should return false when tested value is ' foo'", () => {
+            assert.equal(new StringGuard().isTrimmed().guard(' foo').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'foo '", () => {
+            assert.equal(new StringGuard().isTrimmed().guard('foo ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' foo '", () => {
+            assert.equal(new StringGuard().isTrimmed().guard(' foo ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isTrimmed().guard(' ').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isTrimmed().guard(null).isSuccess(), false);
+        });
+
+        it('should return false tested value is undefined', () => {
+            assert.equal(new StringGuard().isTrimmed().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isAlphaNumeric()', () => {
         it("should return true when tested value is 'foo'", () => {
             assert.equal(new StringGuard().isAlphaNumeric().guard('foo').isSuccess(), true);

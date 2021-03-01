@@ -11,6 +11,7 @@ export type StringRule =
     | { type: 'hasMaxLength'; max: number }
     | { type: 'isUpperCase' }
     | { type: 'isLowerCase' }
+    | { type: 'isTrimmed' }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }

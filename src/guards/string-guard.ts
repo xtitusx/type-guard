@@ -11,6 +11,7 @@ import { StringHasMinLength } from './string/string-has-min-length';
 import { StringHasMaxLength } from './string/string-has-max-length';
 import { StringIsUppercase } from './string/string-is-uppercase';
 import { StringIsLowercase } from './string/string-is-lowercase';
+import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
 import { StringIsNumeric } from './string/string-is-numeric';
@@ -163,6 +164,15 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string does not contain any leading and trailing whitespace.
+     * @remarks Chainable method.
+     */
+    public isTrimmed(): this {
+        this.addRule({ type: 'isTrimmed' });
+        return this;
+    }
+
+    /**
      * Checks if string only contains alpha characters and/or numbers.
      * @remarks Chainable method.
      */
@@ -300,7 +310,7 @@ export class StringGuard extends Guard<StringRule> {
      *  - IPv6 addresses.
      *  - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
      *  - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
-     *  - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
+     *  - IPv4-Embedded IPv6 address (section 2 of rfc6052).
      *  - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
      *  - IPv4-translated addresses (section 2.1 of rfc2765).
      * ```
@@ -343,6 +353,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsUppercase(rule, value).exec();
             case 'isLowerCase':
                 return new StringIsLowercase(rule, value).exec();
+            case 'isTrimmed':
+                return new StringIsTrimmed(rule, value).exec();
             case 'isAlphaNumeric':
                 return new StringIsAlphaNumeric(rule, value).exec();
             case 'isAlpha':
