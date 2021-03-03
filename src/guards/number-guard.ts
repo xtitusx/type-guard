@@ -1,4 +1,5 @@
 import { NumberRule, NetworkPortRange } from './number/number-types';
+
 import { NumberEquals } from './number/number-equals';
 import { NumberIsIn } from './number/number-is-in';
 import { NumberIsMax } from './number/number-is-max';
@@ -6,7 +7,7 @@ import { NumberIsMin } from './number/number-is-min';
 import { NumberIsPositive } from './number/number-is-positive';
 import { NumberIsNegative } from './number/number-is-negative';
 import { NumberIsWhole } from './number/number-is-whole';
-import { NumberIsDecimal } from './number/number-is-decimal';
+import { NumberHasMaxFractionDigits } from './number/number-has-max-fraction-digits';
 import { NumberIsEven } from './number/number-is-even';
 import { NumberIsOdd } from './number/number-is-odd';
 import { NumberIsPrime } from './number/number-is-prime';
@@ -92,11 +93,13 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * Checks if number is a decimal number.
+     * Checks if the fractional part of number is equal or smaller than the specified number.
      * @remarks Chainable method.
+     * @param max Max number of digits to the right of the decimal point in the number.
+    
      */
-    public isDecimal(): this {
-        this.addRule({ type: 'isDecimal' });
+    public hasMaxFractionDigits(max: number): this {
+        this.addRule({ type: 'hasMaxFractionDigits', max });
         return this;
     }
 
@@ -189,8 +192,8 @@ export class NumberGuard extends Guard<NumberRule> {
                 return new NumberIsNegative(rule, value).exec();
             case 'isWhole':
                 return new NumberIsWhole(rule, value).exec();
-            case 'isDecimal':
-                return new NumberIsDecimal(rule, value).exec();
+            case 'hasMaxFractionDigits':
+                return new NumberHasMaxFractionDigits(rule, value).exec();
             case 'isEven':
                 return new NumberIsEven(rule, value).exec();
             case 'isOdd':

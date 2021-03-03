@@ -75,4 +75,21 @@ export class NumberUtils {
 
         return sq - Math.floor(sq) === 0;
     }
+
+    /**
+     * Returns the number of digits to the right of the decimal point in the number.
+     * @param value
+     */
+    public static getPrecision(value: number): number {
+        if (!isFinite(value)) {
+            return 0;
+        }
+        let e = 1,
+            precision = 0;
+        while (Math.round(value * e) / e !== value) {
+            e *= 10;
+            precision++;
+        }
+        return precision;
+    }
 }

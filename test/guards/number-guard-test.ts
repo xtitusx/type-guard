@@ -229,33 +229,57 @@ describe('Number-Guard', () => {
         });
     });
 
-    describe('#isDecimal()', () => {
-        it('should return true when tested value is 1.1', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(1.1).isSuccess(), true);
+    describe('#hasMaxFractionDigits()', () => {
+        it('should return true when param is 1 and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(1).guard(1.1).isSuccess(), true);
         });
 
-        it('should return true when tested value is -1.1', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(-1.1).isSuccess(), true);
+        it('should return true when  param is 1.1 and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(2).guard(1.1).isSuccess(), true);
         });
 
-        it('should return true when tested value is 0.11', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(0.11).isSuccess(), true);
+        it('should return true when param is -1.1 and tested value is -1.1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(1).guard(-1.1).isSuccess(), true);
         });
 
-        it('should return false when tested value is 1', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(1).isSuccess(), false);
+        it('should return true when param is -1.1 and tested value is -1.1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(2).guard(-1.1).isSuccess(), true);
         });
 
-        it('should return false when tested value is 1.0', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(1.0).isSuccess(), false);
+        it('should return true when param is 0.11 and tested value is 0.11', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(2).guard(0.11).isSuccess(), true);
         });
 
-        it('should return false when tested value is null', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(null).isSuccess(), false);
+        it('should return true when param is 0.11 and tested value is 0.11', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(3).guard(0.11).isSuccess(), true);
         });
 
-        it('should return false when tested value is undefined', () => {
-            assert.equal(new NumberGuard().isDecimal().guard(undefined).isSuccess(), false);
+        it('should return true when param is 1 and tested value is 1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(1).guard(1).isSuccess(), true);
+        });
+
+        it('should return true when param is 1 and tested value is 1.0', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(1).guard(1.0).isSuccess(), true);
+        });
+
+        it('should return false when param is 12 and tested value is 3.141592653589', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(12).guard(3.141592653589).isSuccess(), true);
+        });
+
+        it('should return false when param is 0 and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(0).guard(1.1).isSuccess(), false);
+        });
+
+        it('should return false when param is 11 and tested value is 3.141592653589', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(11).guard(3.141592653589).isSuccess(), false);
+        });
+
+        it('should return false when param is 0 and tested value is null', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(0).guard(null).isSuccess(), false);
+        });
+
+        it('should return false when param is 0 and tested value is undefined', () => {
+            assert.equal(new NumberGuard().hasMaxFractionDigits(0).guard(undefined).isSuccess(), false);
         });
     });
 

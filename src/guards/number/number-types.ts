@@ -6,7 +6,7 @@ export type NumberRule =
     | { type: 'isPositive' }
     | { type: 'isNegative' }
     | { type: 'isWhole' }
-    | { type: 'isDecimal' }
+    | { type: 'hasMaxFractionDigits'; max: number }
     | { type: 'isEven' }
     | { type: 'isOdd' }
     | { type: 'isPrime' }
