@@ -534,6 +534,10 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isDecimal().guard('1,0').isSuccess(), true);
         });
 
+        it("should return true when tested value is '0.1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('0.1').isSuccess(), true);
+        });
+
         it("should return true when tested value is '1.1'", () => {
             assert.equal(new StringGuard().isDecimal().guard('1.1').isSuccess(), true);
         });
@@ -569,79 +573,151 @@ describe('String-Guard', () => {
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isDecimal().guard(undefined).isSuccess(), false);
         });
+
+        describe('#isDecimal({ force: true })', () => {
+            it("should return true when param is { force: true } and tested value is '1.1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true }).guard('1.1').isSuccess(), true);
+            });
+
+            it("should return true when param is { force: true } and tested value is '-1.1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true }).guard('-1.1').isSuccess(), true);
+            });
+
+            it("should return true when param is { force: true } and tested value is '1.0'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true }).guard('1.0').isSuccess(), true);
+            });
+
+            it("should return true when param is { force: true } and tested value is '0.0'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true }).guard('0.0').isSuccess(), true);
+            });
+
+            it("should return false when param is { force: true } and tested value is '1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true }).guard('1').isSuccess(), false);
+            });
+        });
+
+        describe('#isDecimal({ force: false })', () => {
+            it("should return true when param is { force: false } and tested value is '1.1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: false }).guard('1.1').isSuccess(), true);
+            });
+
+            it("should return true when param is { force: false } and tested value is '1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: false }).guard('1').isSuccess(), true);
+            });
+        });
+
+        describe('#isDecimal({ precision: <number> })', () => {
+            it("should return true when param is { precision: 1 } and tested value is '1.1'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 1 }).guard('1.1').isSuccess(), true);
+            });
+
+            it("should return true when param is { precision: 3 } and tested value is '11.123'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 3 }).guard('11.123').isSuccess(), true);
+            });
+
+            it("should return true when param is { precision: 4 } and tested value is '-1000.1234'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 4 }).guard('-1000.1234').isSuccess(), true);
+            });
+
+            it("should return true when param is { precision: 0 } and tested value is '1'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 0 }).guard('1').isSuccess(), true);
+            });
+
+            it("should return false when param is { precision: 2 } and tested value is '1.123'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 2 }).guard('1.123').isSuccess(), false);
+            });
+
+            it("should return false when param is { precision: 2 } and tested value is '-1.123'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: 2 }).guard('-1.123').isSuccess(), false);
+            });
+
+            it("should return false when param is { precision: -1 } and tested value is '1'", () => {
+                assert.equal(new StringGuard().isDecimal({ precision: -1 }).guard('1').isSuccess(), false);
+            });
+        });
+
+        describe('#isDecimal({ force: true, precision: <number> })', () => {
+            it("should return true when param are { force: true, precision: 1 } and tested value is '1.1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true, precision: 1 }).guard('1.1').isSuccess(), true);
+            });
+
+            it("should return false when param are { force: true, precision: 0 } and tested value is '1'", () => {
+                assert.equal(new StringGuard().isDecimal({ force: true, precision: 0 }).guard('1').isSuccess(), false);
+            });
+        });
     });
 
     describe('#isEmailAddress()', () => {
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isEmailAddress().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isEmailAddress().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isEmailAddress().guard(undefined).isSuccess(), false);
+        });
+
         describe("#isEmailAddress('quick')", () => {
-            it("should return true when tested value is 'simple@example.com'", () => {
+            it("should return true when param is 'quick' and tested value is 'simple@example.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('quick').guard('simple@example.com').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'very.common@example.com'", () => {
+            it("should return true when param is 'quick' and tested value is 'very.common@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('quick').guard('very.common@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'very_common@example.com'", () => {
+            it("should return true when param is 'quick' and tested value is 'very_common@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('quick').guard('very_common@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'very-common@example.com'", () => {
+            it("should return true when param is 'quick' and tested value is 'very-common@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('quick').guard('very-common@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'very.common@example.info'", () => {
+            it("should return true when param is 'quick' and tested value is 'very.common@example.info'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('quick').guard('very.common@example.info').isSuccess(),
                     true
                 );
             });
 
-            it("should return false when tested value is 'very.common@example.education'", () => {
+            it("should return false when param is 'quick' and tested value is 'very.common@example.education'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('quick').guard('very.common@example.education').isSuccess(),
                     false
                 );
             });
-
-            it("should return false when tested value is ''", () => {
-                assert.equal(new StringGuard().isEmailAddress().guard('').isSuccess(), false);
-            });
-
-            it('should return false when tested value is null', () => {
-                assert.equal(new StringGuard().isEmailAddress().guard(null).isSuccess(), false);
-            });
-
-            it('should return false when tested value is undefined', () => {
-                assert.equal(new StringGuard().isEmailAddress().guard(undefined).isSuccess(), false);
-            });
         });
 
         describe("#isEmailAddress('rfc5322')", () => {
-            it("should return true when tested value is 'simple@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'simple@example.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('simple@example.com').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'simPle@eXample.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'simPle@eXample.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('simPle@eXample.com').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'very.common@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'very.common@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('very.common@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'disposable.style.email.with+symbol@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'disposable.style.email.with+symbol@example.com'", () => {
                 assert.equal(
                     new StringGuard()
                         .isEmailAddress('rfc5322')
@@ -651,7 +727,7 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when tested value is 'other.email-with-hyphen@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'other.email-with-hyphen@example.com'", () => {
                 assert.equal(
                     new StringGuard()
                         .isEmailAddress('rfc5322')
@@ -661,56 +737,56 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when tested value is 'fully-qualified-domain@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'fully-qualified-domain@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('fully-qualified-domain@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'user.name+tag+sorting@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'user.name+tag+sorting@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('user.name+tag+sorting@example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'x@example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'x@example.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('x@example.com').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'example-indeed@strange-example.com'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'example-indeed@strange-example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('example-indeed@strange-example.com').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'mailhost!username@example.org'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'mailhost!username@example.org'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('mailhost!username@example.org').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'user%example.com@example.org'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'user%example.com@example.org'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('user%example.com@example.org').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'user-@example.org'", () => {
+            it("should return true when param is 'rfc5322' and tested value is 'user-@example.org'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('user-@example.org').isSuccess(), true);
             });
 
             // Syntax using double quotes and square brackets not allowed.
-            it('should return false when tested value is \'" "@example.org\'', () => {
+            it("should return false when param is 'rfc5322' and tested value is '\" \"@example.org'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('" "@example.org').isSuccess(), false);
             });
 
             // Syntax using double quotes and square brackets not allowed.
-            it('should return false when tested value is \'"john..doe"@example.org\'', () => {
+            it("should return false when param is 'rfc5322' and tested value is '\"john..doe\"@example.org'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('"john..doe"@example.org').isSuccess(),
                     false
@@ -718,17 +794,17 @@ describe('String-Guard', () => {
             });
 
             // No @ character.
-            it("should return false when tested value is 'Abc.example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'Abc.example.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('Abc.example.com').isSuccess(), false);
             });
 
             // Only one @ is allowed outside quotation marks.
-            it("should return false when tested value is 'A@b@c@example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'A@b@c@example.com'", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('A@b@c@example.com').isSuccess(), false);
             });
 
             // None of the special characters in this local-part are allowed outside quotation marks.
-            it("should return false when tested value is 'a\"b(c)d,e:f;g<h>i[jk]l@example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'a\"b(c)d,e:f;g<h>i[jk]l@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('a"b(c)d,e:f;g<h>i[jk]l@example.com').isSuccess(),
                     false
@@ -736,7 +812,7 @@ describe('String-Guard', () => {
             });
 
             // Quoted strings must be dot separated or the only element making up the local-part.
-            it('should return false when tested value is \'just"not"right@example.com\'', () => {
+            it("should return false when param is 'rfc5322' and tested value is 'just\"not\"right@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('just"not"right@example.com').isSuccess(),
                     false
@@ -744,7 +820,7 @@ describe('String-Guard', () => {
             });
 
             // Spaces, quotes, and backslashes may only exist when within quoted strings and preceded by a backslash.
-            it("should return false when tested value is 'this is\"not\\allowed@example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'this is\"not\\allowed@example.com'", () => {
                 assert.equal(
                     new StringGuard().isEmailAddress('rfc5322').guard('this is"not\\allowed@example.com').isSuccess(),
                     false
@@ -752,7 +828,7 @@ describe('String-Guard', () => {
             });
 
             // Even if escaped (preceded by a backslash), spaces, quotes, and backslashes must still be contained by quotes.
-            it("should return false when tested value is 'this\\ still\\\"not\\\\allowed@example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'this\\ still\\\"not\\\\allowed@example.com'", () => {
                 assert.equal(
                     new StringGuard()
                         .isEmailAddress('rfc5322')
@@ -763,7 +839,7 @@ describe('String-Guard', () => {
             });
 
             // Underscore is not allowed in domain part.
-            it("should return false when tested value is 'i_like_underscore@but_its_not_allowed_in_this_part.example.com'", () => {
+            it("should return false when param is 'rfc5322' and tested value is 'i_like_underscore@but_its_not_allowed_in_this_part.example.com'", () => {
                 assert.equal(
                     new StringGuard()
                         .isEmailAddress('rfc5322')
@@ -773,15 +849,15 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return false when tested value is ''", () => {
+            it("should return false when param is 'rfc5322' and tested value is ''", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard('').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'rfc5322' and tested value is null", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard(null).isSuccess(), false);
             });
 
-            it('should return false when tested value is undefined', () => {
+            it("should return false when param is 'rfc5322' tested value is undefined", () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard(undefined).isSuccess(), false);
             });
         });

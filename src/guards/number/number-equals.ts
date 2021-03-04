@@ -15,7 +15,7 @@ export class NumberEquals extends NumberRuleChecker<{ type: 'equals'; value: num
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`number is expected to be ${this.rule.value} but is not: ${this.value}`)
+                  .withMessage(`number is expected to be equal to ${this.rule.value} but is not: ${this.value}`)
                   .build();
     }
 }

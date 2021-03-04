@@ -15,7 +15,7 @@ export class StringNotEquals extends StringRuleChecker<{ type: 'notEquals'; valu
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is not expected to be ${this.rule.value} but is: ${this.value}`)
+                  .withMessage(`string is not expected to be equal to ${this.rule.value} but is: ${this.value}`)
                   .build();
     }
 }
