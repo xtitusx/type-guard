@@ -19,6 +19,11 @@ export const ALPHA_PATTERN = '^[a-zA-Z]+$';
 export const HEX_PATTERN = '^[a-fA-F\\d]+$';
 
 /**
+ * Decimal pattern.
+ */
+export const DECIMAL_PATTERN = '^[-]?\\d+(([.,]{1}\\d+)|(\\d*))$';
+
+/**
  * Email address pattern matching 99% of email addresses.
  */
 // prettier-ignore

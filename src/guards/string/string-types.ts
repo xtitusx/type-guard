@@ -1,3 +1,5 @@
+import { IIsDecimalOptions } from './string-options';
+
 export type StringRule =
     | { type: 'equals'; value: string }
     | { type: 'notEquals'; value: string }
@@ -16,6 +18,7 @@ export type StringRule =
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
     | { type: 'isHex' }
+    | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }

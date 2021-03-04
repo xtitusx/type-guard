@@ -471,6 +471,106 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isHex()', () => {
+        it("should return true when tested value is '5'", () => {
+            assert.equal(new StringGuard().isHex().guard('51').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '507f1'", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '507F1'", () => {
+            assert.equal(new StringGuard().isHex().guard('507F1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '112345679065574883030833'", () => {
+            assert.equal(new StringGuard().isHex().guard('112345679065574883030833').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'FFFFFFFFFFFFFFFFFFFFFFFF'", () => {
+            assert.equal(new StringGuard().isHex().guard('FFFFFFFFFFFFFFFFFFFFFFFF').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd79943901g'", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd79943901g').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '507f1f77bcf86cd799439011 '", () => {
+            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isHex().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isHex().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isHex().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isDecimal()', () => {
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1234567890'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1234567890').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '-1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('-1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1.0'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1.0').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1,0'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1,0').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1.1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1.1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '-1.1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('-1.1').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '1..1'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1..1').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '1.'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('1.').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isDecimal().guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '123 '", () => {
+            assert.equal(new StringGuard().isDecimal().guard('123 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isDecimal().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isDecimal().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isDecimal().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isEmailAddress()', () => {
         describe("#isEmailAddress('quick')", () => {
             it("should return true when tested value is 'simple@example.com'", () => {
@@ -684,48 +784,6 @@ describe('String-Guard', () => {
             it('should return false when tested value is undefined', () => {
                 assert.equal(new StringGuard().isEmailAddress('rfc5322').guard(undefined).isSuccess(), false);
             });
-        });
-    });
-
-    describe('#isHex()', () => {
-        it("should return true when tested value is '5'", () => {
-            assert.equal(new StringGuard().isHex().guard('51').isSuccess(), true);
-        });
-
-        it("should return true when tested value is '507f1'", () => {
-            assert.equal(new StringGuard().isHex().guard('507f1').isSuccess(), true);
-        });
-
-        it("should return true when tested value is '507F1'", () => {
-            assert.equal(new StringGuard().isHex().guard('507F1').isSuccess(), true);
-        });
-
-        it("should return true when tested value is '112345679065574883030833'", () => {
-            assert.equal(new StringGuard().isHex().guard('112345679065574883030833').isSuccess(), true);
-        });
-
-        it("should return true when tested value is 'FFFFFFFFFFFFFFFFFFFFFFFF'", () => {
-            assert.equal(new StringGuard().isHex().guard('FFFFFFFFFFFFFFFFFFFFFFFF').isSuccess(), true);
-        });
-
-        it("should return false when tested value is '507f1f77bcf86cd79943901g'", () => {
-            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd79943901g').isSuccess(), false);
-        });
-
-        it("should return false when tested value is '507f1f77bcf86cd799439011 '", () => {
-            assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
-        });
-
-        it("should return false when tested value is ''", () => {
-            assert.equal(new StringGuard().isHex().guard('').isSuccess(), false);
-        });
-
-        it('should return false when tested value is null', () => {
-            assert.equal(new StringGuard().isHex().guard(null).isSuccess(), false);
-        });
-
-        it('should return false when tested value is undefined', () => {
-            assert.equal(new StringGuard().isHex().guard(undefined).isSuccess(), false);
         });
     });
 

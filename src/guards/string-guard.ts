@@ -1,4 +1,5 @@
 import { StringRule, EmailAddressDefinition } from './string/string-types';
+import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
 import { StringNotEquals } from './string/string-not-equals';
 import { StringContains } from './string/string-contains';
@@ -15,8 +16,9 @@ import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
 import { StringIsNumeric } from './string/string-is-numeric';
-import { StringIsEmailAddress } from './string/string-is-email-address';
 import { StringIsHex } from './string/string-is-hex';
+import { StringIsDecimal } from './string/string-is-decimal';
+import { StringIsEmailAddress } from './string/string-is-email-address';
 import { StringIsObjectId } from './string/string-is-object-id';
 import { StringIsHexColor } from './string/string-is-hex-color';
 import { StringIsUuidv4 } from './string/string-is-uuid-v4';
@@ -214,6 +216,26 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if number is a decimal number.
+     * @remarks Chainable method.
+     * ```ts
+     * Decimal separators:
+     * - Decimal point.
+     * - Decimal comma.
+     * ```
+     * @param options Additional options.
+     * ```ts
+     * Options:
+     * - force: Force number to have a decimal point. Default is false.
+     * - precision: Max number of digits to the right of the decimal point in the number.
+     * ```
+     */
+    public isDecimal(options?: IIsDecimalOptions): this {
+        this.addRule({ type: 'isDecimal', options });
+        return this;
+    }
+
+    /**
      * Checks if string is an email address number.
      * @remarks Chainable method.
      * ```ts
@@ -361,10 +383,12 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsAlpha(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
-            case 'isEmailAddress':
-                return new StringIsEmailAddress(rule, value).exec();
             case 'isHex':
                 return new StringIsHex(rule, value).exec();
+            case 'isDecimal':
+                return new StringIsDecimal(rule, value).exec();
+            case 'isEmailAddress':
+                return new StringIsEmailAddress(rule, value).exec();
             case 'isObjectId':
                 return new StringIsObjectId(rule, value).exec();
             case 'isHexColor':

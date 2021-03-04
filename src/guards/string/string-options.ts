@@ -1,11 +1,11 @@
-export interface IIsNumericOptions {
+export interface IIsDecimalOptions {
     /**
-     * Force number to have a decimal point.
+     * Force string number to have a decimal separator.
      * @defaultValue false
      */
     force?: boolean;
     /**
-     * Max number of digits to the right of the decimal point in the number.
+     * Max number of digits to the right of the decimal separator in the string number.
      */
     precision?: number;
 }
