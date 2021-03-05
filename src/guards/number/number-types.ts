@@ -11,8 +11,7 @@ export type NumberRule =
     | { type: 'isOdd' }
     | { type: 'isPrime' }
     | { type: 'isComposite' }
-    | { type: 'isFibonacci' }
-    | { type: 'isNegaFibonacci' }
+    | { type: 'isFibonacci'; allowsNegative?: boolean }
     | { type: 'isNetworkPort'; range?: NetworkPortRange };
 
 export type NetworkPortRange = 'well-known' | 'registered' | 'private';

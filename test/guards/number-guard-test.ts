@@ -595,91 +595,101 @@ describe('Number-Guard', () => {
         it('should return false when tested value is undefined', () => {
             assert.equal(new NumberGuard().isFibonacci().guard(undefined).isSuccess(), false);
         });
-    });
 
-    describe('#isNegaFibonacci()', () => {
-        it('should return true when tested value is 0', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(0).isSuccess(), true);
+        describe('#isFibonacci(true)', () => {
+            it('should return true when tested value is 0', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(0).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 1', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(1).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 2', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(2).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 3', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(3).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 5', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(5).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 8', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(8).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 13', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(21).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 21', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(34).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 55', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(55).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 89', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(89).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 144', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(144).isSuccess(), true);
+            });
+
+            it('should return true when tested value is 233', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(233).isSuccess(), true);
+            });
+
+            it('should return true when tested value is -1', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(-1).isSuccess(), true);
+            });
+
+            it('should return true when tested value is -3', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(-3).isSuccess(), true);
+            });
+
+            it('should return false when tested value is -4', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(-4).isSuccess(), false);
+            });
+
+            it('should return false when tested value is 4', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(4).isSuccess(), false);
+            });
+
+            it('should return false when tested value is 6', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(6).isSuccess(), false);
+            });
+
+            it('should return false when tested value is 7', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(7).isSuccess(), false);
+            });
+
+            it('should return false when tested value is 9', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(9).isSuccess(), false);
+            });
+
+            it('should return false when tested value is null', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(null).isSuccess(), false);
+            });
+
+            it('should return false when tested value is undefined', () => {
+                assert.equal(new NumberGuard().isFibonacci(true).guard(undefined).isSuccess(), false);
+            });
         });
 
-        it('should return true when tested value is 1', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(1).isSuccess(), true);
-        });
+        describe('#isFibonacci(false)', () => {
+            it('should return true when tested value is 1', () => {
+                assert.equal(new NumberGuard().isFibonacci(false).guard(1).isSuccess(), true);
+            });
 
-        it('should return true when tested value is 2', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(2).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 3', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(3).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 5', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(5).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 8', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(8).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 13', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(21).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 21', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(34).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 55', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(55).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 89', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(89).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 144', () => {
-            assert.equal(new NumberGuard().isFibonacci().guard(144).isSuccess(), true);
-        });
-
-        it('should return true when tested value is 233', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(233).isSuccess(), true);
-        });
-
-        it('should return true when tested value is -1', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(-1).isSuccess(), true);
-        });
-
-        it('should return true when tested value is -3', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(-3).isSuccess(), true);
-        });
-
-        it('should return false when tested value is -4', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(-4).isSuccess(), false);
-        });
-
-        it('should return false when tested value is 4', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(4).isSuccess(), false);
-        });
-
-        it('should return false when tested value is 6', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(6).isSuccess(), false);
-        });
-
-        it('should return false when tested value is 7', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(7).isSuccess(), false);
-        });
-
-        it('should return false when tested value is 9', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(9).isSuccess(), false);
-        });
-
-        it('should return false when tested value is null', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(null).isSuccess(), false);
-        });
-
-        it('should return false when tested value is undefined', () => {
-            assert.equal(new NumberGuard().isNegaFibonacci().guard(undefined).isSuccess(), false);
+            it('should return false when tested value is -1', () => {
+                assert.equal(new NumberGuard().isFibonacci(false).guard(-1).isSuccess(), false);
+            });
         });
     });
 

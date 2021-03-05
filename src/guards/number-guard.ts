@@ -13,7 +13,6 @@ import { NumberIsOdd } from './number/number-is-odd';
 import { NumberIsPrime } from './number/number-is-prime';
 import { NumberIsComposite } from './number/number-is-composite';
 import { NumberIsFibonacci } from './number/number-is-fibonacci';
-import { NumberIsNegaFibonacci } from './number/number-is-nega-fibonacci';
 import { NumberIsNetworkPort } from './number/number-is-network-port';
 
 import { Guard } from '../core/guard';
@@ -96,7 +95,6 @@ export class NumberGuard extends Guard<NumberRule> {
      * Checks if the fractional part of number is equal or smaller than the specified number.
      * @remarks Chainable method.
      * @param max Max number of digits to the right of the decimal point in the number.
-    
      */
     public hasMaxFractionDigits(max: number): this {
         this.addRule({ type: 'hasMaxFractionDigits', max });
@@ -142,22 +140,14 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * Checks if number is a Fibonacci number.
+     * Checks if number is a Fibonacci or a NegaFibonacci number.
      * @remarks Chainable method.
+     * @param allowsNegative  Allows both positive and negative integers to be represented. Default is false.
      * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number}
-     */
-    public isFibonacci(): this {
-        this.addRule({ type: 'isFibonacci' });
-        return this;
-    }
-
-    /**
-     * Checks if number is a NegaFibonacci number.
-     * @remarks Chainable method.
      * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding}
      */
-    public isNegaFibonacci(): this {
-        this.addRule({ type: 'isNegaFibonacci' });
+    public isFibonacci(allowsNegative?: boolean): this {
+        this.addRule({ type: 'isFibonacci', allowsNegative });
         return this;
     }
 
@@ -204,8 +194,6 @@ export class NumberGuard extends Guard<NumberRule> {
                 return new NumberIsComposite(rule, value).exec();
             case 'isFibonacci':
                 return new NumberIsFibonacci(rule, value).exec();
-            case 'isNegaFibonacci':
-                return new NumberIsNegaFibonacci(rule, value).exec();
             case 'isNetworkPort':
                 return new NumberIsNetworkPort(rule, value).exec();
         }

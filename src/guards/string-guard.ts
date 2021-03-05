@@ -226,7 +226,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param options Additional options.
      * ```ts
      * Options:
-     * - force: Force number to have a decimal point. Default is false.
+     * - force: Force number to have a decimal separator. Default is false.
      * - precision: Max number of digits to the right of the decimal point in the number.
      * ```
      */
@@ -282,7 +282,7 @@ export class StringGuard extends Guard<StringRule> {
      * - Starts with hastag (#) and is followed by 3 or 6 digits.
      * - Not case sensitive.
      * ```
-     * @param digits.
+     * @param digits
      * @example #000000, #FFFFFF, #000, #fff
      */
     public isHexColor(digits?: 3 | 6): this {
