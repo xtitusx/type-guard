@@ -10,6 +10,7 @@ import { NumberIsWhole } from './number/number-is-whole';
 import { NumberHasMaxFractionDigits } from './number/number-has-max-fraction-digits';
 import { NumberIsEven } from './number/number-is-even';
 import { NumberIsOdd } from './number/number-is-odd';
+import { NumberIsMultiple } from './number/number-is-multiple';
 import { NumberIsPrime } from './number/number-is-prime';
 import { NumberIsComposite } from './number/number-is-composite';
 import { NumberIsFibonacci } from './number/number-is-fibonacci';
@@ -120,6 +121,16 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * Checks if number is a multiple of the specified number.
+     * @remarks Chainable method.
+     * @param value
+     */
+    public isMultiple(value: number): this {
+        this.addRule({ type: 'isMultiple', value });
+        return this;
+    }
+
+    /**
      * Checks if number is a prime number.
      * @remarks Chainable method.
      * @see {@link https://en.wikipedia.org/wiki/Prime_number}
@@ -188,6 +199,8 @@ export class NumberGuard extends Guard<NumberRule> {
                 return new NumberIsEven(rule, value).exec();
             case 'isOdd':
                 return new NumberIsOdd(rule, value).exec();
+            case 'isMultiple':
+                return new NumberIsMultiple(rule, value).exec();
             case 'isPrime':
                 return new NumberIsPrime(rule, value).exec();
             case 'isComposite':

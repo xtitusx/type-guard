@@ -9,6 +9,7 @@ export type NumberRule =
     | { type: 'hasMaxFractionDigits'; max: number }
     | { type: 'isEven' }
     | { type: 'isOdd' }
+    | { type: 'isMultiple'; value: number }
     | { type: 'isPrime' }
     | { type: 'isComposite' }
     | { type: 'isFibonacci'; allowsNegative?: boolean }

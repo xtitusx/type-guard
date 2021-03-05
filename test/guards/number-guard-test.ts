@@ -363,6 +363,56 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#isMultiple()', () => {
+        it('should return true when param is 0 and tested value is 1', () => {
+            assert.equal(new NumberGuard().isMultiple(0).guard(1).isSuccess(), true);
+        });
+
+        it('should return true when param is 1 and tested value is 1', () => {
+            assert.equal(new NumberGuard().isMultiple(1).guard(1).isSuccess(), true);
+        });
+
+        it('should return true when param is 2 and tested value is 2', () => {
+            assert.equal(new NumberGuard().isMultiple(2).guard(2).isSuccess(), true);
+        });
+
+        it('should return true when param is 2 and tested value is 4', () => {
+            assert.equal(new NumberGuard().isMultiple(2).guard(4).isSuccess(), true);
+        });
+
+        it('should return true when param is 15 and tested value is 60', () => {
+            assert.equal(new NumberGuard().isMultiple(15).guard(60).isSuccess(), true);
+        });
+
+        it('should return true when param is 2.2 and tested value is 8.8', () => {
+            assert.equal(new NumberGuard().isMultiple(2.2).guard(8.8).isSuccess(), true);
+        });
+
+        it('should return true when param is 2.2 and tested value is -8.8', () => {
+            assert.equal(new NumberGuard().isMultiple(2.2).guard(-8.8).isSuccess(), true);
+        });
+
+        it('should return true when param is -2.2 and tested value is 8.8', () => {
+            assert.equal(new NumberGuard().isMultiple(-2.2).guard(8.8).isSuccess(), true);
+        });
+
+        it('should return false when param is 3 and tested value is 8', () => {
+            assert.equal(new NumberGuard().isMultiple(3).guard(8).isSuccess(), false);
+        });
+
+        it('should return false when param is 15 and tested value is "60"', () => {
+            assert.equal(new NumberGuard().isMultiple(15).guard('60').isSuccess(), false);
+        });
+
+        it('should return false when param is 2 and tested value is null', () => {
+            assert.equal(new NumberGuard().isMultiple(2).guard(null).isSuccess(), false);
+        });
+
+        it('should return false when param is 2 and tested value is undefined', () => {
+            assert.equal(new NumberGuard().isMultiple(2).guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isPrime()', () => {
         it('should return true when tested value is 2', () => {
             assert.equal(new NumberGuard().isPrime().guard(2).isSuccess(), true);
@@ -653,7 +703,7 @@ describe('Number-Guard', () => {
                 assert.equal(new NumberGuard().isFibonacci(true).guard(-3).isSuccess(), true);
             });
 
-            it('should return false when tested value is -4', () => {
+            it('should return true when tested value is -4', () => {
                 assert.equal(new NumberGuard().isFibonacci(true).guard(-4).isSuccess(), false);
             });
 
