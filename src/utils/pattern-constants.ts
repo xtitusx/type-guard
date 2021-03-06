@@ -1,4 +1,14 @@
 /**
+ * Leading whitespace pattern.
+ */
+export const LEADING_WHITESPACE_PATTERN = '^\\s';
+
+/**
+ * Trailing whitespace pattern.
+ */
+export const TRAILING_WHITESPACE_PATTERN = '\\s$';
+
+/**
  * AlphaNumeric pattern.
  */
 export const ALPHA_NUMERIC_PATTERN = '^[0-9a-zA-Z]+$';

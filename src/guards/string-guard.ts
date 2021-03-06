@@ -1,4 +1,4 @@
-import { StringRule, EmailAddressDefinition } from './string/string-types';
+import { StringRule, EmailAddressDefinition, TrimmedSide } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
 import { StringNotEquals } from './string/string-not-equals';
@@ -168,9 +168,10 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string does not contain any leading and trailing whitespace.
      * @remarks Chainable method.
+     * @param side 'both' | 'left' | 'right'
      */
-    public isTrimmed(): this {
-        this.addRule({ type: 'isTrimmed' });
+    public isTrimmed(side: TrimmedSide): this {
+        this.addRule({ type: 'isTrimmed', side });
         return this;
     }
 

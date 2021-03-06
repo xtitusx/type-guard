@@ -13,7 +13,7 @@ export type StringRule =
     | { type: 'hasMaxLength'; max: number }
     | { type: 'isUpperCase' }
     | { type: 'isLowerCase' }
-    | { type: 'isTrimmed' }
+    | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
@@ -25,5 +25,7 @@ export type StringRule =
     | { type: 'isUuidv4' }
     | { type: 'isMACAddress' }
     | { type: 'isIPAddress'; version?: 4 | 6 };
+
+export type TrimmedSide = 'both' | 'left' | 'right';
 
 export type EmailAddressDefinition = 'quick' | 'rfc5322';
