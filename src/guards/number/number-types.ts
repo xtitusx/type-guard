@@ -12,7 +12,7 @@ export type NumberRule =
     | { type: 'isMultiple'; value: number }
     | { type: 'isPrime' }
     | { type: 'isComposite' }
-    | { type: 'isFibonacci'; allowsNegative?: boolean }
+    | { type: 'isFibonacci'; allowNegative?: boolean }
     | { type: 'isNetworkPort'; range?: NetworkPortRange };
 
 export type NetworkPortRange = 'well-known' | 'registered' | 'private';

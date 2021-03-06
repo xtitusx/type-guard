@@ -153,12 +153,12 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if number is a Fibonacci or a NegaFibonacci number.
      * @remarks Chainable method.
-     * @param allowsNegative  Allows both positive and negative integers to be represented. Default is false.
+     * @param allowNegative  Allows both positive and negative integers to be represented. Default is false.
      * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number}
      * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding}
      */
-    public isFibonacci(allowsNegative?: boolean): this {
-        this.addRule({ type: 'isFibonacci', allowsNegative });
+    public isFibonacci(allowNegative?: boolean): this {
+        this.addRule({ type: 'isFibonacci', allowNegative });
         return this;
     }
 

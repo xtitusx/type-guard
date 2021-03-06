@@ -3,8 +3,8 @@ import { NumberRuleChecker } from './number-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { NumberUtils } from '../../utils/number-utils';
 
-export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; allowsNegative?: boolean }> {
-    constructor(rule: { type: 'isFibonacci'; allowsNegative?: boolean }, value: number) {
+export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; allowNegative?: boolean }> {
+    constructor(rule: { type: 'isFibonacci'; allowNegative?: boolean }, value: number) {
         super(rule, value);
     }
 
@@ -12,7 +12,7 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
      * @override
      */
     public exec(): GuardResult {
-        if (this.rule.allowsNegative === true) {
+        if (this.rule.allowNegative === true) {
             return NumberUtils.isNegaFibonacci(this.value)
                 ? new GuardResult.Builder().withSuccess(true).build()
                 : new GuardResult.Builder()
