@@ -177,6 +177,7 @@ export class StringGuard extends Guard<StringRule> {
      *
      * Rule: (TODO)
      * - Starts with one capitalized character, or a number, or a special character.
+     * - Word divider is whitespace.
      * ```
      * @example firstChar: "Foo", "F", "#foo", " ", "38 is my age"
      * @example startCase: "The Quick Brown Fox Jumps Over The Lazy Dog."
