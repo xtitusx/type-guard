@@ -153,7 +153,7 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if number is a Fibonacci or a NegaFibonacci number.
      * @remarks Chainable method.
-     * @param allowNegative  Allows both positive and negative integers to be represented. Default is false.
+     * @param allowNegative - Allows both positive and negative integers to be represented. Default is false.
      * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number}
      * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding}
      */
@@ -165,7 +165,7 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if number is a Network Port.
      * @remarks Chainable method.
-     * @param range 'well-known' | 'registered' | 'private'
+     * @param range - 'well-known' | 'registered' | 'private'
      */
     public isNetworkPort(range?: NetworkPortRange): this {
         this.addRule({ type: 'isNetworkPort', range });

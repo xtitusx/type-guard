@@ -13,6 +13,7 @@ export type StringRule =
     | { type: 'hasMaxLength'; max: number }
     | { type: 'isUpperCase' }
     | { type: 'isLowerCase' }
+    | { type: 'isCapitalized'; style: CapitalizationStyle }
     | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
@@ -25,6 +26,8 @@ export type StringRule =
     | { type: 'isUuidv4' }
     | { type: 'isMACAddress' }
     | { type: 'isIPAddress'; version?: 4 | 6 };
+
+export type CapitalizationStyle = 'firstChar' | 'startCase';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 

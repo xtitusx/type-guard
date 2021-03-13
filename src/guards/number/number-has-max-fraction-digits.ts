@@ -26,7 +26,7 @@ export class NumberHasMaxFractionDigits extends NumberRuleChecker<{
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(
-                      `number is expected to have a max fraction digits of ${this.rule.max} but has: ${this.value}`
+                      `number is expected to have a max of ${this.rule.max} fraction digits but is: ${this.value}`
                   )
                   .build();
     }

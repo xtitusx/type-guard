@@ -1,4 +1,4 @@
-import { StringRule, EmailAddressDefinition, TrimmedSide } from './string/string-types';
+import { StringRule, CapitalizationStyle, EmailAddressDefinition, TrimmedSide } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
 import { StringNotEquals } from './string/string-not-equals';
@@ -12,6 +12,7 @@ import { StringHasMinLength } from './string/string-has-min-length';
 import { StringHasMaxLength } from './string/string-has-max-length';
 import { StringIsUppercase } from './string/string-is-uppercase';
 import { StringIsLowercase } from './string/string-is-lowercase';
+import { StringIsCapitalized } from './string/string-is-capitalized';
 import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
@@ -166,9 +167,29 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string follows capitalization style.
+     * @remarks Chainable method.
+     * @param style - 'firstChar' | 'startCase'
+     * ```ts
+     * style:
+     * - firstChar: Only the first character (alpha, numeric, special) is capitalized.
+     * - startCase: All words, including articles, prepositions, and conjunctions, start with a capitalized character (alpha, numeric, special).
+     *
+     * Rule: (TODO)
+     * - Starts with one capitalized character, or a number, or a special character.
+     * ```
+     * @example firstChar: "Foo", "F", "#foo", " ", "38 is my age"
+     * @example startCase: "The Quick Brown Fox Jumps Over The Lazy Dog."
+     */
+    public isCapitalized(style: CapitalizationStyle): this {
+        this.addRule({ type: 'isCapitalized', style });
+        return this;
+    }
+
+    /**
      * Checks if string does not contain any leading and trailing whitespace.
      * @remarks Chainable method.
-     * @param side 'both' | 'left' | 'right'
+     * @param side - 'both' | 'left' | 'right'
      */
     public isTrimmed(side: TrimmedSide): this {
         this.addRule({ type: 'isTrimmed', side });
@@ -217,14 +238,14 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if number is a decimal number.
+     * Checks if string is a decimal number.
      * @remarks Chainable method.
      * ```ts
      * Decimal separators:
      * - Decimal point.
      * - Decimal comma.
      * ```
-     * @param options Additional options.
+     * @param options - Additional options.
      * ```ts
      * Options:
      * - force: Force number to have a decimal separator. Default is false.
@@ -293,7 +314,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string is an Universally unique identifier v4.
-     * @remakrs Chainable method.
+     * @remarks Chainable method.
      * ```ts
      * Rule:
      * - Lowercase.
@@ -376,6 +397,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsUppercase(rule, value).exec();
             case 'isLowerCase':
                 return new StringIsLowercase(rule, value).exec();
+            case 'isCapitalized':
+                return new StringIsCapitalized(rule, value).exec();
             case 'isTrimmed':
                 return new StringIsTrimmed(rule, value).exec();
             case 'isAlphaNumeric':

@@ -330,125 +330,264 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isLowerCase().guard(undefined).isSuccess(), false);
         });
     });
+
+    describe('#isCapitalized()', () => {
+        describe("#isCapitalized('firstChar')", () => {
+            it("should return true when param is 'firstChar' and tested value is 'Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('Foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is 'Foo bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('Foo bar').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is 'F'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('F').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is ''", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is ' '", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard(' ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is ' foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard(' foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is '1990 foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('1990 foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'firstChar' and tested value is '#foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('#foo').isSuccess(), true);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is '#Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('#Foo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is 'Foo Bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('Foo Bar').isSuccess(), false);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is 'foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('foo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is 'fOo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard('fOo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is null", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard(null).isSuccess(), false);
+            });
+
+            it("should return false when param is 'firstChar' and tested value is undefined", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar').guard(undefined).isSuccess(), false);
+            });
+        });
+
+        describe("#isCapitalized('startCase')", () => {
+            it("should return true when param is 'startCase' and tested value is 'Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('Foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is 'Foo Bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('Foo Bar').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is 'F'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('F').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is ''", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is ' '", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard(' ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is '1990 Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('1990 Foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is '#foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('#foo').isSuccess(), true);
+            });
+
+            it("should return true when param is 'startCase' and tested value is ' Bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard(' Bar').isSuccess(), true);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('bar').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'baR'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('baR').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is ' bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard(' bar').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'Foo bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('Foo bar').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'f'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('f').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is '1990 foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('1990 foo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is '#Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('#Foo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('foo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is 'fOo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('fOo').isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is null", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard(null).isSuccess(), false);
+            });
+
+            it("should return false when param is 'startCase' and tested value is undefined", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard(undefined).isSuccess(), false);
+            });
+        });
+    });
+
     describe('#isTrimmed()', () => {
         describe("#isTrimmed('both')", () => {
-            it("should return true when tested value is 'foo'", () => {
+            it("should return true when param is 'both' and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard('foo').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'foo bar'", () => {
+            it("should return true when param is 'both' and tested value is 'foo bar'", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard('foo bar').isSuccess(), true);
             });
 
-            it("should return true when tested value is ''", () => {
+            it("should return true when param is 'both' and tested value is ''", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard('').isSuccess(), true);
             });
 
-            it("should return false when tested value is ' foo'", () => {
+            it("should return false when param is 'both' and tested value is ' foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard(' foo').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'foo '", () => {
+            it("should return false when param is 'both' and tested value is 'foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard('foo ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' foo '", () => {
+            it("should return false when param is 'both' and tested value is ' foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard(' foo ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'both' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard(' ').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'both' and tested value is null", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard(null).isSuccess(), false);
             });
 
-            it('should return false tested value is undefined', () => {
+            it("should return false when param is 'both' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isTrimmed('both').guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isTrimmed('left')", () => {
-            it("should return true when tested value is 'foo'", () => {
+            it("should return true when param is 'left' and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard('foo').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'foo bar'", () => {
+            it("should return true when param is 'left' and tested value is 'foo bar'", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard('foo bar').isSuccess(), true);
             });
 
-            it("should return true when tested value is ''", () => {
+            it("should return true when param is 'left' and tested value is ''", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard('').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'foo '", () => {
+            it("should return true when param is 'left' and tested value is 'foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard('foo ').isSuccess(), true);
             });
 
-            it("should return false when tested value is ' foo'", () => {
+            it("should return false when param is 'left' and tested value is ' foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard(' foo').isSuccess(), false);
             });
 
-            it("should return false when tested value is '  foo'", () => {
+            it("should return false when param is 'left' and tested value is '  foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard('    foo').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' foo '", () => {
+            it("should return false when param is 'left' and tested value is ' foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard(' foo ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'left' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard(' ').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'left' and tested value is null", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard(null).isSuccess(), false);
             });
 
-            it('should return false tested value is undefined', () => {
+            it("should return false when param is 'left' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isTrimmed('left').guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isTrimmed('right')", () => {
-            it("should return true when tested value is 'foo'", () => {
+            it("should return true when param is 'right' and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard('foo').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'foo bar'", () => {
+            it("should return true when param is 'right' and tested value is 'foo bar'", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard('foo bar').isSuccess(), true);
             });
 
-            it("should return true when tested value is ''", () => {
+            it("should return true when param is 'right' and tested value is ''", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard('').isSuccess(), true);
             });
 
-            it("should return true when tested value is ' foo'", () => {
+            it("should return true when param is 'right' and tested value is ' foo'", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard(' foo').isSuccess(), true);
             });
 
-            it("should return false when tested value is 'foo '", () => {
+            it("should return false when param is 'right' and tested value is 'foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard('foo ').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'foo   '", () => {
+            it("should return false when param is 'right' and tested value is 'foo   '", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard('foo    ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' foo '", () => {
+            it("should return false when param is 'right' and tested value is ' foo '", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard(' foo ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'right' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard(' ').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'right' and tested value is null", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard(null).isSuccess(), false);
             });
 
-            it('should return false tested value is undefined', () => {
+            it("should return false when param is 'right' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isTrimmed('right').guard(undefined).isSuccess(), false);
             });
         });
