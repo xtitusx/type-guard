@@ -41,7 +41,7 @@ export const QUICK_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a
 
 /**
  * RFC5322 email address pattern.
- * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax}
+ * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax }
  */
 
 /**
@@ -72,13 +72,13 @@ export const SIX_DIGITS_HEX_COLOR_PATTERN = '^#[0-9a-fA-F]{6}$';
 
 /**
  * Uuidv4 pattern.
- * @see {@link https://tools.ietf.org/html/rfc4122#section-3}
+ * @see {@link https://tools.ietf.org/html/rfc4122#section-3 }
  */
 export const UUIDV4_PATTERN = '^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$';
 
 /**
  * MAC address pattern.
- * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf}
+ * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf }
  */
 export const MAC_ADDRESS_PATTERN = '^((([0-9A-F]{2}-){5})|(([0-9a-f]{2}:){5}))[0-9a-f]{2}$';
 

@@ -133,7 +133,7 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if number is a prime number.
      * @remarks Chainable method.
-     * @see {@link https://en.wikipedia.org/wiki/Prime_number}
+     * @see {@link https://en.wikipedia.org/wiki/Prime_number }
      */
     public isPrime(): this {
         this.addRule({ type: 'isPrime' });
@@ -143,7 +143,7 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if number is a composite number.
      * @remarks Chainable method.
-     * @see {@link https://en.wikipedia.org/wiki/Composite_number}
+     * @see {@link https://en.wikipedia.org/wiki/Composite_number }
      */
     public isComposite(): this {
         this.addRule({ type: 'isComposite' });
@@ -154,8 +154,8 @@ export class NumberGuard extends Guard<NumberRule> {
      * Checks if number is a Fibonacci or a NegaFibonacci number.
      * @remarks Chainable method.
      * @param allowNegative - Allows both positive and negative integers to be represented. Default is false.
-     * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number}
-     * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding}
+     * @see {@link https://en.wikipedia.org/wiki/Fibonacci_number }
+     * @see {@link https://en.wikipedia.org/wiki/NegaFibonacci_coding }
      */
     public isFibonacci(allowNegative?: boolean): this {
         this.addRule({ type: 'isFibonacci', allowNegative });

@@ -272,8 +272,8 @@ export class StringGuard extends Guard<StringRule> {
      * - domain-specific addresses.
      * - the syntax using double quotes and square brackets.
      * ```
-     * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax} for syntax.
-     * @see {@link http://www.regular-expressions.info/email.html} for regex details.
+     * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax } for syntax.
+     * @see {@link http://www.regular-expressions.info/email.html } for regex details.
      * @param def  'quick' | 'rfc5322'. Default is 'quick'.
      * @example `John.Doe@example.com`
      */
@@ -320,7 +320,7 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Lowercase.
      * ```
-     * @see {@link https://tools.ietf.org/html/rfc4122#section-3} for syntax.
+     * @see {@link https://tools.ietf.org/html/rfc4122#section-3 } for syntax.
      * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
      */
     public isUuidv4(): this {
@@ -337,7 +337,7 @@ export class StringGuard extends Guard<StringRule> {
      * - IEEE802-types definition: dash separator, uppercase.
      * - IETF-yang-types definition: colon separator, lowercase.
      * ```
-     * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
+     * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf } for syntax.
      * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
      */
     public isMACAddress(): this {

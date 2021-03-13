@@ -12,7 +12,7 @@ export class ClassGuard extends Guard<ClassRule> {
      * Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.
      * @remarks Chainable method.
      * @param value
-     * @see {@link https://javascript.info/instanceof}
+     * @see {@link https://javascript.info/instanceof }
      */
     public isInstanceOf(value: Function): this {
         this.addRule({ type: 'isInstanceOf', value: value });

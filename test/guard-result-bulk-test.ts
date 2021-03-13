@@ -1,15 +1,15 @@
 import { assert } from 'chai';
 
-import { StringGuard } from '../src/guards/string-guard';
 import { GuardResultBulk } from '../src/core/guard-result-bulk';
 import { GuardResult } from '../src/core/guard-result';
+import { TypeGuard } from '../src/type-guard';
 
 describe('Guard-Result-Bulk', () => {
     describe('#combine()', () => {
         it('should return true', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([new StringGuard().equals('foo').guard('foo')])
+                    .add([TypeGuard.string().equals('foo').guard('foo')])
                     .combine()
                     .isSuccess(),
                 true
@@ -19,7 +19,10 @@ describe('Guard-Result-Bulk', () => {
         it('should return true', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([new StringGuard().equals('foo').guard('foo'), new StringGuard().hasMinLength(1).guard('foo')])
+                    .add([
+                        TypeGuard.string().equals('foo').guard('foo'),
+                        TypeGuard.string().hasMinLength(1).guard('foo'),
+                    ])
                     .combine()
                     .isSuccess(),
                 true
@@ -29,9 +32,9 @@ describe('Guard-Result-Bulk', () => {
         it('should return false from last bulked guard', () => {
             const guardResult = new GuardResultBulk()
                 .add([
-                    new StringGuard().equals('foo').guard('foo'),
-                    new StringGuard().hasMinLength(1).guard('foo'),
-                    new StringGuard().hasMinLength(4).guard('foo'),
+                    TypeGuard.string().equals('foo').guard('foo'),
+                    TypeGuard.string().hasMinLength(1).guard('foo'),
+                    TypeGuard.string().hasMinLength(4).guard('foo'),
                 ])
                 .combine();
 
@@ -42,10 +45,10 @@ describe('Guard-Result-Bulk', () => {
         it('should return false from second bulked guard', () => {
             const guardResult = new GuardResultBulk()
                 .add([
-                    new StringGuard().equals('foo').guard('foo'),
-                    new StringGuard().hasMinLength(4).guard('foo'),
-                    new StringGuard().hasMinLength(1).guard('foo'),
-                    new StringGuard().hasMaxLength(1).guard('foo'),
+                    TypeGuard.string().equals('foo').guard('foo'),
+                    TypeGuard.string().hasMinLength(4).guard('foo'),
+                    TypeGuard.string().hasMinLength(1).guard('foo'),
+                    TypeGuard.string().hasMaxLength(1).guard('foo'),
                 ])
                 .combine();
 
@@ -58,7 +61,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ true ]', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([new StringGuard().equals('foo').guard('foo')])
+                    .add([TypeGuard.string().equals('foo').guard('foo')])
                     .stack()[0]
                     .isSuccess(),
                 true
@@ -68,7 +71,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ false ]', () => {
             assert.equal(
                 (new GuardResultBulk()
-                    .add([new StringGuard().equals('foo').guard('bar', 'toto')])
+                    .add([TypeGuard.string().equals('foo').guard('bar', 'toto')])
                     .stack() as GuardResult[])[0].isSuccess(),
                 false
             );
@@ -76,7 +79,7 @@ describe('Guard-Result-Bulk', () => {
 
         it('should return [ false ]', () => {
             const guardResultBulk = new GuardResultBulk()
-                .add([new StringGuard().equals('foo').guard('foo'), new StringGuard().equals('foo').guard('bar')])
+                .add([TypeGuard.string().equals('foo').guard('foo'), TypeGuard.string().equals('foo').guard('bar')])
                 .stack();
 
             assert.equal(guardResultBulk[0].isSuccess(), false);
@@ -85,9 +88,9 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ false, false ]', () => {
             const guardResultBulk = new GuardResultBulk()
                 .add([
-                    new StringGuard().equals('foo').guard('foo'),
-                    new StringGuard().equals('foo').guard('bar'),
-                    new StringGuard().equals('foo').guard('bar'),
+                    TypeGuard.string().equals('foo').guard('foo'),
+                    TypeGuard.string().equals('foo').guard('bar'),
+                    TypeGuard.string().equals('foo').guard('bar'),
                 ])
                 .stack();
             assert.equal(guardResultBulk[0].isSuccess(), false);

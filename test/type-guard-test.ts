@@ -1,5 +1,6 @@
 import { assert } from 'chai';
-import { TypeGuard } from '../../src/type-guard';
+
+import { TypeGuard } from '../src/type-guard';
 
 describe('Type-Guard', () => {
     it('should return true when tested value is []', () => {
