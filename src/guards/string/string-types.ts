@@ -13,7 +13,7 @@ export type StringRule =
     | { type: 'hasMaxLength'; max: number }
     | { type: 'isUpperCase' }
     | { type: 'isLowerCase' }
-    | { type: 'isCapitalized'; style: CapitalizationStyle }
+    | { type: 'isCapitalized'; style: CapitalizationStyle; checkFirstCharIsLetter?: boolean }
     | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }

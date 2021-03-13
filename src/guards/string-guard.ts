@@ -170,20 +170,21 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string follows capitalization style.
      * @remarks Chainable method.
      * @param style - 'firstChar' | 'startCase'
+     * @param checkFirstCharIsLetter - Checks if first character is mandatorily a letter. Default is true.
      * ```ts
      * style:
-     * - firstChar: Only the first character (alpha, numeric, special) is capitalized.
-     * - startCase: All words, including articles, prepositions, and conjunctions, start with a capitalized character (alpha, numeric, special).
+     * - firstChar: Only the first character is capitalized.
+     * - startCase: All words, including articles, prepositions, and conjunctions, start with a capitalized character.
      *
-     * Rule: (TODO)
-     * - Starts with one capitalized character, or a number, or a special character.
+     * Rule:
      * - Word divider is whitespace.
      * ```
-     * @example firstChar: "Foo", "F", "#foo", " ", "38 is my age"
+     * @example ('firstChar', true): "Foo", "F", "Foo#", "", "Thirty eight is my age"
+     * @example ('firstChar', false): "Foo", "F", "#foo", " ", "", "38 is my age"
      * @example startCase: "The Quick Brown Fox Jumps Over The Lazy Dog."
      */
-    public isCapitalized(style: CapitalizationStyle): this {
-        this.addRule({ type: 'isCapitalized', style });
+    public isCapitalized(style: CapitalizationStyle, checkFirstCharIsLetter?: boolean): this {
+        this.addRule({ type: 'isCapitalized', style, checkFirstCharIsLetter });
         return this;
     }
 
