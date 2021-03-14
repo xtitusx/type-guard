@@ -170,7 +170,11 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string follows capitalization style.
      * @remarks Chainable method.
      * @param style - 'firstChar' | 'startCase'
-     * @param checkFirstCharIsLetter - Checks if first character is mandatorily a letter. Default is true.
+     * @param checkFirstCharIsLetter - Default is true. Checks if:
+     *
+     * - in 'firstChar' style, the first encountered (even whitespace) character is mandatorily a letter.
+     * - in 'startCase' style, the first character of each word encountered is mandatorily a letter.
+     *
      * ```ts
      * style:
      * - firstChar: Only the first character is capitalized.
@@ -179,9 +183,11 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Word divider is whitespace.
      * ```
-     * @example ('firstChar', true): "Foo", "F", "Foo#", "", "Thirty eight is my age"
-     * @example ('firstChar', false): "Foo", "F", "#foo", " ", "", "38 is my age"
-     * @example startCase: "The Quick Brown Fox Jumps Over The Lazy Dog."
+     * @example returns true with ('firstChar', true) params: "Foo", "F", "Foo#", "", "Thirty eight is my age"
+     * @example returns false with ('firstChar', true) params: " Foo"
+     * @example returns true with ('firstChar', false) params: "Foo", "F", "#foo", "     foo", "", "38 is my age"
+     * @example returns true with ('startCase', true) params: "The Quick Brown Fox Jumps Over The Lazy Dog.", " Foo, Bar."
+     * @example returns true with ('startCase', false) params: "The Quick Brown Fox Jumps Over 1 Lazy Dog."
      */
     public isCapitalized(style: CapitalizationStyle, checkFirstCharIsLetter?: boolean): this {
         this.addRule({ type: 'isCapitalized', style, checkFirstCharIsLetter });

@@ -333,129 +333,235 @@ describe('String-Guard', () => {
 
     describe('#isCapitalized()', () => {
         describe("#isCapitalized('firstChar', true)", () => {
-            it("should return true when param are 'firstChar' and true, and tested value is 'Foo'", () => {
+            it("should return true when params are 'firstChar' and true, and tested value is 'Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('Foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and true, and tested value is 'Foo bar'", () => {
+            it("should return true when params are 'firstChar' and true, and tested value is 'Foo bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('Foo bar').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and true, and tested value is 'F'", () => {
+            it("should return true when params are 'firstChar' and true, and tested value is 'F'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('F').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and true, and tested value is ''", () => {
+            it("should return true when params are 'firstChar' and true, and tested value is ''", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('').isSuccess(), true);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is ' '", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is ' '", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard(' ').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is ' foo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is ' Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('firstChar', true).guard(' Foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'firstChar' and true, and tested value is ' foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard(' foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is '1990 foo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is '1990 foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('1990 foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is '#foo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is '#foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('#foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is 'foo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is '#Foo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is '#Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('#Foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is 'Foo Bar'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is 'Foo Bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('Foo Bar').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is 'fOo'", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is 'fOo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard('fOo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is null", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is null", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard(null).isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and true, and tested value is undefined", () => {
+            it("should return false when params are 'firstChar' and true, and tested value is undefined", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', true).guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isCapitalized('firstChar', false)", () => {
-            it("should return true when param are 'firstChar' and false, and tested value is 'Foo'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is 'Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('Foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is 'Foo bar'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is 'Foo bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('Foo bar').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is 'F'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is 'F'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('F').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is ''", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is ''", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is ' '", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is ' '", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard(' ').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is ' foo'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is ' foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard(' foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is '1990 foo'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is '1990 foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('1990 foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'firstChar' and false, and tested value is '#foo'", () => {
+            it("should return true when params are 'firstChar' and false, and tested value is '#foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('#foo').isSuccess(), true);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is 'foo'", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is '#Foo'", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is '#Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('#Foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is 'Foo Bar'", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is 'Foo Bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('Foo Bar').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is 'fOo'", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is 'fOo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard('fOo').isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is null", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is null", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard(null).isSuccess(), false);
             });
 
-            it("should return false when param are 'firstChar' and false, and tested value is undefined", () => {
+            it("should return false when params are 'firstChar' and false, and tested value is undefined", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar', false).guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isCapitalized('firstChar')", () => {
-            it("should return false when param is 'firstChar', and tested value is '1990 foo'", () => {
+            it("should return false when param is 'firstChar' and tested value is '1990 foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('firstChar').guard('1990 foo').isSuccess(), false);
             });
         });
 
+        describe("#isCapitalized('startCase', true)", () => {
+            it("should return true when params are 'startCase' and true, and tested value is 'The Quick Brown Fox Jumps Over The Lazy Dog.'", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isCapitalized('startCase', true)
+                        .guard('The Quick Brown Fox Jumps Over The Lazy Dog.')
+                        .isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is 'Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('Foo').isSuccess(), true);
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is 'Foo Bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('Foo Bar').isSuccess(), true);
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is 'F'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('F').isSuccess(), true);
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is ''", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('').isSuccess(), true);
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is ' '", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(' ').isSuccess(), true);
+            });
+
+            it("should return true when params are 'startCase' and true, and tested value is ' Bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(' Bar').isSuccess(), true);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'The Quick Brown Fox Jumps Over The Lazy dog.'", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isCapitalized('startCase', true)
+                        .guard('The Quick Brown Fox Jumps Over The Lazy dog.')
+                        .isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is '1990 Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('1990 Foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is '#foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('#foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is ' #foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(' #foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('bar').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'baR'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('baR').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is ' bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(' bar').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'Foo bar'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('Foo bar').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'f'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('f').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is '1990 foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('1990 foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is '#Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('#Foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('foo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is 'fOo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard('fOo').isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is null", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(null).isSuccess(), false);
+            });
+
+            it("should return false when params are 'startCase' and true, and tested value is undefined", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase', true).guard(undefined).isSuccess(), false);
+            });
+        });
+
         describe("#isCapitalized('startCase', false)", () => {
-            it("should return true when param are 'startCase' and tested value is 'The Quick Brown Fox Jumps Over The Lazy Dog.'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is 'The Quick Brown Fox Jumps Over The Lazy Dog.'", () => {
                 assert.equal(
                     new StringGuard()
                         .isCapitalized('startCase', false)
@@ -465,84 +571,90 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is 'Foo'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is 'Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('Foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is 'Foo Bar'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is 'Foo Bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('Foo Bar').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is 'F'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is 'F'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('F').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is ''", () => {
+            it("should return true when params are 'startCase' and false, and tested value is ''", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is ' '", () => {
+            it("should return true when params are 'startCase' and false, and tested value is ' '", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(' ').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is '1990 Foo'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is '1990 Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('1990 Foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is '#foo'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is '#foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('#foo').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is ' Bar'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is ' Bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(' Bar').isSuccess(), true);
             });
 
-            it("should return true when param are 'startCase' and false, and tested value is ' #foo'", () => {
+            it("should return true when params are 'startCase' and false, and tested value is ' #foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(' #foo').isSuccess(), true);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'bar'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('bar').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'baR'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'baR'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('baR').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is ' bar'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is ' bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(' bar').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'Foo bar'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'Foo bar'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('Foo bar').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'f'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'f'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('f').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is '1990 foo'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is '1990 foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('1990 foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is '#Foo'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is '#Foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('#Foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'foo'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'foo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('foo').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is 'fOo'", () => {
+            it("should return false when params are 'startCase' and false, and tested value is 'fOo'", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard('fOo').isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is null", () => {
+            it("should return false when params are 'startCase' and false, and tested value is null", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(null).isSuccess(), false);
             });
 
-            it("should return false when param are 'startCase' and false, and tested value is undefined", () => {
+            it("should return false when params are 'startCase' and false, and tested value is undefined", () => {
                 assert.equal(new StringGuard().isCapitalized('startCase', false).guard(undefined).isSuccess(), false);
+            });
+        });
+
+        describe("#isCapitalized('startChar')", () => {
+            it("should return true when param is 'startCase' and tested value is '1990 Foo'", () => {
+                assert.equal(new StringGuard().isCapitalized('startCase').guard('1990 Foo').isSuccess(), false);
             });
         });
     });
@@ -939,11 +1051,11 @@ describe('String-Guard', () => {
         });
 
         describe('#isDecimal({ force: true, precision: <number> })', () => {
-            it("should return true when param are { force: true, precision: 1 } and tested value is '1.1'", () => {
+            it("should return true when paramd are { force: true, precision: 1 } and tested value is '1.1'", () => {
                 assert.equal(new StringGuard().isDecimal({ force: true, precision: 1 }).guard('1.1').isSuccess(), true);
             });
 
-            it("should return false when param are { force: true, precision: 0 } and tested value is '1'", () => {
+            it("should return false when paramd are { force: true, precision: 0 } and tested value is '1'", () => {
                 assert.equal(new StringGuard().isDecimal({ force: true, precision: 0 }).guard('1').isSuccess(), false);
             });
         });

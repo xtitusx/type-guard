@@ -37,30 +37,42 @@ export class StringIsCapitalized extends StringRuleChecker<{
                                   this.rule.checkFirstCharIsLetter === true
                                       ? 'only a letter'
                                       : 'alphanumeric or special'
-                              }, capitalization style but is not: ${this.value}`
+                              } allowed, capitalization style but is not: ${this.value}`
                           )
                           .build();
 
             case 'startCase':
-                if (this.rule.checkFirstCharIsLetter === false) {
-                    return this.checkStartCase()
-                        ? new GuardResult.Builder().withSuccess(true).build()
-                        : new GuardResult.Builder()
-                              .withSuccess(false)
-                              .withMessage(
-                                  `string is expected to follow start case capitalization style but is not: ${this.value}`
-                              )
-                              .build();
-                }
+                return this.checkStartCase()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to follow start case, ${
+                                  this.rule.checkFirstCharIsLetter === true
+                                      ? 'only a letter'
+                                      : 'alphanumeric or special'
+                              } allowed, capitalization style but is not: ${this.value}`
+                          )
+                          .build();
         }
     }
 
+    /**
+     * Checks if first encountered character is capitalized, even if it's not letter.
+     * @param value
+     * @returns
+     */
     private checkFirstChar(value: string): boolean {
         return value.length === 0 || value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() === value
             ? true
             : false;
     }
 
+    /**
+     * Checks if first encountered character is mandatorily a capitalized letter.
+     * @param value
+     * @returns
+     */
     private checkFirstCharIsLetter(value: string): boolean {
         return (
             this.checkFirstChar(value) &&
@@ -68,7 +80,20 @@ export class StringIsCapitalized extends StringRuleChecker<{
         );
     }
 
+    /**
+     * Checks if string follows start case capitalization, in a strict or permissive style.
+     * @param value
+     * @returns
+     */
     private checkStartCase(): boolean {
-        return this.value.split(/\s+/).find((word) => this.checkFirstChar(word) === false) ? false : true;
+        return this.value
+            .split(/\s+/)
+            .find((word) =>
+                this.rule.checkFirstCharIsLetter === true
+                    ? this.checkFirstCharIsLetter(word) === false
+                    : this.checkFirstChar(word) === false
+            )
+            ? false
+            : true;
     }
 }
