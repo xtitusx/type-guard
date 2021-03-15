@@ -215,7 +215,7 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      *
-     * @param - Most popular programming naming conventions.
+     * @param convention - Most popular programming naming conventions.
      */
     public isProgrammingCase(convention: ProgrammingConvention): this {
         this.addRule({ type: 'isProgrammingCase', convention });

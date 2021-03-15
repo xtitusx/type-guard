@@ -40,17 +40,13 @@ export const DECIMAL_PATTERN = '^[-]?\\d+(([.,]{1}\\d+)|(\\d*))$';
 export const QUICK_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$';
 
 /**
- * RFC5322 email address pattern.
- * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax}
- */
-
-/**
- * Email address pattern matching 99.9% of email addresses.
+ * RFC5322 email address pattern matching 99.9% of email addresses.
  *
  * Lightened RFC 5322 implementation omitting :
  * - IP addresses.
  * - domain-specific addresses.
  * - the syntax using double quotes and square brackets.
+ * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax}
  */
 // prettier-ignore
 export const RFC5322_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+(?:[.][a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$';
