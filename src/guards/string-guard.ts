@@ -187,11 +187,12 @@ export class StringGuard extends Guard<StringRule> {
      * - in 'firstChar' style, the first encountered character can be alphanumeric or special (even whitespace).
      * - in 'startCase' style, the first character of each encountered word can be can be alphanumeric or special.
      * ```
-     * @returns true with ('firstChar', true) params for values: "Foo", "F", "Foo#", "", "Thirty eight is my age"
-     * @returns false with ('firstChar', true) params for value: " Foo"
-     * @returns true with ('firstChar', false) params for values: "Foo", "F", "#foo", "     foo", "", "38 is my age"
-     * @returns true with ('startCase', true) params for values: "The Quick Brown Fox Jumps Over The Lazy Dog.", " Foo, Bar."
-     * @returns true with ('startCase', false) params for value: "The Quick Brown Fox Jumps Over 1 Lazy Dog."
+     * @returns
+     * - true with ('firstChar', true) params for values: "Foo", "F", "Foo#", "", "Thirty eight is my age"
+     * - false with ('firstChar', true) params for value: " Foo"
+     * - true with ('firstChar', false) params for values: "Foo", "F", "#foo", "     foo", "", "38 is my age"
+     * - true with ('startCase', true) params for values: "The Quick Brown Fox Jumps Over The Lazy Dog.", " Foo, Bar."
+     * - true with ('startCase', false) params for value: "The Quick Brown Fox Jumps Over 1 Lazy Dog."
      */
     public isCapitalized(style: CapitalizationStyle, checkFirstCharIsLetter?: boolean): this {
         this.addRule({ type: 'isCapitalized', style, checkFirstCharIsLetter });
