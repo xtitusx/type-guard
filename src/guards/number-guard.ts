@@ -95,7 +95,7 @@ export class NumberGuard extends Guard<NumberRule> {
     /**
      * Checks if the fractional part of number is equal or smaller than the specified number.
      * @remarks Chainable method.
-     * @param max Max number of digits to the right of the decimal point in the number.
+     * @param max - Max number of digits to the right of the decimal point in the number.
      */
     public hasMaxFractionDigits(max: number): this {
         this.addRule({ type: 'hasMaxFractionDigits', max });

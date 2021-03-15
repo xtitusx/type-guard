@@ -191,7 +191,7 @@ export class StringGuard extends Guard<StringRule> {
      * @returns
      * ```ts
      * - true with ('firstChar', true) params for values: "Foo", "F", "Foo#", "", "Thirty eight is my age"
-     * - false with ('firstChar', true) params for value: " Foo", "#foo"
+     * - false with ('firstChar', true) params for values: " Foo", "#foo"
      * - true with ('firstChar', false) params for values: "Foo", "F", "#foo", "     foo", "", "38 is my age"
      * - false with ('firstChar', false) params for values: "foo", "f", "#Foo", "     Foo", "38 is my Age"
      *
