@@ -14,6 +14,7 @@ export type StringRule =
     | { type: 'isUpperCase' }
     | { type: 'isLowerCase' }
     | { type: 'isCapitalized'; style: CapitalizationStyle; checkFirstCharIsLetter?: boolean }
+    | { type: 'isProgrammingCase'; convention: ProgrammingConvention }
     | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
@@ -28,6 +29,8 @@ export type StringRule =
     | { type: 'isIPAddress'; version?: 4 | 6 };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
+
+export type ProgrammingConvention = 'camelCase' | 'snake_case' | 'kebab-case' | 'PascalCase';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 
