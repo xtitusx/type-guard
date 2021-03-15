@@ -170,11 +170,6 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string follows capitalization style.
      * @remarks Chainable method.
      * @param style - 'firstChar' | 'startCase'
-     * @param checkFirstCharIsLetter - Default is true. Checks if:
-     *
-     * - in 'firstChar' style, the first encountered (even whitespace) character is mandatorily a letter.
-     * - in 'startCase' style, the first character of each word encountered is mandatorily a letter.
-     *
      * ```ts
      * style:
      * - firstChar: Only the first character is capitalized.
@@ -183,11 +178,20 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Word divider is whitespace.
      * ```
-     * @example returns true with ('firstChar', true) params: "Foo", "F", "Foo#", "", "Thirty eight is my age"
-     * @example returns false with ('firstChar', true) params: " Foo"
-     * @example returns true with ('firstChar', false) params: "Foo", "F", "#foo", "     foo", "", "38 is my age"
-     * @example returns true with ('startCase', true) params: "The Quick Brown Fox Jumps Over The Lazy Dog.", " Foo, Bar."
-     * @example returns true with ('startCase', false) params: "The Quick Brown Fox Jumps Over 1 Lazy Dog."
+     * @param checkFirstCharIsLetter - Strict or permissive style. Default is true (strict).
+     * ```ts
+     * true:
+     * - in 'firstChar' style, the first encountered character is mandatorily a letter.
+     * - in 'startCase' style, the first character of each encountered word is mandatorily a letter.
+     * false:
+     * - in 'firstChar' style, the first encountered character can be alphanumeric or special (even whitespace).
+     * - in 'startCase' style, the first character of each encountered word can be can be alphanumeric or special.
+     * ```
+     * @returns true with ('firstChar', true) params for values: "Foo", "F", "Foo#", "", "Thirty eight is my age"
+     * @returns false with ('firstChar', true) params for value: " Foo"
+     * @returns true with ('firstChar', false) params for values: "Foo", "F", "#foo", "     foo", "", "38 is my age"
+     * @returns true with ('startCase', true) params for values: "The Quick Brown Fox Jumps Over The Lazy Dog.", " Foo, Bar."
+     * @returns true with ('startCase', false) params for value: "The Quick Brown Fox Jumps Over 1 Lazy Dog."
      */
     public isCapitalized(style: CapitalizationStyle, checkFirstCharIsLetter?: boolean): this {
         this.addRule({ type: 'isCapitalized', style, checkFirstCharIsLetter });
@@ -248,16 +252,16 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is a decimal number.
      * @remarks Chainable method.
-     * ```ts
-     * Decimal separators:
-     * - Decimal point.
-     * - Decimal comma.
-     * ```
      * @param options - Additional options.
      * ```ts
-     * Options:
+     * options:
      * - force: Force number to have a decimal separator. Default is false.
      * - precision: Max number of digits to the right of the decimal point in the number.
+     *
+     * Rules:
+     * Decimal separators supported:
+     * - Point.
+     * - Comma.
      * ```
      */
     public isDecimal(options?: IIsDecimalOptions): this {
@@ -268,6 +272,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an email address number.
      * @remarks Chainable method.
+     * @param def - 'quick' | 'rfc5322'. Default is 'quick'.
      * ```ts
      * def:
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
@@ -281,7 +286,7 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax } for syntax.
      * @see {@link http://www.regular-expressions.info/email.html } for regex details.
-     * @param def  'quick' | 'rfc5322'. Default is 'quick'.
+     
      * @example `John.Doe@example.com`
      */
     public isEmailAddress(def?: EmailAddressDefinition): this {
