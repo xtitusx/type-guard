@@ -3,8 +3,8 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { IPV4_PATTERN, IPV6_PATTERN } from '../../utils/pattern-constants';
 
-export class StringIsIPAddress extends StringRuleChecker<{ type: 'isIPAddress'; version?: 4 | 6 }> {
-    constructor(rule: { type: 'isIPAddress'; version?: 4 | 6 }, value: string) {
+export class StringIsIpAddress extends StringRuleChecker<{ type: 'isIpAddress'; version?: 4 | 6 }> {
+    constructor(rule: { type: 'isIpAddress'; version?: 4 | 6 }, value: string) {
         super(rule, value);
     }
 

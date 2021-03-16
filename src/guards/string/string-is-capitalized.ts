@@ -37,7 +37,7 @@ export class StringIsCapitalized extends StringRuleChecker<{
                                   this.rule.checkFirstCharIsLetter === true
                                       ? 'only a letter'
                                       : 'alphanumeric or special'
-                              } allowed, capitalization style but is not: ${this.value}`
+                              } allowed, capitalization style but does not: ${this.value}`
                           )
                           .build();
 
@@ -51,7 +51,7 @@ export class StringIsCapitalized extends StringRuleChecker<{
                                   this.rule.checkFirstCharIsLetter === true
                                       ? 'only a letter'
                                       : 'alphanumeric or special'
-                              } allowed, capitalization style but is not: ${this.value}`
+                              } allowed, capitalization style but does not: ${this.value}`
                           )
                           .build();
         }

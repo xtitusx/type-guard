@@ -1,4 +1,15 @@
 /**
+ * camelCase namin convention pattern
+ * - The first letter is not capitalized.
+ * - One or more letters in that word are also capitalised.
+ * - The word does not end on a capitalized letter: camelCasE
+ * - No two capitalised letters shall follow directly each other: camelCAse
+ * - No number in that word at any place: camelCase1more
+ * - No dot(.), under_score or dash (-) within the word, only letters: camel_Case
+ */
+export const CAMEL_CASE_PATTERN = '^([a-z]+[A-Z]{1})+[a-z]+$';
+
+/**
  * Leading whitespace pattern.
  */
 export const LEADING_WHITESPACE_PATTERN = '^\\s';
@@ -86,12 +97,12 @@ export const IPV4_PATTERN =
 
 /**
  * IP address v6 pattern matching:
- *  - IPv6 addresses.
- *  - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
- *  - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
- *  - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
- *  - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
- *  - IPv4-translated addresses (section 2.1 of rfc2765).
+ * - IPv6 addresses.
+ * - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
+ * - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
+ * - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
+ * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
+ * - IPv4-translated addresses (section 2.1 of rfc2765).
  */
 export const IPV6_PATTERN =
     '^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$';

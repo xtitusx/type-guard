@@ -3,8 +3,8 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GuardResult } from '../../core/guard-result';
 import { MAC_ADDRESS_PATTERN } from '../../utils/pattern-constants';
 
-export class StringIsMACAddress extends StringRuleChecker<{ type: 'isMACAddress' }> {
-    constructor(rule: { type: 'isMACAddress' }, value: string) {
+export class StringIsMacAddress extends StringRuleChecker<{ type: 'isMacAddress' }> {
+    constructor(rule: { type: 'isMacAddress' }, value: string) {
         super(rule, value);
     }
 

@@ -2,6 +2,7 @@ import { StringRuleChecker } from './string-rule-checker';
 import { ProgrammingConvention } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
+import { CAMEL_CASE_PATTERN } from '../../utils/pattern-constants';
 
 export class StringIsProgrammingCase extends StringRuleChecker<{
     type: 'isProgrammingCase';
@@ -17,8 +18,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
     public exec(): GuardResult {
         switch (this.rule.convention) {
             case 'camelCase':
-                // TODO
-                return this.value.trim() === this.value
+                return this.value.match(new RegExp(CAMEL_CASE_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)

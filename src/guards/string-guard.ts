@@ -30,8 +30,8 @@ import { StringIsEmailAddress } from './string/string-is-email-address';
 import { StringIsObjectId } from './string/string-is-object-id';
 import { StringIsHexColor } from './string/string-is-hex-color';
 import { StringIsUuidv4 } from './string/string-is-uuid-v4';
-import { StringIsMACAddress } from './string/string-is-mac-address';
-import { StringIsIPAddress } from './string/string-is-ip-address';
+import { StringIsMacAddress } from './string/string-is-mac-address';
+import { StringIsIpAddress } from './string/string-is-ip-address';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -174,7 +174,7 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string follows capitalization style.
+     * Checks if string follows a capitalization style.
      * @remarks Chainable method.
      * @param style - 'firstChar' | 'startCase'
      * ```ts
@@ -214,8 +214,10 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     *
-     * @param convention - Most popular programming naming conventions.
+     * Checks if string follows one of the most popular programming naming convention.
+     * @param convention - 'camelCase' | 'PascalCase' | 'snake_case' | 'kebab-case'
+     * @see {@link https://capitalizemytitle.com/camel-case/} for camelCase, PascalCase, snake_case conversion examples.
+     * @see {@link https://wprock.fr/blog/conventions-nommage-programmation/#conventions-le-camel-case} for french explanations.
      */
     public isProgrammingCase(convention: ProgrammingConvention): this {
         this.addRule({ type: 'isProgrammingCase', convention });
@@ -376,8 +378,8 @@ export class StringGuard extends Guard<StringRule> {
      * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
      * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
      */
-    public isMACAddress(): this {
-        this.addRule({ type: 'isMACAddress' });
+    public isMacAddress(): this {
+        this.addRule({ type: 'isMacAddress' });
         return this;
     }
 
@@ -388,18 +390,18 @@ export class StringGuard extends Guard<StringRule> {
      * Rules:
      *
      * IP address v6 pattern matching:
-     *  - IPv6 addresses.
-     *  - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
-     *  - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
-     *  - IPv4-Embedded IPv6 address (section 2 of rfc6052).
-     *  - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
-     *  - IPv4-translated addresses (section 2.1 of rfc2765).
+     * - IPv6 addresses.
+     * - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
+     * - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
+     * - IPv4-Embedded IPv6 address (section 2 of rfc6052).
+     * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
+     * - IPv4-translated addresses (section 2.1 of rfc2765).
      * ```
      * @param version
      * @example 192.168.0.1, fde5:a773:d01a:0b6d
      */
-    public isIPAddress(version?: 4 | 6): this {
-        this.addRule({ type: 'isIPAddress', version: version });
+    public isIpAddress(version?: 4 | 6): this {
+        this.addRule({ type: 'isIpAddress', version: version });
         return this;
     }
 
@@ -458,10 +460,10 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsHexColor(rule, value).exec();
             case 'isUuidv4':
                 return new StringIsUuidv4(rule, value).exec();
-            case 'isMACAddress':
-                return new StringIsMACAddress(rule, value).exec();
-            case 'isIPAddress':
-                return new StringIsIPAddress(rule, value).exec();
+            case 'isMacAddress':
+                return new StringIsMacAddress(rule, value).exec();
+            case 'isIpAddress':
+                return new StringIsIpAddress(rule, value).exec();
         }
     }
 

@@ -25,12 +25,12 @@ export type StringRule =
     | { type: 'isObjectId' }
     | { type: 'isHexColor'; digits?: 3 | 6 }
     | { type: 'isUuidv4' }
-    | { type: 'isMACAddress' }
-    | { type: 'isIPAddress'; version?: 4 | 6 };
+    | { type: 'isMacAddress' }
+    | { type: 'isIpAddress'; version?: 4 | 6 };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
 
-export type ProgrammingConvention = 'camelCase' | 'snake_case' | 'kebab-case' | 'PascalCase';
+export type ProgrammingConvention = 'camelCase' | 'PascalCase' | 'snake_case' | 'kebab-case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 
