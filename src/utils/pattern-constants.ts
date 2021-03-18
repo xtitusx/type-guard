@@ -1,13 +1,22 @@
 /**
- * camelCase namin convention pattern
+ * camelCase naming convention pattern:
  * - The first letter is not capitalized.
- * - One or more letters in that word are also capitalised.
  * - The word does not end on a capitalized letter: camelCasE
  * - No two capitalised letters shall follow directly each other: camelCAse
  * - No number in that word at any place: camelCase1more
  * - No dot(.), under_score or dash (-) within the word, only letters: camel_Case
  */
-export const CAMEL_CASE_PATTERN = '^([a-z]+[A-Z]{1})+[a-z]+$';
+export const CAMEL_CASE_PATTERN = '^([a-z]+[A-Z]?)+[a-z]+$';
+
+/**
+ * PascalCase naming convention pattern:
+ * - The first letter is capitalized.
+ * - The word does not end on a capitalized letter: PascalCasE
+ * - No two capitalised letters shall follow directly each other: PascalCAse
+ * - No number in that word at any place: PascalCase1more
+ * - No dot(.), under_score or dash (-) within the word, only letters: Pascal_Case
+ */
+export const PASCAL_CASE_PATTERN = '^([A-Z][a-z]+)+$';
 
 /**
  * Leading whitespace pattern.

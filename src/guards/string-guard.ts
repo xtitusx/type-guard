@@ -217,6 +217,7 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string follows one of the most popular programming naming convention.
      * @param convention - 'camelCase' | 'PascalCase' | 'snake_case' | 'kebab-case'
      * @see {@link https://capitalizemytitle.com/camel-case/} for camelCase, PascalCase, snake_case conversion examples.
+     * @see {@link https://medium.com/@bendcosta/famous-camelcase-vs-kebab-case-javascript-6415cac2052b} for explanations.
      * @see {@link https://wprock.fr/blog/conventions-nommage-programmation/#conventions-le-camel-case} for french explanations.
      */
     public isProgrammingCase(convention: ProgrammingConvention): this {

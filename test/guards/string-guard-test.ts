@@ -669,8 +669,12 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isProgrammingCase('camelCase').guard('caCamelCase').isSuccess(), true);
             });
 
-            it("should return true when param is 'camelCase' and tested value is 'aBc'", () => {
-                assert.equal(new StringGuard().isProgrammingCase('camelCase').guard('aBc').isSuccess(), true);
+            it("should return true when param is 'camelCase' and tested value is 'cAm'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('camelCase').guard('cAm').isSuccess(), true);
+            });
+
+            it("should return true when param is 'camelCase' and tested value is 'ca'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('camelCase').guard('ca').isSuccess(), true);
             });
 
             it("should return false when param is 'camelCase' and tested value is 'camelCasE'", () => {
@@ -694,6 +698,43 @@ describe('String-Guard', () => {
 
             it("should return false when param is 'camelCase' and tested value is 'camel.Case'", () => {
                 assert.equal(new StringGuard().isProgrammingCase('camelCase').guard('camel.Case').isSuccess(), false);
+            });
+        });
+
+        describe("#isProgrammingCase('PascalCase')", () => {
+            it("should return true when param is 'PascalCase' and tested value is 'PascalCase'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('PascalCase').isSuccess(), true);
+            });
+
+            it("should return true when param is 'PascalCase' and tested value is 'PaPascalCase'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('PaPascalCase').isSuccess(), true);
+            });
+
+            it("should return true when param is 'PascalCase' and tested value is 'Pa'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('Pa').isSuccess(), true);
+            });
+
+            it("should return false when param is 'PascalCase' and tested value is 'PascalCasE'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('PascalCasE').isSuccess(), false);
+            });
+
+            it("should return false when param is 'PascalCase' and tested value is 'PascalCAsE'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('PascalCAsE').isSuccess(), false);
+            });
+
+            it("should return false when param is 'PascalCase' and tested value is 'PascalCase1more'", () => {
+                assert.equal(
+                    new StringGuard().isProgrammingCase('PascalCase').guard('PascalCase1more').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'PascalCase' and tested value is 'Pascal_Case'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('Pascal_Case').isSuccess(), false);
+            });
+
+            it("should return false when param is 'PascalCase' and tested value is 'Pascal.Case'", () => {
+                assert.equal(new StringGuard().isProgrammingCase('PascalCase').guard('Pascal.Case').isSuccess(), false);
             });
         });
     });
