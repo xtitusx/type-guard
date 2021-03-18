@@ -16,7 +16,7 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha' }> {
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to only contain alpha characters but is not: ${this.value}`)
+                  .withMessage(`string is expected to only contain alpha characters but does not: ${this.value}`)
                   .build();
     }
 }

@@ -16,7 +16,7 @@ export class StringIsNumeric extends StringRuleChecker<{ type: 'isNumeric' }> {
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to only contain numeric characters but is not: ${this.value}`)
+                  .withMessage(`string is expected to only contain numeric characters but does not: ${this.value}`)
                   .build();
     }
 }

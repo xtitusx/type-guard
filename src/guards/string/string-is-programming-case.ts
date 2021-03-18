@@ -2,7 +2,7 @@ import { StringRuleChecker } from './string-rule-checker';
 import { ProgrammingConvention } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
-import { CAMEL_CASE_PATTERN, PASCAL_CASE_PATTERN } from '../../utils/pattern-constants';
+import { CAMEL_CASE_PATTERN, PASCAL_CASE_PATTERN, QUIET_SNAKE_CASE_PATTERN } from '../../utils/pattern-constants';
 
 export class StringIsProgrammingCase extends StringRuleChecker<{
     type: 'isProgrammingCase';
@@ -17,6 +17,15 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
      */
     public exec(): GuardResult {
         switch (this.rule.convention) {
+            case 'PascalCase':
+                return this.value.match(new RegExp(PASCAL_CASE_PATTERN)) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to follow PascalCase naming convention but does not: ${this.value}`
+                          )
+                          .build();
             case 'camelCase':
                 return this.value.match(new RegExp(CAMEL_CASE_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -26,13 +35,13 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                               `string is expected to follow camelCase naming convention but does not: ${this.value}`
                           )
                           .build();
-            case 'PascalCase':
-                return this.value.match(new RegExp(PASCAL_CASE_PATTERN)) !== null
+            case 'quiet_snake_case':
+                return this.value.match(new RegExp(QUIET_SNAKE_CASE_PATTERN)) !== null
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to follow PascalCase naming convention but does not: ${this.value}`
+                              `string is expected to follow quiet_snake_case naming convention but does not: ${this.value}`
                           )
                           .build();
         }

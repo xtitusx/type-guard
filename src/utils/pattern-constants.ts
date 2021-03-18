@@ -1,22 +1,35 @@
 /**
- * camelCase naming convention pattern:
- * - The first letter is not capitalized.
- * - The word does not end on a capitalized letter: camelCasE
- * - No two capitalised letters shall follow directly each other: camelCAse
- * - No number in that word at any place: camelCase1more
- * - No dot(.), under_score or dash (-) within the word, only letters: camel_Case
- */
-export const CAMEL_CASE_PATTERN = '^([a-z]+[A-Z]?)+[a-z]+$';
-
-/**
  * PascalCase naming convention pattern:
+ * - At least one leading letter.
  * - The first letter is capitalized.
  * - The word does not end on a capitalized letter: PascalCasE
  * - No two capitalised letters shall follow directly each other: PascalCAse
  * - No number in that word at any place: PascalCase1more
  * - No dot(.), under_score or dash (-) within the word, only letters: Pascal_Case
  */
-export const PASCAL_CASE_PATTERN = '^([A-Z][a-z]+)+$';
+export const PASCAL_CASE_PATTERN = '^(([A-Z])|(([A-Z][a-z]+)+))$';
+
+/**
+ * camelCase naming convention pattern:
+ * - At least one leading letter.
+ * - The first letter is not capitalized.
+ * - The word does not end on a capitalized letter: camelCasE
+ * - No two capitalised letters shall follow directly each other: camelCAse
+ * - No number in that word at any place: camelCase1more
+ * - No dot(.), under_score or dash (-) within the word, only letters: camel_Case
+ */
+export const CAMEL_CASE_PATTERN = '^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$';
+
+/**
+ * quiet_snake_case naming convention pattern:
+ * - At least one leading letter or number.
+ * - All letters are lowercase.
+ * - Numbers allowed.
+ * - All spaces between words are filled with underscores.
+ * - Remove all punctuation.
+ * - A "word" should never consist of a single letter unless it is the last "word".
+ */
+export const QUIET_SNAKE_CASE_PATTERN = '^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$';
 
 /**
  * Leading whitespace pattern.
@@ -29,22 +42,29 @@ export const LEADING_WHITESPACE_PATTERN = '^\\s';
 export const TRAILING_WHITESPACE_PATTERN = '\\s$';
 
 /**
- * AlphaNumeric pattern.
+ * AlphaNumeric pattern:
+ * - Only alpha characters and/or numbers.
+ * - Not case sensitive.
  */
 export const ALPHA_NUMERIC_PATTERN = '^[0-9a-zA-Z]+$';
 
 /**
- * Numeric pattern.
+ * Numeric pattern:
+ * - Only numbers.
  */
 export const NUMERIC_PATTERN = '^[0-9]+$';
 
 /**
- * Alpha pattern.
+ * Alpha pattern:
+ * - Only alpha characters.
+ * - Not case sensitive.
  */
 export const ALPHA_PATTERN = '^[a-zA-Z]+$';
 
 /**
- * Hex pattern.
+ * Hex pattern:
+ * - Only hexadecimal numbers.
+ * - Not case sensitive.
  */
 export const HEX_PATTERN = '^[a-fA-F\\d]+$';
 
@@ -62,7 +82,7 @@ export const QUICK_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a
 /**
  * RFC5322 email address pattern matching 99.9% of email addresses.
  *
- * Lightened RFC 5322 implementation omitting :
+ * Lightened RFC 5322 implementation omitting:
  * - IP addresses.
  * - domain-specific addresses.
  * - the syntax using double quotes and square brackets.
@@ -72,22 +92,27 @@ export const QUICK_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a
 export const RFC5322_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+(?:[.][a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$';
 
 /**
- * ObjectId pattern.
+ * ObjectId pattern:
+ * - 24 hex digits.
+ * - Not case sensitive.
  */
 export const OBJECTID_PATTERN = '^[a-fA-F\\d]{24}$';
 
 /**
- * 3 digits hex color pattern.
+ * 3 digits hex color pattern:
+ * - Not case sensitive.
  */
 export const THREE_DIGITS_HEX_COLOR_PATTERN = '^#[0-9a-fA-F]{3}$';
 
 /**
- * 6 digits hex color pattern.
+ * 6 digits hex color pattern:
+ * - Not case sensitive.
  */
 export const SIX_DIGITS_HEX_COLOR_PATTERN = '^#[0-9a-fA-F]{6}$';
 
 /**
- * Uuidv4 pattern.
+ * Uuidv4 pattern:
+ * - Lowercase.
  * @see {@link https://tools.ietf.org/html/rfc4122#section-3}
  */
 export const UUIDV4_PATTERN = '^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$';

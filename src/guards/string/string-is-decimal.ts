@@ -38,7 +38,7 @@ export class StringIsDecimal extends StringRuleChecker<{ type: 'isDecimal'; opti
                     return new GuardResult.Builder()
                         .withSuccess(false)
                         .withMessage(
-                            `string is expected to be a decimal number with a fractional part max lenght of ${this.rule.options.precision} but has length of: ${precision}`
+                            `string is expected to be a decimal number with a fractional part max lenght of ${this.rule.options.precision} but has a fractional part length of: ${precision}`
                         )
                         .build();
                 }

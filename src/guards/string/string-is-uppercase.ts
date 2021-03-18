@@ -15,7 +15,7 @@ export class StringIsUppercase extends StringRuleChecker<{ type: 'isUpperCase' }
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to not have lowercase alpha characters but has: ${this.value}`)
+                  .withMessage(`string is expected to not have any lowercase alpha characters but has: ${this.value}`)
                   .build();
     }
 }

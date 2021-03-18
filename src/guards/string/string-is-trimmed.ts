@@ -21,7 +21,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to not contain any leading and trailing whitespace but has: ${this.value}`
+                              `string is expected to not contain any leading and trailing whitespace but does: ${this.value}`
                           )
                           .build();
             case 'left':
@@ -30,7 +30,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to not contain any leading whitespace but has: ${this.value}`
+                              `string is expected to not contain any leading whitespace but does: ${this.value}`
                           )
                           .build();
             case 'right':
@@ -39,7 +39,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to not contain any trailing whitespace but has: ${this.value}`
+                              `string is expected to not contain any trailing whitespace but does: ${this.value}`
                           )
                           .build();
         }

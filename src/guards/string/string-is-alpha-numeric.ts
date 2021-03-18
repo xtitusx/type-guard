@@ -16,7 +16,7 @@ export class StringIsAlphaNumeric extends StringRuleChecker<{ type: 'isAlphaNume
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to only contain alphanumeric characters but is not: ${this.value}`)
+                  .withMessage(`string is expected to only contain alphanumeric characters but does not: ${this.value}`)
                   .build();
     }
 }

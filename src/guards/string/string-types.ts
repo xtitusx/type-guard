@@ -30,7 +30,12 @@ export type StringRule =
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
 
-export type ProgrammingConvention = 'camelCase' | 'PascalCase' | 'snake_case' | 'kebab-case';
+export type ProgrammingConvention =
+    | 'PascalCase'
+    | 'camelCase'
+    | 'quiet_snake_case'
+    | 'screaming_snake_case'
+    | 'kebab-case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 
