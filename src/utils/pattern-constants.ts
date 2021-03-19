@@ -33,7 +33,7 @@ export const CAMEL_CASE_PATTERN = '((^$)|(^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$))'
 export const QUIET_SNAKE_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$))';
 
 /**
- * quiet_snake_case naming convention pattern:
+ * SCREAMING_SNAKE_CASE naming convention pattern:
  * - At least one leading letter or number.
  * - All letters are uppercase.
  * - Numbers allowed.
@@ -43,6 +43,18 @@ export const QUIET_SNAKE_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])
  * - Empty string allowed.
  */
 export const SCREAMING_SNAKE_CASE_PATTERN = '((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}[_])+[A-Z0-9]+))$))';
+
+/**
+ * kebab-case naming convention pattern:
+ * - At least one leading letter or number.
+ * - All letters are lowercase.
+ * - Numbers allowed.
+ * - All spaces between words are filled with hyphens.
+ * - Remove all punctuation.
+ * - A "word" should never consist of a single letter unless it is the last "word".
+ * - Empty string allowed.
+ */
+export const KEBAB_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[-])+[a-z0-9]+))$))';
 
 /**
  * Leading whitespace pattern.
