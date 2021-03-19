@@ -158,6 +158,10 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string does not contain any lowercase alpha characters.
      * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Empty string allowed.
+     * ```
      */
     public isUpperCase(): this {
         this.addRule({ type: 'isUpperCase' });
@@ -167,6 +171,10 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string does not contain any uppercase alpha characters.
      * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Empty string allowed.
+     * ```
      */
     public isLowerCase(): this {
         this.addRule({ type: 'isLowerCase' });
@@ -182,7 +190,8 @@ export class StringGuard extends Guard<StringRule> {
      * - firstChar: Only the first character is capitalized.
      * - startCase: All words, including articles, prepositions, and conjunctions, start with a capitalized character.
      *
-     * Rule:
+     * Rules:
+     * - Empty string allowed.
      * - Word divider is whitespace.
      * ```
      * @param checkFirstCharIsLetter - Strict or permissive style. Default is true (strict).
@@ -216,10 +225,10 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string follows one of the most popular programming naming convention.
      * @remarks Chainable method.
-     * @param convention - 'PascalCase' | 'camelCase' | 'quiet_snake_case' | 'screaming_snake_case' | 'kebab-case'
+     * @param convention - 'PascalCase' | 'camelCase' | 'quiet_snake_case' | 'SCREAMING_SNAKE_CASE' | 'kebab-case'
      * ```ts
      * Rule:
-     * - At least one leading character.
+     * - Empty string allowed.
      * ```
      * @see {@link https://capitalizemytitle.com/camel-case/} for camelCase, PascalCase, snake_case conversion examples.
      * @see {@link https://medium.com/@bendcosta/famous-camelcase-vs-kebab-case-javascript-6415cac2052b} for explanations.

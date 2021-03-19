@@ -1,24 +1,24 @@
 /**
  * PascalCase naming convention pattern:
- * - At least one leading letter.
  * - The first letter is capitalized.
  * - The word does not end on a capitalized letter: PascalCasE
  * - No two capitalised letters shall follow directly each other: PascalCAse
  * - No number in that word at any place: PascalCase1more
  * - No dot(.), under_score or dash (-) within the word, only letters: Pascal_Case
+ * - Empty string allowed.
  */
-export const PASCAL_CASE_PATTERN = '^(([A-Z])|(([A-Z][a-z]+)+))$';
+export const PASCAL_CASE_PATTERN = '((^$)|(^(([A-Z])|(([A-Z][a-z]+)+))$))';
 
 /**
  * camelCase naming convention pattern:
- * - At least one leading letter.
  * - The first letter is not capitalized.
  * - The word does not end on a capitalized letter: camelCasE
  * - No two capitalised letters shall follow directly each other: camelCAse
  * - No number in that word at any place: camelCase1more
  * - No dot(.), under_score or dash (-) within the word, only letters: camel_Case
+ * - Empty string allowed.
  */
-export const CAMEL_CASE_PATTERN = '^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$';
+export const CAMEL_CASE_PATTERN = '((^$)|(^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$))';
 
 /**
  * quiet_snake_case naming convention pattern:
@@ -28,8 +28,21 @@ export const CAMEL_CASE_PATTERN = '^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$';
  * - All spaces between words are filled with underscores.
  * - Remove all punctuation.
  * - A "word" should never consist of a single letter unless it is the last "word".
+ * - Empty string allowed.
  */
-export const QUIET_SNAKE_CASE_PATTERN = '^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$';
+export const QUIET_SNAKE_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$))';
+
+/**
+ * quiet_snake_case naming convention pattern:
+ * - At least one leading letter or number.
+ * - All letters are uppercase.
+ * - Numbers allowed.
+ * - All spaces between words are filled with underscores.
+ * - Remove all punctuation.
+ * - A "word" should never consist of a single letter unless it is the last "word".
+ * - Empty string allowed.
+ */
+export const SCREAMING_SNAKE_CASE_PATTERN = '((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}[_])+[A-Z0-9]+))$))';
 
 /**
  * Leading whitespace pattern.

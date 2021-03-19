@@ -34,7 +34,7 @@ export type ProgrammingConvention =
     | 'PascalCase'
     | 'camelCase'
     | 'quiet_snake_case'
-    | 'screaming_snake_case'
+    | 'SCREAMING_SNAKE_CASE'
     | 'kebab-case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
