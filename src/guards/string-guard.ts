@@ -225,7 +225,8 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string follows one of the most popular programming naming convention.
      * @remarks Chainable method.
-     * @param convention - 'PascalCase' | 'camelCase' | 'quiet_snake_case' | 'SCREAMING_SNAKE_CASE' | 'kebab-case' | 'dot.case'
+     * @param convention - {@link PASCAL_CASE_PATTERN | 'PascalCase'} | {@link CAMEL_CASE_PATTERN | 'camelCase'} | {@link QUIET_SNAKE_CASE_PATTERN | 'quiet_snake_case'}
+     * | {@link SCREAMING_SNAKE_CASE_PATTERN | 'SCREAMING_SNAKE_CASE'} | {@link KEBAB_CASE_PATTERN | 'kebab-case'} | {@link DOT_CASE_PATTERN | 'dot.case'}
      * ```ts
      * Rule:
      * - Empty string allowed.
@@ -313,7 +314,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an email address number.
      * @remarks Chainable method.
-     * @param def - 'quick' | 'rfc5322'. Default is 'quick'.
+     * @param def -  {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
      * ```ts
      * def:
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
