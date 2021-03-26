@@ -22,7 +22,7 @@ export const CAMEL_CASE_PATTERN = '((^$)|(^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$))'
 
 /**
  * quiet_snake_case naming convention pattern:
- * - At least one leading letter or number.
+ * - At least one leading letter or number (not underscore).
  * - All letters are lowercase.
  * - Numbers allowed.
  * - All spaces between words are filled with underscores.
@@ -34,7 +34,7 @@ export const QUIET_SNAKE_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])
 
 /**
  * SCREAMING_SNAKE_CASE naming convention pattern:
- * - At least one leading letter or number.
+ * - At least one leading letter or number (not underscore).
  * - All letters are uppercase.
  * - Numbers allowed.
  * - All spaces between words are filled with underscores.
@@ -46,7 +46,7 @@ export const SCREAMING_SNAKE_CASE_PATTERN = '((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}
 
 /**
  * kebab-case naming convention pattern:
- * - At least one leading letter or number.
+ * - At least one leading letter or number (not hyphen).
  * - All letters are lowercase.
  * - Numbers allowed.
  * - All spaces between words are filled with hyphens.
@@ -55,6 +55,18 @@ export const SCREAMING_SNAKE_CASE_PATTERN = '((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}
  * - Empty string allowed.
  */
 export const KEBAB_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[-])+[a-z0-9]+))$))';
+
+/**
+ * dot.case naming convention pattern:
+ * - At least one leading letter or number (not dot).
+ * - All letters are lowercase.
+ * - Numbers allowed.
+ * - All spaces between words are filled with dots.
+ * - Remove all punctuation.
+ * - A "word" should never consist of a single letter unless it is the last "word".
+ * - Empty string allowed.
+ */
+export const DOT_CASE_PATTERN = '((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[.])+[a-z0-9]+))$))';
 
 /**
  * Leading whitespace pattern.

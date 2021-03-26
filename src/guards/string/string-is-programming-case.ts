@@ -4,6 +4,7 @@ import { ProgrammingConvention } from './string-types';
 import { GuardResult } from '../../core/guard-result';
 import {
     CAMEL_CASE_PATTERN,
+    DOT_CASE_PATTERN,
     KEBAB_CASE_PATTERN,
     PASCAL_CASE_PATTERN,
     QUIET_SNAKE_CASE_PATTERN,
@@ -66,6 +67,15 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to follow kebab-case naming convention but does not: ${this.value}`
+                          )
+                          .build();
+            case 'dot.case':
+                return this.value.match(new RegExp(DOT_CASE_PATTERN)) !== null
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to follow dot.case naming convention but does not: ${this.value}`
                           )
                           .build();
         }

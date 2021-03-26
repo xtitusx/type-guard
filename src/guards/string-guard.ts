@@ -225,7 +225,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string follows one of the most popular programming naming convention.
      * @remarks Chainable method.
-     * @param convention - 'PascalCase' | 'camelCase' | 'quiet_snake_case' | 'SCREAMING_SNAKE_CASE' | 'kebab-case'
+     * @param convention - 'PascalCase' | 'camelCase' | 'quiet_snake_case' | 'SCREAMING_SNAKE_CASE' | 'kebab-case' | 'dot.case'
      * ```ts
      * Rule:
      * - Empty string allowed.
