@@ -1,7 +1,7 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { OBJECTID_PATTERN } from '../../utils/pattern-constants';
+import { OBJECT_ID_PATTERN } from '../../utils/pattern-constants';
 
 export class StringIsObjectId extends StringRuleChecker<{ type: 'isObjectId' }> {
     constructor(rule: { type: 'isObjectId' }, value: string) {
@@ -12,7 +12,7 @@ export class StringIsObjectId extends StringRuleChecker<{ type: 'isObjectId' }> 
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(OBJECTID_PATTERN)) !== null
+        return this.value.match(new RegExp(OBJECT_ID_PATTERN)) !== null
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)

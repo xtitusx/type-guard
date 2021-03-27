@@ -14,7 +14,7 @@ export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; di
     public exec(): GuardResult {
         switch (this.rule.digits) {
             case 3:
-                return this.value.match(new RegExp(THREE_DIGITS_HEX_COLOR_PATTERN)) !== null
+                return this.is3DigitsHexColor()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -23,7 +23,7 @@ export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; di
                           )
                           .build();
             case 6:
-                return this.value.match(new RegExp(SIX_DIGITS_HEX_COLOR_PATTERN)) !== null
+                return this.is6DigitsHexColor()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -32,14 +32,24 @@ export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; di
                           )
                           .build();
             default:
-                return this.value.match(
-                    new RegExp(`${THREE_DIGITS_HEX_COLOR_PATTERN}|${SIX_DIGITS_HEX_COLOR_PATTERN}`)
-                ) !== null
+                return this.isHexColor()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(`string is expected to be a hexadecimal color but is not: ${this.value}`)
                           .build();
         }
+    }
+
+    private is3DigitsHexColor(): boolean {
+        return this.value.match(new RegExp(THREE_DIGITS_HEX_COLOR_PATTERN)) !== null;
+    }
+
+    private is6DigitsHexColor(): boolean {
+        return this.value.match(new RegExp(SIX_DIGITS_HEX_COLOR_PATTERN)) !== null;
+    }
+
+    private isHexColor(): boolean {
+        return this.is3DigitsHexColor() || this.is6DigitsHexColor();
     }
 }

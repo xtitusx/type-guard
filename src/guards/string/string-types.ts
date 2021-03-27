@@ -27,7 +27,8 @@ export type StringRule =
     | { type: 'isHexColor'; digits?: 3 | 6 }
     | { type: 'isUuidv4' }
     | { type: 'isMacAddress' }
-    | { type: 'isIpAddress'; version?: 4 | 6 };
+    | { type: 'isIpAddress'; version?: 4 | 6 }
+    | { type: 'isIso31661Alpha'; alpha?: 2 | 3 };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
 

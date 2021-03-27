@@ -133,7 +133,7 @@ export const RFC5322_EMAIL_ADDRESS_PATTERN = '^[a-zA-Z0-9!#$%&\'*+/=?^_\'{|}~-]+
  * - 24 hex digits.
  * - Not case sensitive.
  */
-export const OBJECTID_PATTERN = '^[a-fA-F\\d]{24}$';
+export const OBJECT_ID_PATTERN = '^[a-fA-F\\d]{24}$';
 
 /**
  * 3 digits hex color pattern:

@@ -33,10 +33,10 @@ import { StringIsHexColor } from './string/string-is-hex-color';
 import { StringIsUuidv4 } from './string/string-is-uuid-v4';
 import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsIpAddress } from './string/string-is-ip-address';
+import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
-
 export class StringGuard extends Guard<StringRule> {
     constructor(rules?: StringRule[]) {
         super(rules);
@@ -437,6 +437,21 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is an ISO 3166-1 alpha country code.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Uppercase.
+     * ```
+     * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
+     * @example FR, FRA
+     */
+    public isIso31661Alpha(alpha?: 2 | 3): this {
+        this.addRule({ type: 'isIso31661Alpha', alpha: alpha });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule
      * @param value
@@ -497,6 +512,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsMacAddress(rule, value).exec();
             case 'isIpAddress':
                 return new StringIsIpAddress(rule, value).exec();
+            case 'isIso31661Alpha':
+                return new StringIsIso31661Alpha(rule, value).exec();
         }
     }
 
