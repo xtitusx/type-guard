@@ -106,10 +106,10 @@ export const OCTAL_PATTERN = '^(0(o|O))?[0-7]+$';
 
 /**
  * Hex pattern:
- * - Only hexadecimal numbers.
+ * - ECMAScript 2015 introduces HexIntegerLiteral, prefixed with 0x or 0X (not supported by old browsers).
  * - Not case sensitive.
  */
-export const HEX_PATTERN = '^[a-fA-F\\d]+$';
+export const HEX_PATTERN = '^(0(x|X))?[a-fA-F\\d]+$';
 
 /**
  * Decimal pattern.

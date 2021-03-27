@@ -1503,6 +1503,14 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isHex().guard('507F1').isSuccess(), true);
         });
 
+        it("should return true when tested value is '0x507F1'", () => {
+            assert.equal(new StringGuard().isHex().guard('0x507F1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0X507F1'", () => {
+            assert.equal(new StringGuard().isHex().guard('0X507F1').isSuccess(), true);
+        });
+
         it("should return true when tested value is '112345679065574883030833'", () => {
             assert.equal(new StringGuard().isHex().guard('112345679065574883030833').isSuccess(), true);
         });

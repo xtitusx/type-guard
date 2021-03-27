@@ -300,7 +300,7 @@ export class StringGuard extends Guard<StringRule> {
      * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
      * ```
      * @remarks Chainable method.
-     * @example 10, 010, 0o10, 0O10
+     * @example 1, 7, 10, 010, 0o10, 0O10
      */
     public isOctal(): this {
         this.addRule({ type: 'isOctal' });
@@ -311,7 +311,8 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string is a hexadecimal number (base-16).
      * @remarks Chainable method.
      * ```ts
-     * Rule:
+     * Rules:
+     * - ECMAScript 2015 introduces HexIntegerLiteral, prefixed with 0x or 0X (not supported by old browsers).
      * - Not case sensitive.
      * ```
      * @example F061A, f061a
