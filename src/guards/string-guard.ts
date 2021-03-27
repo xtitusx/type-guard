@@ -11,6 +11,7 @@ import { StringNotEquals } from './string/string-not-equals';
 import { StringContains } from './string/string-contains';
 import { StringNotContains } from './string/string-not-contains';
 import { StringMatches } from './string/string-matches';
+import { StringIsIn } from './string/string-is-in';
 import { StringIsEmpty } from './string/string-is-empty';
 import { StringIsNotEmpty } from './string/string-is-not-empty';
 import { StringHasLength } from './string/string-has-length';
@@ -96,6 +97,20 @@ export class StringGuard extends Guard<StringRule> {
      */
     public matches(value: RegExp): this {
         this.addRule({ type: 'matches', value: value });
+        return this;
+    }
+
+    /**
+     * Checks if string is in an array of allowed string values.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Case sensitive.
+     * ```
+     * @param value - An array of allowed string values.
+     */
+    public isIn(value: string[]): this {
+        this.addRule({ type: 'isIn', value: value });
         return this;
     }
 
@@ -438,6 +453,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringNotContains(rule, value).exec();
             case 'matches':
                 return new StringMatches(rule, value).exec();
+            case 'isIn':
+                return new StringIsIn(rule, value).exec();
             case 'isEmpty':
                 return new StringIsEmpty(rule, value).exec();
             case 'isNotEmpty':

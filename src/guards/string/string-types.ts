@@ -6,6 +6,7 @@ export type StringRule =
     | { type: 'contains'; value: string }
     | { type: 'notContains'; value: string }
     | { type: 'matches'; value: RegExp }
+    | { type: 'isIn'; value: string[] }
     | { type: 'isEmpty' }
     | { type: 'isNotEmpty' }
     | { type: 'hasLength'; value: number }

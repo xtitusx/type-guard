@@ -161,6 +161,28 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isIn()', () => {
+        it("should return true when param is ['foo', 'bar'] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isIn(['foo', 'bar']).guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when param is ['bar'] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isIn(['bar']).guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param is [] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isIn([]).guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param ['foo'] and tested value is null", () => {
+            assert.equal(new StringGuard().isIn(['foo']).guard(null).isSuccess(), false);
+        });
+
+        it("should return false when param ['foo'] and tested value is undefined", () => {
+            assert.equal(new StringGuard().isIn(['foo']).guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isEmpty()', () => {
         it("should return true when tested value is ''", () => {
             assert.equal(new StringGuard().isEmpty().guard('').isSuccess(), true);
