@@ -1452,6 +1452,44 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isOctal()', () => {
+        it("should return true when tested value is '10'", () => {
+            assert.equal(new StringGuard().isOctal().guard('10').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '7'", () => {
+            assert.equal(new StringGuard().isOctal().guard('7').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '010'", () => {
+            assert.equal(new StringGuard().isOctal().guard('010').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0o10'", () => {
+            assert.equal(new StringGuard().isOctal().guard('0o10').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0O10'", () => {
+            assert.equal(new StringGuard().isOctal().guard('0O10').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '8'", () => {
+            assert.equal(new StringGuard().isOctal().guard('8').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isOctal().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isOctal().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isOctal().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isHex()', () => {
         it("should return true when tested value is '5'", () => {
             assert.equal(new StringGuard().isHex().guard('51').isSuccess(), true);

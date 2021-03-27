@@ -99,6 +99,12 @@ export const NUMERIC_PATTERN = '^[0-9]+$';
 export const ALPHA_PATTERN = '^[a-zA-Z]+$';
 
 /**
+ * Octal pattern:
+ * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
+ */
+export const OCTAL_PATTERN = '^(0(o|O))?[0-7]+$';
+
+/**
  * Hex pattern:
  * - Only hexadecimal numbers.
  * - Not case sensitive.

@@ -25,6 +25,7 @@ import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
 import { StringIsNumeric } from './string/string-is-numeric';
+import { StringIsOctal } from './string/string-is-octal';
 import { StringIsHex } from './string/string-is-hex';
 import { StringIsDecimal } from './string/string-is-decimal';
 import { StringIsEmailAddress } from './string/string-is-email-address';
@@ -293,7 +294,21 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string is a hexadecimal number.
+     * Checks if string is an octal number (base-8).
+     * ```ts
+     * Rule:
+     * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
+     * ```
+     * @remarks Chainable method.
+     * @example 10, 010, 0o10, 0O10
+     */
+    public isOctal(): this {
+        this.addRule({ type: 'isOctal' });
+        return this;
+    }
+
+    /**
+     * Checks if string is a hexadecimal number (base-16).
      * @remarks Chainable method.
      * ```ts
      * Rule:
@@ -443,6 +458,7 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Uppercase.
      * ```
+     * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1}
      * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
      * @example FR, FRA
      */
@@ -496,6 +512,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsAlpha(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
+            case 'isOctal':
+                return new StringIsOctal(rule, value).exec();
             case 'isHex':
                 return new StringIsHex(rule, value).exec();
             case 'isDecimal':

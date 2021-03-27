@@ -20,6 +20,7 @@ export type StringRule =
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
+    | { type: 'isOctal' }
     | { type: 'isHex' }
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
