@@ -99,6 +99,12 @@ export const NUMERIC_PATTERN = '^[0-9]+$';
 export const ALPHA_PATTERN = '^[a-zA-Z]+$';
 
 /**
+ * Binary pattern:
+ * - ECMAScript 2015 introduces BinaryIntegerLiteral, prefixed with 0b or 0B (not supported by old browsers).
+ */
+export const BINARY_PATTERN = '^(0(b|B))?[0-1]+$';
+
+/**
  * Octal pattern:
  * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
  */

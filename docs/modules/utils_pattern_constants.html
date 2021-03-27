@@ -2689,6 +2689,9 @@ img {
 			<a href="utils_pattern_constants.html#alpha_pattern" class="tsd-kind-icon">ALPHA_<wbr>PATTERN</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-parent-kind-module">
+			<a href="utils_pattern_constants.html#binary_pattern" class="tsd-kind-icon">BINARY_<wbr>PATTERN</a>
+		</li>
+		<li class=" tsd-kind-variable tsd-parent-kind-module">
 			<a href="utils_pattern_constants.html#camel_case_pattern" class="tsd-kind-icon">CAMEL_<wbr>CASE_<wbr>PATTERN</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-parent-kind-module">
@@ -2764,6 +2767,7 @@ img {
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#alpha_numeric_pattern" class="tsd-kind-icon">ALPHA_<wbr>NUMERIC_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#alpha_pattern" class="tsd-kind-icon">ALPHA_<wbr>PATTERN</a></li>
+							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#binary_pattern" class="tsd-kind-icon">BINARY_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#camel_case_pattern" class="tsd-kind-icon">CAMEL_<wbr>CASE_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#decimal_pattern" class="tsd-kind-icon">DECIMAL_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_pattern_constants.html#dot_case_pattern" class="tsd-kind-icon">DOT_<wbr>CASE_<wbr>PATTERN</a></li>
@@ -2798,7 +2802,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>NUMERIC_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[0-9a-zA-Z]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[0-9a-zA-Z]+$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L86">utils/pattern-constants.ts:86</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L86">utils/pattern-constants.ts:86</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2817,7 +2821,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-zA-Z]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-zA-Z]+$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L99">utils/pattern-constants.ts:99</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L99">utils/pattern-constants.ts:99</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2831,12 +2835,30 @@ img {
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+				<a name="binary_pattern" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> BINARY_<wbr>PATTERN</h3>
+				<div class="tsd-signature tsd-kind-icon">BINARY_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(0(b|B))?[0-1]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(0(b|B))?[0-1]+$&#x27;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L105">utils/pattern-constants.ts:105</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Binary pattern:</p>
+						<ul>
+							<li>ECMAScript 2015 introduces BinaryIntegerLiteral, prefixed with 0b or 0B (not supported by old browsers).</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 				<a name="camel_case_pattern" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> CAMEL_<wbr>CASE_<wbr>PATTERN</h3>
 				<div class="tsd-signature tsd-kind-icon">CAMEL_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([a-z])|(([a-z]+[A-Z]?)+[a-z]+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L21">utils/pattern-constants.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L21">utils/pattern-constants.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2859,7 +2881,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">DECIMAL_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[-]?\\d+(([.,]{1}\\d+)|(\\d*))$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[-]?\\d+(([.,]{1}\\d+)|(\\d*))$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L117">utils/pattern-constants.ts:117</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L123">utils/pattern-constants.ts:123</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2874,7 +2896,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">DOT_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[.])+[a-z0-9]+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[.])+[a-z0-9]+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L69">utils/pattern-constants.ts:69</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L69">utils/pattern-constants.ts:69</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2898,7 +2920,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">HEX_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(0(x|X))?[a-fA-F\\d]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(0(x|X))?[a-fA-F\\d]+$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L112">utils/pattern-constants.ts:112</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L118">utils/pattern-constants.ts:118</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2917,7 +2939,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">IPV4_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])[.]){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])[.]){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L172">utils/pattern-constants.ts:172</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L178">utils/pattern-constants.ts:178</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2932,7 +2954,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">IPV6_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L184">utils/pattern-constants.ts:184</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L190">utils/pattern-constants.ts:190</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2955,7 +2977,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">KEBAB_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[-])+[a-z0-9]+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[-])+[a-z0-9]+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L57">utils/pattern-constants.ts:57</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L57">utils/pattern-constants.ts:57</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2979,7 +3001,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">LEADING_<wbr>WHITESPACE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^\\s&quot;</span><span class="tsd-signature-symbol"> = &#x27;^\\s&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L74">utils/pattern-constants.ts:74</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L74">utils/pattern-constants.ts:74</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2994,7 +3016,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">MAC_<wbr>ADDRESS_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^((([0-9A-F]{2}-){5})|(([0-9a-f]{2}:){5}))[0-9a-f]{2}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^((([0-9A-F]{2}-){5})|(([0-9a-f]{2}:){5}))[0-9a-f]{2}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L167">utils/pattern-constants.ts:167</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L173">utils/pattern-constants.ts:173</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3014,7 +3036,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">NUMERIC_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[0-9]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[0-9]+$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L92">utils/pattern-constants.ts:92</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L92">utils/pattern-constants.ts:92</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3032,7 +3054,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">OBJECT_<wbr>ID_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-fA-F\\d]{24}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-fA-F\\d]{24}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L142">utils/pattern-constants.ts:142</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L148">utils/pattern-constants.ts:148</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3051,7 +3073,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">OCTAL_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(0(o|O))?[0-7]+$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(0(o|O))?[0-7]+$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L105">utils/pattern-constants.ts:105</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L111">utils/pattern-constants.ts:111</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3069,7 +3091,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">PASCAL_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([A-Z])|(([A-Z][a-z]+)+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([A-Z])|(([A-Z][a-z]+)+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L10">utils/pattern-constants.ts:10</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L10">utils/pattern-constants.ts:10</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3092,7 +3114,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">QUICK_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L123">utils/pattern-constants.ts:123</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L129">utils/pattern-constants.ts:129</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3107,7 +3129,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">QUIET_<wbr>SNAKE_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([a-z0-9]+)|(([a-z0-9]{2,}[_])+[a-z0-9]+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L33">utils/pattern-constants.ts:33</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L33">utils/pattern-constants.ts:33</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3131,7 +3153,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">RFC5322_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-zA-Z0-9!#$%&amp;&#x27;*+/&#x3D;?^_&#x27;{|}~-]+(?:[.][a-zA-Z0-9!#$%&amp;&#x27;*+/&#x3D;?^_&#x27;{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-zA-Z0-9!#$%&amp;\&#x27;*+/&#x3D;?^_\&#x27;{|}~-]+(?:[.][a-zA-Z0-9!#$%&amp;\&#x27;*+/&#x3D;?^_\&#x27;{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L135">utils/pattern-constants.ts:135</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L141">utils/pattern-constants.ts:141</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3157,7 +3179,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">SCREAMING_<wbr>SNAKE_<wbr>CASE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}[_])+[A-Z0-9]+))$))&quot;</span><span class="tsd-signature-symbol"> = &#x27;((^$)|(^(([A-Z0-9]+)|(([A-Z0-9]{2,}[_])+[A-Z0-9]+))$))&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L45">utils/pattern-constants.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L45">utils/pattern-constants.ts:45</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3181,7 +3203,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">SIX_<wbr>DIGITS_<wbr>HEX_<wbr>COLOR_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^#[0-9a-fA-F]{6}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^#[0-9a-fA-F]{6}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L154">utils/pattern-constants.ts:154</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L160">utils/pattern-constants.ts:160</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3199,7 +3221,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">THREE_<wbr>DIGITS_<wbr>HEX_<wbr>COLOR_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^#[0-9a-fA-F]{3}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^#[0-9a-fA-F]{3}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L148">utils/pattern-constants.ts:148</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L154">utils/pattern-constants.ts:154</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3217,7 +3239,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">TRAILING_<wbr>WHITESPACE_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;\\s$&quot;</span><span class="tsd-signature-symbol"> = &#x27;\\s$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L79">utils/pattern-constants.ts:79</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L79">utils/pattern-constants.ts:79</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3232,7 +3254,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">UUIDV4_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$&#x27;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/336593c/src/utils/pattern-constants.ts#L161">utils/pattern-constants.ts:161</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/85cecc3/src/utils/pattern-constants.ts#L167">utils/pattern-constants.ts:167</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

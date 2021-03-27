@@ -1452,6 +1452,56 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isBinary()', () => {
+        it("should return true when tested value is '0'", () => {
+            assert.equal(new StringGuard().isBinary().guard('0').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '1'", () => {
+            assert.equal(new StringGuard().isBinary().guard('1').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '10'", () => {
+            assert.equal(new StringGuard().isBinary().guard('10').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '11'", () => {
+            assert.equal(new StringGuard().isBinary().guard('11').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '11111111'", () => {
+            assert.equal(new StringGuard().isBinary().guard('11111111').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0b0'", () => {
+            assert.equal(new StringGuard().isBinary().guard('0b0').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0B0'", () => {
+            assert.equal(new StringGuard().isBinary().guard('0B0').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '2'", () => {
+            assert.equal(new StringGuard().isBinary().guard('2').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '0o10'", () => {
+            assert.equal(new StringGuard().isBinary().guard('0o10').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isBinary().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isBinary().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isBinary().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isOctal()', () => {
         it("should return true when tested value is '10'", () => {
             assert.equal(new StringGuard().isOctal().guard('10').isSuccess(), true);
@@ -1475,6 +1525,10 @@ describe('String-Guard', () => {
 
         it("should return false when tested value is '8'", () => {
             assert.equal(new StringGuard().isOctal().guard('8').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '0b0'", () => {
+            assert.equal(new StringGuard().isOctal().guard('0b0').isSuccess(), false);
         });
 
         it("should return false when tested value is ''", () => {
@@ -1517,6 +1571,10 @@ describe('String-Guard', () => {
 
         it("should return true when tested value is 'FFFFFFFFFFFFFFFFFFFFFFFF'", () => {
             assert.equal(new StringGuard().isHex().guard('FFFFFFFFFFFFFFFFFFFFFFFF').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '0b0'", () => {
+            assert.equal(new StringGuard().isHex().guard('0b0').isSuccess(), true);
         });
 
         it("should return false when tested value is '507f1f77bcf86cd79943901g'", () => {

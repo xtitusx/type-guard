@@ -25,6 +25,7 @@ import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
 import { StringIsNumeric } from './string/string-is-numeric';
+import { StringIsBinary } from './string/string-is-binary';
 import { StringIsOctal } from './string/string-is-octal';
 import { StringIsHex } from './string/string-is-hex';
 import { StringIsDecimal } from './string/string-is-decimal';
@@ -294,12 +295,26 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is a binary number (base-2).
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - ECMAScript 2015 introduces BinaryIntegerLiteral, prefixed with 0b or 0B (not supported by old browsers).
+     * ```
+     * @example 0, 1, 10, 11, 100, 11111111, 0b0, 0B0
+     */
+    public isBinary(): this {
+        this.addRule({ type: 'isBinary' });
+        return this;
+    }
+
+    /**
      * Checks if string is an octal number (base-8).
+     * @remarks Chainable method.
      * ```ts
      * Rule:
      * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
      * ```
-     * @remarks Chainable method.
      * @example 1, 7, 10, 010, 0o10, 0O10
      */
     public isOctal(): this {
@@ -315,7 +330,7 @@ export class StringGuard extends Guard<StringRule> {
      * - ECMAScript 2015 introduces HexIntegerLiteral, prefixed with 0x or 0X (not supported by old browsers).
      * - Not case sensitive.
      * ```
-     * @example F061A, f061a
+     * @example F061A, f061a, 0xF061A, 0XF061A
      */
     public isHex(): this {
         this.addRule({ type: 'isHex' });
@@ -513,6 +528,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsAlpha(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
+            case 'isBinary':
+                return new StringIsBinary(rule, value).exec();
             case 'isOctal':
                 return new StringIsOctal(rule, value).exec();
             case 'isHex':
