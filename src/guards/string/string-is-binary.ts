@@ -1,7 +1,12 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { BINARY_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Binary pattern:
+ * - ECMAScript 2015 introduces BinaryIntegerLiteral, prefixed with 0b or 0B (not supported by old browsers).
+ */
+export const BINARY_PATTERN = '^(0(b|B))?[0-1]+$';
 
 export class StringIsBinary extends StringRuleChecker<{ type: 'isBinary' }> {
     constructor(rule: { type: 'isBinary' }, value: string) {

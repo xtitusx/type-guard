@@ -1,7 +1,13 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { OBJECT_ID_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * ObjectId pattern:
+ * - 24 hex digits.
+ * - Not case sensitive.
+ */
+export const OBJECT_ID_PATTERN = '^[a-fA-F\\d]{24}$';
 
 export class StringIsObjectId extends StringRuleChecker<{ type: 'isObjectId' }> {
     constructor(rule: { type: 'isObjectId' }, value: string) {

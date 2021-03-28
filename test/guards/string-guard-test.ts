@@ -2023,63 +2023,63 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isHexColor().guard(undefined).isSuccess(), false);
         });
 
-        describe('#isHexColor(3)', () => {
+        describe("#isHexColor('3')", () => {
             it("should return true when param is 3 and tested value is '#000'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('#000').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('3').guard('#000').isSuccess(), true);
             });
 
             it("should return true when param is 3 and tested value is '#FFF'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('#FFF').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('3').guard('#FFF').isSuccess(), true);
             });
 
             it("should return true when param is 3 and tested value is '#aa3'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('#aa3').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('3').guard('#aa3').isSuccess(), true);
             });
 
             it("should return false when param is 3 and tested value is '000'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('000').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('3').guard('000').isSuccess(), false);
             });
 
             it("should return false when param is 3 and tested value is '#AA33'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('#AA33').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('3').guard('#AA33').isSuccess(), false);
             });
 
             it("should return false when param is 3 and tested value is '#000000'", () => {
-                assert.equal(new StringGuard().isHexColor(3).guard('000000').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('3').guard('000000').isSuccess(), false);
             });
         });
 
         describe('#isHexColor(6)', () => {
             it("should return true when param is 6 and tested value is '#000000'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#000000').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('6').guard('#000000').isSuccess(), true);
             });
 
             it("should return true when param is 6 and tested value is '#FFFFFF'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#FFFFFF').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('6').guard('#FFFFFF').isSuccess(), true);
             });
 
             it("should return true when param is 6 and tested value is '#AA33FF'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#AA33FF').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('6').guard('#AA33FF').isSuccess(), true);
             });
 
             it("should return true when param is 6 and tested value is '#aa33ff'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#aa33ff').isSuccess(), true);
+                assert.equal(new StringGuard().isHexColor('6').guard('#aa33ff').isSuccess(), true);
             });
 
             it("should return false when param is 6 and tested value is '000000'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('000000').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('6').guard('000000').isSuccess(), false);
             });
 
             it("should return false when param is 6 and tested value is '#AA33FFA'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#AA33FFA').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('6').guard('#AA33FFA').isSuccess(), false);
             });
 
             it("should return false when param is 6 and tested value is '#AA3'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('#AA3').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('6').guard('#AA3').isSuccess(), false);
             });
 
             it("should return false when param is 6 and tested value is '#AA33FG'", () => {
-                assert.equal(new StringGuard().isHexColor(6).guard('AA33FG').isSuccess(), false);
+                assert.equal(new StringGuard().isHexColor('6').guard('AA33FG').isSuccess(), false);
             });
         });
     });

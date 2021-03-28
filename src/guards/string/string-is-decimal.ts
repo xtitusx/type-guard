@@ -2,7 +2,11 @@ import { StringRuleChecker } from './string-rule-checker';
 import { IIsDecimalOptions } from './string-options';
 
 import { GuardResult } from '../../core/guard-result';
-import { DECIMAL_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Decimal pattern.
+ */
+export const DECIMAL_PATTERN = '^[-]?\\d+(([.,]{1}\\d+)|(\\d*))$';
 
 enum DECIMAL_SEPARATOR {
     POINT = '.',

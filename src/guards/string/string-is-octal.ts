@@ -1,7 +1,12 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { OCTAL_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Octal pattern:
+ * - ECMAScript 2015 introduces OctalIntegerLiteral, prefixed with 0o or 0O (not supported by old browsers).
+ */
+export const OCTAL_PATTERN = '^(0(o|O))?[0-7]+$';
 
 export class StringIsOctal extends StringRuleChecker<{ type: 'isOctal' }> {
     constructor(rule: { type: 'isOctal' }, value: string) {

@@ -2,8 +2,16 @@ import { StringRuleChecker } from './string-rule-checker';
 import { TrimmedSide } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
-import { LEADING_WHITESPACE_PATTERN } from '../../utils/pattern-constants';
-import { TRAILING_WHITESPACE_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Leading whitespace pattern.
+ */
+export const LEADING_WHITESPACE_PATTERN = '^\\s';
+
+/**
+ * Trailing whitespace pattern.
+ */
+export const TRAILING_WHITESPACE_PATTERN = '\\s$';
 
 export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side: TrimmedSide }> {
     constructor(rule: { type: 'isTrimmed'; side: TrimmedSide }, value: string) {

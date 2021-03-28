@@ -1,8 +1,8 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { Iso31661Alpha2Enum } from '../../utils/iso31661-alpha-2';
-import { Iso31661Alpha3Enum } from '../../utils/iso31661-alpha-3';
+import { Iso31661Alpha2Enum } from '../../dictionaries/iso31661-alpha-2';
+import { Iso31661Alpha3Enum } from '../../dictionaries/iso31661-alpha-3';
 
 export class StringIsIso31661Alpha extends StringRuleChecker<{ type: 'isIso31661Alpha'; alpha?: 2 | 3 }> {
     constructor(rule: { type: 'isIso31661Alpha'; alpha?: 2 | 3 }, value: string) {

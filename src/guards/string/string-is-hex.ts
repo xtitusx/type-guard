@@ -1,7 +1,13 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { HEX_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Hex pattern:
+ * - ECMAScript 2015 introduces HexIntegerLiteral, prefixed with 0x or 0X (not supported by old browsers).
+ * - Not case sensitive.
+ */
+export const HEX_PATTERN = '^(0(x|X))?[a-fA-F\\d]+$';
 
 export class StringIsHex extends StringRuleChecker<{ type: 'isHex' }> {
     constructor(rule: { type: 'isHex' }, value: string) {

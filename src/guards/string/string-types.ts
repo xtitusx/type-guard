@@ -26,7 +26,7 @@ export type StringRule =
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
-    | { type: 'isHexColor'; digits?: 3 | 6 }
+    | { type: 'isHexColor'; digits?: HExColorDigits }
     | { type: 'isUuidv4' }
     | { type: 'isMacAddress' }
     | { type: 'isIpAddress'; version?: 4 | 6 }
@@ -43,5 +43,7 @@ export type ProgrammingConvention =
     | 'dot.case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
+
+export type HExColorDigits = '3' | '6';
 
 export type EmailAddressDefinition = 'quick' | 'rfc5322';

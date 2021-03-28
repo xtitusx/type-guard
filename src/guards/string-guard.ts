@@ -3,6 +3,7 @@ import {
     CapitalizationStyle,
     EmailAddressDefinition,
     TrimmedSide,
+    HExColorDigits,
     ProgrammingConvention,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
@@ -360,7 +361,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an email address number.
      * @remarks Chainable method.
-     * @param def -  {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
+     * @param def - {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
      * ```ts
      * def:
      * - quick : Common implementation matching 99% of all email addresses in actual use today.
@@ -405,10 +406,10 @@ export class StringGuard extends Guard<StringRule> {
      * - Starts with hastag (#) and is followed by 3 or 6 digits.
      * - Not case sensitive.
      * ```
-     * @param digits
+     * @param digits - {@link THREE_DIGITS_HEX_COLOR_PATTERN | '3'} | {@link SIX_DIGITS_HEX_COLOR_PATTERN | '6'}.
      * @example #000000, #FFFFFF, #000, #fff
      */
-    public isHexColor(digits?: 3 | 6): this {
+    public isHexColor(digits?: HExColorDigits): this {
         this.addRule({ type: 'isHexColor', digits: digits });
         return this;
     }

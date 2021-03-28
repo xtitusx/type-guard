@@ -1,7 +1,24 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { IPV4_PATTERN, IPV6_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * IP address v4 pattern.
+ */
+export const IPV4_PATTERN =
+    '^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])[.]){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$';
+
+/**
+ * IP address v6 pattern matching:
+ * - IPv6 addresses.
+ * - Zero compressed IPv6 addresses (section 2.2 of rfc5952).
+ * - Link-local IPv6 addresses with zone index (section 11 of rfc4007).
+ * - IPv4-Embedded IPv6 Address (section 2 of rfc6052).
+ * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
+ * - IPv4-translated addresses (section 2.1 of rfc2765).
+ */
+export const IPV6_PATTERN =
+    '^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])[.]){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$';
 
 export class StringIsIpAddress extends StringRuleChecker<{ type: 'isIpAddress'; version?: 4 | 6 }> {
     constructor(rule: { type: 'isIpAddress'; version?: 4 | 6 }, value: string) {

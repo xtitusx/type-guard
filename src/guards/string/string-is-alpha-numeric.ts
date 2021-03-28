@@ -1,7 +1,13 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { ALPHA_NUMERIC_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * AlphaNumeric pattern:
+ * - Only alpha characters and/or numbers.
+ * - Not case sensitive.
+ */
+export const ALPHA_NUMERIC_PATTERN = '^[0-9a-zA-Z]+$';
 
 export class StringIsAlphaNumeric extends StringRuleChecker<{ type: 'isAlphaNumeric' }> {
     constructor(rule: { type: 'isAlphaNumeric' }, value: string) {

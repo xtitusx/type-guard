@@ -2685,6 +2685,12 @@ img {
 		<li class=" tsd-kind-class tsd-parent-kind-module">
 			<a href="../classes/guards_string_string_is_email_address.stringisemailaddress.html" class="tsd-kind-icon">String<wbr>IsEmail<wbr>Address</a>
 		</li>
+		<li class=" tsd-kind-variable tsd-parent-kind-module">
+			<a href="guards_string_string_is_email_address.html#quick_email_address_pattern" class="tsd-kind-icon">QUICK_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</a>
+		</li>
+		<li class=" tsd-kind-variable tsd-parent-kind-module">
+			<a href="guards_string_string_is_email_address.html#rfc5322_email_address_pattern" class="tsd-kind-icon">RFC5322_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -2699,6 +2705,57 @@ img {
 							<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guards_string_string_is_email_address.stringisemailaddress.html" class="tsd-kind-icon">String<wbr>IsEmail<wbr>Address</a></li>
 						</ul>
 					</section>
+					<section class="tsd-index-section ">
+						<h3>Variables</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="guards_string_string_is_email_address.html#quick_email_address_pattern" class="tsd-kind-icon">QUICK_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</a></li>
+							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="guards_string_string_is_email_address.html#rfc5322_email_address_pattern" class="tsd-kind-icon">RFC5322_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Variables</h2>
+			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+				<a name="quick_email_address_pattern" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> QUICK_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</h3>
+				<div class="tsd-signature tsd-kind-icon">QUICK_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$&#x27;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/c6cf839/src/guards/string/string-is-email-address.ts#L10">guards/string/string-is-email-address.ts:10</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Email address pattern matching 99% of email addresses.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+				<a name="rfc5322_email_address_pattern" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> RFC5322_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN</h3>
+				<div class="tsd-signature tsd-kind-icon">RFC5322_<wbr>EMAIL_<wbr>ADDRESS_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^[a-zA-Z0-9!#$%&amp;&#x27;*+/&#x3D;?^_&#x27;{|}~-]+(?:[.][a-zA-Z0-9!#$%&amp;&#x27;*+/&#x3D;?^_&#x27;{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^[a-zA-Z0-9!#$%&amp;\&#x27;*+/&#x3D;?^_\&#x27;{|}~-]+(?:[.][a-zA-Z0-9!#$%&amp;\&#x27;*+/&#x3D;?^_\&#x27;{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?[.])+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$&#x27;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/c6cf839/src/guards/string/string-is-email-address.ts#L22">guards/string/string-is-email-address.ts:22</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>RFC5322 email address pattern matching 99.9% of email addresses.</p>
+					</div>
+					<p>Lightened RFC 5322 implementation omitting:</p>
+					<ul>
+						<li>IP addresses.</li>
+						<li>domain-specific addresses.</li>
+						<li>the syntax using double quotes and square brackets.</li>
+					</ul>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p><a href="https://en.wikipedia.org/wiki/Email_address#Syntax" class="external">https://en.wikipedia.org/wiki/Email_address#Syntax</a></p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 		</section>

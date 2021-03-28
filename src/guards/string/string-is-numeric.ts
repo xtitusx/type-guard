@@ -1,7 +1,12 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { NUMERIC_PATTERN } from '../../utils/pattern-constants';
+
+/**
+ * Numeric pattern:
+ * - Only numbers.
+ */
+export const NUMERIC_PATTERN = '^[0-9]+$';
 
 export class StringIsNumeric extends StringRuleChecker<{ type: 'isNumeric' }> {
     constructor(rule: { type: 'isNumeric' }, value: string) {
