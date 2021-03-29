@@ -1,11 +1,12 @@
 import { StringRuleChecker } from './string-rule-checker';
+import { AlphaVersion } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
 import { Iso31661Alpha2Enum } from '../../dictionaries/iso31661-alpha-2';
 import { Iso31661Alpha3Enum } from '../../dictionaries/iso31661-alpha-3';
 
-export class StringIsIso31661Alpha extends StringRuleChecker<{ type: 'isIso31661Alpha'; alpha?: 2 | 3 }> {
-    constructor(rule: { type: 'isIso31661Alpha'; alpha?: 2 | 3 }, value: string) {
+export class StringIsIso31661Alpha extends StringRuleChecker<{ type: 'isIso31661Alpha'; version?: AlphaVersion }> {
+    constructor(rule: { type: 'isIso31661Alpha'; version?: AlphaVersion }, value: string) {
         super(rule, value);
     }
 
@@ -13,8 +14,8 @@ export class StringIsIso31661Alpha extends StringRuleChecker<{ type: 'isIso31661
      * @override
      */
     public exec(): GuardResult {
-        switch (this.rule.alpha) {
-            case 2:
+        switch (this.rule.version) {
+            case '2':
                 return this.isIso31661Alpha2()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
@@ -23,7 +24,7 @@ export class StringIsIso31661Alpha extends StringRuleChecker<{ type: 'isIso31661
                               `string is expected to be an Iso 3166-1 alpha-2 country code but is not: ${this.value}`
                           )
                           .build();
-            case 3:
+            case '3':
                 return this.isIso31661Alpha3()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()

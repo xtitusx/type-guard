@@ -2291,39 +2291,39 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isIso31661Alpha().guard(undefined).isSuccess(), false);
         });
 
-        describe('#isIso31661Alpha(2)', () => {
+        describe("#isIso31661Alpha('2')", () => {
             it("should return true when param is 2 and tested value is 'FR'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(2).guard('FR').isSuccess(), true);
+                assert.equal(new StringGuard().isIso31661Alpha('2').guard('FR').isSuccess(), true);
             });
 
             it("should return true when param is 2 and tested value is 'DE'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(2).guard('DE').isSuccess(), true);
+                assert.equal(new StringGuard().isIso31661Alpha('2').guard('DE').isSuccess(), true);
             });
 
             it("should return false when param is 2 and tested value is 'FRA'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(2).guard('FRA').isSuccess(), false);
+                assert.equal(new StringGuard().isIso31661Alpha('2').guard('FRA').isSuccess(), false);
             });
 
             it("should return false when param is 2 and tested value is 'fr", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(2).guard('fr').isSuccess(), false);
+                assert.equal(new StringGuard().isIso31661Alpha('2').guard('fr').isSuccess(), false);
             });
         });
 
-        describe('#isIso31661Alpha(3)', () => {
+        describe("#isIso31661Alpha('3')", () => {
             it("should return true when param is 3 and tested value is 'FRA'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(3).guard('FRA').isSuccess(), true);
+                assert.equal(new StringGuard().isIso31661Alpha('3').guard('FRA').isSuccess(), true);
             });
 
             it("should return true when param is 3 and tested value is 'DEU'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(3).guard('DEU').isSuccess(), true);
+                assert.equal(new StringGuard().isIso31661Alpha('3').guard('DEU').isSuccess(), true);
             });
 
             it("should return false when param is 3 and tested value is 'FR'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(3).guard('FR').isSuccess(), false);
+                assert.equal(new StringGuard().isIso31661Alpha('3').guard('FR').isSuccess(), false);
             });
 
             it("should return false when param is 3 and tested value is 'fra'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha(3).guard('fra').isSuccess(), false);
+                assert.equal(new StringGuard().isIso31661Alpha('3').guard('fra').isSuccess(), false);
             });
         });
     });

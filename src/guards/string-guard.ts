@@ -6,6 +6,7 @@ import {
     HExColorDigits,
     ProgrammingConvention,
     IpVersion,
+    AlphaVersion,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -472,6 +473,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an ISO 3166-1 alpha country code.
      * @remarks Chainable method.
+     * @param version - {@link Iso31661Alpha2Enum | '2'} | {@link Iso31661Alpha3Enum | '3'}.
      * ```ts
      * Rule:
      * - Uppercase.
@@ -480,8 +482,8 @@ export class StringGuard extends Guard<StringRule> {
      * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
      * @example FR, FRA
      */
-    public isIso31661Alpha(alpha?: 2 | 3): this {
-        this.addRule({ type: 'isIso31661Alpha', alpha: alpha });
+    public isIso31661Alpha(version?: AlphaVersion): this {
+        this.addRule({ type: 'isIso31661Alpha', version: version });
         return this;
     }
 
