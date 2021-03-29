@@ -5,6 +5,7 @@ import {
     TrimmedSide,
     HExColorDigits,
     ProgrammingConvention,
+    IpVersion,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -368,7 +369,7 @@ export class StringGuard extends Guard<StringRule> {
      * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
      *
      * Rules:
-     * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting :
+     * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting:
      * - IP addresses.
      * - domain-specific addresses.
      * - the syntax using double quotes and square brackets.
@@ -449,6 +450,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an IP address.
      * @remarks Chainable method.
+     * @param version - {@link IPV4_PATTERN | '4'} | {@link IPV6_PATTERN | '6'}.
      * ```ts
      * Rules:
      *
@@ -460,10 +462,9 @@ export class StringGuard extends Guard<StringRule> {
      * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
      * - IPv4-translated addresses (section 2.1 of rfc2765).
      * ```
-     * @param version
      * @example 192.168.0.1, fde5:a773:d01a:0b6d
      */
-    public isIpAddress(version?: 4 | 6): this {
+    public isIpAddress(version?: IpVersion): this {
         this.addRule({ type: 'isIpAddress', version: version });
         return this;
     }

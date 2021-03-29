@@ -29,7 +29,7 @@ export type StringRule =
     | { type: 'isHexColor'; digits?: HExColorDigits }
     | { type: 'isUuidv4' }
     | { type: 'isMacAddress' }
-    | { type: 'isIpAddress'; version?: 4 | 6 }
+    | { type: 'isIpAddress'; version?: IpVersion }
     | { type: 'isIso31661Alpha'; alpha?: 2 | 3 };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
@@ -45,5 +45,7 @@ export type ProgrammingConvention =
 export type TrimmedSide = 'both' | 'left' | 'right';
 
 export type HExColorDigits = '3' | '6';
+
+export type IpVersion = '4' | '6';
 
 export type EmailAddressDefinition = 'quick' | 'rfc5322';
