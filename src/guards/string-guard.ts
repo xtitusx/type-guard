@@ -6,6 +6,7 @@ import {
     HExColorDigits,
     ProgrammingConvention,
     IpVersion,
+    GeoCoordinatesFormat,
     AlphaVersion,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
@@ -38,6 +39,7 @@ import { StringIsHexColor } from './string/string-is-hex-color';
 import { StringIsUuidv4 } from './string/string-is-uuid-v4';
 import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsIpAddress } from './string/string-is-ip-address';
+import { StringIsLatitude } from './string/string-is-latitude';
 import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
 
 import { Guard } from '../core/guard';
@@ -441,7 +443,8 @@ export class StringGuard extends Guard<StringRule> {
      * - IETF-yang-types definition: colon separator, lowercase.
      * ```
      * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
-     * @example 00-0A-95-9D-68-16, 00:0a:95:9d:68:16
+     * @example IEEE802-types definition: 00-0A-95-9D-68-16
+     * @example IETF-yang-types definition: 00:0a:95:9d:68:16
      */
     public isMacAddress(): this {
         this.addRule({ type: 'isMacAddress' });
@@ -463,10 +466,37 @@ export class StringGuard extends Guard<StringRule> {
      * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
      * - IPv4-translated addresses (section 2.1 of rfc2765).
      * ```
-     * @example 192.168.0.1, fde5:a773:d01a:0b6d
+     * @example IP address v4: 192.168.0.1
+     * @example IP address v6: fde5:a773:d01a:0b6d
      */
     public isIpAddress(version?: IpVersion): this {
         this.addRule({ type: 'isIpAddress', version: version });
+        return this;
+    }
+
+    /**
+     * Checks if string is a latitude geographic coordinate.
+     * @remarks Chainable method.
+     * @param format - {@link DMS_LAT_PATTERN | Degrees minutes seconds (DMS)}, {@link DM_LAT_PATTERN | Degrees minutes (DM)}, or Decimal degrees (DD).
+     * ```ts
+     * format:
+     * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
+     * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
+     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system).
+     *
+     * Rules:
+     * - DMS fractional part max lenght is 4.
+     * - DM fractional part max lenght is 4.
+     * - DD fractional part max lenght is 6.
+     * ```
+     * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
+     * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
+     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30.3033″ N
+     * @example DM: 49° 30.5051′
+     * @example DD: 49.508418°
+     */
+    public isLatitude(format?: GeoCoordinatesFormat): this {
+        this.addRule({ type: 'isLatitude', format: format });
         return this;
     }
 
@@ -480,7 +510,8 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1}
      * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
-     * @example FR, FRA
+     * @example ISO 3166-1 alpha-2: DE, FR
+     * @example ISO 3166-1 alpha-3: DEU, FRA
      */
     public isIso31661Alpha(version?: AlphaVersion): this {
         this.addRule({ type: 'isIso31661Alpha', version: version });
@@ -552,6 +583,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsMacAddress(rule, value).exec();
             case 'isIpAddress':
                 return new StringIsIpAddress(rule, value).exec();
+            case 'isLatitude':
+                return new StringIsLatitude(rule, value).exec();
             case 'isIso31661Alpha':
                 return new StringIsIso31661Alpha(rule, value).exec();
         }

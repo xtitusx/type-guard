@@ -30,6 +30,7 @@ export type StringRule =
     | { type: 'isUuidv4' }
     | { type: 'isMacAddress' }
     | { type: 'isIpAddress'; version?: IpVersion }
+    | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
     | { type: 'isIso31661Alpha'; version?: AlphaVersion };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
@@ -47,6 +48,8 @@ export type TrimmedSide = 'both' | 'left' | 'right';
 export type HExColorDigits = '3' | '6';
 
 export type IpVersion = '4' | '6';
+
+export type GeoCoordinatesFormat = 'DMS' | 'DM' | 'DD';
 
 export type AlphaVersion = '2' | '3';
 
