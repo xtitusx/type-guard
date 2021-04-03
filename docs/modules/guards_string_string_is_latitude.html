@@ -2686,6 +2686,9 @@ img {
 			<a href="../classes/guards_string_string_is_latitude.stringislatitude.html" class="tsd-kind-icon">String<wbr>IsLatitude</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-parent-kind-module">
+			<a href="guards_string_string_is_latitude.html#dd_lat_pattern" class="tsd-kind-icon">DD_<wbr>LAT_<wbr>PATTERN</a>
+		</li>
+		<li class=" tsd-kind-variable tsd-parent-kind-module">
 			<a href="guards_string_string_is_latitude.html#dms_lat_pattern" class="tsd-kind-icon">DMS_<wbr>LAT_<wbr>PATTERN</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-parent-kind-module">
@@ -2708,6 +2711,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Variables</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="guards_string_string_is_latitude.html#dd_lat_pattern" class="tsd-kind-icon">DD_<wbr>LAT_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="guards_string_string_is_latitude.html#dms_lat_pattern" class="tsd-kind-icon">DMS_<wbr>LAT_<wbr>PATTERN</a></li>
 							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="guards_string_string_is_latitude.html#dm_lat_pattern" class="tsd-kind-icon">DM_<wbr>LAT_<wbr>PATTERN</a></li>
 						</ul>
@@ -2718,12 +2722,33 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Variables</h2>
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-				<a name="dms_lat_pattern" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> DMS_<wbr>LAT_<wbr>PATTERN</h3>
-				<div class="tsd-signature tsd-kind-icon">DMS_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(([0-8][0-9])|90)[°][ ][0-5][0-9][′][ ][0-5][0-9]([.][0-9]{1,4})?[″][ ](N|S)$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(([0-8][0-9])|90)[\u{00B0}][ ][0-5][0-9][\u{2032}][ ][0-5][0-9]([.][0-9]{1,4})?[\u{2033}][ ](N|S)$&#x27;</span></div>
+				<a name="dd_lat_pattern" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> DD_<wbr>LAT_<wbr>PATTERN</h3>
+				<div class="tsd-signature tsd-kind-icon">DD_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/14f5e4d/src/guards/string/string-is-latitude.ts#L17">guards/string/string-is-latitude.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L43">guards/string/string-is-latitude.ts:43</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>DM latitude pattern:</p>
+						<ul>
+							<li>Signed degrees value when negative.</li>
+							<li>Degrees are within range -90 to 90.</li>
+							<li>The “partial” minute and second can be expressed as a decimal, fractional part max lenght is 6 digits.</li>
+							<li>Degrees must be followed by the symbols ° (U+00B0), without spaces between the number and symbol.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+				<a name="dms_lat_pattern" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> DMS_<wbr>LAT_<wbr>PATTERN</h3>
+				<div class="tsd-signature tsd-kind-icon">DMS_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L21">guards/string/string-is-latitude.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2732,11 +2757,11 @@ img {
 						<ul>
 							<li>Unsigned degrees value.</li>
 							<li>Degrees are within range 0 to 90.</li>
-							<li>Minutes and seconds are withing range 0 to 59 (sexageximal system).</li>
+							<li>Minutes and seconds are withing range 0 to 59 (sexagesimal system).</li>
 							<li>When minutes and seconds are less than ten, leading zeroes must be shown.</li>
 							<li>The “partial” second can be expressed as a decimal, fractional part max lenght is 4 digits.</li>
-							<li>Degrees, minutes and seconds should be followed by the symbols ° (U+00B0), ′ (U+2032), and ″ (U+2033), without spaces between the number and symbol.</li>
-							<li>North and south latitudes should be indicated by a cardinal compass point (N and S), following immediately after the digits.</li>
+							<li>Degrees, minutes and seconds must be followed by the symbols ° (U+00B0), ′ (U+2032), and ″ (U+2033), without spaces between the number and symbol.</li>
+							<li>North and south latitudes must be indicated by a cardinal compass point (N and S), following immediately after the digits.</li>
 							<li>Degrees, minutes, seconds, and cardinal compass point are each separated by a whitespace.</li>
 						</ul>
 					</div>
@@ -2745,10 +2770,10 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 				<a name="dm_lat_pattern" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagConst">Const</span> DM_<wbr>LAT_<wbr>PATTERN</h3>
-				<div class="tsd-signature tsd-kind-icon">DM_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;^(([0-8][0-9])|90)[°][ ][0-5][0-9]([.][0-9]{1,4})?[′][ ](N|S)$&quot;</span><span class="tsd-signature-symbol"> = &#x27;^(([0-8][0-9])|90)[\u{00B0}][ ][0-5][0-9]([.][0-9]{1,4})?[\u{2032}][ ](N|S)$&#x27;</span></div>
+				<div class="tsd-signature tsd-kind-icon">DM_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/14f5e4d/src/guards/string/string-is-latitude.ts#L31">guards/string/string-is-latitude.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L34">guards/string/string-is-latitude.ts:34</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2757,11 +2782,11 @@ img {
 						<ul>
 							<li>Unsigned degrees value.</li>
 							<li>Degrees are within range 0 to 90.</li>
-							<li>Minutes are withing range 0 to 59 (sexageximal system).</li>
+							<li>Minutes are withing range 0 to 59 (sexagesimal system).</li>
 							<li>When minutes are less than ten, leading zeroes must be shown.</li>
 							<li>The “partial” minute can be expressed as a decimal, fractional part max lenght is 4 digits.</li>
-							<li>Degrees, and minutes should be followed by the symbols ° (U+00B0), and ′ (U+2032), without spaces between the number and symbol.</li>
-							<li>North and south latitudes should be indicated by a cardinal compass point (N and S), following immediately after the digits.</li>
+							<li>Degrees, and minutes must be followed by the symbols ° (U+00B0), and ′ (U+2032), without spaces between the number and symbol.</li>
+							<li>North and south latitudes must be indicated by a cardinal compass point (N and S), following immediately after the digits.</li>
 							<li>Degrees, minutes, and cardinal compass point are each separated by a whitespace.</li>
 						</ul>
 					</div>

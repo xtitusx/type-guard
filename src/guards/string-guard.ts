@@ -477,12 +477,12 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is a latitude geographic coordinate.
      * @remarks Chainable method.
-     * @param format - {@link DMS_LAT_PATTERN | Degrees minutes seconds (DMS)}, {@link DM_LAT_PATTERN | Degrees minutes (DM)}, or Decimal degrees (DD).
+     * @param format - {@link DMS_LAT_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LAT_PATTERN | Degrees Minutes (DM)}, {@link DM_LAT_PATTERN | Decimal Degrees minutes (DM)}.
      * ```ts
      * format:
      * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
      * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
-     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system).
+     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
      *
      * Rules:
      * - DMS fractional part max lenght is 4.
@@ -491,9 +491,9 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
-     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30.3033″ N
-     * @example DM: 49° 30.5051′
-     * @example DD: 49.508418°
+     * @example DMS: 49° 30′ 30″ N, , 49° 30′ 30″ S, 49° 30′ 30.3033″ N
+     * @example DM: 49° 30.5051′ N,  49° 30.5051′ S
+     * @example DD: 49.508418°, -49°
      */
     public isLatitude(format?: GeoCoordinatesFormat): this {
         this.addRule({ type: 'isLatitude', format: format });
