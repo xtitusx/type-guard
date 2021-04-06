@@ -40,10 +40,12 @@ import { StringIsUuidv4 } from './string/string-is-uuid-v4';
 import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsIpAddress } from './string/string-is-ip-address';
 import { StringIsLatitude } from './string/string-is-latitude';
+import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
+
 export class StringGuard extends Guard<StringRule> {
     constructor(rules?: StringRule[]) {
         super(rules);
@@ -491,12 +493,38 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
-     * @example DMS: 49° 30′ 30″ N, , 49° 30′ 30″ S, 49° 30′ 30.3033″ N
-     * @example DM: 49° 30.5051′ N,  49° 30.5051′ S
-     * @example DD: 49.508418°, -49°
+     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30″ S, 49° 30′ 30.3033″ N, 9° 30′ 30.3033″ N
+     * @example DM: 49° 30.5051′ N, 49° 30.5051′ S, 9° 30.5051′ S
+     * @example DD: 49.508418°, -49°, 9°
      */
     public isLatitude(format?: GeoCoordinatesFormat): this {
         this.addRule({ type: 'isLatitude', format: format });
+        return this;
+    }
+
+    /**
+     * Checks if string is a longitude geographic coordinate.
+     * @remarks Chainable method.
+     * @param format - {@link DMS_LONG_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LONG_PATTERN | Degrees Minutes (DM)}, {@link DM_LONG_PATTERN | Decimal Degrees minutes (DM)}.
+     * ```ts
+     * format:
+     * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
+     * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
+     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
+     *
+     * Rules:
+     * - DMS fractional part max lenght is 4.
+     * - DM fractional part max lenght is 4.
+     * - DD fractional part max lenght is 6.
+     * ```
+     * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
+     * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
+     * @example DMS: 144° 57′ 48″ E, 144° 57′ 48″ W, 144° 57′ 48.1321″ E, 44° 57′ 48.1321″ E, 4° 57′ 48.1321″ E
+     * @example DM: 144° 57.8022′ E, 144° 57.8022′ W, 44° 57.8022′ W, 4° 57.8022′ W
+     * @example DD: 144.963375°, -144°, 44°, 4°
+     */
+    public isLongitude(format?: GeoCoordinatesFormat): this {
+        this.addRule({ type: 'isLongitude', format: format });
         return this;
     }
 
@@ -585,6 +613,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsIpAddress(rule, value).exec();
             case 'isLatitude':
                 return new StringIsLatitude(rule, value).exec();
+            case 'isLongitude':
+                return new StringIsLongitude(rule, value).exec();
             case 'isIso31661Alpha':
                 return new StringIsIso31661Alpha(rule, value).exec();
         }

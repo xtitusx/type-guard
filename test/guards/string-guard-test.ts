@@ -2324,6 +2324,22 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isLatitude('DMS').guard('00° 00′ 00″ S').isSuccess(), true);
             });
 
+            it("should return true when param is 'DMS' and tested value is '0° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('0° 00′ 00″ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '1° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('1° 00′ 00″ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '9° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('9° 00′ 00″ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '09° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('09° 00′ 00″ N').isSuccess(), true);
+            });
+
             it("should return true when param is 'DMS' and tested value is '49° 30′ 30.1″ N'", () => {
                 assert.equal(new StringGuard().isLatitude('DMS').guard('49° 30′ 30.1″ N').isSuccess(), true);
             });
@@ -2346,6 +2362,14 @@ describe('String-Guard', () => {
 
             it("should return false when param is 'DMS' and tested value is '49° 59′ 60″ N'", () => {
                 assert.equal(new StringGuard().isLatitude('DMS').guard('49° 59′ 60″ N').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '090° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('090° 00′ 00″ N').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '000° 00′ 00″ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DMS').guard('000° 00′ 00″ N').isSuccess(), false);
             });
 
             it("should return false when param is 'DMS' and tested value is '-90° 00′ 00″ S'", () => {
@@ -2410,6 +2434,22 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isLatitude('DM').guard('00° 00.0000′ S').isSuccess(), true);
             });
 
+            it("should return true when param is 'DM' and tested value is '0° 00.0000′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('0° 00.0000′ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '1° 00.0000′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('1° 00.0000′ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '9° 00.0000′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('9° 00.0000′ N').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '09° 00.0000′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('09° 00.0000′ N').isSuccess(), true);
+            });
+
             it("should return true when param is 'DM' and tested value is '49° 30′ N'", () => {
                 assert.equal(new StringGuard().isLatitude('DM').guard('49° 30′ N').isSuccess(), true);
             });
@@ -2428,6 +2468,14 @@ describe('String-Guard', () => {
 
             it("should return false when param is 'DM' and tested value is '49.508418°'", () => {
                 assert.equal(new StringGuard().isLatitude('DM').guard('49.508418°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '090° 00′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('090° 00′ N').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '000° 00′ N'", () => {
+                assert.equal(new StringGuard().isLatitude('DM').guard('000° 00′ N').isSuccess(), false);
             });
 
             it("should return false when param is 'DM' and tested value is '-90° 00′ S'", () => {
@@ -2504,8 +2552,28 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isLatitude('DD').guard('00.000000°').isSuccess(), true);
             });
 
+            it("should return true when param is 'DD' and tested value is '0.000000°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('0.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '1.000000°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('1.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '9.000000°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('9.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '09.000000°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('09.000000°').isSuccess(), true);
+            });
+
             it("should return true when param is 'DD' and tested value is '-00.000000°'", () => {
                 assert.equal(new StringGuard().isLatitude('DD').guard('-00.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '1°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('1°').isSuccess(), true);
             });
 
             it("should return true when param is 'DD' and tested value is '49°'", () => {
@@ -2522,6 +2590,10 @@ describe('String-Guard', () => {
 
             it("should return false when param is 'DD' and tested value is '49.7777777°'", () => {
                 assert.equal(new StringGuard().isLatitude('DMS').guard('49.7777777°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '090°'", () => {
+                assert.equal(new StringGuard().isLatitude('DD').guard('090°').isSuccess(), false);
             });
 
             it("should return false when param is 'DD' and tested value is '91°'", () => {
@@ -2546,6 +2618,394 @@ describe('String-Guard', () => {
 
             it("should return false when param is 'DD' and tested value is '-90.000001°'", () => {
                 assert.equal(new StringGuard().isLatitude('DD').guard('-90.000001°').isSuccess(), false);
+            });
+        });
+    });
+
+    describe('#isLongitude()', () => {
+        it("should return true when tested value is '144° 57′ 48″ E'", () => {
+            assert.equal(new StringGuard().isLongitude().guard('144° 57′ 48″ E').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '144° 57.8022′ E'", () => {
+            assert.equal(new StringGuard().isLongitude().guard('144° 57.8022′ E').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '144.963375°'", () => {
+            assert.equal(new StringGuard().isLongitude().guard('144.963375°').isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isLongitude().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isLongitude().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isLongitude('DMS')", () => {
+            it("should return true when param is 'DMS' and tested value is '144° 00′ 00″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 00′ 00″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '144° 57′ 00″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 00″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '144° 57′ 48″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 48″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '179° 59′ 59″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('179° 59′ 59″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '180° 00′ 00″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 00′ 00″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '180° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '000° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('000° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '000° 00′ 00″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('000° 00′ 00″ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '00° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('00° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '0° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('0° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '1° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('1° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '9° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('9° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '09° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('09° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '009° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('009° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '19° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('19° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '019° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('019° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '99° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('99° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '099° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('099° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '100° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('100° 00′ 00″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '144° 57′ 48.1″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 48.1″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '144° 57′ 48.1321″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 48.1321″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '144° 57′ 48.0000″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 48.0000″ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DMS' and tested value is '180° 00′ 00.0000″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 00′ 00.0000″ E').isSuccess(), true);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '144° 60′ 59″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 60′ 59″ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '144° 59′ 60″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 59′ 60″ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '-180° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('-180° 00′ 00″ W').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '-0° 00′ 00″ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('-0° 00′ 00″ W').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '0° 00' 00'' E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard("0° 00' 00'' E").isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '144° 57′ 48.55555 E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144° 57′ 48.55555 E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '180° 01′ 00″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 01′ 00″ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '180° 00′ 01″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 00′ 01″ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DMS' and tested value is '180° 00′ 00.0001″ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('180° 00′ 00.0001″ E').isSuccess(), false);
+            });
+        });
+
+        describe("#isLongitude('DM')", () => {
+            it("should return true when param is 'DM' and tested value is '144° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '144° 57.8022′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 57.8022′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '144° 59.3000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 59.3000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '179° 59.9999′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('179° 59.9999′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '190° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('180° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '180° 00.0000′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('180° 00.0000′ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '000° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('000° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '000° 00.0000′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('000° 00.0000′ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '00° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('00° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '0° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('0° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '1° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('1° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '9° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('9° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '09° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('09° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '009° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('009° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '19° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('19° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '99° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('99° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '099° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('099° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '100° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('100° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '019° 00.0000′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('019° 00.0000′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '49° 30′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('49° 30′ E').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '90° 00′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('90° 00′ W').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DM' and tested value is '144° 59′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 59′ W').isSuccess(), true);
+            });
+
+            it("should return false when param is 'DM' and tested value is '144° 6′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 6′ W').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '144° 60′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 60′ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '144.508418°'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144.508418°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '-180° 00′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('-180° 00′ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '-00° 00′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('-00° 00′ W').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '00° 00' W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard("00° 00' W").isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '144° 57.55555′ W'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('144° 57.55555 W').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '180° 01′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('180° 01′ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '180° 00.1′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('180° 00.1′ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '180° 00.0001′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DM').guard('180° 00.0001′ E').isSuccess(), false);
+            });
+        });
+
+        describe("#isLongitude('DD')", () => {
+            it("should return true when param is 'DD' and tested value is '144.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.000000°').isSuccess(), true);
+            });
+
+            it("should return true when tested value is '144.963375°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.963375°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.1°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.1°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.22°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.22°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.333°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.333°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.4444°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.4444°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.55555°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.55555°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144.666666°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144.666666°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '180.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('180.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '-180.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('-180.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '000.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('000.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '00.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('00.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '0.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('0.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '-0.000000°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('-0.000000°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '144°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '44°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('44°').isSuccess(), true);
+            });
+
+            it("should return true when param is 'DD' and tested value is '4°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('4°').isSuccess(), true);
+            });
+
+            it("should return false when param is 'DD' and tested value is '144° 57′ 30″ N'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144° 57′ 30″ N').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DM' and tested value is '144° 57.8022′ E'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('144° 57.8022′ E').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '144.7777777°'", () => {
+                assert.equal(new StringGuard().isLongitude('DMS').guard('144.7777777°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '181°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('181°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '180.1°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('180.1°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '180.000001°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('180.000001°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '-181°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('-181°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '-180.1°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('-180.1°').isSuccess(), false);
+            });
+
+            it("should return false when param is 'DD' and tested value is '-180.000001°'", () => {
+                assert.equal(new StringGuard().isLongitude('DD').guard('-180.000001°').isSuccess(), false);
             });
         });
     });

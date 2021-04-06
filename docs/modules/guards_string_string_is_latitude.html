@@ -2727,7 +2727,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">DD_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L43">guards/string/string-is-latitude.ts:43</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/2d4bf4a/src/guards/string/string-is-latitude.ts#L46">guards/string/string-is-latitude.ts:46</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2736,6 +2736,7 @@ img {
 						<ul>
 							<li>Signed degrees value when negative.</li>
 							<li>Degrees are within range -90 to 90.</li>
+							<li>When degrees are less than ten, leading zero can be shown.</li>
 							<li>The “partial” minute and second can be expressed as a decimal, fractional part max lenght is 6 digits.</li>
 							<li>Degrees must be followed by the symbols ° (U+00B0), without spaces between the number and symbol.</li>
 						</ul>
@@ -2748,7 +2749,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">DMS_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L21">guards/string/string-is-latitude.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/2d4bf4a/src/guards/string/string-is-latitude.ts#L22">guards/string/string-is-latitude.ts:22</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2757,6 +2758,7 @@ img {
 						<ul>
 							<li>Unsigned degrees value.</li>
 							<li>Degrees are within range 0 to 90.</li>
+							<li>When degrees are less than ten, leading zero can be shown.</li>
 							<li>Minutes and seconds are withing range 0 to 59 (sexagesimal system).</li>
 							<li>When minutes and seconds are less than ten, leading zeroes must be shown.</li>
 							<li>The “partial” second can be expressed as a decimal, fractional part max lenght is 4 digits.</li>
@@ -2773,7 +2775,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">DM_<wbr>LAT_<wbr>PATTERN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/4e6ebb5/src/guards/string/string-is-latitude.ts#L34">guards/string/string-is-latitude.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/2d4bf4a/src/guards/string/string-is-latitude.ts#L36">guards/string/string-is-latitude.ts:36</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2782,6 +2784,7 @@ img {
 						<ul>
 							<li>Unsigned degrees value.</li>
 							<li>Degrees are within range 0 to 90.</li>
+							<li>When degrees are less than ten, leading zero can be shown.</li>
 							<li>Minutes are withing range 0 to 59 (sexagesimal system).</li>
 							<li>When minutes are less than ten, leading zeroes must be shown.</li>
 							<li>The “partial” minute can be expressed as a decimal, fractional part max lenght is 4 digits.</li>
