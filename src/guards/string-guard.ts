@@ -42,8 +42,8 @@ import { StringIsIpAddress } from './string/string-is-ip-address';
 import { StringIsLatitude } from './string/string-is-latitude';
 import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsLatLong } from './string/string-is-lat-long';
-import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
-import { StringIsIso4217Alpha } from './string/string-is-iso4217-alpha';
+import { StringIsIso3166Part1Alpha } from './string/string-is-iso-3166-part1-alpha';
+import { StringIsIso4217Alpha3 } from './string/string-is-iso-4217-alpha-3';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -553,7 +553,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an ISO 3166-1 alpha country code.
      * @remarks Chainable method.
-     * @param version - {@link Iso31661Alpha2Enum | '2'} | {@link Iso31661Alpha3Enum | '3'}.
+     * @param version - {@link Iso3166Part1Alpha2Enum | '2'} | {@link Iso3166Part1Alpha3Enum | '3'}.
      * ```ts
      * Rule:
      * - Uppercase.
@@ -563,13 +563,13 @@ export class StringGuard extends Guard<StringRule> {
      * @example ISO 3166-1 alpha-2: DE, FR
      * @example ISO 3166-1 alpha-3: DEU, FRA
      */
-    public isIso31661Alpha(version?: AlphaVersion): this {
-        this.addRule({ type: 'isIso31661Alpha', version: version });
+    public isIso3166Part1Alpha(version?: AlphaVersion): this {
+        this.addRule({ type: 'isIso3166Part1Alpha', version: version });
         return this;
     }
 
     /**
-     * Checks if string is an ISO 4217 alpha currency code representing:
+     * Checks if string is an ISO 4217 alpha-3 currency code representing:
      * - National currencies.
      * - X currencies (precious metals, supranational currencies, etc.)
      * @remarks Chainable method.
@@ -577,12 +577,12 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Uppercase.
      * ```
-     * @see {@link Iso4217AlphaEnum | Last table update: 2018-08-29}
+     * @see {@link Iso4217Alpha3Enum | List of active ISO 4217 alpha-3 currency codes}
      * @see {@link https://en.wikipedia.org/wiki/ISO_4217}
      * @example EUR, USD, CHF, XAU
      */
-    public isIso4217Alpha(): this {
-        this.addRule({ type: 'isIso4217Alpha' });
+    public isIso4217Alpha3(): this {
+        this.addRule({ type: 'isIso4217Alpha3' });
         return this;
     }
 
@@ -657,10 +657,10 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsLongitude(rule, value).exec();
             case 'isLatLong':
                 return new StringIsLatLong(rule, value).exec();
-            case 'isIso31661Alpha':
-                return new StringIsIso31661Alpha(rule, value).exec();
-            case 'isIso4217Alpha':
-                return new StringIsIso4217Alpha(rule, value).exec();
+            case 'isIso3166Part1Alpha':
+                return new StringIsIso3166Part1Alpha(rule, value).exec();
+            case 'isIso4217Alpha3':
+                return new StringIsIso4217Alpha3(rule, value).exec();
         }
     }
 

@@ -1,8 +1,10 @@
 /**
  * ISO 4218 alpha codes are three-letter codes that represent National and X currencies.
+ *
+ * Last table update: 2018-08-29.
  * @see {@link https://en.wikipedia.org/wiki/ISO_4217}
  */
-export enum Iso4217AlphaEnum {
+export enum Iso4217Alpha3Enum {
     AED = 'AED',
     AFN = 'AFN',
     ALL = 'ALL',

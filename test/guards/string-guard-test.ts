@@ -3064,99 +3064,99 @@ describe('String-Guard', () => {
         });
     });
 
-    describe('#isIso31661Alpha()', () => {
+    describe('#isIso3166Part1Alpha()', () => {
         it("should return true when tested value is 'FR'", () => {
-            assert.equal(new StringGuard().isIso31661Alpha().guard('FR').isSuccess(), true);
+            assert.equal(new StringGuard().isIso3166Part1Alpha().guard('FR').isSuccess(), true);
         });
 
         it("should return true when tested value is 'FRA'", () => {
-            assert.equal(new StringGuard().isIso31661Alpha().guard('FRA').isSuccess(), true);
+            assert.equal(new StringGuard().isIso3166Part1Alpha().guard('FRA').isSuccess(), true);
         });
 
         it("should return false when tested value is ''", () => {
-            assert.equal(new StringGuard().isIso31661Alpha().guard('').isSuccess(), false);
+            assert.equal(new StringGuard().isIso3166Part1Alpha().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
-            assert.equal(new StringGuard().isIso31661Alpha().guard(null).isSuccess(), false);
+            assert.equal(new StringGuard().isIso3166Part1Alpha().guard(null).isSuccess(), false);
         });
 
         it('should return false when tested value is undefined', () => {
-            assert.equal(new StringGuard().isIso31661Alpha().guard(undefined).isSuccess(), false);
+            assert.equal(new StringGuard().isIso3166Part1Alpha().guard(undefined).isSuccess(), false);
         });
 
-        describe("#isIso31661Alpha('2')", () => {
+        describe("#isIso3166Part1Alpha('2')", () => {
             it("should return true when param is 2 and tested value is 'FR'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('2').guard('FR').isSuccess(), true);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('FR').isSuccess(), true);
             });
 
             it("should return true when param is 2 and tested value is 'DE'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('2').guard('DE').isSuccess(), true);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('DE').isSuccess(), true);
             });
 
             it("should return false when param is 2 and tested value is 'FRA'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('2').guard('FRA').isSuccess(), false);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('FRA').isSuccess(), false);
             });
 
             it("should return false when param is 2 and tested value is 'fr", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('2').guard('fr').isSuccess(), false);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('fr').isSuccess(), false);
             });
         });
 
-        describe("#isIso31661Alpha('3')", () => {
+        describe("#isIso3166Part1Alpha('3')", () => {
             it("should return true when param is 3 and tested value is 'FRA'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('3').guard('FRA').isSuccess(), true);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('FRA').isSuccess(), true);
             });
 
             it("should return true when param is 3 and tested value is 'DEU'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('3').guard('DEU').isSuccess(), true);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('DEU').isSuccess(), true);
             });
 
             it("should return false when param is 3 and tested value is 'FR'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('3').guard('FR').isSuccess(), false);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('FR').isSuccess(), false);
             });
 
             it("should return false when param is 3 and tested value is 'fra'", () => {
-                assert.equal(new StringGuard().isIso31661Alpha('3').guard('fra').isSuccess(), false);
+                assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('fra').isSuccess(), false);
             });
         });
     });
 
-    describe('#isIso4217Alpha()', () => {
+    describe('#isIso4217Alpha3()', () => {
         it("should return true when tested value is 'EUR'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('EUR').isSuccess(), true);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('EUR').isSuccess(), true);
         });
 
         it("should return true when tested value is 'USD'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('USD').isSuccess(), true);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('USD').isSuccess(), true);
         });
 
         it("should return true when tested value is 'CHF'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('CHF').isSuccess(), true);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('CHF').isSuccess(), true);
         });
 
         it("should return true when tested value is 'XAU'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('XAU').isSuccess(), true);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('XAU').isSuccess(), true);
         });
 
         it("should return false when tested value is 'eur'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('eur').isSuccess(), false);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('eur').isSuccess(), false);
         });
 
         it("should return false when tested value is 'FRF'", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('FRF').isSuccess(), false);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('FRF').isSuccess(), false);
         });
 
         it("should return false when tested value is ''", () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard('').isSuccess(), false);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard(null).isSuccess(), false);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard(null).isSuccess(), false);
         });
 
         it('should return false when tested value is undefined', () => {
-            assert.equal(new StringGuard().isIso4217Alpha().guard(undefined).isSuccess(), false);
+            assert.equal(new StringGuard().isIso4217Alpha3().guard(undefined).isSuccess(), false);
         });
     });
 });

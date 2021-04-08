@@ -2,7 +2,7 @@
  * ISO 3166-1 alpha-3 codes are three-letter country codes defined in ISO 3166-1, part of the ISO 3166 standard.
  * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}
  */
-export enum Iso31661Alpha3Enum {
+export enum Iso3166Part1Alpha3Enum {
     ABW = 'ABW',
     AFG = 'AFG',
     AGO = 'AGO',

@@ -2,7 +2,7 @@
  * ISO 3166-1 alpha-2 codes are two-letter country codes defined in ISO 3166-1, part of the ISO 3166 standard.
  * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2}
  */
-export enum Iso31661Alpha2Enum {
+export enum Iso3166Part1Alpha2Enum {
     AD = 'AD',
     AE = 'AE',
     AF = 'AF',
