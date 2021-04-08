@@ -3121,4 +3121,42 @@ describe('String-Guard', () => {
             });
         });
     });
+
+    describe('#isIso4217Alpha()', () => {
+        it("should return true when tested value is 'EUR'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('EUR').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'USD'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('USD').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'CHF'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('CHF').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'XAU'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('XAU').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'eur'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('eur').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'FRF'", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('FRF').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isIso4217Alpha().guard(undefined).isSuccess(), false);
+        });
+    });
 });

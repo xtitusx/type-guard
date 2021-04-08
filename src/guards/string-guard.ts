@@ -43,6 +43,7 @@ import { StringIsLatitude } from './string/string-is-latitude';
 import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsLatLong } from './string/string-is-lat-long';
 import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
+import { StringIsIso4217Alpha } from './string/string-is-iso4217-alpha';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
@@ -568,6 +569,24 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is an ISO 4217 alpha currency code representing:
+     * - National currencies.
+     * - X currencies (precious metals, supranational currencies, etc.)
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Uppercase.
+     * ```
+     * @see {@link Iso4217AlphaEnum | Last table update: 2018-08-29}
+     * @see {@link https://en.wikipedia.org/wiki/ISO_4217}
+     * @example EUR, USD, CHF, XAU
+     */
+    public isIso4217Alpha(): this {
+        this.addRule({ type: 'isIso4217Alpha' });
+        return this;
+    }
+
+    /**
      * @override
      * @param rule
      * @param value
@@ -640,6 +659,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsLatLong(rule, value).exec();
             case 'isIso31661Alpha':
                 return new StringIsIso31661Alpha(rule, value).exec();
+            case 'isIso4217Alpha':
+                return new StringIsIso4217Alpha(rule, value).exec();
         }
     }
 

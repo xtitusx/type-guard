@@ -33,7 +33,8 @@ export type StringRule =
     | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLongitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLatLong'; format?: GeoCoordinatesFormat }
-    | { type: 'isIso31661Alpha'; version?: AlphaVersion };
+    | { type: 'isIso31661Alpha'; version?: AlphaVersion }
+    | { type: 'isIso4217Alpha' };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
 
