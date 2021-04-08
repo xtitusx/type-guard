@@ -42,6 +42,7 @@ import { StringIsIpAddress } from './string/string-is-ip-address';
 import { StringIsLatitude } from './string/string-is-latitude';
 import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsLatLong } from './string/string-is-lat-long';
+import { StringIsIso639Part1Alpha2 } from './string/string-is-iso-639-part1-alpha-2';
 import { StringIsIso3166Part1Alpha } from './string/string-is-iso-3166-part1-alpha';
 import { StringIsIso4217Alpha3 } from './string/string-is-iso-4217-alpha-3';
 
@@ -551,6 +552,22 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is an ISO 639-1 alpha-2 language code.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Lowercase.
+     * ```
+     * @see {@link Iso639Part1Alpha2Enum | List of 184 ISO 639-1 alpha-2 language codes}
+     * @see {@link https://en.wikipedia.org/wiki/ISO_639-1}
+     * @example en, es, fr
+     */
+    public isIso639Part1Alpha2(): this {
+        this.addRule({ type: 'isIso639Part1Alpha2' });
+        return this;
+    }
+
+    /**
      * Checks if string is an ISO 3166-1 alpha country code.
      * @remarks Chainable method.
      * @param version - {@link Iso3166Part1Alpha2Enum | '2'} | {@link Iso3166Part1Alpha3Enum | '3'}.
@@ -657,6 +674,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsLongitude(rule, value).exec();
             case 'isLatLong':
                 return new StringIsLatLong(rule, value).exec();
+            case 'isIso639Part1Alpha2':
+                return new StringIsIso639Part1Alpha2(rule, value).exec();
             case 'isIso3166Part1Alpha':
                 return new StringIsIso3166Part1Alpha(rule, value).exec();
             case 'isIso4217Alpha3':

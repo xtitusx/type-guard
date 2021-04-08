@@ -2,8 +2,8 @@ import { StringRuleChecker } from './string-rule-checker';
 import { AlphaVersion } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
-import { Iso3166Part1Alpha2Enum } from '../../dictionaries/iso3166-part1-alpha-2';
-import { Iso3166Part1Alpha3Enum } from '../../dictionaries/iso3166-part1-alpha-3';
+import { Iso3166Part1Alpha2Enum } from '../../dictionaries/iso-3166-part1-alpha-2';
+import { Iso3166Part1Alpha3Enum } from '../../dictionaries/iso-3166-part1-alpha-3';
 
 export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
     type: 'isIso3166Part1Alpha';

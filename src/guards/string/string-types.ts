@@ -33,6 +33,7 @@ export type StringRule =
     | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLongitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLatLong'; format?: GeoCoordinatesFormat }
+    | { type: 'isIso639Part1Alpha2' }
     | { type: 'isIso3166Part1Alpha'; version?: AlphaVersion }
     | { type: 'isIso4217Alpha3' };
 

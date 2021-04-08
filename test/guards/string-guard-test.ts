@@ -3064,6 +3064,40 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isIso639Part1Alpha2()', () => {
+        it("should return true when tested value is 'en'", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('en').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'es'", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('es').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'fr'", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('fr').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'EN'", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('EN').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'eng'", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('eng').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isIso639Part1Alpha2().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isIso3166Part1Alpha()', () => {
         it("should return true when tested value is 'FR'", () => {
             assert.equal(new StringGuard().isIso3166Part1Alpha().guard('FR').isSuccess(), true);
