@@ -41,6 +41,7 @@ import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsIpAddress } from './string/string-is-ip-address';
 import { StringIsLatitude } from './string/string-is-latitude';
 import { StringIsLongitude } from './string/string-is-longitude';
+import { StringIsLatLong } from './string/string-is-lat-long';
 import { StringIsIso31661Alpha } from './string/string-is-iso31661-alpha';
 
 import { Guard } from '../core/guard';
@@ -493,9 +494,9 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
-     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30″ S, 49° 30′ 30.3033″ N, 9° 30′ 30.3033″ N
-     * @example DM: 49° 30.5051′ N, 49° 30.5051′ S, 9° 30.5051′ S
-     * @example DD: 49.508418°, -49°, 9°
+     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30″ S, 49° 30′ 30.3033″ N, 9° 30′ 30.3033″ N, 09° 30′ 30.3033″ N
+     * @example DM: 49° 30.5051′ N, 49° 30.5051′ S, 9° 30.5051′ S, 09° 30.5051′ S
+     * @example DD: 49.508418°, -49°, 9°, 09°
      */
     public isLatitude(format?: GeoCoordinatesFormat): this {
         this.addRule({ type: 'isLatitude', format: format });
@@ -519,12 +520,32 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
-     * @example DMS: 144° 57′ 48″ E, 144° 57′ 48″ W, 144° 57′ 48.1321″ E, 44° 57′ 48.1321″ E, 4° 57′ 48.1321″ E
-     * @example DM: 144° 57.8022′ E, 144° 57.8022′ W, 44° 57.8022′ W, 4° 57.8022′ W
-     * @example DD: 144.963375°, -144°, 44°, 4°
+     * @example DMS: 144° 57′ 48″ E, 144° 57′ 48″ W, 144° 57′ 48.1321″ E, 44° 57′ 48.1321″ E, 4° 57′ 48.1321″ E, 004° 57′ 48.1321″ E
+     * @example DM: 144° 57.8022′ E, 144° 57.8022′ W, 44° 57.8022′ W, 4° 57.8022′ W, 004° 57.8022′ W
+     * @example DD: 144.963375°, -144°, 44°, 4°, 004°
      */
     public isLongitude(format?: GeoCoordinatesFormat): this {
         this.addRule({ type: 'isLongitude', format: format });
+        return this;
+    }
+
+    /**
+     * Checks if string is a latitude-longitude geographic coordinate.
+     * @remarks Chainable method.
+     * @param format - Degrees Minutes Seconds (DMS),  Degrees Minutes (DM), Decimal Degrees minutes (DM).
+     * ```ts
+     * Rules:
+     * - Latitude comes before longitude.
+     * - Latitude is followed by a comma (',' or ', ' tolerated).
+     * ```
+     * @see {@link isLatitude} for latitude formats and rules.
+     * @see {@link isLongitude} for longitude formats and rules.
+     * @example DMS: 49° 30′ 30″ N, 49° 30′ 30″ S, 144° 57′ 48″ E, 144° 57′ 48″ W
+     * @example DM: 49° 30.5051′ N, 144° 57.8022′ E
+     * @example DD: 49.508418°, 144.963375°
+     */
+    public isLatLong(format?: GeoCoordinatesFormat): this {
+        this.addRule({ type: 'isLatLong', format: format });
         return this;
     }
 
@@ -615,6 +636,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsLatitude(rule, value).exec();
             case 'isLongitude':
                 return new StringIsLongitude(rule, value).exec();
+            case 'isLatLong':
+                return new StringIsLatLong(rule, value).exec();
             case 'isIso31661Alpha':
                 return new StringIsIso31661Alpha(rule, value).exec();
         }

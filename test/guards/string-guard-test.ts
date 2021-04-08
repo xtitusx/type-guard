@@ -3010,6 +3010,60 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isLatLong()', () => {
+        it("should return true when tested value is '49° 30′ 00″ N, 144° 57′ 48″ E'", () => {
+            assert.equal(new StringGuard().isLatLong().guard('49° 30′ 00″ N, 144° 57′ 48″ E').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '49° 30.0000′ N, 144° 57.8022′ E'", () => {
+            assert.equal(new StringGuard().isLatLong().guard('49° 30.0000′ N, 144° 57.8022′ E').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '49.508418°, 144.963375°'", () => {
+            assert.equal(new StringGuard().isLatLong().guard('49.508418°, 144.963375°').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '49.508418°,144.963375°'", () => {
+            assert.equal(new StringGuard().isLatLong().guard('49.508418°,144.963375°').isSuccess(), true);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isLatLong().guard(null).isSuccess(), false);
+        });
+
+        it("should return true when tested value is '49° 30′ 00″ N, 144° 57′ 48″ E'", () => {
+            assert.equal(new StringGuard().isLatLong().guard('49° 30′ 00″ N, 144° 57′ 48″ E').isSuccess(), true);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isLatLong().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isLatLong('DMS')", () => {
+            it("should return true when tested value is '49° 30′ 00″ N, 144° 57′ 48″ E'", () => {
+                assert.equal(
+                    new StringGuard().isLatLong('DMS').guard('49° 30′ 00″ N, 144° 57′ 48″ E').isSuccess(),
+                    true
+                );
+            });
+        });
+
+        describe("#isLatLong('DM')", () => {
+            it("should return true when tested value is '49° 30.0000′ N, 144° 57.8022′ E'", () => {
+                assert.equal(
+                    new StringGuard().isLatLong('DM').guard('49° 30.0000′ N, 144° 57.8022′ E').isSuccess(),
+                    true
+                );
+            });
+        });
+
+        describe("#isLatLong('DD')", () => {
+            it("should return true when tested value is '49.508418°, 144.963375°'", () => {
+                assert.equal(new StringGuard().isLatLong('DD').guard('49.508418°, 144.963375°').isSuccess(), true);
+            });
+        });
+    });
+
     describe('#isIso31661Alpha()', () => {
         it("should return true when tested value is 'FR'", () => {
             assert.equal(new StringGuard().isIso31661Alpha().guard('FR').isSuccess(), true);

@@ -32,6 +32,7 @@ export type StringRule =
     | { type: 'isIpAddress'; version?: IpVersion }
     | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLongitude'; format?: GeoCoordinatesFormat }
+    | { type: 'isLatLong'; format?: GeoCoordinatesFormat }
     | { type: 'isIso31661Alpha'; version?: AlphaVersion };
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
