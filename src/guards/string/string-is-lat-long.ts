@@ -56,16 +56,13 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
         }
     }
 
-    private hasCommaSeparator(): boolean {
+    private hasSeparator(): boolean {
         return this.value.includes(LAT_LONG_SEPARATOR);
     }
 
     private isLatLong(format?: GeoCoordinatesFormat): boolean {
-        console.log(this.value.split(new RegExp(LAT_LONG_SEPARATOR_PATTERN))[0]);
-        console.log(this.value.split(new RegExp(LAT_LONG_SEPARATOR_PATTERN))[1]);
-
         return (
-            this.hasCommaSeparator() &&
+            this.hasSeparator() &&
             TypeGuard.string()
                 .isLatitude(format)
                 .guard(this.value.split(new RegExp(LAT_LONG_SEPARATOR_PATTERN))[0])
