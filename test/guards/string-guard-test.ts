@@ -1452,6 +1452,39 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isAscii()', () => {
+        const allAsciiChars =
+            ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+
+        it("should return true when tested value is 'A'", () => {
+            assert.equal(new StringGuard().isAscii().guard('A').isSuccess(), true);
+        });
+
+        it("should return true when tested value is ' '", () => {
+            assert.equal(new StringGuard().isAscii().guard(' ').isSuccess(), true);
+        });
+
+        it(`should return true when tested value is '${allAsciiChars}'`, () => {
+            assert.equal(new StringGuard().isAscii().guard(allAsciiChars).isSuccess(), true);
+        });
+
+        it("should return false when tested value is '€'", () => {
+            assert.equal(new StringGuard().isAscii().guard('€').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isAscii().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isAscii().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isAscii().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isBinary()', () => {
         it("should return true when tested value is '0'", () => {
             assert.equal(new StringGuard().isBinary().guard('0').isSuccess(), true);

@@ -29,6 +29,7 @@ import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAlpha } from './string/string-is-alpha';
 import { StringIsNumeric } from './string/string-is-numeric';
+import { StringIsAscii } from './string/string-is-ascii';
 import { StringIsBinary } from './string/string-is-binary';
 import { StringIsOctal } from './string/string-is-octal';
 import { StringIsHex } from './string/string-is-hex';
@@ -301,6 +302,17 @@ export class StringGuard extends Guard<StringRule> {
      */
     public isNumeric(): this {
         this.addRule({ type: 'isNumeric' });
+        return this;
+    }
+
+    /**
+     * Checks if string only contains printable ASCII characters.
+     * @remarks Chainable method.
+     * @see {@link http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm} for details about the 95 printable characters in ASCII Table.
+     * @see {@link https://donsnotes.com/tech/charsets/ascii.html} for details about all characters in ASCII Table.
+     */
+    public isAscii(): this {
+        this.addRule({ type: 'isAscii' });
         return this;
     }
 
@@ -648,6 +660,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsAlpha(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
+            case 'isAscii':
+                return new StringIsAscii(rule, value).exec();
             case 'isBinary':
                 return new StringIsBinary(rule, value).exec();
             case 'isOctal':

@@ -20,6 +20,7 @@ export type StringRule =
     | { type: 'isAlphaNumeric' }
     | { type: 'isAlpha' }
     | { type: 'isNumeric' }
+    | { type: 'isAscii' }
     | { type: 'isBinary' }
     | { type: 'isOctal' }
     | { type: 'isHex' }
