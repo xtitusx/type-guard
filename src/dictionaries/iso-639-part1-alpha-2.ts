@@ -1,5 +1,11 @@
 /**
- * ISO 639-1:2002, Codes for the representation of names of languages—Part 1: Alpha-2 code, is the first part of the ISO 639 series of international standards for language codes. Part 1 covers the registration of two-letter codes. There are 184 two-letter codes registered as of December 2018. The registered codes cover the world's major languages.
+ * ISO 639-1:2002, Codes for the representation of names of languages—Part 1: Alpha-2 code, is the first part of the ISO 639 series of international standards for language codes.
+ *
+ * Part 1 covers the registration of two-letter codes.
+ *
+ * There are 184 two-letter codes registered as of December 2018.
+ *
+ * The registered codes cover the world's major languages.
  * @see {@link https://en.wikipedia.org/wiki/ISO_639-1}
  */
 export enum Iso639Part1Alpha2Enum {
