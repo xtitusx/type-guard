@@ -290,6 +290,8 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string only contains alpha characters.
+     *
+     * Characters with diacritics such as é or ä, as well as additional letters, are characters of extended alphabets and are not included in this set of alpha characters.
      * @remarks Chainable method.
      */
     public isAlpha(): this {
@@ -362,6 +364,8 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string is a decimal number.
+     *
+     * A decimal separator is a symbol used to separate the integer part from the fractional part of a number written in decimal form.
      * @remarks Chainable method.
      * @param options - Additional options.
      * ```ts
@@ -374,6 +378,7 @@ export class StringGuard extends Guard<StringRule> {
      * - Point.
      * - Comma.
      * ```
+     * @see {@link https://en.wikipedia.org/wiki/Decimal_separator} for details.
      */
     public isDecimal(options?: IIsDecimalOptions): this {
         this.addRule({ type: 'isDecimal', options });
@@ -581,7 +586,7 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string is an ISO 639-2 alpha-3 language code.
+     * Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code.
      * @remarks Chainable method.
      * ```ts
      * Rule:
