@@ -1522,6 +1522,18 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isBinary().guard('0o10').isSuccess(), false);
         });
 
+        it("should return false when tested value is ' 0'", () => {
+            assert.equal(new StringGuard().isBinary().guard(' 0').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '0 '", () => {
+            assert.equal(new StringGuard().isBinary().guard('0 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isBinary().guard('').isSuccess(), false);
+        });
+
         it("should return false when tested value is ''", () => {
             assert.equal(new StringGuard().isBinary().guard('').isSuccess(), false);
         });
@@ -1562,6 +1574,18 @@ describe('String-Guard', () => {
 
         it("should return false when tested value is '0b0'", () => {
             assert.equal(new StringGuard().isOctal().guard('0b0').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' 10'", () => {
+            assert.equal(new StringGuard().isOctal().guard(' 10').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '10 '", () => {
+            assert.equal(new StringGuard().isOctal().guard('10 ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isOctal().guard(' ').isSuccess(), false);
         });
 
         it("should return false when tested value is ''", () => {
@@ -1618,6 +1642,14 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isHex().guard('507f1f77bcf86cd799439011 ').isSuccess(), false);
         });
 
+        it("should return false when tested value is ' 507f1f77bcf86cd799439011'", () => {
+            assert.equal(new StringGuard().isHex().guard(' 507f1f77bcf86cd799439011').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isHex().guard(' ').isSuccess(), false);
+        });
+
         it("should return false when tested value is ''", () => {
             assert.equal(new StringGuard().isHex().guard('').isSuccess(), false);
         });
@@ -1628,6 +1660,250 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isHex().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isBase64()', () => {
+        describe("#isBase64('standard')", () => {
+            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGkh').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk=' (decoded: 'Hi')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk=').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk+' (decoded: 'Hi>')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk+').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk/' (decoded: 'Hi?')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk/').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk=' (decoded: 'H')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk=').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'YG==' (decoded: 'a')", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('YG==').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isBase64('standard')
+                        .guard('V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==')
+                        .isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when tested value is 'SGk'", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk-'", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk-').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk_'", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGk_').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh'", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard(' SGkh').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard(' SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' '", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard(' ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ''", () => {
+                assert.equal(new StringGuard().isBase64('standard').guard('').isSuccess(), false);
+            });
+
+            it('should return false when tested value is null', () => {
+                assert.equal(new StringGuard().isBase64('standard').guard(null).isSuccess(), false);
+            });
+
+            it('should return false when tested value is undefined', () => {
+                assert.equal(new StringGuard().isBase64('standard').guard(undefined).isSuccess(), false);
+            });
+        });
+
+        describe("#isBase64('fileName')", () => {
+            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGkh').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk=' (decoded: 'Hi')", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk=').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk+' (decoded: 'Hi>')", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk+').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk-'", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk-').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk=' (decoded: 'H')", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk=').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'YG==' (decoded: 'a')", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('YG==').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isBase64('fileName')
+                        .guard('V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==')
+                        .isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when tested value is 'SGk'", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk/'", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk/').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk_'", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGk_').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh'", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard(' SGkh').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard(' SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' '", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard(' ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ''", () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard('').isSuccess(), false);
+            });
+
+            it('should return false when tested value is null', () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard(null).isSuccess(), false);
+            });
+
+            it('should return false when tested value is undefined', () => {
+                assert.equal(new StringGuard().isBase64('fileName').guard(undefined).isSuccess(), false);
+            });
+        });
+
+        describe("#isBase64('urlSafe')", () => {
+            it("should return true when tested value is 'aHR0cHM6Ly93d3cuZ29vZ2xlLmZy' (decoded: 'http://www.google.fr')", () => {
+                assert.equal(
+                    new StringGuard().isBase64('urlSafe').guard('aHR0cHM6Ly93d3cuZ29vZ2xlLmZy').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when tested value is 'aHR0cHM6Ly93d3cuYmFzZTY0ZW5jb2RlLm9yZy8' (decoded: 'https://www.base64encode.org/')", () => {
+                assert.equal(
+                    new StringGuard().isBase64('urlSafe').guard('aHR0cHM6Ly93d3cuYmFzZTY0ZW5jb2RlLm9yZy8').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGkh').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk-'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk-').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk_'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGK_').isSuccess(), true);
+            });
+
+            it("should return true when tested value is 'SGk'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk').isSuccess(), true);
+            });
+
+            it("should return false when tested value is 'SGk='", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk=').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk+'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk+').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGk='", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk=').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'YG=='", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('YG==').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw=='", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isBase64('urlSafe')
+                        .guard('V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==')
+                        .isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when tested value is 'SGk/'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGK/').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh'", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard(' SGkh').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard(' SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is 'SGkh '", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('SGkh ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ' '", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard(' ').isSuccess(), false);
+            });
+
+            it("should return false when tested value is ''", () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard('').isSuccess(), false);
+            });
+
+            it('should return false when tested value is null', () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard(null).isSuccess(), false);
+            });
+
+            it('should return false when tested value is undefined', () => {
+                assert.equal(new StringGuard().isBase64('urlSafe').guard(undefined).isSuccess(), false);
+            });
         });
     });
 

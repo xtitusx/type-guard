@@ -8,6 +8,7 @@ import {
     IpVersion,
     GeoCoordinatesFormat,
     AlphaVersion,
+    Base64Implementation,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -33,6 +34,7 @@ import { StringIsAscii } from './string/string-is-ascii';
 import { StringIsBinary } from './string/string-is-binary';
 import { StringIsOctal } from './string/string-is-octal';
 import { StringIsHex } from './string/string-is-hex';
+import { StringIsBase64 } from './string/string-is-base64';
 import { StringIsDecimal } from './string/string-is-decimal';
 import { StringIsEmailAddress } from './string/string-is-email-address';
 import { StringIsObjectId } from './string/string-is-object-id';
@@ -107,7 +109,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string matches the specified regex.
      * @remarks Chainable method.
-     * @param value
+     * @param value - The RegExp pattern.
      */
     public matches(value: RegExp): this {
         this.addRule({ type: 'matches', value: value });
@@ -213,15 +215,16 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string follows a capitalization style.
      * @remarks Chainable method.
+     * ```ts
+     *  Rules:
+     * - Empty string allowed.
+     * - Word divider is whitespace.
+     * ```
      * @param style - 'firstChar' | 'startCase'
      * ```ts
      * style:
      * - firstChar: Only the first character is capitalized.
      * - startCase: All words, including articles, prepositions, and conjunctions, start with a capitalized character.
-     *
-     * Rules:
-     * - Empty string allowed.
-     * - Word divider is whitespace.
      * ```
      * @param checkFirstCharIsLetter - Strict or permissive style. Default is true (strict).
      * ```ts
@@ -254,12 +257,12 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string follows one of the most popular programming naming convention.
      * @remarks Chainable method.
-     * @param convention - {@link PASCAL_CASE_PATTERN | 'PascalCase'} | {@link CAMEL_CASE_PATTERN | 'camelCase'} | {@link QUIET_SNAKE_CASE_PATTERN | 'quiet_snake_case'}
-     * | {@link SCREAMING_SNAKE_CASE_PATTERN | 'SCREAMING_SNAKE_CASE'} | {@link KEBAB_CASE_PATTERN | 'kebab-case'} | {@link DOT_CASE_PATTERN | 'dot.case'}
      * ```ts
      * Rule:
      * - Empty string allowed.
      * ```
+     * @param convention - {@link PASCAL_CASE_PATTERN | 'PascalCase'} | {@link CAMEL_CASE_PATTERN | 'camelCase'} | {@link QUIET_SNAKE_CASE_PATTERN | 'quiet_snake_case'}
+     * | {@link SCREAMING_SNAKE_CASE_PATTERN | 'SCREAMING_SNAKE_CASE'} | {@link KEBAB_CASE_PATTERN | 'kebab-case'} | {@link DOT_CASE_PATTERN | 'dot.case'}
      * @see {@link https://capitalizemytitle.com/camel-case/} for camelCase, PascalCase, snake_case conversion examples.
      * @see {@link https://medium.com/@bendcosta/famous-camelcase-vs-kebab-case-javascript-6415cac2052b} for explanations.
      * @see {@link https://wprock.fr/blog/conventions-nommage-programmation/#conventions-le-camel-case} for french explanations.
@@ -290,8 +293,10 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string only contains alpha characters.
-     *
+     * ```ts
+     * Rule:
      * Characters with diacritics such as é or ä, as well as additional letters, are characters of extended alphabets and are not included in this set of alpha characters.
+     * ```
      * @remarks Chainable method.
      */
     public isAlpha(): this {
@@ -363,20 +368,43 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is Base64 encoded.
+     *
+     * Base64 is a binary to ASCII encoding scheme.
+     *
+     * Because Base64 is a six-bit encoding, and because the decoded values are divided into 8-bit octets on a modern computer,
+     * every four characters of Base64-encoded text (4 sextets = 24 bits) represents three octets of unencoded text or data (3 octets = 24 bits).
+     * @remarks Chainable method.
+     * @param impl - {@link BASE64_STANDARD_PATTERN | 'standard'} | {@link BASE64_FILE_NAME_PATTERN | 'fileName'} | {@link BASE64_URL_SAFE_PATTERN | 'urlSafe'}.
+     * ```ts
+     * impl:
+     * - standard : Standard Base64 encoding scheme. The padding character is "=".
+     * - fileName : Base64 for filenames uses "-" in place of "/". This is to work around the fact that Unix and Windows filenames cannot contain the character "/" since it’s used in file paths.
+     * - urlSafe : Base64 for URLs uses "-" and "_" in the place of "+"" and "/"" and omits padding the encoded string with "=". This is because URLs require special characters like +, / and = to be URL encoded into %2b, %2f and %3d, which makes the encoded string unnecessarily long.
+     * ```
+     * @see {@link https://en.wikipedia.org/wiki/Base64} for details.
+     * @see {@link https://medium.com/swlh/powering-the-internet-with-base64-d823ec5df747} for Base64 implementations.
+     * @example V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==
+     */
+    public isBase64(impl: Base64Implementation): this {
+        this.addRule({ type: 'isBase64', impl });
+        return this;
+    }
+
+    /**
      * Checks if string is a decimal number.
      *
      * A decimal separator is a symbol used to separate the integer part from the fractional part of a number written in decimal form.
      * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * Supported decimal separators are point and comma.
+     * ```
      * @param options - Additional options.
      * ```ts
      * options:
      * - force: Force number to have a decimal separator. Default is false.
      * - precision: Max number of digits to the right of the decimal point in the number.
-     *
-     * Rules:
-     * Supported decimal separators:
-     * - Point.
-     * - Comma.
      * ```
      * @see {@link https://en.wikipedia.org/wiki/Decimal_separator} for details.
      */
@@ -388,21 +416,21 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an email address number.
      * @remarks Chainable method.
-     * @param def - {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
      * ```ts
-     * def:
-     * - quick : Common implementation matching 99% of all email addresses in actual use today.
-     * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
-     *
      * Rules:
      * Lightened RFC 5322 (sections 3.2.3 and 3.4.1) and RFC 5321 implementation is omitting:
      * - IP addresses.
      * - domain-specific addresses.
      * - the syntax using double quotes and square brackets.
      * ```
+     * @param def - {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
+     * ```ts
+     * def:
+     * - quick : Common implementation matching 99% of all email addresses in actual use today.
+     * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
+     * ```
      * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax} for syntax.
      * @see {@link http://www.regular-expressions.info/email.html} for regex details.
-     
      * @example `John.Doe@example.com`
      */
     public isEmailAddress(def?: EmailAddressDefinition): this {
@@ -477,7 +505,6 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an IP address.
      * @remarks Chainable method.
-     * @param version - {@link IPV4_PATTERN | '4'} | {@link IPV6_PATTERN | '6'}.
      * ```ts
      * Rules:
      *
@@ -489,6 +516,7 @@ export class StringGuard extends Guard<StringRule> {
      * - IPv4-mapped IPv6 addresses (section 2.1 of rfc2765).
      * - IPv4-translated addresses (section 2.1 of rfc2765).
      * ```
+     * @param version - {@link IPV4_PATTERN | '4'} | {@link IPV6_PATTERN | '6'}.
      * @example IP address v4: 192.168.0.1
      * @example IP address v6: fde5:a773:d01a:0b6d
      */
@@ -500,17 +528,18 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is a latitude geographic coordinate.
      * @remarks Chainable method.
+     * ```ts
+     * Rules:
+     * - DMS fractional part max lenght is 4.
+     * - DM fractional part max lenght is 4.
+     * - DD fractional part max lenght is 6.
+     * ```
      * @param format - {@link DMS_LAT_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LAT_PATTERN | Degrees Minutes (DM)}, {@link DM_LAT_PATTERN | Decimal Degrees minutes (DM)}.
      * ```ts
      * format:
      * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
      * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
      * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
-     *
-     * Rules:
-     * - DMS fractional part max lenght is 4.
-     * - DM fractional part max lenght is 4.
-     * - DD fractional part max lenght is 6.
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
@@ -526,17 +555,18 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is a longitude geographic coordinate.
      * @remarks Chainable method.
+     * ```ts
+     *  Rules:
+     * - DMS fractional part max lenght is 4.
+     * - DM fractional part max lenght is 4.
+     * - DD fractional part max lenght is 6.
+     * ```
      * @param format - {@link DMS_LONG_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LONG_PATTERN | Degrees Minutes (DM)}, {@link DM_LONG_PATTERN | Decimal Degrees minutes (DM)}.
      * ```ts
      * format:
      * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
      * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
      * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
-     *
-     * Rules:
-     * - DMS fractional part max lenght is 4.
-     * - DM fractional part max lenght is 4.
-     * - DD fractional part max lenght is 6.
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
@@ -552,12 +582,12 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is a latitude-longitude geographic coordinate.
      * @remarks Chainable method.
-     * @param format - Degrees Minutes Seconds (DMS),  Degrees Minutes (DM), Decimal Degrees minutes (DM).
      * ```ts
      * Rules:
      * - Latitude comes before longitude.
      * - Latitude is followed by a comma (',' or ', ' tolerated).
      * ```
+     * @param format - Degrees Minutes Seconds (DMS),  Degrees Minutes (DM), Decimal Degrees minutes (DM).
      * @see {@link isLatitude} for latitude formats and rules.
      * @see {@link isLongitude} for longitude formats and rules.
      * @example DMS: 49° 30′ 30″ N, 49° 30′ 30″ S, 144° 57′ 48″ E, 144° 57′ 48″ W
@@ -604,11 +634,11 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string is an ISO 3166-1 alpha country code.
      * @remarks Chainable method.
-     * @param version - {@link Iso3166Part1Alpha2Enum | '2'} | {@link Iso3166Part1Alpha3Enum | '3'}.
      * ```ts
      * Rule:
      * - Uppercase.
      * ```
+     * @param version - {@link Iso3166Part1Alpha2Enum | '2'} | {@link Iso3166Part1Alpha3Enum | '3'}.
      * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1}
      * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
      * @example ISO 3166-1 alpha-2: DE, FR
@@ -690,6 +720,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsOctal(rule, value).exec();
             case 'isHex':
                 return new StringIsHex(rule, value).exec();
+            case 'isBase64':
+                return new StringIsBase64(rule, value).exec();
             case 'isDecimal':
                 return new StringIsDecimal(rule, value).exec();
             case 'isEmailAddress':

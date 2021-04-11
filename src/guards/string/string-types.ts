@@ -24,6 +24,7 @@ export type StringRule =
     | { type: 'isBinary' }
     | { type: 'isOctal' }
     | { type: 'isHex' }
+    | { type: 'isBase64'; impl: Base64Implementation }
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
@@ -51,6 +52,10 @@ export type ProgrammingConvention =
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 
+export type Base64Implementation = 'standard' | 'fileName' | 'urlSafe';
+
+export type EmailAddressDefinition = 'quick' | 'rfc5322';
+
 export type HExColorDigits = '3' | '6';
 
 export type IpVersion = '4' | '6';
@@ -58,5 +63,3 @@ export type IpVersion = '4' | '6';
 export type GeoCoordinatesFormat = 'DMS' | 'DM' | 'DD';
 
 export type AlphaVersion = '2' | '3';
-
-export type EmailAddressDefinition = 'quick' | 'rfc5322';
