@@ -1831,6 +1831,18 @@ describe('String-Guard', () => {
                 );
             });
 
+            it("should return true when tested value is 'aHR0cHM6Ly9wYTEubmFydmlpLmNvbS82MzY4L2NkMGQyZmIyNmJhYzRmZmViNjRkNTQwNWQ4NjM2Zjg3MGZmYmJkOGZfaHEuZ2lm' (decoded: 'https://pa1.narvii.com/6368/cd0d2fb26bac4ffeb64d5405d8636f870ffbbd8f_hq.gif')", () => {
+                assert.equal(
+                    new StringGuard()
+                        .isBase64('urlSafe')
+                        .guard(
+                            'aHR0cHM6Ly9wYTEubmFydmlpLmNvbS82MzY4L2NkMGQyZmIyNmJhYzRmZmViNjRkNTQwNWQ4NjM2Zjg3MGZmYmJkOGZfaHEuZ2lm'
+                        )
+                        .isSuccess(),
+                    true
+                );
+            });
+
             it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGkh').isSuccess(), true);
             });
@@ -1904,6 +1916,71 @@ describe('String-Guard', () => {
             it('should return false when tested value is undefined', () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(undefined).isSuccess(), false);
             });
+        });
+    });
+
+    describe('#isJson()', () => {
+        it('should return true when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+            assert.equal(new StringGuard().isJson().guard('{ "name":"John", "age":30, "car":null }').isSuccess(), true);
+        });
+
+        it('should return false when tested value is \'{ "name":\'John\', "age":30, "car":null }\'', () => {
+            assert.equal(
+                new StringGuard().isJson().guard('{ "name":\'John\', "age":30, "car":null }').isSuccess(),
+                false
+            );
+        });
+
+        it("should return true when tested value is '{}'", () => {
+            assert.equal(new StringGuard().isJson().guard('{}').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'true'", () => {
+            assert.equal(new StringGuard().isJson().guard('true').isSuccess(), true);
+        });
+
+        it('should return true when tested value is \'"foo"\'"', () => {
+            assert.equal(new StringGuard().isJson().guard('"foo"').isSuccess(), true);
+        });
+
+        it('should return true when tested value is \'["foo"]\'', () => {
+            assert.equal(new StringGuard().isJson().guard('["foo"]').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'null'", () => {
+            assert.equal(new StringGuard().isJson().guard('null').isSuccess(), true);
+        });
+
+        it("should return false when tested value is ['foo']", () => {
+            assert.equal(new StringGuard().isJson().guard(['foo']).isSuccess(), false);
+        });
+
+        it('should return false when tested value is true', () => {
+            assert.equal(new StringGuard().isJson().guard(true).isSuccess(), false);
+        });
+
+        it('should return false when tested value is 1', () => {
+            assert.equal(new StringGuard().isJson().guard(1).isSuccess(), false);
+        });
+
+        it('should return false when tested value is "foo"', () => {
+            assert.equal(new StringGuard().isJson().guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isJson().guard(' ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isJson().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isJson().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isJson().guard(undefined).isSuccess(), false);
         });
     });
 

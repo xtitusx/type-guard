@@ -35,6 +35,7 @@ import { StringIsBinary } from './string/string-is-binary';
 import { StringIsOctal } from './string/string-is-octal';
 import { StringIsHex } from './string/string-is-hex';
 import { StringIsBase64 } from './string/string-is-base64';
+import { StringIsJson } from './string/string-is-json';
 import { StringIsDecimal } from './string/string-is-decimal';
 import { StringIsEmailAddress } from './string/string-is-email-address';
 import { StringIsObjectId } from './string/string-is-object-id';
@@ -392,6 +393,15 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is a valid JSON string.
+     * @remarks Chainable method.
+     */
+    public isJson(): this {
+        this.addRule({ type: 'isJson' });
+        return this;
+    }
+
+    /**
      * Checks if string is a decimal number.
      *
      * A decimal separator is a symbol used to separate the integer part from the fractional part of a number written in decimal form.
@@ -722,6 +732,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsHex(rule, value).exec();
             case 'isBase64':
                 return new StringIsBase64(rule, value).exec();
+            case 'isJson':
+                return new StringIsJson(rule, value).exec();
             case 'isDecimal':
                 return new StringIsDecimal(rule, value).exec();
             case 'isEmailAddress':

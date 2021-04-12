@@ -25,6 +25,7 @@ export type StringRule =
     | { type: 'isOctal' }
     | { type: 'isHex' }
     | { type: 'isBase64'; impl: Base64Implementation }
+    | { type: 'isJson' }
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
