@@ -25,7 +25,7 @@ export type StringRule =
     | { type: 'isOctal' }
     | { type: 'isHex' }
     | { type: 'isBase64'; impl: Base64Implementation }
-    | { type: 'isJson' }
+    | { type: 'isJson'; format?: JsonFormat }
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
@@ -54,6 +54,8 @@ export type ProgrammingConvention =
 export type TrimmedSide = 'both' | 'left' | 'right';
 
 export type Base64Implementation = 'standard' | 'fileName' | 'urlSafe';
+
+export type JsonFormat = 'array' | 'object' | 'string';
 
 export type EmailAddressDefinition = 'quick' | 'rfc5322';
 

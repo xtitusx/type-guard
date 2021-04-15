@@ -9,6 +9,7 @@ import {
     GeoCoordinatesFormat,
     AlphaVersion,
     Base64Implementation,
+    JsonFormat,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -296,7 +297,7 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string only contains alpha characters.
      * ```ts
      * Rule:
-     * Characters with diacritics such as é or ä, as well as additional letters, are characters of extended alphabets and are not included in this set of alpha characters.
+     * - Characters with diacritics such as é or ä, as well as additional letters, are characters of extended alphabets and are not included in this set of alpha characters.
      * ```
      * @remarks Chainable method.
      */
@@ -379,9 +380,9 @@ export class StringGuard extends Guard<StringRule> {
      * @param impl - {@link BASE64_STANDARD_PATTERN | 'standard'} | {@link BASE64_FILE_NAME_PATTERN | 'fileName'} | {@link BASE64_URL_SAFE_PATTERN | 'urlSafe'}.
      * ```ts
      * impl:
-     * - standard : Standard Base64 encoding scheme. The padding character is "=".
-     * - fileName : Base64 for filenames uses "-" in place of "/". This is to work around the fact that Unix and Windows filenames cannot contain the character "/" since it’s used in file paths.
-     * - urlSafe : Base64 for URLs uses "-" and "_" in the place of "+"" and "/"" and omits padding the encoded string with "=". This is because URLs require special characters like +, / and = to be URL encoded into %2b, %2f and %3d, which makes the encoded string unnecessarily long.
+     * - standard: Standard Base64 encoding scheme. The padding character is "=".
+     * - fileName: Base64 for filenames uses "-" in place of "/". This is to work around the fact that Unix and Windows filenames cannot contain the character "/" since it’s used in file paths.
+     * - urlSafe: Base64 for URLs uses "-" and "_" in the place of "+"" and "/" and omits padding the encoded string with "=". This is because URLs require special characters like +, / and = to be URL encoded into %2b, %2f and %3d, which makes the encoded string unnecessarily long.
      * ```
      * @see {@link https://en.wikipedia.org/wiki/Base64} for details.
      * @see {@link https://medium.com/swlh/powering-the-internet-with-base64-d823ec5df747} for Base64 implementations.
@@ -394,10 +395,25 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string is a valid JSON string.
+     *
+     * A JSON string can describe the following sorts of JavaScript values: array, object, or string.
      * @remarks Chainable method.
+     * @param format - 'array' | 'object' | 'string'
+     * ```ts
+     * format:
+     * - array: Stringified JSON Array is surrounded by square brackets '[]'.
+     * - object: Stringified JSON Object is surrounded by curly braces '{}', and is written in key/value pairs.
+     * - string: Stringified JSON String, not empty.
+     * ```
+     * @see {@link https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse} for JSON.parse() returned values.
+     * @see {@link https://www.w3schools.com/js/js_json_objects.asp} for JSON Objects details.
+     * @see {@link https://matthewaisthorpe.com.au/json-object-vs-json-array/} for JSON Object and Array explanations.
+     * @example Stringified JSON Array: '["value"]'
+     * @example Stringified JSON Object: '{"object":"value"}'
+     * @example Stringified JSON String: '"foo"'
      */
-    public isJson(): this {
-        this.addRule({ type: 'isJson' });
+    public isJson(format?: JsonFormat): this {
+        this.addRule({ type: 'isJson', format });
         return this;
     }
 
@@ -436,8 +452,8 @@ export class StringGuard extends Guard<StringRule> {
      * @param def - {@link QUICK_EMAIL_ADDRESS_PATTERN | 'quick'} | {@link RFC5322_EMAIL_ADDRESS_PATTERN | 'rfc5322'}. Default is 'quick'.
      * ```ts
      * def:
-     * - quick : Common implementation matching 99% of all email addresses in actual use today.
-     * - rfc5322 : Lightened RFC 5322 implementation matching 99.99%.
+     * - quick: Common implementation matching 99% of all email addresses in actual use today.
+     * - rfc5322: Lightened RFC 5322 implementation matching 99.99%.
      * ```
      * @see {@link https://en.wikipedia.org/wiki/Email_address#Syntax} for syntax.
      * @see {@link http://www.regular-expressions.info/email.html} for regex details.
@@ -547,9 +563,9 @@ export class StringGuard extends Guard<StringRule> {
      * @param format - {@link DMS_LAT_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LAT_PATTERN | Degrees Minutes (DM)}, {@link DM_LAT_PATTERN | Decimal Degrees minutes (DM)}.
      * ```ts
      * format:
-     * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
-     * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
-     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
+     * - DMS: Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
+     * - DM: If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
+     * - DD: Most appreciated computer format for geographic coordinates using the base-10 number system.
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.
@@ -574,9 +590,9 @@ export class StringGuard extends Guard<StringRule> {
      * @param format - {@link DMS_LONG_PATTERN | Degrees Minutes Seconds (DMS)}, {@link DM_LONG_PATTERN | Degrees Minutes (DM)}, {@link DM_LONG_PATTERN | Decimal Degrees minutes (DM)}.
      * ```ts
      * format:
-     * - DMS : Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
-     * - DM : If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
-     * - DD : Most appreciated computer format for geographic coordinates using the base-10 number system.
+     * - DMS: Traditional format for geographic coordinates using a sexagesimal system (base-60), first used by ancient Sumerians in the 3rd millennium BC. In higher accuracy map-ping situations, the “partial” second can be expressed as a decimal. For example, 49° 30′ 30.3033″ N is still in the DMS format.
+     * - DM: If the decimal immediately follows the minutes coordinate (49° 30.5051′) then it’s DM.
+     * - DD: Most appreciated computer format for geographic coordinates using the base-10 number system.
      * ```
      * @see {@link https://gsp.humboldt.edu/olm/Lessons/GIS/01%20SphericalCoordinates/Reporting_Geographic_Coordinates.html} for DMS and DD details.
      * @see {@link https://www.pgc.umn.edu/apps/convert/} for online converter.

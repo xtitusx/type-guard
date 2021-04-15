@@ -1924,13 +1924,6 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isJson().guard('{ "name":"John", "age":30, "car":null }').isSuccess(), true);
         });
 
-        it('should return false when tested value is \'{ "name":\'John\', "age":30, "car":null }\'', () => {
-            assert.equal(
-                new StringGuard().isJson().guard('{ "name":\'John\', "age":30, "car":null }').isSuccess(),
-                false
-            );
-        });
-
         it("should return true when tested value is '{}'", () => {
             assert.equal(new StringGuard().isJson().guard('{}').isSuccess(), true);
         });
@@ -1949,6 +1942,13 @@ describe('String-Guard', () => {
 
         it("should return true when tested value is 'null'", () => {
             assert.equal(new StringGuard().isJson().guard('null').isSuccess(), true);
+        });
+
+        it('should return false when tested value is \'{ "name":\'John\', "age":30, "car":null }\'', () => {
+            assert.equal(
+                new StringGuard().isJson().guard('{ "name":\'John\', "age":30, "car":null }').isSuccess(),
+                false
+            );
         });
 
         it("should return false when tested value is ['foo']", () => {
@@ -1981,6 +1981,65 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isJson().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isJson('array)", () => {
+            it('should return true when tested value is \'["foo"]\'', () => {
+                assert.equal(new StringGuard().isJson('array').guard('["foo"]').isSuccess(), true);
+            });
+
+            it("should return true when tested value is '[]'", () => {
+                assert.equal(new StringGuard().isJson('array').guard('[]').isSuccess(), true);
+            });
+
+            it('should return false when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+                assert.equal(
+                    new StringGuard().isJson('array').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
+                    false
+                );
+            });
+
+            it('should return false when tested value is \'"foo"\'"', () => {
+                assert.equal(new StringGuard().isJson('array').guard('"foo"').isSuccess(), false);
+            });
+        });
+
+        describe("#isJson('object)", () => {
+            it('should return true when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+                assert.equal(
+                    new StringGuard().isJson('object').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when tested value is '{}'", () => {
+                assert.equal(new StringGuard().isJson('object').guard('{}').isSuccess(), true);
+            });
+
+            it('should return false when tested value is \'["foo"]\'', () => {
+                assert.equal(new StringGuard().isJson('object').guard('["foo"]').isSuccess(), false);
+            });
+
+            it('should return false when tested value is \'"foo"\'"', () => {
+                assert.equal(new StringGuard().isJson('object').guard('"foo"').isSuccess(), false);
+            });
+        });
+
+        describe("#isJson('string)", () => {
+            it('should return true when tested value is \'"foo"\'"', () => {
+                assert.equal(new StringGuard().isJson('string').guard('"foo"').isSuccess(), true);
+            });
+
+            it('should return false when tested value is \'["foo"]\'', () => {
+                assert.equal(new StringGuard().isJson('string').guard('["foo"]').isSuccess(), false);
+            });
+
+            it('should return false when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+                assert.equal(
+                    new StringGuard().isJson('string').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
+                    false
+                );
+            });
         });
     });
 
