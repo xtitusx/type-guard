@@ -27,6 +27,31 @@ describe('DateString-Guard', () => {
         });
     });
 
+    describe('#isIso8601()', () => {
+        it("should return true when tested value is '2015-01-20'", () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard('2015-01-20').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2021-02-28'", () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard('2021-02-28').isSuccess(), true);
+        });
+        it("should return false when tested value is '2021-02-29'", () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard('2021-02-30').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '2015-01-19T22:00:00+00:00'", () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard('2015-01-19T22:00:00+00:00').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isSameOrBefore()', () => {
         it("should return true when param is '2015-01-20T00:00:00+02:00' and tested value is '2015-01-20T00:00:00+02:00'", () => {
             assert.equal(
