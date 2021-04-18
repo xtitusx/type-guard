@@ -57,7 +57,7 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
     /**
      * Checks if number is a perfect square.
      * @remarks Perfect squares are the squares of the whole numbers: 1, 4, 9, 16, 25, 36, 49...
-     * @parma value
+     * @param value
      */
     private isPerfectSquare(value: number): boolean {
         const sq = Math.sqrt(value);

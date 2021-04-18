@@ -1,7 +1,7 @@
 import { StringRuleChecker } from './string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { Iso4217Alpha3Enum } from '../../dictionaries/iso-4217-alpha-3';
+import { Iso4217Alpha3Enum } from '../../dictionaries/iso-4217-alpha-3.enum';
 
 export class StringIsIso4217Alpha3 extends StringRuleChecker<{ type: 'isIso4217Alpha3' }> {
     constructor(rule: { type: 'isIso4217Alpha3' }, value: string) {
