@@ -11,7 +11,7 @@ export class ArrayHasSize extends ArrayRuleChecker<{ type: 'hasSize'; value: num
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length === this.rule.value
+        return this.hasSize()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class ArrayHasSize extends ArrayRuleChecker<{ type: 'hasSize'; value: num
                       `array object is expected to have length of ${this.rule.value} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasSize(): boolean {
+        return this.value.length === this.rule.value;
     }
 }

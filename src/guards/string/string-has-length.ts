@@ -11,7 +11,7 @@ export class StringHasLength extends StringRuleChecker<{ type: 'hasLength'; valu
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length === this.rule.value
+        return this.hasLength()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class StringHasLength extends StringRuleChecker<{ type: 'hasLength'; valu
                       `string is expected to have length of ${this.rule.value} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasLength(): boolean {
+        return this.value.length === this.rule.value;
     }
 }

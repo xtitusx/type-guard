@@ -20,15 +20,15 @@ export class DateStringIsIso8601Date extends DateStringRuleChecker<{ type: 'isIs
      * @override
      */
     public exec(): GuardResult {
-        return this.isIso8601DateExist()
+        return this.isIso8601DateValid()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`date string is expected to be an Iso 8601 date but is not: ${this.value}`)
+                  .withMessage(`date string is expected to be a valid Iso 8601 date but is not: ${this.value}`)
                   .build();
     }
 
-    private isIso8601DateExist(): boolean {
+    private isIso8601DateValid(): boolean {
         return dayjs(this.value, 'YYYY-MM-DD').format('YYYY-MM-DD') === this.value;
     }
 

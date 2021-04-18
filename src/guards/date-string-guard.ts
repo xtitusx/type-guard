@@ -17,7 +17,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * Checks if date string follows the ISO 8601 date representation (YYYY-MM-DD).
+     * Checks if date string is a valid ISO 8601 date (YYYY-MM-DD).
      * @remarks Chainable method.
      * @see {@link https://en.wikipedia.org/wiki/ISO_8601}
      */
@@ -47,7 +47,7 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * Checks if string date is the same or after the specified date.
+     * Checks if date string is the same or after the specified date.
      * @remarks Chainable method.
      * @param value
      */

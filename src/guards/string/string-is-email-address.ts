@@ -32,7 +32,7 @@ export class StringIsEmailAddress extends StringRuleChecker<{ type: 'isEmailAddr
     public exec(): GuardResult {
         switch (this.rule.def) {
             case 'rfc5322':
-                return this.value.match(new RegExp(RFC5322_EMAIL_ADDRESS_PATTERN)) !== null
+                return this.isRfc5322()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -42,7 +42,7 @@ export class StringIsEmailAddress extends StringRuleChecker<{ type: 'isEmailAddr
                           .build();
             case 'quick':
             default:
-                return this.value.match(new RegExp(QUICK_EMAIL_ADDRESS_PATTERN)) !== null
+                return this.isQuick()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -51,5 +51,13 @@ export class StringIsEmailAddress extends StringRuleChecker<{ type: 'isEmailAddr
                           )
                           .build();
         }
+    }
+
+    private isRfc5322(): boolean {
+        return this.value.match(new RegExp(RFC5322_EMAIL_ADDRESS_PATTERN)) !== null;
+    }
+
+    private isQuick(): boolean {
+        return this.value.match(new RegExp(QUICK_EMAIL_ADDRESS_PATTERN)) !== null;
     }
 }

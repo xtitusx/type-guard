@@ -21,4 +21,8 @@ export class NilIsNull extends NilRuleChecker<{ type: 'isNull' }> {
                   .withMessage(`value is expected to be null but is not: ${typeof this.value}`)
                   .build();
     }
+
+    private isNull(): boolean {
+        return this.value === null;
+    }
 }

@@ -11,11 +11,15 @@ export class StringContains extends StringRuleChecker<{ type: 'contains'; value:
      * @override
      */
     public exec(): GuardResult {
-        return this.value.indexOf(this.rule.value) !== -1
+        return this.contains()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to contain ${this.rule.value} but does not: ${this.value}`)
                   .build();
+    }
+
+    private contains(): boolean {
+        return this.value.indexOf(this.rule.value) !== -1;
     }
 }

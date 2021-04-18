@@ -17,11 +17,15 @@ export class StringIsBinary extends StringRuleChecker<{ type: 'isBinary' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(BINARY_PATTERN)) !== null
+        return this.isBinary()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to be a binary number but is not: ${this.value}`)
                   .build();
+    }
+
+    private isBinary(): boolean {
+        return this.value.match(new RegExp(BINARY_PATTERN)) !== null;
     }
 }

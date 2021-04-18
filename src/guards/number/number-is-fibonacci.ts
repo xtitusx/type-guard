@@ -12,7 +12,7 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
      */
     public exec(): GuardResult {
         if (this.rule.allowNegative === true) {
-            return this.isNegaFibonacci(this.value)
+            return this.isNegaFibonacci()
                 ? new GuardResult.Builder().withSuccess(true).build()
                 : new GuardResult.Builder()
                       .withSuccess(false)
@@ -20,7 +20,7 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
                       .build();
         }
 
-        return this.isFibonacci(this.value)
+        return this.isFibonacci()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -33,12 +33,12 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
      * @remarks n is a Fibonacci number if n is equal or greater than zero, and of the following conditions is fulfilled:
      * - 5n²+4 is a perfect square.
      * - 5n²-4 is a perfect square.
-     * @param value
      */
-    private isFibonacci(value: number): boolean {
-        return value < 0
+    private isFibonacci(): boolean {
+        return this.value < 0
             ? false
-            : this.isPerfectSquare(5 * Math.pow(value, 2) + 4) || this.isPerfectSquare(5 * Math.pow(value, 2) - 4);
+            : this.isPerfectSquare(5 * Math.pow(this.value, 2) + 4) ||
+                  this.isPerfectSquare(5 * Math.pow(this.value, 2) - 4);
     }
 
     /**
@@ -46,15 +46,18 @@ export class NumberIsFibonacci extends NumberRuleChecker<{ type: 'isFibonacci'; 
      * @remarks n is a NegaFibonacci number if one of the following conditions is fulfilled:
      * - 5n²+4 is a perfect square.
      * - 5n²-4 is a perfect square.
-     * @param value
      */
-    private isNegaFibonacci(value: number): boolean {
-        return this.isPerfectSquare(5 * Math.pow(value, 2) + 4) || this.isPerfectSquare(5 * Math.pow(value, 2) - 4);
+    private isNegaFibonacci(): boolean {
+        return (
+            this.isPerfectSquare(5 * Math.pow(this.value, 2) + 4) ||
+            this.isPerfectSquare(5 * Math.pow(this.value, 2) - 4)
+        );
     }
 
     /**
      * Checks if number is a perfect square.
      * @remarks Perfect squares are the squares of the whole numbers: 1, 4, 9, 16, 25, 36, 49...
+     * @parma value
      */
     private isPerfectSquare(value: number): boolean {
         const sq = Math.sqrt(value);

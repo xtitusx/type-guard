@@ -11,7 +11,7 @@ export class NumberIsIn extends NumberRuleChecker<{ type: 'isIn'; min: number; m
      * @override
      */
     public exec(): GuardResult {
-        return this.value >= this.rule.min && this.value <= this.rule.max
+        return this.isIn()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class NumberIsIn extends NumberRuleChecker<{ type: 'isIn'; min: number; m
                       `number is expected to be within range ${this.rule.min} to ${this.rule.max} but is not: ${this.value}`
                   )
                   .build();
+    }
+
+    private isIn(): boolean {
+        return this.value >= this.rule.min && this.value <= this.rule.max;
     }
 }

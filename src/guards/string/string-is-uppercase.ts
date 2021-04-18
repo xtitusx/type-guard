@@ -11,11 +11,15 @@ export class StringIsUppercase extends StringRuleChecker<{ type: 'isUpperCase' }
      * @override
      */
     public exec(): GuardResult {
-        return this.value.toUpperCase() === this.value
+        return this.isUppercase()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to not have any lowercase alpha characters but has: ${this.value}`)
                   .build();
+    }
+
+    private isUppercase(): boolean {
+        return this.value.toUpperCase() === this.value;
     }
 }

@@ -17,11 +17,15 @@ export class StringIsOctal extends StringRuleChecker<{ type: 'isOctal' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(OCTAL_PATTERN)) !== null
+        return this.isOctal()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to be an octal number but is not: ${this.value}`)
                   .build();
+    }
+
+    private isOctal(): boolean {
+        return this.value.match(new RegExp(OCTAL_PATTERN)) !== null;
     }
 }

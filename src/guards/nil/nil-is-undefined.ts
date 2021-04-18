@@ -14,11 +14,15 @@ export class NilIsUndefined extends NilRuleChecker<{ type: 'isUndefined' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value === undefined
+        return this.isUndefined()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`value is expected to be undefined but is not: ${typeof this.value}`)
                   .build();
+    }
+
+    private isUndefined(): boolean {
+        return this.value === undefined;
     }
 }

@@ -18,11 +18,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(ALPHA_PATTERN)) !== null
+        return this.isAlpha()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to only contain alpha characters but does not: ${this.value}`)
                   .build();
+    }
+
+    private isAlpha(): boolean {
+        return this.value.match(new RegExp(ALPHA_PATTERN)) !== null;
     }
 }

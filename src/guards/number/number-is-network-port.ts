@@ -14,7 +14,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
     public exec(): GuardResult {
         switch (this.rule.range) {
             case 'well-known':
-                return Number.isInteger(this.value) && this.value >= 1 && this.value <= 1023
+                return this.isWellKnownPort()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -23,7 +23,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                           )
                           .build();
             case 'registered':
-                return Number.isInteger(this.value) && this.value >= 1024 && this.value <= 49151
+                return this.isRegisteredPort()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -32,7 +32,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                           )
                           .build();
             case 'private':
-                return Number.isInteger(this.value) && this.value >= 49152 && this.value <= 65535
+                return this.isPrivatePort()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -41,7 +41,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                           )
                           .build();
             default:
-                return Number.isInteger(this.value) && this.value >= 1 && this.value <= 65535
+                return this.isPort()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -50,5 +50,21 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                           )
                           .build();
         }
+    }
+
+    private isWellKnownPort(): boolean {
+        return Number.isInteger(this.value) && this.value >= 1 && this.value <= 1023;
+    }
+
+    private isRegisteredPort(): boolean {
+        return Number.isInteger(this.value) && this.value >= 1024 && this.value <= 49151;
+    }
+
+    private isPrivatePort(): boolean {
+        return Number.isInteger(this.value) && this.value >= 49152 && this.value <= 65535;
+    }
+
+    private isPort(): boolean {
+        return Number.isInteger(this.value) && this.value >= 1 && this.value <= 65535;
     }
 }

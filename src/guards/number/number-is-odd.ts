@@ -11,11 +11,15 @@ export class NumberIsOdd extends NumberRuleChecker<{ type: 'isOdd' }> {
      * @override
      */
     public exec(): GuardResult {
-        return Number.isInteger(this.value) && this.value % 2 !== 0
+        return this.isOdd()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`number is expected to be odd but is not: ${this.value}`)
                   .build();
+    }
+
+    private isOdd(): boolean {
+        return Number.isInteger(this.value) && this.value % 2 !== 0;
     }
 }

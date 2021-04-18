@@ -87,7 +87,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
     public exec(): GuardResult {
         switch (this.rule.convention) {
             case 'PascalCase':
-                return this.value.match(new RegExp(PASCAL_CASE_PATTERN)) !== null
+                return this.isPascalCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -96,7 +96,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
             case 'camelCase':
-                return this.value.match(new RegExp(CAMEL_CASE_PATTERN)) !== null
+                return this.isCamelCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -105,7 +105,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
             case 'quiet_snake_case':
-                return this.value.match(new RegExp(QUIET_SNAKE_CASE_PATTERN)) !== null
+                return this.isQuietSnakeCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -114,7 +114,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
             case 'SCREAMING_SNAKE_CASE':
-                return this.value.match(new RegExp(SCREAMING_SNAKE_CASE_PATTERN)) !== null
+                return this.isScreamingSnakeCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -123,7 +123,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
             case 'kebab-case':
-                return this.value.match(new RegExp(KEBAB_CASE_PATTERN)) !== null
+                return this.isKebabCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -132,7 +132,7 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
             case 'dot.case':
-                return this.value.match(new RegExp(DOT_CASE_PATTERN)) !== null
+                return this.isDotCase()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -141,5 +141,29 @@ export class StringIsProgrammingCase extends StringRuleChecker<{
                           )
                           .build();
         }
+    }
+
+    private isPascalCase(): boolean {
+        return this.value.match(new RegExp(PASCAL_CASE_PATTERN)) !== null;
+    }
+
+    private isCamelCase(): boolean {
+        return this.value.match(new RegExp(CAMEL_CASE_PATTERN)) !== null;
+    }
+
+    private isQuietSnakeCase(): boolean {
+        return this.value.match(new RegExp(QUIET_SNAKE_CASE_PATTERN)) !== null;
+    }
+
+    private isScreamingSnakeCase(): boolean {
+        return this.value.match(new RegExp(SCREAMING_SNAKE_CASE_PATTERN)) !== null;
+    }
+
+    private isKebabCase(): boolean {
+        return this.value.match(new RegExp(KEBAB_CASE_PATTERN)) !== null;
+    }
+
+    private isDotCase(): boolean {
+        return this.value.match(new RegExp(DOT_CASE_PATTERN)) !== null;
     }
 }

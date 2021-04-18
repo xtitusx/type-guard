@@ -17,11 +17,15 @@ export class StringIsMacAddress extends StringRuleChecker<{ type: 'isMacAddress'
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(MAC_ADDRESS_PATTERN)) !== null
+        return this.isMacAddress()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to be a MAC address but is not: ${this.value}`)
                   .build();
+    }
+
+    private isMacAddress(): boolean {
+        return this.value.match(new RegExp(MAC_ADDRESS_PATTERN)) !== null;
     }
 }

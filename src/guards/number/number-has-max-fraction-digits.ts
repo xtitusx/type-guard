@@ -20,7 +20,7 @@ export class NumberHasMaxFractionDigits extends NumberRuleChecker<{
      * @override
      */
     public exec(): GuardResult {
-        return this.getPrecision(this.value) <= this.rule.max
+        return this.hasMaxFractionDigits()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -30,17 +30,20 @@ export class NumberHasMaxFractionDigits extends NumberRuleChecker<{
                   .build();
     }
 
+    private hasMaxFractionDigits(): boolean {
+        return this.getPrecision() <= this.rule.max;
+    }
+
     /**
      * Returns the number of digits to the right of the decimal point in the number.
-     * @param value
      */
-    private getPrecision(value: number): number {
-        if (!isFinite(value)) {
+    private getPrecision(): number {
+        if (!isFinite(this.value)) {
             return 0;
         }
         let e = 1,
             precision = 0;
-        while (Math.round(value * e) / e !== value) {
+        while (Math.round(this.value * e) / e !== this.value) {
             e *= 10;
             precision++;
         }

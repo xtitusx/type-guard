@@ -11,7 +11,7 @@ export class ArrayHasMaxSize extends ArrayRuleChecker<{ type: 'hasMaxSize'; max:
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length <= this.rule.max
+        return this.hasMaxSize()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class ArrayHasMaxSize extends ArrayRuleChecker<{ type: 'hasMaxSize'; max:
                       `array object is expected to have max length of ${this.rule.max} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasMaxSize(): boolean {
+        return this.value.length <= this.rule.max;
     }
 }

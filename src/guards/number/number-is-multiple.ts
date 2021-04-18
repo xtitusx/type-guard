@@ -11,11 +11,15 @@ export class NumberIsMultiple extends NumberRuleChecker<{ type: 'isMultiple'; va
      * @override
      */
     public exec(): GuardResult {
-        return this.rule.value === 0 || this.value % this.rule.value === 0
+        return this.isMultiple()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`number is expected to be a multiple of ${this.rule.value} but is not: ${this.value}`)
                   .build();
+    }
+
+    private isMultiple(): boolean {
+        return this.rule.value === 0 || this.value % this.rule.value === 0;
     }
 }

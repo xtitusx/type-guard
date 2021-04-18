@@ -11,7 +11,7 @@ export class NumberIsMax extends NumberRuleChecker<{ type: 'isMax'; max: number 
      * @override
      */
     public exec(): GuardResult {
-        return this.value <= this.rule.max
+        return this.isMax()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class NumberIsMax extends NumberRuleChecker<{ type: 'isMax'; max: number 
                       `number is expected to be equal or smaller than ${this.rule.max} but is greater: ${this.value}`
                   )
                   .build();
+    }
+
+    private isMax(): boolean {
+        return this.value <= this.rule.max;
     }
 }

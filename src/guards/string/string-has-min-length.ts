@@ -11,7 +11,7 @@ export class StringHasMinLength extends StringRuleChecker<{ type: 'hasMinLength'
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length >= this.rule.min
+        return this.hasMinLength()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class StringHasMinLength extends StringRuleChecker<{ type: 'hasMinLength'
                       `string is expected to have min length of ${this.rule.min} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasMinLength(): boolean {
+        return this.value.length >= this.rule.min;
     }
 }

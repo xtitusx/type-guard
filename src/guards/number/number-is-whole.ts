@@ -11,11 +11,15 @@ export class NumberIsWhole extends NumberRuleChecker<{ type: 'isWhole' }> {
      * @override
      */
     public exec(): GuardResult {
-        return Number.isInteger(this.value)
+        return this.isWhole()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`number is expected to be a whole number but is not: ${this.value}`)
                   .build();
+    }
+
+    private isWhole(): boolean {
+        return Number.isInteger(this.value);
     }
 }

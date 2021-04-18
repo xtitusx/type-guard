@@ -24,7 +24,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
     public exec(): GuardResult {
         switch (this.rule.side) {
             case 'both':
-                return this.value.trim() === this.value
+                return this.isTrimmed()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -33,7 +33,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                           )
                           .build();
             case 'left':
-                return this.value.match(new RegExp(LEADING_WHITESPACE_PATTERN)) === null
+                return this.isLeftTrimmed()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -42,7 +42,7 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                           )
                           .build();
             case 'right':
-                return this.value.match(new RegExp(TRAILING_WHITESPACE_PATTERN)) === null
+                return this.isRightTrimmed()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
@@ -51,5 +51,17 @@ export class StringIsTrimmed extends StringRuleChecker<{ type: 'isTrimmed'; side
                           )
                           .build();
         }
+    }
+
+    private isTrimmed(): boolean {
+        return this.value.trim() === this.value;
+    }
+
+    private isLeftTrimmed(): boolean {
+        return this.value.match(new RegExp(LEADING_WHITESPACE_PATTERN)) === null;
+    }
+
+    private isRightTrimmed(): boolean {
+        return this.value.match(new RegExp(TRAILING_WHITESPACE_PATTERN)) === null;
     }
 }

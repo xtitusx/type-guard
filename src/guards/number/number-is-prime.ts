@@ -11,7 +11,7 @@ export class NumberIsPrime extends NumberRuleChecker<{ type: 'isPrime' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.isPrime(this.value)
+        return this.isPrime()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -22,14 +22,13 @@ export class NumberIsPrime extends NumberRuleChecker<{ type: 'isPrime' }> {
     /**
      * Checks if number is a prime number.
      * @remarks A prime number is a positive integer that is not a product of two smaller natural numbers.
-     * @param value
      */
-    private isPrime(value: number): boolean {
-        if (!Number.isInteger(value) || value < 2) {
+    private isPrime(): boolean {
+        if (!Number.isInteger(this.value) || this.value < 2) {
             return false;
         }
-        for (let whole = 2; whole < value; whole++) {
-            if (value % whole === 0) {
+        for (let whole = 2; whole < this.value; whole++) {
+            if (this.value % whole === 0) {
                 return false;
             }
         }

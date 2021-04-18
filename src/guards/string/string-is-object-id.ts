@@ -18,11 +18,15 @@ export class StringIsObjectId extends StringRuleChecker<{ type: 'isObjectId' }> 
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(OBJECT_ID_PATTERN)) !== null
+        return this.isObjectId()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to be an ObjectId but is not: ${this.value}`)
                   .build();
+    }
+
+    private isObjectId(): boolean {
+        return this.value.match(new RegExp(OBJECT_ID_PATTERN)) !== null;
     }
 }

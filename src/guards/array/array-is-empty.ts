@@ -11,11 +11,15 @@ export class ArrayIsEmpty extends ArrayRuleChecker<{ type: 'isEmpty' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length === 0
+        return this.isEmpty()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`array object is expected to be empty but has length of: ${this.value.length}`)
                   .build();
+    }
+
+    private isEmpty(): boolean {
+        return this.value.length === 0;
     }
 }

@@ -11,7 +11,7 @@ export class NumberIsMin extends NumberRuleChecker<{ type: 'isMin'; min: number 
      * @override
      */
     public exec(): GuardResult {
-        return this.value >= this.rule.min
+        return this.isMin()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class NumberIsMin extends NumberRuleChecker<{ type: 'isMin'; min: number 
                       `number is expected to be equal or greater than ${this.rule.min} but is smaller: ${this.value}`
                   )
                   .build();
+    }
+
+    private isMin(): boolean {
+        return this.value >= this.rule.min;
     }
 }

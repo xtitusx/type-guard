@@ -18,11 +18,15 @@ export class StringIsAlphaNumeric extends StringRuleChecker<{ type: 'isAlphaNume
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(new RegExp(ALPHA_NUMERIC_PATTERN)) !== null
+        return this.isAlphaNumeric()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to only contain alphanumeric characters but does not: ${this.value}`)
                   .build();
+    }
+
+    private isAlphaNumeric(): boolean {
+        return this.value.match(new RegExp(ALPHA_NUMERIC_PATTERN)) !== null;
     }
 }

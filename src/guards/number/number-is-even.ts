@@ -11,11 +11,15 @@ export class NumberIsEven extends NumberRuleChecker<{ type: 'isEven' }> {
      * @override
      */
     public exec(): GuardResult {
-        return this.value % 2 === 0
+        return this.isEven()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`number is expected to be even but is not: ${this.value}`)
                   .build();
+    }
+
+    private isEven(): boolean {
+        return this.value % 2 === 0;
     }
 }

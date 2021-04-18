@@ -13,11 +13,15 @@ export class DateStringIsBefore extends DateStringRuleChecker<{ type: 'isBefore'
      * @override
      */
     public exec(): GuardResult {
-        return dayjs(this.value).isBefore(this.rule.value)
+        return this.isBefore()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`date string is expected to be before ${this.rule.value} but is after: ${this.value}`)
                   .build();
+    }
+
+    private isBefore(): boolean {
+        return dayjs(this.value).isBefore(this.rule.value);
     }
 }

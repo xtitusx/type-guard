@@ -11,11 +11,15 @@ export class StringMatches extends StringRuleChecker<{ type: 'matches'; value: R
      * @override
      */
     public exec(): GuardResult {
-        return this.value.match(this.rule.value) !== null
+        return this.matches()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is expected to match ${this.rule.value} regex but does not: ${this.value}`)
                   .build();
+    }
+
+    private matches(): boolean {
+        return this.value.match(this.rule.value) !== null;
     }
 }

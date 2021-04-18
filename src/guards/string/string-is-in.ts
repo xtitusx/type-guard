@@ -11,7 +11,7 @@ export class StringIsIn extends StringRuleChecker<{ type: 'isIn'; value: string[
      * @override
      */
     public exec(): GuardResult {
-        return this.rule.value.includes(this.value)
+        return this.isIn()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class StringIsIn extends StringRuleChecker<{ type: 'isIn'; value: string[
                       `string is expected to be in an array of allowed string values but is not: ${this.value}`
                   )
                   .build();
+    }
+
+    private isIn(): boolean {
+        return this.rule.value.includes(this.value);
     }
 }

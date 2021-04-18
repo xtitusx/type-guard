@@ -15,7 +15,7 @@ export class DateStringIsSameOrBefore extends DateStringRuleChecker<{ type: 'isS
      * @override
      */
     public exec(): GuardResult {
-        return dayjs(this.value).isSameOrBefore(this.rule.value)
+        return this.isSameOrBefore()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -23,5 +23,9 @@ export class DateStringIsSameOrBefore extends DateStringRuleChecker<{ type: 'isS
                       `date string is expected to be the same or before ${this.rule.value} but is after: ${this.value}`
                   )
                   .build();
+    }
+
+    private isSameOrBefore(): boolean {
+        return dayjs(this.value).isSameOrBefore(this.rule.value);
     }
 }

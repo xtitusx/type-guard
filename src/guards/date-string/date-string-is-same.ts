@@ -22,4 +22,8 @@ export class DateStringIsSame extends DateStringRuleChecker<{ type: 'isSame'; va
                   )
                   .build();
     }
+
+    private isSame(): boolean {
+        return dayjs(this.value).isSame(this.rule.value);
+    }
 }

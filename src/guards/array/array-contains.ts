@@ -11,11 +11,15 @@ export class ArrayContains extends ArrayRuleChecker<{ type: 'contains'; value: a
      * @override
      */
     public exec(): GuardResult {
-        return Object.values(this.value).includes(this.rule.value)
+        return this.contains()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`array object is expected to contain ${this.rule.value} value but is not`)
                   .build();
+    }
+
+    private contains(): boolean {
+        return Object.values(this.value).includes(this.rule.value);
     }
 }

@@ -19,7 +19,7 @@ export class StringIsDecimal extends StringRuleChecker<{ type: 'isDecimal'; opti
     }
 
     public exec(): GuardResult {
-        if (this.value.match(new RegExp(DECIMAL_PATTERN)) === null) {
+        if (!this.isDecimal()) {
             return new GuardResult.Builder()
                 .withSuccess(false)
                 .withMessage(`string is expected to be a decimal number but is not: ${this.value}`)
@@ -50,6 +50,10 @@ export class StringIsDecimal extends StringRuleChecker<{ type: 'isDecimal'; opti
         }
 
         return new GuardResult.Builder().withSuccess(true).build();
+    }
+
+    private isDecimal(): boolean {
+        return this.value.match(new RegExp(DECIMAL_PATTERN)) !== null;
     }
 
     private hasDecimalSeparator(): boolean {

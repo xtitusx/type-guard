@@ -11,7 +11,7 @@ export class StringHasMaxLength extends StringRuleChecker<{ type: 'hasMaxLength'
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length <= this.rule.max
+        return this.hasMaxLength()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class StringHasMaxLength extends StringRuleChecker<{ type: 'hasMaxLength'
                       `string is expected to have max length of ${this.rule.max} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasMaxLength(): boolean {
+        return this.value.length <= this.rule.max;
     }
 }

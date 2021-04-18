@@ -11,7 +11,7 @@ export class ArrayHasMinSize extends ArrayRuleChecker<{ type: 'hasMinSize'; min:
      * @override
      */
     public exec(): GuardResult {
-        return this.value.length >= this.rule.min
+        return this.hasMinSize()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
@@ -19,5 +19,9 @@ export class ArrayHasMinSize extends ArrayRuleChecker<{ type: 'hasMinSize'; min:
                       `array object is expected to have min length of ${this.rule.min} but has length of: ${this.value.length}`
                   )
                   .build();
+    }
+
+    private hasMinSize(): boolean {
+        return this.value.length >= this.rule.min;
     }
 }

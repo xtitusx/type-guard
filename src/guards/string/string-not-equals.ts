@@ -11,11 +11,15 @@ export class StringNotEquals extends StringRuleChecker<{ type: 'notEquals'; valu
      * @override
      */
     public exec(): GuardResult {
-        return this.value !== this.rule.value
+        return this.notEquals()
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(`string is not expected to be equal to ${this.rule.value} but is: ${this.value}`)
                   .build();
+    }
+
+    private notEquals(): boolean {
+        return this.value !== this.rule.value;
     }
 }
