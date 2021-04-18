@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { NilGuard } from '../../src/guards/nil-guard';
+import { NilGuard } from '../../src/guards/nil.guard';
 
 describe('Nil-Guard', () => {
     describe('#isUndefined()', () => {

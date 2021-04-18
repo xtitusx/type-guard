@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { ArrayGuard } from '../../src/guards/array-guard';
+import { ArrayGuard } from '../../src/guards/array.guard';
 
 describe('Array-Guard', () => {
     describe('#isEmpty()', () => {

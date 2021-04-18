@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { StringGuard } from '../../src/guards/string-guard';
+import { StringGuard } from '../../src/guards/string.guard';
 
 describe('String-Guard', () => {
     describe('#guard()', () => {
