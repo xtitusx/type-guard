@@ -22,17 +22,17 @@ export class TypeGuard {
     }
 
     /**
-     * @returns A new instance of DateStringGuard.
-     */
-    public static dateString(): DateStringGuard {
-        return new DateStringGuard();
-    }
-
-    /**
      * @returns A new instance of ClassGuard.
      */
     public static class(): ClassGuard {
         return new ClassGuard();
+    }
+
+    /**
+     * @returns A new instance of DateStringGuard.
+     */
+    public static dateString(): DateStringGuard {
+        return new DateStringGuard();
     }
 
     /**
