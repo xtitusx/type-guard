@@ -1,5 +1,5 @@
 {
-  "name": "type-guard",
+  "name": "@xtitusx/type-guard",
   "version": "1.0.0",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
   "scripts": {
