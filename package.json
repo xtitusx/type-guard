@@ -2,6 +2,9 @@
   "name": "@xtitusx/type-guard",
   "version": "1.0.0",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
+  "files": ["build/src/**/*"],
+  "main": "./build/src/index.js",
+  "typings": "./build/src/index.d.ts",
   "scripts": {
     "build": "rimraf build && tsc",
     "test": "mocha ./build/test/**/**/*-test.js",
@@ -28,6 +31,7 @@
     "validation",
     "guard"
   ],
+
   "homepage": "https://github.com/xtitusx/type-guard#readme",
   "dependencies": {
     "dayjs": "^1.8.23"
