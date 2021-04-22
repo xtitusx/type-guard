@@ -36,11 +36,15 @@ describe('DateString-Guard', () => {
             assert.equal(new DateStringGuard().isIso8601Date().guard('2021-02-28').isSuccess(), true);
         });
         it("should return false when tested value is '2021-02-29'", () => {
-            assert.equal(new DateStringGuard().isIso8601Date().guard('2021-02-30').isSuccess(), false);
+            assert.equal(new DateStringGuard().isIso8601Date().guard('2021-02-29').isSuccess(), false);
         });
 
         it("should return false when tested value is '2015-01-19T22:00:00+00:00'", () => {
             assert.equal(new DateStringGuard().isIso8601Date().guard('2015-01-19T22:00:00+00:00').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new DateStringGuard().isIso8601Date().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
@@ -49,6 +53,52 @@ describe('DateString-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new DateStringGuard().isIso8601Date().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isRfc3339()', () => {
+        it("should return true when tested value is '2019-10-12T07:20:50.52Z'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2019-10-12T07:20:50.52Z').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2019-10-12 07:20:50.52Z'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2019-10-12 07:20:50.52Z').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2015-01-19T22:00:00+00:00'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2015-01-19T22:00:00+00:00').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2015-01-19T22:00:00+00:00'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2015-01-19T22:00:00+00:00').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2015-01-19T22:00:00+12:00'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2015-01-19T22:00:00+12:00').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2015-01-19T22:00:00-12:00'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2015-01-19T22:00:00-12:00').isSuccess(), true);
+        });
+
+        it("should return true when tested value is '2015-01-19T22:00:00-01:00'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2015-01-19T22:00:00-01:00').isSuccess(), true);
+        });
+
+        it("should return false when tested value is '2021-02-29 07:20:50.52Z'", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('2021-02-29 07:20:50.52Z').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new DateStringGuard().isRfc3339().guard(undefined).isSuccess(), false);
         });
     });
 

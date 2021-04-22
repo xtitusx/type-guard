@@ -24,7 +24,7 @@ export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be an Iso 3166-1 alpha-2 country code but is not: ${this.value}`
+                              `string is expected to be an ISO 3166-1 alpha-2 country code but is not: ${this.value}`
                           )
                           .build();
             case '3':
@@ -33,7 +33,7 @@ export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be an Iso 3166-1 alpha-3 country code but is not: ${this.value}`
+                              `string is expected to be an ISO 3166-1 alpha-3 country code but is not: ${this.value}`
                           )
                           .build();
             default:
@@ -42,7 +42,7 @@ export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be an Iso 3166-1 alpha-2 or alpha-3 country code but is not: ${this.value}`
+                              `string is expected to be an ISO 3166-1 alpha-2 or alpha-3 country code but is not: ${this.value}`
                           )
                           .build();
         }

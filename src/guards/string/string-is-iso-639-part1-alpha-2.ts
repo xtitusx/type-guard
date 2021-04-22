@@ -16,7 +16,7 @@ export class StringIsIso639Part1Alpha2 extends StringRuleChecker<{ type: 'isIso6
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to be an Iso 639-1 alpha-2 language code but is not: ${this.value}`)
+                  .withMessage(`string is expected to be an ISO 639-1 alpha-2 language code but is not: ${this.value}`)
                   .build();
     }
 

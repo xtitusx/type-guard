@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 
 import { DateStringRule } from './date-string/date-string-types';
 import { DateStringIsIso8601Date } from './date-string/date-string-is-iso-8601-date';
+import { DateStringIsRfc3339 } from './date-string/date-string-is-rfc-3339';
 import { DateStringIsSame } from './date-string/date-string-is-same';
 import { DateStringIsSameOrBefore } from './date-string/date-string-is-same-or-before';
 import { DateStringIsSameOrAfter } from './date-string/date-string-is-same-or-after';
@@ -17,12 +18,26 @@ export class DateStringGuard extends Guard<DateStringRule> {
     }
 
     /**
-     * Checks if date string is a valid ISO 8601 date (YYYY-MM-DD).
+     * Checks if date string is a valid and existing ISO 8601 Date (YYYY-MM-DD).
      * @remarks Chainable method.
      * @see {@link https://en.wikipedia.org/wiki/ISO_8601}
+     * @example 1982-03-16
      */
     public isIso8601Date(): this {
         this.addRule({ type: 'isIso8601Date' });
+        return this;
+    }
+
+    /**
+     * Checks if date string is a valid and existing RFC 3339 Datetime.
+     *
+     * RFC 3339 is following the ISO 8601 DateTime format. The only difference is RFC allows us to replace “T” with “space”.
+     * @remarks Chainable method.
+     * @see {@link https://medium.com/easyread/understanding-about-rfc-3339-for-datetime-formatting-in-software-engineering-940aa5d5f68a}
+     * @example 2019-10-12T07:20:50.52Z, 2019-10-12 07:20:50.52Z
+     */
+    public isRfc3339(): this {
+        this.addRule({ type: 'isRfc3339' });
         return this;
     }
 
@@ -85,6 +100,8 @@ export class DateStringGuard extends Guard<DateStringRule> {
         switch (rule.type) {
             case 'isIso8601Date':
                 return new DateStringIsIso8601Date(rule, value).exec();
+            case 'isRfc3339':
+                return new DateStringIsRfc3339(rule, value).exec();
             case 'isSame':
                 return new DateStringIsSame(rule, value).exec();
             case 'isSameOrBefore':

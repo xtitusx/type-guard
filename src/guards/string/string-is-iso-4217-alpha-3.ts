@@ -16,7 +16,7 @@ export class StringIsIso4217Alpha3 extends StringRuleChecker<{ type: 'isIso4217A
             ? new GuardResult.Builder().withSuccess(true).build()
             : new GuardResult.Builder()
                   .withSuccess(false)
-                  .withMessage(`string is expected to be an Iso 4217 alpha-3 currency code but is not: ${this.value}`)
+                  .withMessage(`string is expected to be an ISO 4217 alpha-3 currency code but is not: ${this.value}`)
                   .build();
     }
 
