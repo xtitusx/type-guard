@@ -18,7 +18,7 @@ const numberSuccess: boolean = TypeGuard.number().isIn(10, 20).isEven().guard(14
 
 const stringSuccess: boolean = TypeGuard.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo").isSuccess();
 
-Bulk example:
+Bulk examples:
 
 const guardResult = new GuardResultBulk()
     .add([
