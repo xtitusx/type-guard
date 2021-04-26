@@ -27,7 +27,7 @@ export class GuardResultBulk {
      */
     public combine(): GuardResult {
         for (const guardResult of this.guardResults) {
-            if (!guardResult?.isSuccess()) {
+            if (guardResult && !guardResult.isSuccess()) {
                 return guardResult;
             }
         }

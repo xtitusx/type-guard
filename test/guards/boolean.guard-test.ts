@@ -8,6 +8,16 @@ describe('Boolean-Guard', () => {
             assert.equal(new BooleanGuard().isTrue().guard(true).isSuccess(), true);
         });
 
+        it('should return true when tested value is true', () => {
+            assert.equal(
+                new BooleanGuard()
+                    .isTrue()
+                    .guard(1 > 0)
+                    .isSuccess(),
+                true
+            );
+        });
+
         it('should return false when tested value is false', () => {
             assert.equal(new BooleanGuard().isTrue().guard(false).isSuccess(), false);
         });
