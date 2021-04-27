@@ -266,7 +266,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param convention - {@link PASCAL_CASE_PATTERN | 'PascalCase'} | {@link CAMEL_CASE_PATTERN | 'camelCase'} | {@link QUIET_SNAKE_CASE_PATTERN | 'quiet_snake_case'}
      * | {@link SCREAMING_SNAKE_CASE_PATTERN | 'SCREAMING_SNAKE_CASE'} | {@link KEBAB_CASE_PATTERN | 'kebab-case'} | {@link DOT_CASE_PATTERN | 'dot.case'}
      * @see {@link https://capitalizemytitle.com/camel-case/} for camelCase, PascalCase, snake_case conversion examples.
-     * @see {@link https://medium.com/@bendcosta/famous-camelcase-vs-kebab-case-javascript-6415cac2052b} for explanations.
+     * @see {@link https://medium.com/bendcosta/famous-camelcase-vs-kebab-case-javascript-6415cac2052b} for explanations.
      * @see {@link https://wprock.fr/blog/conventions-nommage-programmation/#conventions-le-camel-case} for french explanations.
      */
     public isProgrammingCase(convention: ProgrammingConvention): this {

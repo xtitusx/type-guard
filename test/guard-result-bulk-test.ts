@@ -29,6 +29,20 @@ describe('Guard-Result-Bulk', () => {
             );
         });
 
+        it('should return true', () => {
+            assert.equal(
+                new GuardResultBulk()
+                    .add([
+                        undefined,
+                        TypeGuard.string().equals('foo').guard('foo'),
+                        TypeGuard.string().hasMinLength(1).guard('foo'),
+                    ])
+                    .combine()
+                    .isSuccess(),
+                true
+            );
+        });
+
         it('should return false from last bulked guard', () => {
             const guardResult = new GuardResultBulk()
                 .add([

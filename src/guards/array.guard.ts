@@ -63,7 +63,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * Checks if array contains the specified number.
+     * Checks if array contains the specified value.
      * @remarks Chainable method.
      * @param value
      */
