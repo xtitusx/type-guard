@@ -1,9 +1,17 @@
-type-guard
+# type-guard
 
-TypeDoc: https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+[![Minified size][min-size-image]][npm-url]
 
-Simple examples:
+## Installation
 
+```
+npm install @xtitusx/type-guard
+```
+
+## Simple examples
+```
 const arraySuccess: boolean = TypeGuard.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']).isSuccess();
 
 const booleanSuccess: boolean = TypeGuard.boolean().isTrue().guard(1 > 0).isSuccess();
@@ -17,9 +25,10 @@ const nilSuccess: boolean = TypeGuard.nil().isNil(null).guard(null).isSuccess();
 const numberSuccess: boolean = TypeGuard.number().isIn(10, 20).isEven().guard(14).isSuccess();
 
 const stringSuccess: boolean = TypeGuard.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo").isSuccess();
+```
+## Bulk examples
 
-Bulk examples:
-
+```
 const guardResult = new GuardResultBulk()
     .add([
         TypeGuard.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
@@ -35,3 +44,16 @@ const guardResult = new GuardResultBulk()
         TypeGuard.number().isIn(10, 20).isEven().guard(14),
     ])
     .stack();
+```
+
+## TypeDoc
+[GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html)
+
+## Maintainer
+- [xtitusx](https://github.com/xtitusx) - **Benjamin Tussac** (author)
+
+
+[npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
+[npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
+[downloads-image]: https://img.shields.io/npm/dm/@xtitusx/type-guard
+[min-size-image]: https://img.shields.io/bundlephobia/min/@xtitusx/type-guard

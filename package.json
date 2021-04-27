@@ -1,6 +1,6 @@
 {
   "name": "@xtitusx/type-guard",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
   "files": ["build/src/**/*"],
   "main": "./build/src/index.js",
