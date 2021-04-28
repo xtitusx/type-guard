@@ -44,7 +44,7 @@ Notice that only a single type of rule checker is retained in the guard: the las
 
 So, in the following example, .contains('bar') will override .contains('foo'):
 ```
-Tyr.string().contains('foo').contains('bar');
+Tyr.string().contains('foo').contains('bar').guard("foo");
 ```
 
 ## Simple examples
