@@ -1,3 +1,4 @@
+import { Codex } from './codex';
 import { ArrayGuard } from './guards/array.guard';
 import { BooleanGuard } from './guards/boolean.guard';
 import { ClassGuard } from './guards/class.guard';
@@ -6,7 +7,7 @@ import { NilGuard } from './guards/nil.guard';
 import { NumberGuard } from './guards/number.guard';
 import { StringGuard } from './guards/string.guard';
 
-export class TypeGuard {
+export class Tyr {
     /**
      * @returns A new instance of ArrayGuard.
      */

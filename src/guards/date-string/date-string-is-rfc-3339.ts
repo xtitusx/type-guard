@@ -1,7 +1,7 @@
 import { DateStringRuleChecker } from './date-string-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
-import { TypeGuard } from '../../type-guard';
+import { Tyr } from '../../tyr';
 
 /**
  * RFC3339 Datetime pattern.
@@ -27,9 +27,7 @@ export class DateStringIsRfc3339 extends DateStringRuleChecker<{ type: 'isRfc333
     }
 
     private isRfc3339Valid(): boolean {
-        return (
-            this.isRfc3339() && TypeGuard.dateString().isIso8601Date().guard(this.value.substring(0, 10)).isSuccess()
-        );
+        return this.isRfc3339() && Tyr.dateString().isIso8601Date().guard(this.value.substring(0, 10)).isSuccess();
     }
 
     private isRfc3339(): boolean {

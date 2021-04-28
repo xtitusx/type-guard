@@ -1,5 +1,5 @@
 /**
- * ISO 4218 alpha codes are three-letter codes that represent National and X currencies.
+ * ISO 4217 alpha codes are three-letter codes that represent National and X currencies.
  *
  * Last table update: 2018-08-29.
  * @see {@link https://en.wikipedia.org/wiki/ISO_4217}

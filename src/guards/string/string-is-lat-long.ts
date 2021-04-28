@@ -2,7 +2,7 @@ import { StringRuleChecker } from './string-rule-checker';
 import { GeoCoordinatesFormat } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
-import { TypeGuard } from '../../type-guard';
+import { Tyr } from '../../tyr';
 
 const LAT_LONG_SEPARATOR = ',';
 const LAT_LONG_SEPARATOR_PATTERN = `[${LAT_LONG_SEPARATOR}][ ]?`;
@@ -63,11 +63,11 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
     private isLatLong(format?: GeoCoordinatesFormat): boolean {
         return (
             this.hasSeparator() &&
-            TypeGuard.string()
+            Tyr.string()
                 .isLatitude(format)
                 .guard(this.value.split(new RegExp(LAT_LONG_SEPARATOR_PATTERN))[0])
                 .isSuccess() &&
-            TypeGuard.string()
+            Tyr.string()
                 .isLongitude(format)
                 .guard(this.value.split(new RegExp(LAT_LONG_SEPARATOR_PATTERN))[1])
                 .isSuccess()

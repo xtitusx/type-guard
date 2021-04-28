@@ -2,14 +2,14 @@ import { assert } from 'chai';
 
 import { GuardResultBulk } from '../src/core/guard-result-bulk';
 import { GuardResult } from '../src/core/guard-result';
-import { TypeGuard } from '../src/type-guard';
+import { Tyr } from '../src/tyr';
 
 describe('Guard-Result-Bulk', () => {
     describe('#combine()', () => {
         it('should return true', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([TypeGuard.string().equals('foo').guard('foo')])
+                    .add([Tyr.string().equals('foo').guard('foo')])
                     .combine()
                     .isSuccess(),
                 true
@@ -19,10 +19,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return true', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([
-                        TypeGuard.string().equals('foo').guard('foo'),
-                        TypeGuard.string().hasMinLength(1).guard('foo'),
-                    ])
+                    .add([Tyr.string().equals('foo').guard('foo'), Tyr.string().hasMinLength(1).guard('foo')])
                     .combine()
                     .isSuccess(),
                 true
@@ -34,8 +31,8 @@ describe('Guard-Result-Bulk', () => {
                 new GuardResultBulk()
                     .add([
                         undefined,
-                        TypeGuard.string().equals('foo').guard('foo'),
-                        TypeGuard.string().hasMinLength(1).guard('foo'),
+                        Tyr.string().equals('foo').guard('foo'),
+                        Tyr.string().hasMinLength(1).guard('foo'),
                     ])
                     .combine()
                     .isSuccess(),
@@ -46,9 +43,9 @@ describe('Guard-Result-Bulk', () => {
         it('should return false from last bulked guard', () => {
             const guardResult = new GuardResultBulk()
                 .add([
-                    TypeGuard.string().equals('foo').guard('foo'),
-                    TypeGuard.string().hasMinLength(1).guard('foo'),
-                    TypeGuard.string().hasMinLength(4).guard('foo'),
+                    Tyr.string().equals('foo').guard('foo'),
+                    Tyr.string().hasMinLength(1).guard('foo'),
+                    Tyr.string().hasMinLength(4).guard('foo'),
                 ])
                 .combine();
 
@@ -59,10 +56,10 @@ describe('Guard-Result-Bulk', () => {
         it('should return false from second bulked guard', () => {
             const guardResult = new GuardResultBulk()
                 .add([
-                    TypeGuard.string().equals('foo').guard('foo'),
-                    TypeGuard.string().hasMinLength(4).guard('foo'),
-                    TypeGuard.string().hasMinLength(1).guard('foo'),
-                    TypeGuard.string().hasMaxLength(1).guard('foo'),
+                    Tyr.string().equals('foo').guard('foo'),
+                    Tyr.string().hasMinLength(4).guard('foo'),
+                    Tyr.string().hasMinLength(1).guard('foo'),
+                    Tyr.string().hasMaxLength(1).guard('foo'),
                 ])
                 .combine();
 
@@ -75,7 +72,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ true ]', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([TypeGuard.string().equals('foo').guard('foo')])
+                    .add([Tyr.string().equals('foo').guard('foo')])
                     .stack()[0]
                     .isSuccess(),
                 true
@@ -85,7 +82,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ false ]', () => {
             assert.equal(
                 (new GuardResultBulk()
-                    .add([TypeGuard.string().equals('foo').guard('bar', 'toto')])
+                    .add([Tyr.string().equals('foo').guard('bar', 'toto')])
                     .stack() as GuardResult[])[0].isSuccess(),
                 false
             );
@@ -93,7 +90,7 @@ describe('Guard-Result-Bulk', () => {
 
         it('should return [ false ]', () => {
             const guardResultBulk = new GuardResultBulk()
-                .add([TypeGuard.string().equals('foo').guard('foo'), TypeGuard.string().equals('foo').guard('bar')])
+                .add([Tyr.string().equals('foo').guard('foo'), Tyr.string().equals('foo').guard('bar')])
                 .stack();
 
             assert.equal(guardResultBulk[0].isSuccess(), false);
@@ -102,9 +99,9 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ false, false ]', () => {
             const guardResultBulk = new GuardResultBulk()
                 .add([
-                    TypeGuard.string().equals('foo').guard('foo'),
-                    TypeGuard.string().equals('foo').guard('bar'),
-                    TypeGuard.string().equals('foo').guard('bar'),
+                    Tyr.string().equals('foo').guard('foo'),
+                    Tyr.string().equals('foo').guard('bar'),
+                    Tyr.string().equals('foo').guard('bar'),
                 ])
                 .stack();
             assert.equal(guardResultBulk[0].isSuccess(), false);
