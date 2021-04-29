@@ -3,7 +3,7 @@ import {
     CapitalizationStyle,
     EmailAddressDefinition,
     TrimmedSide,
-    HExColorDigits,
+    HexColorDigits,
     ProgrammingConvention,
     IpVersion,
     GeoCoordinatesFormat,
@@ -490,7 +490,7 @@ export class StringGuard extends Guard<StringRule> {
      * @param digits - {@link THREE_DIGITS_HEX_COLOR_PATTERN | '3'} | {@link SIX_DIGITS_HEX_COLOR_PATTERN | '6'}.
      * @example #000000, #FFFFFF, #000, #fff
      */
-    public isHexColor(digits?: HExColorDigits): this {
+    public isHexColor(digits?: HexColorDigits): this {
         this.addRule({ type: 'isHexColor', digits: digits });
         return this;
     }

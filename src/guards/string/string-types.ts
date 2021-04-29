@@ -29,7 +29,7 @@ export type StringRule =
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }
     | { type: 'isObjectId' }
-    | { type: 'isHexColor'; digits?: HExColorDigits }
+    | { type: 'isHexColor'; digits?: HexColorDigits }
     | { type: 'isUuidv4' }
     | { type: 'isMacAddress' }
     | { type: 'isIpAddress'; version?: IpVersion }
@@ -59,7 +59,7 @@ export type JsonFormat = 'array' | 'object' | 'string';
 
 export type EmailAddressDefinition = 'quick' | 'rfc5322';
 
-export type HExColorDigits = '3' | '6';
+export type HexColorDigits = '3' | '6';
 
 export type IpVersion = '4' | '6';
 

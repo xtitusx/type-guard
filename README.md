@@ -141,7 +141,7 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 | isDecimal(options?: IIsDecimalOptions)                                        | Checks if string is a decimal number.                                             |
 | isEmailAddress(def?: EmailAddressDefinition)                                  | Checks if string is an email address number.                                      |
 | isObjectId()                                                                  | Checks if string is a representation of a MongoDB ObjectId.                       |
-| isHexColor(digits?: HExColorDigits)                                           | Checks if string is a hexadecimal color.                                          |
+| isHexColor(digits?: HexColorDigits)                                           | Checks if string is a hexadecimal color.                                          |
 | isUuidv4()                                                                    | Checks if string is an Universally unique identifier v4.                          |
 | isMacAddress()                                                                | Checks if string is a MAC address.                                                |
 | isIpAddress(version?: IpVersion)                                              | Checks if string is an IP address.                                                |

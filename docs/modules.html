@@ -2694,10 +2694,11 @@ img {
 				<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/dm/@xtitusx/type-guard" alt="Downloads"></a>
 			<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/bundlephobia/min/@xtitusx/type-guard" alt="Minified size"></a></p>
 			<p>type-guard performs a runtime check that guarantees the type and value of properties in some scopes.</p>
+			<p>In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.</p>
 			<p>It relies on Tyr to:</p>
 			<ol>
-				<li>Call a specific Guard (string(), number(), and many others).</li>
-				<li>Run chained rule checkers.</li>
+				<li>Call a specific Guard like <strong>string()</strong>, <strong>number()</strong>.</li>
+				<li>Call chained rule checkers.</li>
 				<li>Return a GuardResult instance containing the reason for the failure of the guard, or a success.</li>
 			</ol>
 			<p>It also relies on GuardResultBulk to manage multiple Tyr invocations:</p>
@@ -2710,7 +2711,16 @@ img {
 			</a>
 			<ol>
 				<li><a href="#installation">Installation</a></li>
-				<li><a href="#tyr">Tyr</a></li>
+				<li><a href="#tyr">Tyr</a><ol>
+						<li><a href="#array">array()</a></li>
+						<li><a href="#boolean">boolean()</a></li>
+						<li><a href="#class">class()</a></li>
+						<li><a href="#datestring">dateString()</a></li>
+						<li><a href="#nil">nil()</a></li>
+						<li><a href="#number">number()</a></li>
+						<li><a href="#string">string()</a></li>
+					</ol>
+				</li>
 				<li><a href="#simple-examples">Simple examples</a></li>
 				<li><a href="#bulk-examples">Bulk Examples</a></li>
 				<li><a href="#codex">Codex</a></li>
@@ -2724,7 +2734,7 @@ img {
 			<a href="#tyr" id="tyr" style="color: inherit; text-decoration: none;">
 				<h2>Tyr</h2>
 			</a>
-			<p>In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish with a .guard() call containing the property.</p>
+			<p>In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish by calling <strong>guard()</strong> method which contains the property value and optionaly a property name.</p>
 			<ul>
 				<li><p>Example of a simple type property check:</p>
 					<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
@@ -2735,10 +2745,391 @@ img {
 </code></pre>
 				</li>
 			</ul>
-			<p>Notice that only a single type of rule checker is retained in the guard: the last called one.</p>
-			<p>So, in the following example, .contains(&#39;bar&#39;) will override .contains(&#39;foo&#39;):</p>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">);</span>
+			<p>Notice that only a single type of rule checker, the last called one, is retained in the guard.</p>
+			<p>So, in the following example, <strong>contains(&#39;bar&#39;)</strong> method will override <strong>contains(&#39;foo&#39;)</strong>:</p>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
 </code></pre>
+			<a href="#array" id="array" style="color: inherit; text-decoration: none;">
+				<h3>array()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>isEmpty()</td>
+						<td align="left">Check if array is empty.</td>
+					</tr>
+					<tr>
+						<td>isNotEmpty()</td>
+						<td align="left">Check if array is not empty.</td>
+					</tr>
+					<tr>
+						<td>hasSize(value: number)</td>
+						<td align="left">Checks if array&#39;s length is equal to the specified number.</td>
+					</tr>
+					<tr>
+						<td>hasMinSize(min: number)</td>
+						<td align="left">Checks if array&#39;s length is equal or greater than to the specified number.</td>
+					</tr>
+					<tr>
+						<td>hasMaxSize(max: number)</td>
+						<td align="left">Checks if array&#39;s length is equal or smaller than the specified number.</td>
+					</tr>
+					<tr>
+						<td>contains(value: unknown)</td>
+						<td align="left">Checks if array&#39;s length is equal or smaller than the specified number.</td>
+					</tr>
+			</tbody></table>
+			<a href="#boolean" id="boolean" style="color: inherit; text-decoration: none;">
+				<h3>boolean()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>isTrue()</td>
+						<td align="left">Checks if value is a true boolean.</td>
+					</tr>
+					<tr>
+						<td>isFalse()</td>
+						<td align="left">Checks if value is a false boolean.</td>
+					</tr>
+			</tbody></table>
+			<a href="#class" id="class" style="color: inherit; text-decoration: none;">
+				<h3>class()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>isInstanceIf(value: Function)</td>
+						<td align="left">Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.</td>
+					</tr>
+			</tbody></table>
+			<a href="#datestring" id="datestring" style="color: inherit; text-decoration: none;">
+				<h3>dateString()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>isIso8601Date()</td>
+						<td align="left">Checks if date string is a valid and existing ISO 8601 Date (YYYY-MM-DD).</td>
+					</tr>
+					<tr>
+						<td>isRfc3339()</td>
+						<td align="left">Checks if date string is a valid and existing RFC 3339 Datetime.</td>
+					</tr>
+					<tr>
+						<td>isSame(value: string)</td>
+						<td align="left">Checks if date string is the same that the specified date.</td>
+					</tr>
+					<tr>
+						<td>isSameOrBefore(value: string)</td>
+						<td align="left">Checks if date string is the same or before the specified date.</td>
+					</tr>
+					<tr>
+						<td>isSameOrAfter(value: string)</td>
+						<td align="left">Checks if date string is the same or after the specified date.</td>
+					</tr>
+					<tr>
+						<td>isBefore(value: string)</td>
+						<td align="left">Checks if date string is strictly before the specified date.</td>
+					</tr>
+					<tr>
+						<td>isAfter(value: string)</td>
+						<td align="left">Checks if date string is strictly after the specified date.</td>
+					</tr>
+			</tbody></table>
+			<a href="#nil" id="nil" style="color: inherit; text-decoration: none;">
+				<h3>nil()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>isUndefined()</td>
+						<td align="left">Checks if value is undefined.</td>
+					</tr>
+					<tr>
+						<td>isNotUndefined()</td>
+						<td align="left">Checks if value is not undefined.</td>
+					</tr>
+					<tr>
+						<td>isNull</td>
+						<td align="left">Checks if value is null.</td>
+					</tr>
+					<tr>
+						<td>isNotNull()</td>
+						<td align="left">Checks if value is not null.</td>
+					</tr>
+					<tr>
+						<td>isNil()</td>
+						<td align="left">Checks if value is undefined or null.</td>
+					</tr>
+					<tr>
+						<td>isNotNil()</td>
+						<td align="left">Checks if value is neither undefined nor null.</td>
+					</tr>
+			</tbody></table>
+			<a href="#number" id="number" style="color: inherit; text-decoration: none;">
+				<h3>number()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>equals(value: number)</td>
+						<td align="left">Checks if two numbers are equals.</td>
+					</tr>
+					<tr>
+						<td>isMin(min: number)</td>
+						<td align="left">Checks if number is equal or greater than to the specified number.</td>
+					</tr>
+					<tr>
+						<td>isMax(max: number)</td>
+						<td align="left">Checks if number is equal or smaller than to the specified number.</td>
+					</tr>
+					<tr>
+						<td>isIn(min: number, max: number)</td>
+						<td align="left">Checks if number is within a closed interval.</td>
+					</tr>
+					<tr>
+						<td>isPositive()</td>
+						<td align="left">Checks if number is greater than zero.</td>
+					</tr>
+					<tr>
+						<td>isNegative()</td>
+						<td align="left">Checks if number is smaller than zero.</td>
+					</tr>
+					<tr>
+						<td>isWhole()</td>
+						<td align="left">Checks if number is a whole number.</td>
+					</tr>
+					<tr>
+						<td>hasMaxFractionDigits(max: number)</td>
+						<td align="left">Checks if the fractional part of number is equal or smaller than the specified number.</td>
+					</tr>
+					<tr>
+						<td>isEven()</td>
+						<td align="left">Checks if number is even.</td>
+					</tr>
+					<tr>
+						<td>isOdd()</td>
+						<td align="left">Checks if number is odd.</td>
+					</tr>
+					<tr>
+						<td>isMultiple(value: number)</td>
+						<td align="left">Checks if number is a multiple of the specified number.</td>
+					</tr>
+					<tr>
+						<td>isPrime()</td>
+						<td align="left">Checks if number is a prime number.</td>
+					</tr>
+					<tr>
+						<td>isComposite()</td>
+						<td align="left">Checks if number is a composite number.</td>
+					</tr>
+					<tr>
+						<td>isFibonacci(allowNegative?: boolean)</td>
+						<td align="left">Checks if number is a Fibonacci or a NegaFibonacci number.</td>
+					</tr>
+					<tr>
+						<td>isNetworkPort(range?: NetworkPortRange)</td>
+						<td align="left">Checks if number is a Network Port.</td>
+					</tr>
+			</tbody></table>
+			<a href="#string" id="string" style="color: inherit; text-decoration: none;">
+				<h3>string()</h3>
+			</a>
+			<table>
+				<thead>
+					<tr>
+						<th>Rule checker</th>
+						<th align="left">Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+						<td>equals(value: string)</td>
+						<td align="left">Checks if two string are equals.</td>
+					</tr>
+					<tr>
+						<td>notEquals(value: string)</td>
+						<td align="left">Checks if two string are not equals.</td>
+					</tr>
+					<tr>
+						<td>contains(value: string)</td>
+						<td align="left">Checks if string contains the specified substring.</td>
+					</tr>
+					<tr>
+						<td>notContains(value: string)</td>
+						<td align="left">Checks if string does not contain the specified substring.</td>
+					</tr>
+					<tr>
+						<td>matches(value: RegExp)</td>
+						<td align="left">Checks if string matches the specified regex.</td>
+					</tr>
+					<tr>
+						<td>isIn(value: string[])</td>
+						<td align="left">Checks if string is in an array of allowed string values.</td>
+					</tr>
+					<tr>
+						<td>isEmpty()</td>
+						<td align="left">Checks if string is empty.</td>
+					</tr>
+					<tr>
+						<td>isNotEmpty()</td>
+						<td align="left">Checks if string is not empty.</td>
+					</tr>
+					<tr>
+						<td>hasLength(value: number)</td>
+						<td align="left">Checks if string&#39;s length is equal to the specified number.</td>
+					</tr>
+					<tr>
+						<td>hasMinLength(min: number)</td>
+						<td align="left">Checks if string&#39;s length is equal or greater than to the specified number.</td>
+					</tr>
+					<tr>
+						<td>hasMaxLength(max: number)</td>
+						<td align="left">Checks if string&#39;s length is equal or smaller than the specified number.</td>
+					</tr>
+					<tr>
+						<td>isUpperCase()</td>
+						<td align="left">Checks if string does not contain any lowercase alpha characters.</td>
+					</tr>
+					<tr>
+						<td>isLowerCase()</td>
+						<td align="left">Checks if string does not contain any uppercase alpha characters.</td>
+					</tr>
+					<tr>
+						<td>isCapitalized(style: CapitalizationStyle, checkFirstCharIsLetter?: boolean)</td>
+						<td align="left">Checks if string follows a capitalization style.</td>
+					</tr>
+					<tr>
+						<td>isProgrammingCase(convention: ProgrammingConvention)</td>
+						<td align="left">Checks if string follows one of the most popular programming naming convention.</td>
+					</tr>
+					<tr>
+						<td>isTrimmed(side: TrimmedSide)</td>
+						<td align="left">Checks if string does not contain any leading and trailing whitespace.</td>
+					</tr>
+					<tr>
+						<td>isAlphaNumeric()</td>
+						<td align="left">Checks if string only contains alpha characters and/or numbers.</td>
+					</tr>
+					<tr>
+						<td>isAlpha()</td>
+						<td align="left">Checks if string only contains alpha characters.</td>
+					</tr>
+					<tr>
+						<td>isNumeric()</td>
+						<td align="left">Checks if string only contains numbers.</td>
+					</tr>
+					<tr>
+						<td>isAscii()</td>
+						<td align="left">Checks if string only contains printable ASCII characters.</td>
+					</tr>
+					<tr>
+						<td>isBinary()</td>
+						<td align="left">Checks if string is a binary number (base-2).</td>
+					</tr>
+					<tr>
+						<td>isOctal()</td>
+						<td align="left">Checks if string is an octal number (base-8).</td>
+					</tr>
+					<tr>
+						<td>isHex()</td>
+						<td align="left">Checks if string is a hexadecimal number (base-16).</td>
+					</tr>
+					<tr>
+						<td>isBase64(impl: Base64Implementation)</td>
+						<td align="left">Checks if string is Base64 encoded.</td>
+					</tr>
+					<tr>
+						<td>isJson(format?: JsonFormat)</td>
+						<td align="left">Checks if string is a valid JSON string.</td>
+					</tr>
+					<tr>
+						<td>isDecimal(options?: IIsDecimalOptions)</td>
+						<td align="left">Checks if string is a decimal number.</td>
+					</tr>
+					<tr>
+						<td>isEmailAddress(def?: EmailAddressDefinition)</td>
+						<td align="left">Checks if string is an email address number.</td>
+					</tr>
+					<tr>
+						<td>isObjectId()</td>
+						<td align="left">Checks if string is a representation of a MongoDB ObjectId.</td>
+					</tr>
+					<tr>
+						<td>isHexColor(digits?: HexColorDigits)</td>
+						<td align="left">Checks if string is a hexadecimal color.</td>
+					</tr>
+					<tr>
+						<td>isUuidv4()</td>
+						<td align="left">Checks if string is an Universally unique identifier v4.</td>
+					</tr>
+					<tr>
+						<td>isMacAddress()</td>
+						<td align="left">Checks if string is a MAC address.</td>
+					</tr>
+					<tr>
+						<td>isIpAddress(version?: IpVersion)</td>
+						<td align="left">Checks if string is an IP address.</td>
+					</tr>
+					<tr>
+						<td>isLatitude(format?: GeoCoordinatesFormat)</td>
+						<td align="left">Checks if string is a latitude geographic coordinate.</td>
+					</tr>
+					<tr>
+						<td>isLongitude(format?: GeoCoordinatesFormat)</td>
+						<td align="left">Checks if string is a longitude geographic coordinate.</td>
+					</tr>
+					<tr>
+						<td>isLatLong(format?: GeoCoordinatesFormat)</td>
+						<td align="left">Checks if string is a latitude-longitude geographic coordinate.</td>
+					</tr>
+					<tr>
+						<td>isIso639Part1Alpha2()</td>
+						<td align="left">Checks if string is an ISO 639-1 alpha-2 language code.</td>
+					</tr>
+					<tr>
+						<td>isIso639Part2Alpha3()</td>
+						<td align="left">Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code.</td>
+					</tr>
+					<tr>
+						<td>isIso3166Part1Alpha(version?: AlphaVersion)</td>
+						<td align="left">Checks if string is an ISO 3166-1 alpha country code.</td>
+					</tr>
+					<tr>
+						<td>isIso4217Alpha3()</td>
+						<td align="left">Checks if string is an ISO 4217 alpha-3 currency code.</td>
+					</tr>
+			</tbody></table>
 			<a href="#simple-examples" id="simple-examples" style="color: inherit; text-decoration: none;">
 				<h2>Simple examples</h2>
 			</a>
@@ -2775,26 +3166,10 @@ img {
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
 </code></pre>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
-<span style="color: #000000">    ])</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span>
-<span style="color: #001080">const</span><span style="color: #000000"> </span><span style="color: #001080">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
-<span style="color: #000000">    ])</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
-</code></pre>
 			<a href="#codex" id="codex" style="color: inherit; text-decoration: none;">
 				<h2>Codex</h2>
 			</a>
-			<p>Refer to the Codex to directly access to Enums containing some ISO values:
+			<p>Refer to the Codex to directly access Enums containing some ISO values:
 				| Codex entry                       | Description                                       |
 				| ---                               |:---                                               |
 				| Codex.iso639Part1Alpha2Enum()     | List of 184 ISO 639-1 alpha-2 language codes.     |

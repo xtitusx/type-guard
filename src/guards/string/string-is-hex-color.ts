@@ -1,5 +1,5 @@
 import { StringRuleChecker } from './string-rule-checker';
-import { HExColorDigits } from './string-types';
+import { HexColorDigits } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
 
@@ -15,8 +15,8 @@ export const THREE_DIGITS_HEX_COLOR_PATTERN = '^#[0-9a-fA-F]{3}$';
  */
 export const SIX_DIGITS_HEX_COLOR_PATTERN = '^#[0-9a-fA-F]{6}$';
 
-export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; digits?: HExColorDigits }> {
-    constructor(rule: { type: 'isHexColor'; digits?: HExColorDigits }, value: string) {
+export class StringIsHexColor extends StringRuleChecker<{ type: 'isHexColor'; digits?: HexColorDigits }> {
+    constructor(rule: { type: 'isHexColor'; digits?: HexColorDigits }, value: string) {
         super(rule, value);
     }
 
