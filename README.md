@@ -4,12 +4,12 @@
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
 
-type-guard performs a runtime check that guarantees the type and value of properties in some scopes.
+**type-guard** performs a runtime check that guarantees the type and value of properties in some scopes.
 
 In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.
 
 It relies on Tyr to:
-1. Call a specific Guard like **string()**, **number()**.
+1. Call one of the seven specific Guards like `string()` or `number()`.
 2. Call chained rule checkers.
 3. Return a GuardResult instance containing the reason for the failure of the guard, or a success.
 
@@ -19,7 +19,8 @@ It also relies on GuardResultBulk to manage multiple Tyr invocations:
 
 # Table of Contents
 1. [Installation](#installation)
-2. [Tyr](#tyr)
+2. [Basic Usage](#basic-usage)
+3. [Tyr](#tyr)
     1. [array()](#array)
     2. [boolean()](#boolean)
     3. [class()](#class)
@@ -27,17 +28,17 @@ It also relies on GuardResultBulk to manage multiple Tyr invocations:
     5. [nil()](#nil)
     6. [number()](#number)
     7. [string()](#string)
-3. [Simple examples](#simple-examples)
-4. [Bulk Examples](#bulk-examples)
-5. [Codex](#codex)
-5. [TypeDoc](#typedoc)
+4. [Simple examples](#simple-examples)
+5. [Bulk Examples](#bulk-examples)
+6. [Codex](#codex)
+7. [TypeDoc](#typedoc)
 
 ## Installation
 ```
 npm install @xtitusx/type-guard
 ```
-## Tyr
-In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish by calling **guard()** method which contains the property value and optionaly a property name.
+## Basic Usage
+In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish by calling `guard(propertyValue: unknown, propertyName?: string)` method which contains the property value and optionaly a property name.
 
 * Example of a simple type property check:
 ```
@@ -51,10 +52,11 @@ Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard
 
 Notice that only a single type of rule checker, the last called one, is retained in the guard.
 
-So, in the following example, **contains('bar')** method will override **contains('foo')**:
+So, in the following example, `contains('bar')` method will override `contains('foo')`:
 ```
 Tyr.string().contains('foo').contains('bar').guard("foo");
 ```
+## Tyr
 ### array()
 | Rule checker              | Description                                                                   |
 | ---                       |:---                                                                           |
@@ -63,7 +65,7 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 | hasSize(value: number)    | Checks if array's length is equal to the specified number.                    |
 | hasMinSize(min: number)   | Checks if array's length is equal or greater than to the specified number.    |
 | hasMaxSize(max: number)   | Checks if array's length is equal or smaller than the specified number.       |
-| contains(value: unknown)  | Checks if array's length is equal or smaller than the specified number.       |
+| contains(value: unknown)  | Checks if array contains the specified value.                                 |
 ### boolean()
 | Rule checker              | Description                                                                   |
 | ---                       |:---                                                                           |
@@ -72,7 +74,7 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 ### class()
 | Rule checker                  | Description                                                                                                               |
 | ---                           |:---                                                                                                                       |
-| isInstanceIf(value: Function) | Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.  |
+| isInstanceOf(value: Function) | Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.  |
 ### dateString()
 | Rule checker                  | Description                                                                |
 | ---                           |:---                                                                        |
@@ -151,7 +153,7 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 | isIso639Part1Alpha2()                                                         | Checks if string is an ISO 639-1 alpha-2 language code.                           |
 | isIso639Part2Alpha3()                                                         | Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code.   |
 | isIso3166Part1Alpha(version?: AlphaVersion)                                   | Checks if string is an ISO 3166-1 alpha country code.                             |
-| isIso4217Alpha3()                                     |  Checks if string is an ISO 4217 alpha-3 currency code.                                                   |
+| isIso4217Alpha3()                                                             |  Checks if string is an ISO 4217 alpha-3 currency code.                           |
 
 ## Simple examples
 ```
