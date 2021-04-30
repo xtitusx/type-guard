@@ -6,6 +6,10 @@
 
 **type-guard** performs a runtime check that guarantees the type and value of properties in some scopes.
 
+* 🚀 Node.js ready for launch.
+
+* 🚀 Angular ready for launch.
+
 In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.
 
 It relies on Tyr to:
