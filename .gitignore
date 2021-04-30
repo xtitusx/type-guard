@@ -40,3 +40,4 @@ build/
 tmp/
 out-tsc/
 temp
+.nyc_output

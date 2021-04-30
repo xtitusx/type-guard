@@ -1,6 +1,7 @@
 # type-guard
 
 [![NPM version][npm-image]][npm-url]
+[![Coverage][codecov-image]][codecov-url]
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
 
@@ -68,14 +69,14 @@ Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
 
 * Example of a thrown exception with `GuardResult` instance message:
 ```
- const guardResult = new DateStringGuard().isIso8601Date().guard('29-02-2021');
+ const guardResult = Tyr.dateString().isIso8601Date().guard('29-02-2021');
 if (!guardResult.isSuccess()) {
     throw new Error(guardResult.getMessage());
 }
 ```
 Notice that only a single type of rule checker, the last called one, is retained in the guard.
 
-So, in the following example, `contains('bar')` method will override `contains('foo')`:
+So, in the following example, `contains('bar')` method overrides `contains('foo')`:
 ```
 Tyr.string().contains('foo').contains('bar').guard("foo");
 ```
@@ -197,19 +198,19 @@ Refer to the Codex to directly access Enums containing some ISO values:
 ## Examples
 ### Single
 ```
-Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']).isSuccess();
+Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']);
 
-Tyr.boolean().isTrue().guard(1 > 0).isSuccess();
+Tyr.boolean().isTrue().guard(1 > 0);
 
-Tyr.class().isInstanceOf(Number).guard(new Number(1)).isSuccess();
+Tyr.class().isInstanceOf(Number).guard(new Number(1));
 
 Tyr.dateString().isIso8601Date().isSameOrBefore('2016-01-20T00:00:00+02:00').guard('2015-02-28');
 
-Tyr.nil().isNil(null).guard(null).isSuccess();
+Tyr.nil().isNil(null).guard(null);
 
-Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
+Tyr.number().isIn(10, 20).isEven().guard(14));
 
-Tyr.string().isAlpha().contains('rem').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum").isSuccess();
+Tyr.string().isAlpha().contains('rem').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum");
 ```
 ### Bulk
 ```
@@ -261,5 +262,9 @@ SOFTWARE.
 
 [npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
 [npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
+
+[codecov-url]: https://codecov.io/gh/xtitusx/type-guard
+[codecov-image]: https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB
+
 [downloads-image]: https://img.shields.io/npm/dm/@xtitusx/type-guard
 [min-size-image]: https://img.shields.io/bundlephobia/min/@xtitusx/type-guard
