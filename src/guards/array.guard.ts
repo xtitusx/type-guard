@@ -15,7 +15,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * Check if array is empty.
+     * Checks if array is empty.
      * @remarks Chainable method.
      */
     public isEmpty(): this {
@@ -24,7 +24,7 @@ export class ArrayGuard extends Guard<ArrayRule> {
     }
 
     /**
-     * Check if array is not empty.
+     * Checks if array is not empty.
      * @remarks Chainable method.
      */
     public isNotEmpty(): this {
