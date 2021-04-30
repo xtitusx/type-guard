@@ -22,14 +22,17 @@
     "url": "git+https://github.com/xtitusx/type-guard.git"
   },
   "author": "Benjamin Tussac",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/xtitusx/type-guard/issues"
   },
   "keywords": [
     "typescript",
     "validation",
-    "guard"
+    "validator",
+    "guard",
+    "node",
+    "angular"
   ],
 
   "homepage": "https://github.com/xtitusx/type-guard#readme",
