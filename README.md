@@ -32,10 +32,17 @@ It also relies on GuardResultBulk to manage multiple Tyr invocations:
     5. [nil()](#nil)
     6. [number()](#number)
     7. [string()](#string)
-4. [Simple examples](#simple-examples)
-5. [Bulk Examples](#bulk-examples)
-6. [Codex](#codex)
+4. [GuardResultBulk](#guardresultbulk)
+    1. [Add](#add)
+    2. [Combine](#combine)
+    3. [Stack](#stack)
+5. [Codex](#codex)
+6. [Examples](#examples)
+    1. [Basic Examples](#basic-examples)
+    2. [Bulk Examples](#bulk-examples)
 7. [TypeDoc](#typedoc)
+8. [Maintener](#maintainer)
+9. [Licence](#licence)
 
 ## Installation
 ```
@@ -54,6 +61,11 @@ Tyr.string().guard("foo");
 Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo");
 ```
 
+* Example of a fast validation returning simply a boolean:
+```
+Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
+```
+
 Notice that only a single type of rule checker, the last called one, is retained in the guard.
 
 So, in the following example, `contains('bar')` method will override `contains('foo')`:
@@ -64,8 +76,8 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 ### array()
 | Rule checker              | Description                                                                   |
 | ---                       |:---                                                                           |
-| isEmpty()                 | Checks if array is empty.                                                      |
-| isNotEmpty()              | Checks if array is not empty.                                                  |
+| isEmpty()                 | Checks if array is empty.                                                     |
+| isNotEmpty()              | Checks if array is not empty.                                                 |
 | hasSize(value: number)    | Checks if array's length is equal to the specified number.                    |
 | hasMinSize(min: number)   | Checks if array's length is equal or greater than to the specified number.    |
 | hasMaxSize(max: number)   | Checks if array's length is equal or smaller than the specified number.       |
@@ -159,7 +171,24 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 | isIso3166Part1Alpha(version?: AlphaVersion)                                   | Checks if string is an ISO 3166-1 alpha country code.                             |
 | isIso4217Alpha3()                                                             |  Checks if string is an ISO 4217 alpha-3 currency code.                           |
 
-## Simple examples
+## GuardResultBulk
+### Add
+Stacks guardResult(s) in bulk by calling `add(guardResults: GuardResult | GuardResult[])` method.
+### Combine
+Returns either the first fail in bulk, or only one success by calling `combine()` method.
+### Stack
+Returns all fails in bulk, or only one success by calling `stack()` method.
+## Codex
+Refer to the Codex to directly access Enums containing some ISO values:
+| Codex entry                       | Description                                       |
+| ---                               |:---                                               |
+| Codex.iso639Part1Alpha2Enum()     | List of 184 ISO 639-1 alpha-2 language codes.     |
+| Codex.iso639Part2Alpha3Enum()     | List of 487 ISO 639-2 alpha-3 language codes.     |
+| Codex.iso3166Part1Alpha2Enum()    | List of ISO 3166-1 alpha-2 country codes.         |
+| Codex.iso3166Part1Alpha3Enum()    | List of ISO 3166-1 alpha-3 country codes.         |
+| Codex.iso4217Alpha3Enum()         | List of active ISO 4217 alpha-3 currency codes.   |
+## Examples
+### Basic Examples
 ```
 const success: boolean = Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']).isSuccess();
 
@@ -175,7 +204,7 @@ const success: boolean = Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess(
 
 const success: boolean = Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo").isSuccess();
 ```
-## Bulk examples
+### Bulk Examples
 ```
 const guardResult = new GuardResultBulk()
     .add([
@@ -193,21 +222,13 @@ const guardResult = new GuardResultBulk()
     ])
     .stack();
 ```
-## Codex
-Refer to the Codex to directly access Enums containing some ISO values:
-| Codex entry                       | Description                                       |
-| ---                               |:---                                               |
-| Codex.iso639Part1Alpha2Enum()     | List of 184 ISO 639-1 alpha-2 language codes.     |
-| Codex.iso639Part2Alpha3Enum()     | List of 487 ISO 639-2 alpha-3 language codes.     |
-| Codex.iso3166Part1Alpha2Enum()    | List of ISO 3166-1 alpha-2 country codes.         |
-| Codex.iso3166Part1Alpha3Enum()    | List of ISO 3166-1 alpha-3 country codes.         |
-| Codex.iso4217Alpha3Enum()         | List of active ISO 4217 alpha-3 currency codes.   |
 ## TypeDoc
 [GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html)
 ## Maintainer
 - [xtitusx](https://github.com/xtitusx) - **Benjamin Tussac** (author)
 
-## LICENCE
+## Licence
+```
 MIT License
 
 Copyright (c) 2021 Benjamin Tussac
@@ -229,6 +250,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
 
 [npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
 [npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
