@@ -61,11 +61,18 @@ Tyr.string().guard("foo");
 Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo");
 ```
 
-* Example of a fast validation returning simply a boolean:
+* Example of fast validation returning simply a boolean:
 ```
 Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
 ```
 
+* Example of a thrown exception with `GuardResult` instance message:
+```
+ const guardResult = new DateStringGuard().isIso8601Date().guard('29-02-2021');
+if (!guardResult.isSuccess()) {
+    throw new Error(guardResult.getMessage());
+}
+```
 Notice that only a single type of rule checker, the last called one, is retained in the guard.
 
 So, in the following example, `contains('bar')` method will override `contains('foo')`:
