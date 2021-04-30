@@ -25,23 +25,23 @@ It also relies on GuardResultBulk to manage multiple Tyr invocations:
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
 3. [Tyr](#tyr)
-    1. [array()](#array)
-    2. [boolean()](#boolean)
-    3. [class()](#class)
-    4. [dateString()](#datestring)
-    5. [nil()](#nil)
-    6. [number()](#number)
-    7. [string()](#string)
+    - [array()](#array)
+    - [boolean()](#boolean)
+    - [class()](#class)
+    - [dateString()](#datestring)
+    - [nil()](#nil)
+    - [number()](#number)
+    - [string()](#string)
 4. [GuardResultBulk](#guardresultbulk)
-    1. [Add](#add)
-    2. [Combine](#combine)
-    3. [Stack](#stack)
+    - [add()](#add)
+    - [combine()](#combine)
+    - [stack()](#stack)
 5. [Codex](#codex)
 6. [Examples](#examples)
-    1. [Basic Examples](#basic-examples)
-    2. [Bulk Examples](#bulk-examples)
+    - [Single](#single)
+    - [Bulk](#bulk)
 7. [TypeDoc](#typedoc)
-8. [Maintener](#maintainer)
+8. [Maintainer](#maintainer)
 9. [Licence](#licence)
 
 ## Installation
@@ -172,12 +172,12 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 | isIso4217Alpha3()                                                             |  Checks if string is an ISO 4217 alpha-3 currency code.                           |
 
 ## GuardResultBulk
-### Add
-Stacks guardResult(s) in bulk by calling `add(guardResults: GuardResult | GuardResult[])` method.
-### Combine
-Returns either the first fail in bulk, or only one success by calling `combine()` method.
-### Stack
-Returns all fails in bulk, or only one success by calling `stack()` method.
+### add()
+Stacks guardResult(s) in bulk.
+### combine()
+Returns either the first fail in bulk, or only one success.
+### stack()
+Returns all fails in bulk, or only one success.
 ## Codex
 Refer to the Codex to directly access Enums containing some ISO values:
 | Codex entry                       | Description                                       |
@@ -188,23 +188,23 @@ Refer to the Codex to directly access Enums containing some ISO values:
 | Codex.iso3166Part1Alpha3Enum()    | List of ISO 3166-1 alpha-3 country codes.         |
 | Codex.iso4217Alpha3Enum()         | List of active ISO 4217 alpha-3 currency codes.   |
 ## Examples
-### Basic Examples
+### Single
 ```
-const success: boolean = Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']).isSuccess();
+Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']).isSuccess();
 
-const success: boolean = Tyr.boolean().isTrue().guard(1 > 0).isSuccess();
+Tyr.boolean().isTrue().guard(1 > 0).isSuccess();
 
-const success: boolean = Tyr.class().isInstanceOf(Number).guard(new Number(1)).isSuccess();
+Tyr.class().isInstanceOf(Number).guard(new Number(1)).isSuccess();
 
-const success: boolean = Tyr.dateString().isIso8601Date().isSameOrBefore('2016-01-20T00:00:00+02:00').guard('2015-02-28');
+Tyr.dateString().isIso8601Date().isSameOrBefore('2016-01-20T00:00:00+02:00').guard('2015-02-28');
 
-const success: boolean = Tyr.nil().isNil(null).guard(null).isSuccess();
+Tyr.nil().isNil(null).guard(null).isSuccess();
 
-const success: boolean = Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
+Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
 
-const success: boolean = Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo").isSuccess();
+Tyr.string().isAlpha().contains('rem').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum").isSuccess();
 ```
-### Bulk Examples
+### Bulk
 ```
 const guardResult = new GuardResultBulk()
     .add([
