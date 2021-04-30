@@ -12,14 +12,14 @@
 
 In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.
 
-It relies on Tyr to:
+It relies on `Tyr` to:
 1. Call one of the seven specific Guards like `string()` or `number()`.
 2. Call chained rule checkers.
-3. Return a GuardResult instance containing the reason for the failure of the guard, or a success.
+3. Return a `GuardResult` instance containing the reason for the failure of the guard, or a success.
 
-It also relies on GuardResultBulk to manage multiple Tyr invocations:
-* Combine and return the first GuardResult instance in failure, or only a GuardResult instance in success.
-* Stack and return all GuardResult instances in failure, or only a GuardResult instance in success.
+It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
+* Combine and return the first `GuardResult` instance in failure, or only a `GuardResult` instance in success.
+* Stack and return all `GuardResult` instances in failure, or only a `GuardResult` instance in success.
 
 # Table of Contents
 1. [Installation](#installation)
@@ -49,7 +49,7 @@ It also relies on GuardResultBulk to manage multiple Tyr invocations:
 npm install @xtitusx/type-guard
 ```
 ## Basic Usage
-In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish by calling `guard(propertyValue: unknown, propertyName?: string)` method which contains the property value and optionaly a property name.
+In order to check and return a `GuardResult` instance, just invoke `Tyr`, call a specific Guard, and finish by calling `guard(propertyValue: unknown, propertyName?: string)` method which contains the property value and optionaly a property name.
 
 * Example of a simple type property check:
 ```
@@ -173,7 +173,7 @@ Tyr.string().contains('foo').contains('bar').guard("foo");
 
 ## GuardResultBulk
 ### add()
-Stacks guardResult(s) in bulk.
+Adds `GuardResult` instance(s) in bulk.
 ### combine()
 Returns either the first fail in bulk, or only one success.
 ### stack()

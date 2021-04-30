@@ -8,7 +8,7 @@ export class GuardResultBulk {
     }
 
     /**
-     * Stacks guardResult(s) in bulk.
+     * Adds GuardResult instance(s) in bulk.
      * @param guardResults
      */
     public add(guardResults: GuardResult | GuardResult[]): this {
