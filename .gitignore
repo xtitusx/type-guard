@@ -41,5 +41,7 @@ tmp/
 out-tsc/
 temp
 
-# Testing output folders
+# Testing output
 .nyc_output
+coverage
+*.lcov

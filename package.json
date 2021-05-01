@@ -23,7 +23,9 @@
   "typings": "./build/src/index.d.ts",
   "scripts": {
     "build": "rimraf build && tsc",
-    "test": "nyc mocha ./build/test/**/**/*-test.js",
+    "test": "mocha ./build/test/**/**/*-test.js",
+    "test:nyc": "nyc mocha ./build/test/**/**/*-test.js",
+    "test:ci": "nyc --reporter=lcov mocha ./build/test/**/**/*-test.js && codecov",
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "prettier:check": "prettier --check  './**/*.{ts,md}'",
