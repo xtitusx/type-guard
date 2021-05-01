@@ -23,6 +23,23 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 * Combine and return the first `GuardResult` instance in failure, or only a `GuardResult` instance in success.
 * Stack and return all `GuardResult` instances in failure, or only a `GuardResult` instance in success.
 
+# The true story
+
+Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard.
+This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
+Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains, but we will not discuss them in this story ...
+
+The Backings were a people of craftsmen: miners, blacksmiths, loggers, lumberjacks.
+The Frontkings were a tribe skilled in the arts, including body painting, storytelling, and music.
+Their skaldes often swapped the tale of one or two sagas against the essential goods produced by the Backings.
+
+And all this little small world lived in peace and harmony, until the day, when curious foreigners from the south, tried to sow trouble and divide this beautiful and well-ordered kingdom.
+The northerners, not understanding their language, decided to simply name these invaders the Jsøns.
+The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth.
+Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.
+
+Tyr was accompanied by seven guards, each representing an aspect of the order ....
+
 # Table of Contents
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
