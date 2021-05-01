@@ -2,6 +2,20 @@
   "name": "@xtitusx/type-guard",
   "version": "2.0.1",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
+  "keywords": [
+    "typescript",
+    "validation",
+    "validator",
+    "guard",
+    "node",
+    "angular"
+  ],
+  "homepage": "https://github.com/xtitusx/type-guard#readme",
+  "bugs": {
+    "url": "https://github.com/xtitusx/type-guard/issues"
+  },
+  "license": "MIT",
+  "author": "Benjamin Tussac",
   "files": [
     "build/src/**/*"
   ],
@@ -23,20 +37,6 @@
     "type": "git",
     "url": "git+https://github.com/xtitusx/type-guard.git"
   },
-  "author": "Benjamin Tussac",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xtitusx/type-guard/issues"
-  },
-  "keywords": [
-    "typescript",
-    "validation",
-    "validator",
-    "guard",
-    "node",
-    "angular"
-  ],
-  "homepage": "https://github.com/xtitusx/type-guard#readme",
   "dependencies": {
     "dayjs": "^1.8.23"
   },

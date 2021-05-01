@@ -40,4 +40,6 @@ build/
 tmp/
 out-tsc/
 temp
+
+# Testing output folders
 .nyc_output
