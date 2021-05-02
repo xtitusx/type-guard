@@ -41,7 +41,7 @@ export class GuardResultBulk {
      * - Or only one success.
      */
     public stack(): GuardResult[] {
-        const fails = [...this.guardResults.filter((guardResult) => !guardResult?.isSuccess())];
+        const fails = [...this.guardResults.filter((guardResult) => guardResult && !guardResult.isSuccess())];
 
         return fails.length ? fails : [...fails, new GuardResult.Builder().withSuccess(true).build()];
     }

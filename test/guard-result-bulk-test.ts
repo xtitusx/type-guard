@@ -79,6 +79,16 @@ describe('Guard-Result-Bulk', () => {
             );
         });
 
+        it('should return [ true ]', () => {
+            assert.equal(
+                new GuardResultBulk()
+                    .add([undefined, Tyr.string().equals('foo').guard('foo')])
+                    .stack()[0]
+                    .isSuccess(),
+                true
+            );
+        });
+
         it('should return [ false ]', () => {
             assert.equal(
                 (new GuardResultBulk()
