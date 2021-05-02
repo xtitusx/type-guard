@@ -8,8 +8,8 @@
 
 **type-guard** performs a runtime check that guarantees the type and value of properties in some scopes.
 ```
-🚀 Node.js ready for launch.
-🚀 Angular ready for launch.
+:rocket: Node.js ready for launch.
+:rocket: Angular ready for launch.
 ```
 
 In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.
@@ -25,17 +25,20 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 
 # The true story
 
-Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard.
+Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard :rainbow:.
 This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
-Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains, but we will not discuss them in this story ...
+Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains :mount_fuji:, but we will not discuss them in this story ...
 
-The Backings were a people of craftsmen: miners, blacksmiths, loggers, lumberjacks.
-The Frontkings were a tribe skilled in the arts, including body painting, storytelling, and music.
-Their skaldes often swapped the tale of one or two sagas against the essential goods produced by the Backings.
+The Backings were a people of craftsmen: miners :gem:, blacksmiths :hammer:, loggers, lumberjacks.
+The Frontkings were a tribe skilled in the arts, including body painting :performing_arts: and storytelling :violin:.
 
-And all this little small world lived in peace and harmony, until the day, when curious foreigners from the south, tried to sow trouble and divide this beautiful and well-ordered kingdom.
-The northerners, not understanding their language, decided to simply name these invaders the Jsøns.
-The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth.
+After each daily council :coffee:, Frontking's skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.
+
+And all this little small world lived in cooperation and peace, until the day, when curious foreigners from the south, tried to sow trouble :snake: and divide this beautiful and well-ordered kingdom.
+The northerners, not understanding their language, decided to simply name these invaders the sons of Julius, or Jsøns in Old Nordic language.
+
+The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth :suspect:.
+
 Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.
 
 Tyr was accompanied by seven guards, each representing an aspect of the order ....
