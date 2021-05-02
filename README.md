@@ -7,10 +7,10 @@
 [![Minified size][min-size-image]][npm-url]
 
 **type-guard** performs a runtime check that guarantees the type and value of properties in some scopes.
-```
-:rocket: Node.js ready for launch.
-:rocket: Angular ready for launch.
-```
+
+:rocket: **Node.js ready for launch.**
+
+:rocket: **Angular ready for launch.**
 
 In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.
 
@@ -26,6 +26,7 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 # The true story
 
 Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard :rainbow:.
+
 This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
 Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains :mount_fuji:, but we will not discuss them in this story ...
 
