@@ -23,27 +23,6 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 * Combine and return the first `GuardResult` instance in failure, or only a `GuardResult` instance in success.
 * Stack and return all `GuardResult` instances in failure, or only a `GuardResult` instance in success.
 
-# The true story
-
-Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard :rainbow:.
-
-This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
-Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains :mount_fuji:, but we will not discuss them in this story ...
-
-The Backings were a people of craftsmen: miners :gem:, blacksmiths :hammer:, loggers, lumberjacks.
-The Frontkings were a tribe skilled in the arts, including body painting :performing_arts: and storytelling :violin:.
-
-After each daily council :coffee:, Frontking's skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.
-
-And all this little small world lived in cooperation and peace, until the day, when curious foreigners from the south, tried to sow trouble :snake: and divide this beautiful and well-ordered kingdom.
-The northerners, not understanding their language, decided to simply name these invaders the sons of Julius, or Jsøns in Old Nordic language.
-
-The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth :suspect:.
-
-Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.
-
-Tyr was accompanied by seven guards, each representing an aspect of the order ....
-
 # Table of Contents
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
@@ -64,8 +43,9 @@ Tyr was accompanied by seven guards, each representing an aspect of the order ..
     - [Single](#single)
     - [Bulk](#bulk)
 7. [TypeDoc](#typedoc)
-8. [Maintainer](#maintainer)
-9. [Licence](#licence)
+8. [The true story](#the-true-story)
+9. [Maintainer](#maintainer)
+10. [Licence](#licence)
 
 ## Installation
 ```
@@ -254,9 +234,27 @@ const guardResult = new GuardResultBulk()
 ```
 ## TypeDoc
 [GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html)
+## The true story
+Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard :rainbow:.
+
+This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
+Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains :mount_fuji:, but we will not discuss them in this story ...
+
+The Backings were a people of craftsmen: miners :gem:, blacksmiths :hammer:, loggers, lumberjacks.
+The Frontkings were a tribe skilled in the arts, including body painting :performing_arts: and storytelling :violin:.
+
+After each daily council :coffee:, Frontking's skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.
+
+And all this little small world lived in cooperation and peace, until the day, when curious foreigners from the south, tried to sow trouble, and divide this beautiful and well-ordered kingdom :snake:.
+The northerners, not understanding their language, decided to simply name these invaders the sons of Julius, or Jsøns in Old Nordic language.
+
+The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth :suspect:.
+
+Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.
+
+Tyr was accompanied by seven guards, each representing an aspect of the order ....
 ## Maintainer
 - [xtitusx](https://github.com/xtitusx) - **Benjamin Tussac** (author)
-
 ## Licence
 ```
 MIT License
