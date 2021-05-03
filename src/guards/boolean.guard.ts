@@ -4,8 +4,8 @@ import { GuardResult } from '../core/guard-result';
 type BooleanRule = { type: 'isTrue'; value: true } | { type: 'isFalse'; value: false };
 
 export class BooleanGuard extends Guard<BooleanRule> {
-    constructor(rules?: BooleanRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

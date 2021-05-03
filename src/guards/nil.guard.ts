@@ -10,8 +10,8 @@ import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class NilGuard extends Guard<NilRule> {
-    constructor(rules?: NilRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

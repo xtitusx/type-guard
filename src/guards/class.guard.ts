@@ -4,8 +4,8 @@ import { GuardResult } from '../core/guard-result';
 type ClassRule = { type: 'isInstanceOf'; value: Function };
 
 export class ClassGuard extends Guard<ClassRule> {
-    constructor(rules?: ClassRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

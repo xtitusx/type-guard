@@ -56,8 +56,8 @@ import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class StringGuard extends Guard<StringRule> {
-    constructor(rules?: StringRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

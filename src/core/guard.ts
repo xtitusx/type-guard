@@ -7,8 +7,8 @@ export abstract class Guard<T extends Rule> {
     protected propertyValue: unknown;
     protected combinedGuardResult: GuardResult;
 
-    constructor(rules?: T[]) {
-        this.rules = Array.isArray(rules) ? rules : [];
+    constructor() {
+        this.rules = [];
     }
 
     /**

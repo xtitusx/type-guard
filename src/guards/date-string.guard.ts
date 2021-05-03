@@ -13,8 +13,8 @@ import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class DateStringGuard extends Guard<DateStringRule> {
-    constructor(rules?: DateStringRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

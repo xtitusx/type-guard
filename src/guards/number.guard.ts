@@ -20,8 +20,8 @@ import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class NumberGuard extends Guard<NumberRule> {
-    constructor(rules?: NumberRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**

@@ -10,8 +10,8 @@ import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class ArrayGuard extends Guard<ArrayRule> {
-    constructor(rules?: ArrayRule[]) {
-        super(rules);
+    constructor() {
+        super();
     }
 
     /**
