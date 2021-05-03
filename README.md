@@ -283,7 +283,7 @@ SOFTWARE.
 [npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
 [npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
 
-[ci-image]: https://img.shields.io/travis/xtitusx/type-guard
+[ci-image]: https://img.shields.io/travis/com/xtitusx/type-guard
 
 [codecov-url]: https://codecov.io/gh/xtitusx/type-guard
 [codecov-image]: https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB
