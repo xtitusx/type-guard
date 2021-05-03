@@ -3,6 +3,7 @@
 [![NPM version][npm-image]][npm-url]
 ![CI][ci-image]
 [![Coverage][codecov-image]][codecov-url]
+[![Known Vulnerabilities][snyk-url]][snyk-image]
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
 
@@ -287,6 +288,9 @@ SOFTWARE.
 
 [codecov-url]: https://codecov.io/gh/xtitusx/type-guard
 [codecov-image]: https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB
+
+[snyk-url]: https://snyk.io/test/github/xtitusx/type-guard/badge.svg
+[snyk-image]: https://snyk.io/test/github/xtitusx/type-guard
 
 [downloads-image]: https://img.shields.io/npm/dm/@xtitusx/type-guard
 [min-size-image]: https://img.shields.io/bundlephobia/min/@xtitusx/type-guard
