@@ -231,7 +231,11 @@ const guardResult2 = stringGuard
 
 ### add()
 
-Adds `GuardResult` instance(s) in bulk.
+Adds `GuardResult` instance(s) in bulk:
+
+```
+const guardResultBulk = new GuardResultBulk().add(Tyr.string().equals('foo').guard('foo'));
+```
 
 ### combine()
 
