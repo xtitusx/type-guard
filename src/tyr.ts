@@ -1,4 +1,4 @@
-import { Codex } from './codex';
+import { IGuardOptions } from './core/guard';
 import { ArrayGuard } from './guards/array.guard';
 import { BooleanGuard } from './guards/boolean.guard';
 import { ClassGuard } from './guards/class.guard';
@@ -11,8 +11,8 @@ export class Tyr {
     /**
      * @returns A new instance of ArrayGuard.
      */
-    public static array(): ArrayGuard {
-        return new ArrayGuard();
+    public static array(options?: IGuardOptions): ArrayGuard {
+        return new ArrayGuard(options);
     }
 
     /**
@@ -32,8 +32,8 @@ export class Tyr {
     /**
      * @returns A new instance of DateStringGuard.
      */
-    public static dateString(): DateStringGuard {
-        return new DateStringGuard();
+    public static dateString(options?: IGuardOptions): DateStringGuard {
+        return new DateStringGuard(options);
     }
 
     /**
@@ -46,14 +46,14 @@ export class Tyr {
     /**
      * @returns A new instance of NumberGuard.
      */
-    public static number(): NumberGuard {
-        return new NumberGuard();
+    public static number(options?: IGuardOptions): NumberGuard {
+        return new NumberGuard(options);
     }
 
     /**
      * @returns A new instance of StringGuard.
      */
-    public static string(): StringGuard {
-        return new StringGuard();
+    public static string(options?: IGuardOptions): StringGuard {
+        return new StringGuard(options);
     }
 }

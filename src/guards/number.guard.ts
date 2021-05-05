@@ -16,12 +16,12 @@ import { NumberIsComposite } from './number/number-is-composite';
 import { NumberIsFibonacci } from './number/number-is-fibonacci';
 import { NumberIsNetworkPort } from './number/number-is-network-port';
 
-import { Guard } from '../core/guard';
+import { Guard, IGuardOptions } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class NumberGuard extends Guard<NumberRule> {
-    constructor() {
-        super();
+    constructor(options?: IGuardOptions) {
+        super(options);
     }
 
     /**

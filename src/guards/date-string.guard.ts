@@ -9,12 +9,12 @@ import { DateStringIsSameOrAfter } from './date-string/date-string-is-same-or-af
 import { DateStringIsBefore } from './date-string/date-string-is-before';
 import { DateStringIsAfter } from './date-string/date-string-is-after';
 
-import { Guard } from '../core/guard';
+import { Guard, IGuardOptions } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class DateStringGuard extends Guard<DateStringRule> {
-    constructor() {
-        super();
+    constructor(options?: IGuardOptions) {
+        super(options);
     }
 
     /**

@@ -2691,27 +2691,36 @@ img {
 				<h1>type-guard</h1>
 			</a>
 			<p><a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/v/@xtitusx/type-guard" alt="NPM version"></a>
+				<img src="https://img.shields.io/travis/com/xtitusx/type-guard" alt="CI">
+				<a href="https://codecov.io/gh/xtitusx/type-guard"><img src="https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB" alt="Coverage"></a>
+				<a href="https://snyk.io/test/github/xtitusx/type-guard"><img src="https://snyk.io/test/github/xtitusx/type-guard/badge.svg" alt="Known Vulnerabilities"></a>
 				<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/dm/@xtitusx/type-guard" alt="Downloads"></a>
 			<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/bundlephobia/min/@xtitusx/type-guard" alt="Minified size"></a></p>
-			<p>type-guard performs a runtime check that guarantees the type and value of properties in some scopes.</p>
+			<p><strong>type-guard</strong> performs a runtime check that guarantees the type and value of properties in some scopes.</p>
+			<p>:rocket: <strong>Node.js ready for launch.</strong></p>
+			<p>:rocket: <strong>Angular ready for launch.</strong></p>
 			<p>In a Domain Driven Design approach, it is very useful to check constraints on Domain Entity and ValueType properties.</p>
-			<p>It relies on Tyr to:</p>
+			<p>It relies on <code>Tyr</code> to:</p>
 			<ol>
-				<li>Call a specific Guard like <strong>string()</strong>, <strong>number()</strong>.</li>
+				<li>Call one of the seven specific Guards like <code>string()</code> or <code>number()</code>.</li>
 				<li>Call chained rule checkers.</li>
-				<li>Return a GuardResult instance containing the reason for the failure of the guard, or a success.</li>
+				<li>Return a <code>GuardResult</code> instance containing the reason for the failure of the guard, or a success.</li>
 			</ol>
-			<p>It also relies on GuardResultBulk to manage multiple Tyr invocations:</p>
+			<p>It also relies on <code>GuardResultBulk</code> to manage multiple <code>Tyr</code> invocations:</p>
 			<ul>
-				<li>Combine and return the first GuardResult instance in failure, or only a GuardResult instance in success.</li>
-				<li>Stack and return all GuardResult instances in failure, or only a GuardResult instance in success.</li>
+				<li>  Combine and return the first <code>GuardResult</code> instance in failure, or only a <code>GuardResult</code> instance in success.</li>
+				<li>  Stack and return all <code>GuardResult</code> instances in failure, or only a <code>GuardResult</code> instance in success.</li>
 			</ul>
 			<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
 				<h1>Table of Contents</h1>
 			</a>
 			<ol>
 				<li><a href="#installation">Installation</a></li>
-				<li><a href="#tyr">Tyr</a><ol>
+				<li><a href="#basic-usage">Basic Usage</a><ul>
+						<li><a href="#guard-options">Guard Options</a></li>
+					</ul>
+				</li>
+				<li><a href="#tyr">Tyr</a><ul>
 						<li><a href="#array">array()</a></li>
 						<li><a href="#boolean">boolean()</a></li>
 						<li><a href="#class">class()</a></li>
@@ -2719,36 +2728,80 @@ img {
 						<li><a href="#nil">nil()</a></li>
 						<li><a href="#number">number()</a></li>
 						<li><a href="#string">string()</a></li>
-					</ol>
+					</ul>
 				</li>
-				<li><a href="#simple-examples">Simple examples</a></li>
-				<li><a href="#bulk-examples">Bulk Examples</a></li>
+				<li><a href="#guardresultbulk">GuardResultBulk</a><ul>
+						<li><a href="#add">add()</a></li>
+						<li><a href="#combine">combine()</a></li>
+						<li><a href="#stack">stack()</a></li>
+					</ul>
+				</li>
 				<li><a href="#codex">Codex</a></li>
+				<li><a href="#examples">Examples</a><ul>
+						<li><a href="#single">Single</a></li>
+						<li><a href="#bulk">Bulk</a></li>
+					</ul>
+				</li>
 				<li><a href="#typedoc">TypeDoc</a></li>
+				<li><a href="#the-true-story">The true story</a></li>
+				<li><a href="#maintainer">Maintainer</a></li>
+				<li><a href="#licence">Licence</a></li>
 			</ol>
 			<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 				<h2>Installation</h2>
 			</a>
 			<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">xtitusx</span><span style="color: #000000">/</span><span style="color: #001080">type</span><span style="color: #000000">-</span><span style="color: #001080">guard</span>
 </code></pre>
+			<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+				<h2>Basic Usage</h2>
+			</a>
+			<p>In order to check and return a <code>GuardResult</code> instance, just invoke <code>Tyr</code>, call a specific Guard, and finish by calling <code>guard(propertyValue: unknown, propertyName?: string)</code> method which contains the property value and optionaly a property name.</p>
+			<ul>
+				<li>  A simple type property check:</li>
+			</ul>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
+</code></pre>
+			<ul>
+				<li>  Multiple chained rule checkers:</li>
+			</ul>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum foo&quot;</span><span style="color: #000000">);</span>
+</code></pre>
+			<ul>
+				<li>  A fast validation returning simply a boolean:</li>
+			</ul>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+</code></pre>
+			<ul>
+				<li>  A thrown exception with a <code>GuardResult</code> instance message:</li>
+			</ul>
+			<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;29-02-2021&#039;</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (!</span><span style="color: #001080">guardResult</span><span style="color: #000000">.</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">()) {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Error</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">.</span><span style="color: #795E26">getMessage</span><span style="color: #000000">());</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<a href="#guard-options" id="guard-options" style="color: inherit; text-decoration: none;">
+				<h3>Guard Options</h3>
+			</a>
+			<p>The <code>Tyr.array()</code>, <code>Tyr.number()</code>, <code>Tyr.dateString()</code>, and <code>Tyr.string()</code> methods expect optionaly an <code>IGuardOptions</code> object:</p>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">IGuardOptions</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * A single type of rule, the last called in the chain, is retained in the guard.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@defaultValue</span><span style="color: #008000"> false</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #001080">overriding</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overriding:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult1</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span><span style="color: #000000">.</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dummy&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Lorem Ipsum is simply dummy text&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult2</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;random&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Contrary to popular belief, Lorem Ipsum is not simply random text&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 			<a href="#tyr" id="tyr" style="color: inherit; text-decoration: none;">
 				<h2>Tyr</h2>
 			</a>
-			<p>In order to check and return a GuardResult instance, just invoke Tyr, call a specific Guard, and finish by calling <strong>guard()</strong> method which contains the property value and optionaly a property name.</p>
-			<ul>
-				<li><p>Example of a simple type property check:</p>
-					<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
-</code></pre>
-				</li>
-				<li><p>Example of multiple chained rule checkers:</p>
-					<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum foo&quot;</span><span style="color: #000000">);</span>
-</code></pre>
-				</li>
-			</ul>
-			<p>Notice that only a single type of rule checker, the last called one, is retained in the guard.</p>
-			<p>So, in the following example, <strong>contains(&#39;bar&#39;)</strong> method will override <strong>contains(&#39;foo&#39;)</strong>:</p>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
-</code></pre>
 			<a href="#array" id="array" style="color: inherit; text-decoration: none;">
 				<h3>array()</h3>
 			</a>
@@ -2761,11 +2814,11 @@ img {
 				</thead>
 				<tbody><tr>
 						<td>isEmpty()</td>
-						<td align="left">Check if array is empty.</td>
+						<td align="left">Checks if array is empty.</td>
 					</tr>
 					<tr>
 						<td>isNotEmpty()</td>
-						<td align="left">Check if array is not empty.</td>
+						<td align="left">Checks if array is not empty.</td>
 					</tr>
 					<tr>
 						<td>hasSize(value: number)</td>
@@ -2781,7 +2834,7 @@ img {
 					</tr>
 					<tr>
 						<td>contains(value: unknown)</td>
-						<td align="left">Checks if array&#39;s length is equal or smaller than the specified number.</td>
+						<td align="left">Checks if array contains the specified value.</td>
 					</tr>
 			</tbody></table>
 			<a href="#boolean" id="boolean" style="color: inherit; text-decoration: none;">
@@ -2814,7 +2867,7 @@ img {
 					</tr>
 				</thead>
 				<tbody><tr>
-						<td>isInstanceIf(value: Function)</td>
+						<td>isInstanceOf(value: Function)</td>
 						<td align="left">Checks if the prototype property of the param constructor appears anywhere in the prototype chain of the guarded object.</td>
 					</tr>
 			</tbody></table>
@@ -3130,25 +3183,54 @@ img {
 						<td align="left">Checks if string is an ISO 4217 alpha-3 currency code.</td>
 					</tr>
 			</tbody></table>
-			<a href="#simple-examples" id="simple-examples" style="color: inherit; text-decoration: none;">
-				<h2>Simple examples</h2>
+			<a href="#guardresultbulk" id="guardresultbulk" style="color: inherit; text-decoration: none;">
+				<h2>GuardResultBulk</h2>
 			</a>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">]).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+			<a href="#add" id="add" style="color: inherit; text-decoration: none;">
+				<h3>add()</h3>
+			</a>
+			<p>Adds <code>GuardResult</code> instance(s) in bulk.</p>
+			<a href="#combine" id="combine" style="color: inherit; text-decoration: none;">
+				<h3>combine()</h3>
+			</a>
+			<p>Returns either the first fail in bulk, or only one success.</p>
+			<a href="#stack" id="stack" style="color: inherit; text-decoration: none;">
+				<h3>stack()</h3>
+			</a>
+			<p>Returns all fails in bulk, or only one success.</p>
+			<a href="#codex" id="codex" style="color: inherit; text-decoration: none;">
+				<h2>Codex</h2>
+			</a>
+			<p>Refer to the Codex to directly access Enums containing some ISO values:
+				| Codex entry | Description |
+				| --- |:--- |
+				| Codex.iso639Part1Alpha2Enum() | List of 184 ISO 639-1 alpha-2 language codes. |
+				| Codex.iso639Part2Alpha3Enum() | List of 487 ISO 639-2 alpha-3 language codes. |
+				| Codex.iso3166Part1Alpha2Enum() | List of ISO 3166-1 alpha-2 country codes. |
+				| Codex.iso3166Part1Alpha3Enum() | List of ISO 3166-1 alpha-3 country codes. |
+			| Codex.iso4217Alpha3Enum() | List of active ISO 4217 alpha-3 currency codes. |</p>
+			<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+				<h2>Examples</h2>
+			</a>
+			<a href="#single" id="single" style="color: inherit; text-decoration: none;">
+				<h3>Single</h3>
+			</a>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">]);</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">boolean</span><span style="color: #000000">().</span><span style="color: #795E26">isTrue</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000"> &gt; </span><span style="color: #098658">0</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">boolean</span><span style="color: #000000">().</span><span style="color: #795E26">isTrue</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000"> &gt; </span><span style="color: #098658">0</span><span style="color: #000000">);</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">class</span><span style="color: #000000">().</span><span style="color: #795E26">isInstanceOf</span><span style="color: #000000">(</span><span style="color: #267F99">Number</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">)).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">class</span><span style="color: #000000">().</span><span style="color: #795E26">isInstanceOf</span><span style="color: #000000">(</span><span style="color: #267F99">Number</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">));</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">isSameOrBefore</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2016-01-20T00:00:00+02:00&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2015-02-28&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">isSameOrBefore</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2016-01-20T00:00:00+02:00&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2015-02-28&#039;</span><span style="color: #000000">);</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">nil</span><span style="color: #000000">().</span><span style="color: #795E26">isNil</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">nil</span><span style="color: #000000">().</span><span style="color: #795E26">isNil</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">);</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">));</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;rem&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">);</span>
 </code></pre>
-			<a href="#bulk-examples" id="bulk-examples" style="color: inherit; text-decoration: none;">
-				<h2>Bulk examples</h2>
+			<a href="#bulk" id="bulk" style="color: inherit; text-decoration: none;">
+				<h3>Bulk</h3>
 			</a>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
@@ -3157,7 +3239,7 @@ img {
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span>
+
 <span style="color: #001080">const</span><span style="color: #000000"> </span><span style="color: #001080">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
@@ -3166,27 +3248,55 @@ img {
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
 </code></pre>
-			<a href="#codex" id="codex" style="color: inherit; text-decoration: none;">
-				<h2>Codex</h2>
-			</a>
-			<p>Refer to the Codex to directly access Enums containing some ISO values:
-				| Codex entry                       | Description                                       |
-				| ---                               |:---                                               |
-				| Codex.iso639Part1Alpha2Enum()     | List of 184 ISO 639-1 alpha-2 language codes.     |
-				| Codex.iso639Part2Alpha3Enum()     | List of 487 ISO 639-2 alpha-3 language codes.     |
-				| Codex.iso3166Part1Alpha2Enum()    | List of ISO 3166-1 alpha-2 country codes.         |
-				| Codex.iso3166Part1Alpha3Enum()    | List of ISO 3166-1 alpha-3 country codes.         |
-			| Codex.iso4217Alpha3Enum()         | List of active ISO 4217 alpha-3 currency codes.   |</p>
 			<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
 				<h2>TypeDoc</h2>
 			</a>
 			<p><a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html">GitHub HTML Preview</a></p>
+			<a href="#the-true-story" id="the-true-story" style="color: inherit; text-decoration: none;">
+				<h2>The true story</h2>
+			</a>
+			<p>Once upon a time there was a forgotten kingdom, lost in the far north, called TypGard :rainbow:.</p>
+			<p>This kingdom was populated by two complementary tribes living in harmony: the Backings and the Frontkings.
+			Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in the mountains :mount_fuji:, but we will not discuss them in this story ...</p>
+			<p>The Backings were a people of craftsmen: miners :gem:, blacksmiths :hammer:, loggers, lumberjacks.
+			The Frontkings were a tribe skilled in the arts, including body painting :performing_arts: and storytelling :violin:.</p>
+			<p>After each daily council :coffee:, Frontking&#39;s skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.</p>
+			<p>And all this little small world lived in cooperation and peace, until the day, when curious foreigners from the south, tried to sow trouble, and divide this beautiful and well-ordered kingdom :snake:.
+			The northerners, not understanding their language, decided to simply name these invaders the sons of Julius, or Jsøns in Old Nordic language.</p>
+			<p>The Jsøns were devious and manipulative, and the Northerners never knew if they were telling them the truth :suspect:.</p>
+			<p>Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.</p>
+			<p>Tyr was accompanied by seven guards, each representing an aspect of the order ....</p>
 			<a href="#maintainer" id="maintainer" style="color: inherit; text-decoration: none;">
 				<h2>Maintainer</h2>
 			</a>
 			<ul>
-				<li><a href="https://github.com/xtitusx">xtitusx</a> - <strong>Benjamin Tussac</strong> (author)</li>
+				<li>  <a href="https://github.com/xtitusx">xtitusx</a> - <strong>Benjamin Tussac</strong> (author)</li>
 			</ul>
+			<a href="#licence" id="licence" style="color: inherit; text-decoration: none;">
+				<h2>Licence</h2>
+			</a>
+			<pre><code><span style="color: #0070C1">MIT</span><span style="color: #000000"> </span><span style="color: #001080">License</span>
+
+<span style="color: #795E26">Copyright</span><span style="color: #000000"> (</span><span style="color: #001080">c</span><span style="color: #000000">) </span><span style="color: #098658">2021</span><span style="color: #000000"> </span><span style="color: #001080">Benjamin</span><span style="color: #000000"> </span><span style="color: #001080">Tussac</span>
+
+<span style="color: #001080">Permission</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> </span><span style="color: #001080">hereby</span><span style="color: #000000"> </span><span style="color: #001080">granted</span><span style="color: #000000">, </span><span style="color: #001080">free</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">charge</span><span style="color: #000000">, </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">any</span><span style="color: #000000"> </span><span style="color: #001080">person</span><span style="color: #000000"> </span><span style="color: #001080">obtaining</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">copy</span>
+<span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000"> </span><span style="color: #001080">software</span><span style="color: #000000"> </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #001080">associated</span><span style="color: #000000"> </span><span style="color: #001080">documentation</span><span style="color: #000000"> </span><span style="color: #795E26">files</span><span style="color: #000000"> (</span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Software&quot;</span><span style="color: #000000">), </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">deal</span>
+<span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">Software</span><span style="color: #000000"> </span><span style="color: #001080">without</span><span style="color: #000000"> </span><span style="color: #001080">restriction</span><span style="color: #000000">, </span><span style="color: #001080">including</span><span style="color: #000000"> </span><span style="color: #001080">without</span><span style="color: #000000"> </span><span style="color: #001080">limitation</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">rights</span>
+<span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">use</span><span style="color: #000000">, </span><span style="color: #001080">copy</span><span style="color: #000000">, </span><span style="color: #001080">modify</span><span style="color: #000000">, </span><span style="color: #001080">merge</span><span style="color: #000000">, </span><span style="color: #001080">publish</span><span style="color: #000000">, </span><span style="color: #001080">distribute</span><span style="color: #000000">, </span><span style="color: #001080">sublicense</span><span style="color: #000000">, </span><span style="color: #001080">and</span><span style="color: #000000">/</span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">sell</span>
+<span style="color: #001080">copies</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">Software</span><span style="color: #000000">, </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">permit</span><span style="color: #000000"> </span><span style="color: #001080">persons</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">whom</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">Software</span><span style="color: #000000"> </span><span style="color: #001080">is</span>
+<span style="color: #001080">furnished</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #AF00DB">do</span><span style="color: #000000"> </span><span style="color: #001080">so</span><span style="color: #000000">, </span><span style="color: #001080">subject</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">following</span><span style="color: #000000"> conditions:</span>
+
+<span style="color: #001080">The</span><span style="color: #000000"> </span><span style="color: #001080">above</span><span style="color: #000000"> </span><span style="color: #001080">copyright</span><span style="color: #000000"> </span><span style="color: #001080">notice</span><span style="color: #000000"> </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000"> </span><span style="color: #001080">permission</span><span style="color: #000000"> </span><span style="color: #001080">notice</span><span style="color: #000000"> </span><span style="color: #001080">shall</span><span style="color: #000000"> </span><span style="color: #001080">be</span><span style="color: #000000"> </span><span style="color: #001080">included</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #001080">all</span>
+<span style="color: #001080">copies</span><span style="color: #000000"> </span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">substantial</span><span style="color: #000000"> </span><span style="color: #001080">portions</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">Software</span><span style="color: #000000">.</span>
+
+<span style="color: #0070C1">THE</span><span style="color: #000000"> </span><span style="color: #0070C1">SOFTWARE</span><span style="color: #000000"> </span><span style="color: #0070C1">IS</span><span style="color: #000000"> </span><span style="color: #0070C1">PROVIDED</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;AS IS&quot;</span><span style="color: #000000">, </span><span style="color: #0070C1">WITHOUT</span><span style="color: #000000"> </span><span style="color: #0070C1">WARRANTY</span><span style="color: #000000"> </span><span style="color: #0070C1">OF</span><span style="color: #000000"> </span><span style="color: #0070C1">ANY</span><span style="color: #000000"> </span><span style="color: #0070C1">KIND</span><span style="color: #000000">, </span><span style="color: #0070C1">EXPRESS</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span>
+<span style="color: #0070C1">IMPLIED</span><span style="color: #000000">, </span><span style="color: #0070C1">INCLUDING</span><span style="color: #000000"> </span><span style="color: #0070C1">BUT</span><span style="color: #000000"> </span><span style="color: #0070C1">NOT</span><span style="color: #000000"> </span><span style="color: #0070C1">LIMITED</span><span style="color: #000000"> </span><span style="color: #0070C1">TO</span><span style="color: #000000"> </span><span style="color: #0070C1">THE</span><span style="color: #000000"> </span><span style="color: #0070C1">WARRANTIES</span><span style="color: #000000"> </span><span style="color: #0070C1">OF</span><span style="color: #000000"> </span><span style="color: #0070C1">MERCHANTABILITY</span><span style="color: #000000">,</span>
+<span style="color: #0070C1">FITNESS</span><span style="color: #000000"> </span><span style="color: #0070C1">FOR</span><span style="color: #000000"> </span><span style="color: #0070C1">A</span><span style="color: #000000"> </span><span style="color: #0070C1">PARTICULAR</span><span style="color: #000000"> </span><span style="color: #0070C1">PURPOSE</span><span style="color: #000000"> </span><span style="color: #0070C1">AND</span><span style="color: #000000"> </span><span style="color: #0070C1">NONINFRINGEMENT</span><span style="color: #000000">. </span><span style="color: #0070C1">IN</span><span style="color: #000000"> </span><span style="color: #0070C1">NO</span><span style="color: #000000"> </span><span style="color: #0070C1">EVENT</span><span style="color: #000000"> </span><span style="color: #0070C1">SHALL</span><span style="color: #000000"> </span><span style="color: #0070C1">THE</span>
+<span style="color: #0070C1">AUTHORS</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">COPYRIGHT</span><span style="color: #000000"> </span><span style="color: #0070C1">HOLDERS</span><span style="color: #000000"> </span><span style="color: #0070C1">BE</span><span style="color: #000000"> </span><span style="color: #0070C1">LIABLE</span><span style="color: #000000"> </span><span style="color: #0070C1">FOR</span><span style="color: #000000"> </span><span style="color: #0070C1">ANY</span><span style="color: #000000"> </span><span style="color: #0070C1">CLAIM</span><span style="color: #000000">, </span><span style="color: #0070C1">DAMAGES</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">OTHER</span>
+<span style="color: #0070C1">LIABILITY</span><span style="color: #000000">, </span><span style="color: #0070C1">WHETHER</span><span style="color: #000000"> </span><span style="color: #0070C1">IN</span><span style="color: #000000"> </span><span style="color: #0070C1">AN</span><span style="color: #000000"> </span><span style="color: #0070C1">ACTION</span><span style="color: #000000"> </span><span style="color: #0070C1">OF</span><span style="color: #000000"> </span><span style="color: #0070C1">CONTRACT</span><span style="color: #000000">, </span><span style="color: #0070C1">TORT</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">OTHERWISE</span><span style="color: #000000">, </span><span style="color: #0070C1">ARISING</span><span style="color: #000000"> </span><span style="color: #0070C1">FROM</span><span style="color: #000000">,</span>
+<span style="color: #0070C1">OUT</span><span style="color: #000000"> </span><span style="color: #0070C1">OF</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">IN</span><span style="color: #000000"> </span><span style="color: #0070C1">CONNECTION</span><span style="color: #000000"> </span><span style="color: #0070C1">WITH</span><span style="color: #000000"> </span><span style="color: #0070C1">THE</span><span style="color: #000000"> </span><span style="color: #0070C1">SOFTWARE</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">THE</span><span style="color: #000000"> </span><span style="color: #0070C1">USE</span><span style="color: #000000"> </span><span style="color: #0070C1">OR</span><span style="color: #000000"> </span><span style="color: #0070C1">OTHER</span><span style="color: #000000"> </span><span style="color: #0070C1">DEALINGS</span><span style="color: #000000"> </span><span style="color: #0070C1">IN</span><span style="color: #000000"> </span><span style="color: #0070C1">THE</span>
+<span style="color: #0070C1">SOFTWARE</span><span style="color: #000000">.</span>
+</code></pre>
 		</div>
 		<div style="position:relative;"><a name="typedoc-main-index" class="tsd-anchor"></a></div>
 		<section class="tsd-panel-group tsd-index-group">

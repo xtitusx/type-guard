@@ -2,13 +2,23 @@ import { GuardResult } from './guard-result';
 
 export type Rule = { type: string };
 
+export interface IGuardOptions {
+    /**
+     * A single type of rule, the last called in the chain, is retained in the guard.
+     * @defaultValue false
+     */
+    overriding?: boolean;
+}
+
 export abstract class Guard<T extends Rule> {
     protected rules?: T[];
+    protected options?: IGuardOptions;
     protected propertyValue: unknown;
     protected combinedGuardResult: GuardResult;
 
-    constructor() {
+    constructor(options?: IGuardOptions) {
         this.rules = [];
+        this.options = options;
     }
 
     /**
@@ -32,12 +42,19 @@ export abstract class Guard<T extends Rule> {
     }
 
     /**
-     * Adds a rule type to the rule list, or replaces an already existing rule type.
-     * @remarks A single type of rule is therefore retained in the guard.
+     * Adds a rule to the rule list.
+     * @remarks Method has two different behaviors depending the 'options.overriding' flag:
+     * ```ts
+     * false: Adds a rule to the list. Default behavior.
+     * -true: Adds a rule type to the rule list, or replaces an already existing rule type. A single type of rule is therefore retained in the guard.
+     * ```
      * @param rule
      */
     protected addRule(rule: T): void {
-        this.rules = [...this.rules.filter((r) => r.type !== rule.type), rule];
+        this.rules =
+            this.options?.overriding === true
+                ? [...this.rules.filter((r) => r.type !== rule.type), rule]
+                : [...this.rules, rule];
     }
 
     /**

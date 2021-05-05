@@ -30,6 +30,7 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
+    - [Guard Options](#guard-options)
 3. [Tyr](#tyr)
     - [array()](#array)
     - [boolean()](#boolean)
@@ -61,25 +62,25 @@ npm install @xtitusx/type-guard
 
 In order to check and return a `GuardResult` instance, just invoke `Tyr`, call a specific Guard, and finish by calling `guard(propertyValue: unknown, propertyName?: string)` method which contains the property value and optionaly a property name.
 
--   Example of a simple type property check:
+-   A simple type property check:
 
 ```
 Tyr.string().guard("foo");
 ```
 
--   Example of multiple chained rule checkers:
+-   Multiple chained rule checkers:
 
 ```
 Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo");
 ```
 
--   Example of fast validation returning simply a boolean:
+-   A fast validation returning simply a boolean:
 
 ```
 Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
 ```
 
--   Example of a thrown exception with `GuardResult` instance message:
+-   A thrown exception with a `GuardResult` instance message:
 
 ```
  const guardResult = Tyr.dateString().isIso8601Date().guard('29-02-2021');
@@ -88,12 +89,28 @@ if (!guardResult.isSuccess()) {
 }
 ```
 
-Notice that only a single type of rule checker, the last called one, is retained in the guard.
+### Guard Options
 
-So, in the following example, `contains('bar')` method overrides `contains('foo')`:
+The `Tyr.array()`, `Tyr.number()`, `Tyr.dateString()`, and `Tyr.string()` methods expect optionaly an `IGuardOptions` object:
 
 ```
-Tyr.string().contains('foo').contains('bar').guard("foo");
+export interface IGuardOptions {
+    /**
+     * A single type of rule, the last called in the chain, is retained in the guard.
+     * @defaultValue false
+     */
+    overriding?: boolean;
+}
+```
+
+```
+const stringGuard = Tyr.string({ overriding: true }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
+
+const guardResult1 = stringGuard.contains('dummy').guard('Lorem Ipsum is simply dummy text');
+
+const guardResult2 = stringGuard
+    .contains('random')
+    .guard('Contrary to popular belief, Lorem Ipsum is not simply random text');
 ```
 
 ## Tyr

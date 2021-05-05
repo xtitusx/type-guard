@@ -32,8 +32,8 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().equals('foo').guard('foo').isSuccess(), true);
         });
 
-        it("should return true when param is 'foobar' then 'foo' and tested value is 'foo'", () => {
-            assert.equal(new StringGuard().equals('foobar').equals('foo').guard('foo').isSuccess(), true);
+        it("should return false when param is 'foobar' then 'foo' and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().equals('foobar').equals('foo').guard('foo').isSuccess(), false);
         });
 
         it("should return false when param is 'FOO' and tested value is 'foo'", () => {

@@ -52,12 +52,12 @@ import { StringIsIso639Part2Alpha3 } from './string/string-is-iso-639-part2-alph
 import { StringIsIso3166Part1Alpha } from './string/string-is-iso-3166-part1-alpha';
 import { StringIsIso4217Alpha3 } from './string/string-is-iso-4217-alpha-3';
 
-import { Guard } from '../core/guard';
+import { Guard, IGuardOptions } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class StringGuard extends Guard<StringRule> {
-    constructor() {
-        super();
+    constructor(options?: IGuardOptions) {
+        super(options);
     }
 
     /**

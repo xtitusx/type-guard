@@ -6,12 +6,12 @@ import { ArrayHasMinSize } from './array/array-has-min-size';
 import { ArrayHasMaxSize } from './array/array-has-max-size';
 import { ArrayContains } from './array/array-contains';
 
-import { Guard } from '../core/guard';
+import { Guard, IGuardOptions } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
 export class ArrayGuard extends Guard<ArrayRule> {
-    constructor() {
-        super();
+    constructor(options?: IGuardOptions) {
+        super(options);
     }
 
     /**
