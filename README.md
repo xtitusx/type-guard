@@ -44,13 +44,10 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
     - [combine()](#combine)
     - [stack()](#stack)
 5. [Codex](#codex)
-6. [Examples](#examples)
-    - [Single](#single)
-    - [Bulk](#bulk)
-7. [TypeDoc](#typedoc)
-8. [The true story](#the-true-story)
-9. [Maintainer](#maintainer)
-10. [Licence](#licence)
+6. [TypeDoc](#typedoc)
+7. [The true story](#the-true-story)
+8. [Maintainer](#maintainer)
+9. [Licence](#licence)
 
 ## Installation
 
@@ -74,6 +71,10 @@ Tyr.string().guard("foo");
 Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo");
 ```
 
+```
+Tyr.number().isMultiple(2).isMultiple(3).isMultiple(4).guard(12);
+```
+
 -   A fast validation returning simply a boolean:
 
 ```
@@ -91,7 +92,7 @@ if (!guardResult.isSuccess()) {
 
 ### Guard Options
 
-The `Tyr.array()`, `Tyr.number()`, `Tyr.dateString()`, and `Tyr.string()` methods expect optionaly an `IGuardOptions` object:
+`Tyr.array()`, `Tyr.dateString()`, `Tyr.number()`, and `Tyr.string()` methods expect optionaly an `IGuardOptions` object:
 
 ```
 export interface IGuardOptions {
@@ -234,11 +235,32 @@ Adds `GuardResult` instance(s) in bulk.
 
 ### combine()
 
-Returns either the first fail in bulk, or only one success.
+Returns either the first fail in bulk, or only one success:
+
+```
+const guardResult = new GuardResultBulk()
+    .add([
+        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
+        Tyr.string().equals('foo').guard('foo'),
+        Tyr.number().isIn(10, 20).isEven().guard(14),
+    ])
+    .combine();
+
+```
 
 ### stack()
 
-Returns all fails in bulk, or only one success.
+Returns all fails in bulk, or only one success:
+
+```
+const guardResult = new GuardResultBulk()
+    .add([
+        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
+        Tyr.string().equals('foo').guard('foo'),
+        Tyr.number().isIn(10, 20).isEven().guard(14),
+    ])
+    .stack();
+```
 
 ## Codex
 
@@ -250,46 +272,6 @@ Refer to the Codex to directly access Enums containing some ISO values:
 | Codex.iso3166Part1Alpha2Enum() | List of ISO 3166-1 alpha-2 country codes. |
 | Codex.iso3166Part1Alpha3Enum() | List of ISO 3166-1 alpha-3 country codes. |
 | Codex.iso4217Alpha3Enum() | List of active ISO 4217 alpha-3 currency codes. |
-
-## Examples
-
-### Single
-
-```
-Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar']);
-
-Tyr.boolean().isTrue().guard(1 > 0);
-
-Tyr.class().isInstanceOf(Number).guard(new Number(1));
-
-Tyr.dateString().isIso8601Date().isSameOrBefore('2016-01-20T00:00:00+02:00').guard('2015-02-28');
-
-Tyr.nil().isNil(null).guard(null);
-
-Tyr.number().isIn(10, 20).isEven().guard(14));
-
-Tyr.string().isAlpha().contains('rem').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum");
-```
-
-### Bulk
-
-```
-const guardResult = new GuardResultBulk()
-    .add([
-        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
-        Tyr.string().equals('foo').guard('foo'),
-        Tyr.number().isIn(10, 20).isEven().guard(14),
-    ])
-    .combine();
-
-const guardResult = new GuardResultBulk()
-    .add([
-        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
-        Tyr.string().equals('foo').guard('foo'),
-        Tyr.number().isIn(10, 20).isEven().guard(14),
-    ])
-    .stack();
-```
 
 ## TypeDoc
 
