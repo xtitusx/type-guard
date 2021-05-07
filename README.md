@@ -1,8 +1,20 @@
+[npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
+[npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
+[ci-image]: https://img.shields.io/travis/com/xtitusx/type-guard
+[codecov-url]: https://codecov.io/gh/xtitusx/type-guard
+[codecov-image]: https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB
+[snyk-security-image]: https://snyk-widget.herokuapp.com/badge/npm/%40xtitusx%2Ftype-guard/badge.svg
+[snyk-url]: https://snyk.io/test/github/xtitusx/type-guard/badge.svg
+[snyk-image]: https://snyk.io/test/github/xtitusx/type-guard
+[downloads-image]: https://img.shields.io/npm/dm/@xtitusx/type-guard
+[min-size-image]: https://img.shields.io/bundlephobia/min/@xtitusx/type-guard
+
 # type-guard
 
 [![NPM version][npm-image]][npm-url]
 ![CI][ci-image]
 [![Coverage][codecov-image]][codecov-url]
+![Security Badge][snyk-security-image]
 [![Known Vulnerabilities][snyk-url]][snyk-image]
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
@@ -331,13 +343,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-[npm-url]: https://www.npmjs.com/package/@xtitusx/type-guard
-[npm-image]: https://img.shields.io/npm/v/@xtitusx/type-guard
-[ci-image]: https://img.shields.io/travis/com/xtitusx/type-guard
-[codecov-url]: https://codecov.io/gh/xtitusx/type-guard
-[codecov-image]: https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB
-[snyk-url]: https://snyk.io/test/github/xtitusx/type-guard/badge.svg
-[snyk-image]: https://snyk.io/test/github/xtitusx/type-guard
-[downloads-image]: https://img.shields.io/npm/dm/@xtitusx/type-guard
-[min-size-image]: https://img.shields.io/bundlephobia/min/@xtitusx/type-guard
