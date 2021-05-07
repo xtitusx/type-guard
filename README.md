@@ -92,12 +92,12 @@ if (!guardResult.isSuccess()) {
 
 ### Guard Options
 
-`Tyr.array()`, `Tyr.dateString()`, `Tyr.number()`, and `Tyr.string()` methods expect optionaly an `IGuardOptions` object:
+`Tyr.array()`, `Tyr.dateString()`, `Tyr.number()`, and `Tyr.string()` methods expect an `IGuardOptions` object optionaly:
 
 ```
 export interface IGuardOptions {
     /**
-     * A single type of rule, the last called in the chain, is retained in the guard.
+     * A single type of rule, the last called in the chain, is retained by the guard.
      * @defaultValue false
      */
     overriding?: boolean;
