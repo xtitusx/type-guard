@@ -18,7 +18,7 @@ export type StringRule =
     | { type: 'isProgrammingCase'; convention: ProgrammingConvention }
     | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isAlphaNumeric' }
-    | { type: 'isAlpha' }
+    | { type: 'isAlpha'; alphabet?: Alphabet }
     | { type: 'isNumeric' }
     | { type: 'isAscii' }
     | { type: 'isBinary' }
@@ -52,6 +52,8 @@ export type ProgrammingConvention =
     | 'dot.case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
+
+export type Alphabet = 'basic-latin' | 'precomposed-latin';
 
 export type Base64Implementation = 'standard' | 'fileName' | 'urlSafe';
 

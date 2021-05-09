@@ -10,6 +10,7 @@ import {
     AlphaVersion,
     Base64Implementation,
     JsonFormat,
+    Alphabet,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -301,8 +302,8 @@ export class StringGuard extends Guard<StringRule> {
      * ```
      * @remarks Chainable method.
      */
-    public isAlpha(): this {
-        this.addRule({ type: 'isAlpha' });
+    public isAlpha(alphabet?: Alphabet): this {
+        this.addRule({ type: 'isAlpha', alphabet });
         return this;
     }
 
