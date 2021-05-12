@@ -10,12 +10,9 @@ import { GuardResult } from '../../core/guard-result';
 export const BASIC_LATIN_PATTERN = '^[a-zA-Z]+$';
 
 /**
- * Diacritic Latin pattern:
- * - Not case sensitive.
- * @see {@link https://en.wikipedia.org/wiki/List_of_precomposed_Latin_characters_in_Unicode}
- * @see {@link https://unicode-table.com/en/}
+ * Partial precomposed Latin pattern.
  */
-export const PRECOMPOSED_LATIN_PATTERN = '^[a-zA-ZÀ-ÖØ-öø-Ÿ]+$';
+const PARTIAL_PRECOMPOSED_LATIN_PATTERN = '^[a-zA-ZÀ-ÖØ-öø-ŸʒƷſß]+$';
 
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
@@ -33,7 +30,7 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to only contain basic Latin alpha characters but does not: ${this.value}`
+                              `string is expected to only contain basic Latin characters but does not: ${this.value}`
                           )
                           .build();
             case 'precomposed-latin':
@@ -43,7 +40,7 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to only contain precomposed Latin alpha characters but does not: ${this.value}`
+                              `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
                           )
                           .build();
         }
@@ -54,6 +51,11 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
     }
 
     private isPrecomposedLatin(): boolean {
-        return this.value.match(new RegExp(DIACRITIC_LATIN_PATTERN)) !== null;
+        return (
+            this.value
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .match(new RegExp(PARTIAL_PRECOMPOSED_LATIN_PATTERN)) !== null
+        );
     }
 }
