@@ -2693,6 +2693,7 @@ img {
 			<p><a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/v/@xtitusx/type-guard" alt="NPM version"></a>
 				<img src="https://img.shields.io/travis/com/xtitusx/type-guard" alt="CI">
 				<a href="https://codecov.io/gh/xtitusx/type-guard"><img src="https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB" alt="Coverage"></a>
+				<img src="https://snyk-widget.herokuapp.com/badge/npm/%40xtitusx%2Ftype-guard/badge.svg" alt="Security Badge">
 				<a href="https://snyk.io/test/github/xtitusx/type-guard"><img src="https://snyk.io/test/github/xtitusx/type-guard/badge.svg" alt="Known Vulnerabilities"></a>
 				<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/dm/@xtitusx/type-guard" alt="Downloads"></a>
 			<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/bundlephobia/min/@xtitusx/type-guard" alt="Minified size"></a></p>
@@ -2737,11 +2738,6 @@ img {
 					</ul>
 				</li>
 				<li><a href="#codex">Codex</a></li>
-				<li><a href="#examples">Examples</a><ul>
-						<li><a href="#single">Single</a></li>
-						<li><a href="#bulk">Bulk</a></li>
-					</ul>
-				</li>
 				<li><a href="#typedoc">TypeDoc</a></li>
 				<li><a href="#the-true-story">The true story</a></li>
 				<li><a href="#maintainer">Maintainer</a></li>
@@ -2766,6 +2762,8 @@ img {
 			</ul>
 			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum foo&quot;</span><span style="color: #000000">);</span>
 </code></pre>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">12</span><span style="color: #000000">);</span>
+</code></pre>
 			<ul>
 				<li>  A fast validation returning simply a boolean:</li>
 			</ul>
@@ -2782,10 +2780,10 @@ img {
 			<a href="#guard-options" id="guard-options" style="color: inherit; text-decoration: none;">
 				<h3>Guard Options</h3>
 			</a>
-			<p>The <code>Tyr.array()</code>, <code>Tyr.number()</code>, <code>Tyr.dateString()</code>, and <code>Tyr.string()</code> methods expect optionaly an <code>IGuardOptions</code> object:</p>
+			<p><code>Tyr.array()</code>, <code>Tyr.dateString()</code>, <code>Tyr.number()</code>, and <code>Tyr.string()</code> methods expect an <code>IGuardOptions</code> object optionaly:</p>
 			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">IGuardOptions</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #008000">/**</span>
-<span style="color: #008000">     * A single type of rule, the last called in the chain, is retained in the guard.</span>
+<span style="color: #008000">     * A single type of rule, the last called in the chain, is retained by the guard.</span>
 <span style="color: #008000">     * </span><span style="color: #0000FF">@defaultValue</span><span style="color: #008000"> false</span>
 <span style="color: #008000">     */</span>
 <span style="color: #000000">    </span><span style="color: #001080">overriding</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
@@ -3189,15 +3187,34 @@ img {
 			<a href="#add" id="add" style="color: inherit; text-decoration: none;">
 				<h3>add()</h3>
 			</a>
-			<p>Adds <code>GuardResult</code> instance(s) in bulk.</p>
+			<p>Adds <code>GuardResult</code> instance(s) in bulk:</p>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResultBulk</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">().</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">));</span>
+</code></pre>
 			<a href="#combine" id="combine" style="color: inherit; text-decoration: none;">
 				<h3>combine()</h3>
 			</a>
-			<p>Returns either the first fail in bulk, or only one success.</p>
+			<p>Returns either the first fail in bulk, or only one success:</p>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
+<span style="color: #000000">    ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
+
+</code></pre>
 			<a href="#stack" id="stack" style="color: inherit; text-decoration: none;">
 				<h3>stack()</h3>
 			</a>
-			<p>Returns all fails in bulk, or only one success.</p>
+			<p>Returns all fails in bulk, or only one success:</p>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
+<span style="color: #000000">    ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
+</code></pre>
 			<a href="#codex" id="codex" style="color: inherit; text-decoration: none;">
 				<h2>Codex</h2>
 			</a>
@@ -3209,45 +3226,6 @@ img {
 				| Codex.iso3166Part1Alpha2Enum() | List of ISO 3166-1 alpha-2 country codes. |
 				| Codex.iso3166Part1Alpha3Enum() | List of ISO 3166-1 alpha-3 country codes. |
 			| Codex.iso4217Alpha3Enum() | List of active ISO 4217 alpha-3 currency codes. |</p>
-			<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
-				<h2>Examples</h2>
-			</a>
-			<a href="#single" id="single" style="color: inherit; text-decoration: none;">
-				<h3>Single</h3>
-			</a>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">]);</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">boolean</span><span style="color: #000000">().</span><span style="color: #795E26">isTrue</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000"> &gt; </span><span style="color: #098658">0</span><span style="color: #000000">);</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">class</span><span style="color: #000000">().</span><span style="color: #795E26">isInstanceOf</span><span style="color: #000000">(</span><span style="color: #267F99">Number</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Number</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">));</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">isSameOrBefore</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2016-01-20T00:00:00+02:00&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2015-02-28&#039;</span><span style="color: #000000">);</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">nil</span><span style="color: #000000">().</span><span style="color: #795E26">isNil</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #0000FF">null</span><span style="color: #000000">);</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">));</span>
-
-<span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;rem&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">);</span>
-</code></pre>
-			<a href="#bulk" id="bulk" style="color: inherit; text-decoration: none;">
-				<h3>Bulk</h3>
-			</a>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
-<span style="color: #000000">    ])</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
-
-<span style="color: #001080">const</span><span style="color: #000000"> </span><span style="color: #001080">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
-<span style="color: #000000">    ])</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
-</code></pre>
 			<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
 				<h2>TypeDoc</h2>
 			</a>

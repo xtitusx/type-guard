@@ -1389,8 +1389,12 @@ describe('String-Guard', () => {
     });
 
     describe('#isAlpha()', () => {
-        it("should return true when tested value is 'foo'", () => {
-            assert.equal(new StringGuard().isAlpha().guard('foo').isSuccess(), true);
+        it("should return true when tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+            assert.equal(new StringGuard().isAlpha().guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+            assert.equal(new StringGuard().isAlpha().guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
         });
 
         it("should return false when tested value is ''", () => {
@@ -1419,6 +1423,1181 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isAlphaNumeric().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isAlpha('basic-latin')", () => {
+            it("should return true when param is 'basic-latin' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('basic-latin').guard('abcdefghijklmnopqrstwxyz').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'basic-latin' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('basic-latin').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when param is 'basic-latin' and tested value is 'Áá'", () => {
+                assert.equal(new StringGuard().isAlpha('basic-latin').guard('Áá').isSuccess(), false);
+            });
+        });
+
+        describe("#isAlpha('precomposed-latin')", () => {
+            it("should return true when param is 'precomposed-latin' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('abcdefghijklmnopqrstwxyz').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value is french diacritics 'àâäéèêëïîôöùûüÿç'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('àâäéèêëïîôöùûüÿç').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value is french diacritics 'ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ').isSuccess(),
+                    true
+                );
+            });
+
+            describe("#isAlpha('precomposed-latin')", () => {
+                describe("#isAlpha('precomposed-latin') acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Áá'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Áá').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǽǽ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǽǽ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ćć'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ćć').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Éé'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Éé').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǵǵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǵǵ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Íí'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Íí').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḱḱ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḱḱ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĺĺ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĺĺ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḿḿ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḿḿ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ńń'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ńń').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Óó'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Óó').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǿǿ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǿǿ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṕṕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṕṕ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŕŕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŕŕ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Śś'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Śś').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Úú'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Úú').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẃẃ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẃẃ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ýý'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ýý').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Źź'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Źź').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and dot above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṥṥ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṥṥ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ăă'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ăă').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĕĕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĕĕ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ğğ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ğğ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĭĭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĭĭ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŏŏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŏŏ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŭŭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŭŭ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ắắ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ắắ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and dot below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ặặ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ặặ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ằằ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ằằ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and hook above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẳẳ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẳẳ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and hook above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẵẵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẵẵ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') breve and breve below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḫḫ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḫḫ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') caron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǎǎ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǎǎ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Čč'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Čč').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ďď'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ďď').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ěě'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ěě').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǧǧ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǧǧ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȟȟ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȟȟ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǐǐ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǐǐ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'ǰ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ǰ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǩǩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǩǩ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ľľ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ľľ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ňň'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ňň').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǒǒ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǒǒ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Řř'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Řř').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Šš'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Šš').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ťť'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ťť').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǔǔ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǔǔ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Žž'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Žž').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǯǯ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǯǯ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') caron and dot above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṧṧ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṧṧ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') cedilla", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Çç'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Çç').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḑḑ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḑḑ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȩȩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȩȩ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ģģ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ģģ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḩḩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḩḩ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ķķ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ķķ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ļļ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ļļ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ņņ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ņņ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŗŗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŗŗ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Şş'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Şş').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ţţ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ţţ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') cedilla and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḉḉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḉḉ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') cedilla and breve", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḝḝ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḝḝ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ââ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ââ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĉĉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĉĉ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Êê'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Êê').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĝĝ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĝĝ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĥĥ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĥĥ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Îî'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Îî').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĵĵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĵĵ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ôô'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ôô').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŝŝ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŝŝ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ûû'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ûû').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŵŵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŵŵ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ŷŷ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ŷŷ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẑẑ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẑẑ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ấấ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ấấ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ếế'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ếế').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ốố'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ốố').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex and dot below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ậậ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ậậ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ệệ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ệệ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ộộ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ộộ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex and grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ầầ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ầầ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ềề'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ềề').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ồồ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ồồ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex and hook above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẩẩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẩẩ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ểể'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ểể').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ổổ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ổổ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex and tilde", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẫẫ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẫẫ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ễễ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ễễ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỗỗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỗỗ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') circumflex below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḓḓ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḓḓ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḙḙ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḙḙ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḽḽ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḽḽ').isSuccess(), true);
+                    });
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṋṋ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṋṋ').isSuccess(), true);
+                    });
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṱṱ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṱṱ').isSuccess(), true);
+                    });
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṷṷ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṷṷ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') comma below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Șș'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Șș').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Țț'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Țț').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ää'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ää').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ëë'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ëë').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḧḧ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḧḧ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ïï'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ïï').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Öö'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Öö').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'ẗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ẗ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Üü'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Üü').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẅẅ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẅẅ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẍẍ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẍẍ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ÿÿ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ÿÿ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḯḯ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḯḯ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǘǘ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǘǘ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis and caron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǚǚ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǚǚ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis and grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǜǜ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǜǜ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis and macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǟǟ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǟǟ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȫȫ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȫȫ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǖǖ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǖǖ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') diaeresis below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṳṳ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṳṳ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') dot above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȧȧ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȧȧ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḃḃ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḃḃ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ċċ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ċċ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḋḋ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḋḋ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ėė'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ėė').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḟḟ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḟḟ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ġġ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ġġ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḣḣ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḣḣ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'İi'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('İi').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṁṁ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṁṁ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṅṅ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṅṅ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȯȯ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȯȯ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṗṗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṗṗ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṙṙ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṙṙ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṡẛṡ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṡẛṡ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṫṫ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṫṫ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẇẇ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẇẇ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẋẋ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẋẋ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẏẏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẏẏ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Żż'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Żż').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') dot above and macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǡǡ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǡǡ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȱȱ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȱȱ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') dot below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ạạ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ạạ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḅḅ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḅḅ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḍḍ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḍḍ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẹẹ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẹẹ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḥḥ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḥḥ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ịị'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ịị').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḳḳ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḳḳ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḷḷ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḷḷ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṃṃ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṃṃ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṇṇ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṇṇ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ọọ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ọọ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṛṛ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṛṛ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṣṣ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṣṣ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṭṭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṭṭ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ụụ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ụụ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṿṿ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṿṿ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẉẉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẉẉ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỵỵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỵỵ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẓẓ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẓẓ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') dot below and dot above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṩṩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṩṩ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') dot below and macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḹḹ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḹḹ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṝṝ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṝṝ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') double acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Őő'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Őő').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Űű'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Űű').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') double grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȁȁ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȁȁ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȅȅ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȅȅ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȉȉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȉȉ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȍȍ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȍȍ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȑȑ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȑȑ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȕȕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȕȕ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Àà'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Àà').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Èè'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Èè').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ìì'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ìì').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Àà'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Àà').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǹǹ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǹǹ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Òò'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Òò').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ùù'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ùù').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẁẁ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẁẁ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỳỳ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỳỳ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') hook above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ảả'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ảả').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẻẻ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẻẻ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỉỉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỉỉ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỏỏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỏỏ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ủủ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ủủ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỷỷ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỷỷ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ơơ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ơơ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ưư'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ưư').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ớớ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ơơ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ứứ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ứứ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn and dot below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ợợ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ợợ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ựự'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ựự').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn and grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ờờ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ờờ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ừừ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ừừ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn and hook above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ởở'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ởở').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ửử'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ửử').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') horn and tilde", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỡỡ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỡỡ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ữữ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ữữ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') inverted breve", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȃȃ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȃȃ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȇȇ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȇȇ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȋȋ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȋȋ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȏȏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȏȏ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȓȓ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȓȓ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȗȗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȗȗ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Āā'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Āā').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǣǣ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǣǣ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ēē'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ēē').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḡḡ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḡḡ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Īī'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Īī').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ōō'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ōō').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ūū'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ūū').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȳȳ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȳȳ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') macron and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḗḗ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḗḗ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṓṓ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṓṓ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') macron and diaeresis", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṻṻ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṻṻ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') macron and grave", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḕḕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḕḕ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṑṑ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṑṑ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') macron below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḇḇ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḇḇ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḏḏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḏḏ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'ẖ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ẖ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḵḵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḵḵ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḻḻ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḻḻ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṉṉ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṉṉ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṟṟ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṟṟ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṯṯ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṯṯ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẕẕ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẕẕ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') ogonek", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ąą'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ąą').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ęę'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ęę').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Įį'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Įį').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǫǫ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǫǫ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ųų'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ųų').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') ogonek and macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǭǭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǭǭ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') ring above", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Åå'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Åå').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ůů'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ůů').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'ẘ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ẘ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'ẙ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ẙ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') ring above and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ǻǻ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ǻǻ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') ring below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḁḁ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḁḁ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') tilde", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ãã'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ãã').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ẽẽ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ẽẽ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ĩĩ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ĩĩ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ññ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ññ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Õõ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Õõ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ũũ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ũũ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṽṽ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṽṽ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ỹỹ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ỹỹ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') tilde and acute", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṍṍ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṍṍ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṹṹ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṹṹ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') tilde and diaeresis", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṏṏ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṏṏ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') tilde and macron", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ȭȭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ȭȭ').isSuccess(), true);
+                    });
+                });
+
+                describe("#isAlpha('precomposed-latin') tilde below", () => {
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḛḛ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḛḛ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ḭḭ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ḭḭ').isSuccess(), true);
+                    });
+
+                    it("should return true when param is 'precomposed-latin' and tested value is 'Ṵṵ'", () => {
+                        assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṵṵ').isSuccess(), true);
+                    });
+                });
+            });
         });
     });
 

@@ -10,6 +10,7 @@ import {
     AlphaVersion,
     Base64Implementation,
     JsonFormat,
+    Alphabet,
 } from './string/string-types';
 import { IIsDecimalOptions } from './string/string-options';
 import { StringEquals } from './string/string-equals';
@@ -295,14 +296,17 @@ export class StringGuard extends Guard<StringRule> {
 
     /**
      * Checks if string only contains alpha characters.
-     * ```ts
-     * Rule:
-     * - Characters with diacritics such as é or ä, as well as additional letters, are characters of extended alphabets and are not included in this set of alpha characters.
-     * ```
      * @remarks Chainable method.
+     * @param alphabet - {@link BASIC_LATIN_PATTERN | 'basic-latin'} | {@link https://en.wikipedia.org/wiki/Precomposed_character | 'precomposed-latin'}. Default is 'basic-latin'.
+     * ```ts
+     * alphabet:
+     * - basic-latin: Basic latin consists of two sets of 26 letters. They are the same letters that comprise the English alphabet.
+     * - precomposed-latin: Extended basic latin characters with diacritics such as é or ä, and ligatures such as Æ or ß.
+     * ```
+     * @see {@link https://unicode-table.com/en/}
      */
-    public isAlpha(): this {
-        this.addRule({ type: 'isAlpha' });
+    public isAlpha(alphabet?: Alphabet): this {
+        this.addRule({ type: 'isAlpha', alphabet });
         return this;
     }
 
