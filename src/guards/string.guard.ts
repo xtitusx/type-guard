@@ -444,7 +444,7 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string is an email address number.
+     * Checks if string is an email address.
      * @remarks Chainable method.
      * ```ts
      * Rules:

@@ -225,7 +225,7 @@ const guardResult2 = stringGuard
 | isBase64(impl: Base64Implementation)                                        | Checks if string is Base64 encoded.                                             |
 | isJson(format?: JsonFormat)                                                 | Checks if string is a valid JSON string.                                        |
 | isDecimal(options?: IIsDecimalOptions)                                      | Checks if string is a decimal number.                                           |
-| isEmailAddress(def?: EmailAddressDefinition)                                | Checks if string is an email address number.                                    |
+| isEmailAddress(def?: EmailAddressDefinition)                                | Checks if string is an email address.                                           |
 | isObjectId()                                                                | Checks if string is a representation of a MongoDB ObjectId.                     |
 | isHexColor(digits?: HexColorDigits)                                         | Checks if string is a hexadecimal color.                                        |
 | isUuidv4()                                                                  | Checks if string is an Universally unique identifier v4.                        |
