@@ -216,7 +216,7 @@ const guardResult2 = stringGuard
 | isProgrammingCase(convention: ProgrammingConvention)                        | Checks if string follows one of the most popular programming naming convention. |
 | isTrimmed(side: TrimmedSide)                                                | Checks if string does not contain any leading and trailing whitespace.          |
 | isAlphaNumeric()                                                            | Checks if string only contains alpha characters and/or numbers.                 |
-| isAlpha()                                                                   | Checks if string only contains alpha characters.                                |
+| isAlpha(alphabet?: Alphabet)                                                | Checks if string only contains alpha characters.                                |
 | isNumeric()                                                                 | Checks if string only contains numbers.                                         |
 | isAscii()                                                                   | Checks if string only contains printable ASCII characters.                      |
 | isBinary()                                                                  | Checks if string is a binary number (base-2).                                   |
@@ -303,7 +303,7 @@ Two other tribes, constantly at war, the Vikings and the Nanokings quarreled in 
 The Backings were a people of craftsmen: miners :gem:, blacksmiths :hammer:, loggers, lumberjacks.
 The Frontkings were a tribe skilled in the arts, including body painting :performing_arts: and storytelling :violin:.
 
-After each daily council :coffee:, Frontking's skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.
+After each daily thing :coffee:, Frontking's skalds often swapped the tale of one or two sagas against the essential goods produced by the Backings.
 
 And all this little small world lived in cooperation and peace, until the day, when curious foreigners from the south, tried to sow trouble, and divide this beautiful and well-ordered kingdom :snake:.
 The northerners, not understanding their language, decided to simply name these invaders the sons of Julius, or Jsøns in Old Nordic language.

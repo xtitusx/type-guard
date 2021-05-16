@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Add an optional parameter to Tyr.string().isAlpha() method (accepted values: 'basic-latin' or 'precomposed-latin').
+-   An optional parameter to Tyr.string().isAlpha() method (accepted values: 'basic-latin' or 'precomposed-latin').
