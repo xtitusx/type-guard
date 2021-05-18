@@ -4,15 +4,51 @@ import { Alphabet } from './string-types';
 import { GuardResult } from '../../core/guard-result';
 
 /**
- * Basic Latin pattern:
- * - Not case sensitive.
+ * Basic Latin range.
+ * @see {@link https://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet}
  */
-export const BASIC_LATIN_PATTERN = '^[a-zA-Z]+$';
+const BASIC_LATIN = 'a-zA-Z';
+
+/**
+ * Latin Latin-1 Supplement range.
+ * @see {@link https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)}
+ */
+const LATIN_1_SUPPLEMENT = `À-ÖØ-öø-ÿ`;
+
+/**
+ * Latin Extended-A range.
+ * @see {@link https://en.wikipedia.org/wiki/Latin_Extended-A}
+ */
+const LATIN_EXTENDED_A = `Ā-ſ`;
+
+/**
+ * Latin Extended-B range.
+ * @see {@link https://en.wikipedia.org/wiki/Latin_Extended-B}
+ */
+const LATIN_EXTENDED_B = `ƀ-ɏ`;
+
+/**
+ * Latin Extended Additional range.
+ * @see {@link https://en.wikipedia.org/wiki/Latin_Extended_Additional}
+ */
+const LATIN_EXTENDED_ADDITIONAL = `Ḁ-ỿ`;
+
+/**
+ * @see {@link https://en.wikipedia.org/wiki/IPA_Extensions}
+ * @see {@link https://fr.wikipedia.org/wiki/Lettres_suppl%C3%A9mentaires_de_l%27alphabet_latin}
+ */
+const IPA_EXTENSIONS_LETTERS = `ʒ`;
+
+/**
+ * Latin trigram letters.
+ * @see {@link https://fr.wikipedia.org/wiki/Liste_de_digrammes_et_trigrammes}
+ */
+const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
 
 /**
  * Partial precomposed Latin pattern.
  */
-const PARTIAL_PRECOMPOSED_LATIN_PATTERN = '^[a-zA-ZÀ-ÖØ-öø-ŸʒƷſß]+$';
+const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
@@ -47,7 +83,7 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
     }
 
     private isBasicLatin(): boolean {
-        return this.value.match(new RegExp(BASIC_LATIN_PATTERN)) !== null;
+        return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
     }
 
     private isPrecomposedLatin(): boolean {
