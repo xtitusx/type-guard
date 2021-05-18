@@ -57,9 +57,10 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
     - [stack()](#stack)
 5. [Codex](#codex)
 6. [TypeDoc](#typedoc)
-7. [The true story](#the-true-story)
-8. [Maintainer](#maintainer)
-9. [Licence](#licence)
+7. [Changelog](#changelog)
+8. [The true story](#the-true-story)
+9. [Maintainer](#maintainer)
+10. [Licence](#licence)
 
 ## Installation
 
@@ -292,6 +293,10 @@ Refer to the Codex to directly access Enums containing some ISO values:
 ## TypeDoc
 
 [GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html)
+
+## Changelog
+
+See information about breaking changes and release notes [here](CHANGELOG.md).
 
 ## The true story
 
