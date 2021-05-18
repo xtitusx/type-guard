@@ -1482,12 +1482,20 @@ describe('String-Guard', () => {
                 );
             });
 
-            it.skip("should return true when param is 'precomposed-latin' and tested value is breton trigram 'CʼH'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value is breton trigram 'CʼH'", () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('CʼH').isSuccess(), true);
             });
 
-            it("should return false when param is 'precomposed-latin' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
-                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+            it("should return true when param is 'precomposed-latin' and tested value is breton trigram 'Cʼh'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Cʼh').isSuccess(), true);
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value is breton trigram 'cʼh'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('cʼh').isSuccess(), true);
+            });
+
+            it("should return false when param is 'precomposed-latin' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>ʼ", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>ʼ';
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(
