@@ -297,7 +297,7 @@ export class StringGuard extends Guard<StringRule> {
     /**
      * Checks if string only contains alpha characters.
      * @remarks Chainable method.
-     * @param alphabet - {@link https://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet | 'basic-latin'} | {@link https://en.wikipedia.org/wiki/Precomposed_character | 'precomposed-latin'}. Default is 'basic-latin'.
+     * @param alphabet - {@link https://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet | 'basic-latin'} | {@link https://en.wikipedia.org/wiki/List_of_precomposed_Latin_characters_in_Unicode | 'precomposed-latin'}. Default is 'basic-latin'.
      * ```ts
      * alphabet:
      * - basic-latin: Basic latin consists of two sets of 26 letters. They are the same letters that comprise the English alphabet.
