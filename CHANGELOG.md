@@ -7,14 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2021-05-21
+
+### Fixed
+
+-   Fix Tyr.string().isAlpha() default parameter to 'basic-latin'.
+
+### Added
+
+-   Optional parameters 'deu' and 'fra' to Tyr.string().isAlpha() method.
+
 ## [2.2.1] - 2021-05-18
 
 ### Fixed
 
--   Fix Tyr.string().isAlpha('precomposed-latin') method: accept BASIC_LATIN, LATIN_1_SUPPLEMENT, LATIN_EXTENDED_A, LATIN_EXTENDED_B, LATIN_EXTENDED_ADDITIONAL, IPA_EXTENSIONS_LETTERS (ʒ), and LATIN_TRIGRAM_LETTERS (CʼH|Cʼh|cʼh).
+-   Tyr.string().isAlpha('precomposed-latin') method, supported sets are Basic Latin, Latin-1_Supplement, Latin Extended A, Latin Extended B, Latin Extended Additional, one IPA Extension letter (ʒ), and one Latin trigram letter (C'h).
 
 ## [2.2.0] - 2021-05-13
 
 ### Added
 
--   An optional parameter to Tyr.string().isAlpha() method (accepted values: 'basic-latin' or 'precomposed-latin').
+-   An optional parameter to Tyr.string().isAlpha() method, accepted values are 'basic-latin' or 'precomposed-latin'.

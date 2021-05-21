@@ -50,6 +50,9 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
  */
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
+export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
+export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
         super(rule, value);
@@ -60,23 +63,41 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
      */
     public exec(): GuardResult {
         switch (this.rule.alphabet) {
-            case 'basic-latin':
-                return this.isBasicLatin()
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to only contain basic Latin characters but does not: ${this.value}`
-                          )
-                          .build();
             case 'precomposed-latin':
-            default:
                 return this.isPrecomposedLatin()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'deu':
+                return this.isGerman()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain german characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'fra':
+                return this.isFrench()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain french characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'basic-latin':
+            default:
+                return this.isBasicLatin()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain basic Latin characters but does not: ${this.value}`
                           )
                           .build();
         }
@@ -93,5 +114,13 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                 .replace(/[\u0300-\u036f]/g, '')
                 .match(new RegExp(PARTIAL_PRECOMPOSED_LATIN_PATTERN)) !== null
         );
+    }
+
+    private isGerman(): boolean {
+        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
+    private isFrench(): boolean {
+        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
     }
 }
