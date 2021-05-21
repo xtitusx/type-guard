@@ -2,7 +2,6 @@ import { StringRuleChecker } from './string-rule-checker';
 import { Alphabet } from './string-types';
 
 import { GuardResult } from '../../core/guard-result';
-import { Iso639Part2Alpha3Enum } from '../../dictionaries/iso-639-part2-alpha-3.enum';
 
 /**
  * Basic Latin range.
@@ -51,7 +50,8 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
  */
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
-export const FRENCH_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
+export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
 
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
@@ -72,7 +72,16 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
                           )
                           .build();
-            case Iso639Part2Alpha3Enum.fre:
+            case 'deu':
+                return this.isGerman()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain german characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'fra':
                 return this.isFrench()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
@@ -107,7 +116,11 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         );
     }
 
+    private isGerman(): boolean {
+        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
     private isFrench(): boolean {
-        return this.value.match(new RegExp(FRENCH_PATTERN)) !== null;
+        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
     }
 }
