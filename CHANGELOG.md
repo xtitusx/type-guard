@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2021-05-20
+
+### Fixed
+
+-   Fix Tyr.string().isAlpha() default parameter to 'basic-latin'.
+
+### Added
+
+-   Optional parameters 'deu' and 'fra' to Tyr.string().isAlpha() method.
+
 ## [2.2.1] - 2021-05-18
 
 ### Fixed
