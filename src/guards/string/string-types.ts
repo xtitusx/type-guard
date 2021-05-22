@@ -53,7 +53,7 @@ export type ProgrammingConvention =
 
 export type TrimmedSide = 'both' | 'left' | 'right';
 
-export type Alphabet = 'basic-latin' | 'precomposed-latin' | 'deu' | 'fra' | 'spa';
+export type Alphabet = 'basic-latin' | 'precomposed-latin' | 'deu' | 'fra' | 'por' | 'spa';
 
 export type Base64Implementation = 'standard' | 'fileName' | 'urlSafe';
 
