@@ -1491,6 +1491,10 @@ describe('String-Guard', () => {
                 );
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains spanish characters 'ñÑ'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ñÑ').isSuccess(), true);
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value is breton trigram 'CʼH'", () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('CʼH').isSuccess(), true);
             });
@@ -2665,7 +2669,7 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isAlpha('fra').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
             });
 
-            it("should return true when param is 'fre' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+            it("should return true when param is 'fra' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
                 assert.equal(new StringGuard().isAlpha('fra').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
             });
 
@@ -2682,6 +2686,28 @@ describe('String-Guard', () => {
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(new StringGuard().isAlpha('fra').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
+        describe("#isAlpha('spa')", () => {
+            it("should return true when param is 'spa' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(new StringGuard().isAlpha('spa').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'spa' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(new StringGuard().isAlpha('spa').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'spa' and tested value is 'ñÑ'", () => {
+                assert.equal(new StringGuard().isAlpha('spa').guard('ñÑ').isSuccess(), true);
+            });
+
+            it("should return false when param is 'spa' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('spa').guard(str.charAt(pos)).isSuccess(), false);
                 }
             });
         });

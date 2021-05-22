@@ -52,6 +52,7 @@ const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT
 
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+export const SPA_PATTERN = '^[a-zA-ZñÑ]+$';
 
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
@@ -90,6 +91,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain french characters but does not: ${this.value}`
                           )
                           .build();
+            case 'spa':
+                return this.isSpanish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain spanish characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'basic-latin':
             default:
                 return this.isBasicLatin()
@@ -122,5 +132,9 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isFrench(): boolean {
         return this.value.match(new RegExp(FRA_PATTERN)) !== null;
+    }
+
+    private isSpanish(): boolean {
+        return this.value.match(new RegExp(SPA_PATTERN)) !== null;
     }
 }
