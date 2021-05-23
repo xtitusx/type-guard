@@ -220,6 +220,7 @@ export class StringGuard extends Guard<StringRule> {
      * @remarks Chainable method.
      * ```ts
      *  Rules:
+     * - Basic-latin alphabet.
      * - Empty string allowed.
      * - Word divider is whitespace.
      * ```

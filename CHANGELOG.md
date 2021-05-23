@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.4.0] - 2021-05-22
+## [2.4.0] - 2021-05-23
 
 ### Added
 
@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Rewrite  Tyr.string().isAlphaNumeric() method TSDoc.
+-   Rewrite Tyr.string().isAlphaNumeric() method TSDoc.
+-   Rewrite Tyr.string().isCapitalized() method TSDoc.
 
 ## [2.3.0] - 2021-05-21
 
