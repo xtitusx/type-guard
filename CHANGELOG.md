@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Add optional parameters 'por' and 'spa' to Tyr.string().isAlpha() method.
 
+### Changed
+
+-   Rewrite  Tyr.string().isAlphaNumeric() method TSDoc.
+
 ## [2.3.0] - 2021-05-21
 
 ### Fixed

@@ -286,7 +286,7 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string only contains alpha characters and/or numbers.
+     * Checks if string only contains basic-latin characters and/or numbers.
      * @remarks Chainable method.
      */
     public isAlphaNumeric(): this {

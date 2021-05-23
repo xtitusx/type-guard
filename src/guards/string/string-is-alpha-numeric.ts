@@ -4,7 +4,7 @@ import { GuardResult } from '../../core/guard-result';
 
 /**
  * AlphaNumeric pattern:
- * - Only alpha characters and/or numbers.
+ * - Only basic-latin characters and/or numbers.
  * - Not case sensitive.
  */
 export const ALPHA_NUMERIC_PATTERN = '^[0-9a-zA-Z]+$';
