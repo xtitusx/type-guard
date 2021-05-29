@@ -1,7 +1,7 @@
 export type ArrayRule =
-    | { type: 'isEmpty' }
-    | { type: 'isNotEmpty' }
-    | { type: 'hasSize'; value: number }
-    | { type: 'hasMinSize'; min: number }
+    | { type: 'contains'; value: any }
     | { type: 'hasMaxSize'; max: number }
-    | { type: 'contains'; value: any };
+    | { type: 'hasMinSize'; min: number }
+    | { type: 'hasSize'; value: number }
+    | { type: 'isEmpty' }
+    | { type: 'isNotEmpty' };
