@@ -52,6 +52,7 @@ const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT
 
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
 export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
 export const SPA_PATTERN = '^[a-zA-ZÑñ]+$';
 
@@ -92,6 +93,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain french characters but does not: ${this.value}`
                           )
                           .build();
+            case 'ita':
+                return this.isItalian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain italian characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'por':
                 return this.isPortuguese()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -127,6 +137,22 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
     }
 
+    private isFrench(): boolean {
+        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
+    }
+
+    private isGerman(): boolean {
+        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
+    private isItalian(): boolean {
+        return this.value.match(new RegExp(ITA_PATTERN)) !== null;
+    }
+
+    private isPortuguese(): boolean {
+        return this.value.match(new RegExp(POR_PATTERN)) !== null;
+    }
+
     private isPrecomposedLatin(): boolean {
         return (
             this.value
@@ -134,18 +160,6 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                 .replace(/[\u0300-\u036f]/g, '')
                 .match(new RegExp(PARTIAL_PRECOMPOSED_LATIN_PATTERN)) !== null
         );
-    }
-
-    private isGerman(): boolean {
-        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
-    }
-
-    private isFrench(): boolean {
-        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
-    }
-
-    private isPortuguese(): boolean {
-        return this.value.match(new RegExp(POR_PATTERN)) !== null;
     }
 
     private isSpanish(): boolean {

@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.4.0] - 2021-05-23
+## [2.4.0] - 2021-05-31
 
 ### Added
 
--   Add optional parameters 'por' and 'spa' to Tyr.string().isAlpha() method.
+-   Add optional parameters 'ita', 'por', and 'spa' to Tyr.string().isAlpha() method.
 
 ### Changed
 

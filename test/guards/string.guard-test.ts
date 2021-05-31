@@ -1461,6 +1461,32 @@ describe('String-Guard', () => {
             });
         });
 
+        describe("#isAlpha('ita')", () => {
+            it("should return true when param is 'fra' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(new StringGuard().isAlpha('ita').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'fra' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(new StringGuard().isAlpha('ita').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'fra' and tested value is 'àéèíìîóòúù'", () => {
+                assert.equal(new StringGuard().isAlpha('ita').guard('àéèíìîóòúù').isSuccess(), true);
+            });
+
+            it("should return true when param is 'fra' and tested value is 'ÀÉÈÍÌÎÓÒÚÙ'", () => {
+                assert.equal(new StringGuard().isAlpha('ita').guard('ÀÉÈÍÌÎÓÒÚÙ').isSuccess(), true);
+            });
+
+            it("should return false when param is 'ita' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('ita').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
         describe("#isAlpha('por')", () => {
             it("should return true when param is 'por' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
                 assert.equal(new StringGuard().isAlpha('por').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);

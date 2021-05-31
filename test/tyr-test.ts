@@ -27,8 +27,16 @@ describe('Tyr', () => {
         });
     });
 
-    it('should return true when tested value is true', () => {
-        assert.equal(Tyr.boolean().guard(true).isSuccess(), true);
+    describe('#boolean()', () => {
+        it('should return true when tested value is true', () => {
+            assert.equal(Tyr.boolean().guard(true).isSuccess(), true);
+        });
+    });
+
+    describe('#class()', () => {
+        it('should return true when tested value is new Number(1)', () => {
+            assert.equal(Tyr.class().guard(new Number(1)).isSuccess(), true);
+        });
     });
 
     describe('#dateString()', () => {
@@ -70,12 +78,10 @@ describe('Tyr', () => {
         });
     });
 
-    it('should return true when tested value is new Number(1)', () => {
-        assert.equal(Tyr.class().guard(new Number(1)).isSuccess(), true);
-    });
-
-    it('should return true when tested value is undefined', () => {
-        assert.equal(Tyr.nil().guard(undefined).isSuccess(), true);
+    describe('#nil()', () => {
+        it('should return true when tested value is undefined', () => {
+            assert.equal(Tyr.nil().guard(undefined).isSuccess(), true);
+        });
     });
 
     describe('#number()', () => {
