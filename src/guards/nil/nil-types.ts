@@ -1,7 +1,7 @@
 export type NilRule =
-    | { type: 'isUndefined' }
+    | { type: 'isNil' }
+    | { type: 'isNotNil' }
+    | { type: 'isNotNull' }
     | { type: 'isNotUndefined' }
     | { type: 'isNull' }
-    | { type: 'isNotNull' }
-    | { type: 'isNil' }
-    | { type: 'isNotNil' };
+    | { type: 'isUndefined' };

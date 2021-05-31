@@ -15,11 +15,29 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * Checks if value is undefined.
+     * Checks if value is undefined or null.
      * @remarks Chainable method.
      */
-    public isUndefined(): this {
-        this.addRule({ type: 'isUndefined' });
+    public isNil(): this {
+        this.addRule({ type: 'isNil' });
+        return this;
+    }
+
+    /**
+     * Checks if value is neither undefined nor null.
+     * @remarks Chainable method.
+     */
+    public isNotNil(): this {
+        this.addRule({ type: 'isNotNil' });
+        return this;
+    }
+
+    /**
+     * Checks if value is not null.
+     * @remarks Chainable method.
+     */
+    public isNotNull(): this {
+        this.addRule({ type: 'isNotNull' });
         return this;
     }
 
@@ -42,29 +60,11 @@ export class NilGuard extends Guard<NilRule> {
     }
 
     /**
-     * Checks if value is not null.
+     * Checks if value is undefined.
      * @remarks Chainable method.
      */
-    public isNotNull(): this {
-        this.addRule({ type: 'isNotNull' });
-        return this;
-    }
-
-    /**
-     * Checks if value is undefined or null.
-     * @remarks Chainable method.
-     */
-    public isNil(): this {
-        this.addRule({ type: 'isNil' });
-        return this;
-    }
-
-    /**
-     * Checks if value is neither undefined nor null.
-     * @remarks Chainable method.
-     */
-    public isNotNil(): this {
-        this.addRule({ type: 'isNotNil' });
+    public isUndefined(): this {
+        this.addRule({ type: 'isUndefined' });
         return this;
     }
 
@@ -75,18 +75,18 @@ export class NilGuard extends Guard<NilRule> {
      */
     protected checkRule(rule: NilRule, value: unknown): GuardResult {
         switch (rule.type) {
-            case 'isUndefined':
-                return new NilIsUndefined(rule, value).exec();
+            case 'isNil':
+                return new NilIsNil(rule, value).exec();
+            case 'isNotNil':
+                return new NilIsNotNil(rule, value).exec();
             case 'isNotUndefined':
                 return new NilIsNotUndefined(rule, value).exec();
             case 'isNull':
                 return new NilIsNull(rule, value).exec();
             case 'isNotNull':
                 return new NilIsNotNull(rule, value).exec();
-            case 'isNil':
-                return new NilIsNil(rule, value).exec();
-            case 'isNotNil':
-                return new NilIsNotNil(rule, value).exec();
+            case 'isUndefined':
+                return new NilIsUndefined(rule, value).exec();
         }
     }
 
