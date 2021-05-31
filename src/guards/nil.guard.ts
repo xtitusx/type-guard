@@ -1,10 +1,11 @@
 import { NilRule } from './nil/nil-types';
-import { NilIsUndefined } from './nil/nil-is-undefined';
-import { NilIsNotUndefined } from './nil/nil-is-not-undefined';
-import { NilIsNull } from './nil/nil-is-null';
-import { NilIsNotNull } from './nil/nil-is-not-null';
+
 import { NilIsNil } from './nil/nil-is-nil';
 import { NilIsNotNil } from './nil/nil-is-not-nil';
+import { NilIsNotNull } from './nil/nil-is-not-null';
+import { NilIsNotUndefined } from './nil/nil-is-not-undefined';
+import { NilIsNull } from './nil/nil-is-null';
+import { NilIsUndefined } from './nil/nil-is-undefined';
 
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';

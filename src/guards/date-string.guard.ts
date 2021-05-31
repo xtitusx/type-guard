@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 
 import { DateStringRule } from './date-string/date-string-types';
+
+import { DateStringIsAfter } from './date-string/date-string-is-after';
+import { DateStringIsBefore } from './date-string/date-string-is-before';
 import { DateStringIsIso8601Date } from './date-string/date-string-is-iso-8601-date';
 import { DateStringIsRfc3339 } from './date-string/date-string-is-rfc-3339';
 import { DateStringIsSame } from './date-string/date-string-is-same';
-import { DateStringIsSameOrBefore } from './date-string/date-string-is-same-or-before';
 import { DateStringIsSameOrAfter } from './date-string/date-string-is-same-or-after';
-import { DateStringIsBefore } from './date-string/date-string-is-before';
-import { DateStringIsAfter } from './date-string/date-string-is-after';
+import { DateStringIsSameOrBefore } from './date-string/date-string-is-same-or-before';
 
 import { Guard, IGuardOptions } from '../core/guard';
 import { GuardResult } from '../core/guard-result';

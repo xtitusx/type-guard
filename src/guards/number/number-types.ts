@@ -1,18 +1,18 @@
 export type NumberRule =
     | { type: 'equals'; value: number }
-    | { type: 'isMin'; min: number }
-    | { type: 'isMax'; max: number }
-    | { type: 'isIn'; min: number; max: number }
-    | { type: 'isPositive' }
-    | { type: 'isNegative' }
-    | { type: 'isWhole' }
     | { type: 'hasMaxFractionDigits'; max: number }
-    | { type: 'isEven' }
-    | { type: 'isOdd' }
-    | { type: 'isMultiple'; value: number }
-    | { type: 'isPrime' }
     | { type: 'isComposite' }
+    | { type: 'isEven' }
     | { type: 'isFibonacci'; allowNegative?: boolean }
-    | { type: 'isNetworkPort'; range?: NetworkPortRange };
+    | { type: 'isIn'; min: number; max: number }
+    | { type: 'isMax'; max: number }
+    | { type: 'isMin'; min: number }
+    | { type: 'isMultiple'; value: number }
+    | { type: 'isNegative' }
+    | { type: 'isNetworkPort'; range?: NetworkPortRange }
+    | { type: 'isOdd' }
+    | { type: 'isPositive' }
+    | { type: 'isPrime' }
+    | { type: 'isWhole' };
 
 export type NetworkPortRange = 'well-known' | 'registered' | 'private';
