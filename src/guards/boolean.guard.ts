@@ -1,20 +1,11 @@
 import { Guard } from '../core/guard';
 import { GuardResult } from '../core/guard-result';
 
-type BooleanRule = { type: 'isTrue'; value: true } | { type: 'isFalse'; value: false };
+type BooleanRule = { type: 'isFalse'; value: false } | { type: 'isTrue'; value: true };
 
 export class BooleanGuard extends Guard<BooleanRule> {
     constructor() {
         super();
-    }
-
-    /**
-     * Checks if value is a true boolean.
-     * @remarks Chainable method.
-     */
-    public isTrue(): this {
-        this.addRule({ type: 'isTrue', value: true });
-        return this;
     }
 
     /**
@@ -23,6 +14,15 @@ export class BooleanGuard extends Guard<BooleanRule> {
      */
     public isFalse(): this {
         this.addRule({ type: 'isFalse', value: false });
+        return this;
+    }
+
+    /**
+     * Checks if value is a true boolean.
+     * @remarks Chainable method.
+     */
+    public isTrue(): this {
+        this.addRule({ type: 'isTrue', value: true });
         return this;
     }
 
