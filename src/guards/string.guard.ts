@@ -125,6 +125,7 @@ export class StringGuard extends Guard<StringRule> {
      *  {@link https://en.wikipedia.org/wiki/German_orthography | 'deu'} |
      *  {@link https://en.wikipedia.org/wiki/French_orthography | 'fra'} |
      *  {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
+     *  {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
      *  {@link https://en.wikipedia.org/wiki/Portuguese_orthography | 'por'} |
      *  {@link https://en.wikipedia.org/wiki/Spanish_orthography | 'spa'}. Default is 'basic-latin'.
      * ```ts
