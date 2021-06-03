@@ -52,6 +52,12 @@ const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT
 
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
+export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
+export const NOR_PATTERN = '^[a-zA-ZÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē]+$';
+export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
+export const SPA_PATTERN = '^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+$';
+export const SWE_PATTERN = '^[a-zA-ZÅåÄäÖöÁáÉéÈèÜü]+$';
 
 export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet?: Alphabet }> {
     constructor(rule: { type: 'isAlpha'; alphabet?: Alphabet }, value: string) {
@@ -63,15 +69,6 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
      */
     public exec(): GuardResult {
         switch (this.rule.alphabet) {
-            case 'precomposed-latin':
-                return this.isPrecomposedLatin()
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
-                          )
-                          .build();
             case 'deu':
                 return this.isGerman()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -88,6 +85,70 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain french characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'isl':
+                return this.isIcelandic()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain icelandic characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'ita':
+                return this.isItalian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain italian characters but does not: ${this.value}`
+                          )
+                          .build();
+
+            case 'nor':
+                return this.isNorwegian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain norwegian characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'por':
+                return this.isPortuguese()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain portuguese characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'precomposed-latin':
+                return this.isPrecomposedLatin()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'spa':
+                return this.isSpanish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain spanish characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'swe':
+                return this.isSwedish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain swedish characters but does not: ${this.value}`
                           )
                           .build();
             case 'basic-latin':
@@ -107,6 +168,30 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
     }
 
+    private isFrench(): boolean {
+        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
+    }
+
+    private isGerman(): boolean {
+        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
+    private isIcelandic(): boolean {
+        return this.value.match(new RegExp(ISL_PATTERN)) !== null;
+    }
+
+    private isItalian(): boolean {
+        return this.value.match(new RegExp(ITA_PATTERN)) !== null;
+    }
+
+    private isNorwegian(): boolean {
+        return this.value.match(new RegExp(NOR_PATTERN)) !== null;
+    }
+
+    private isPortuguese(): boolean {
+        return this.value.match(new RegExp(POR_PATTERN)) !== null;
+    }
+
     private isPrecomposedLatin(): boolean {
         return (
             this.value
@@ -116,11 +201,11 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         );
     }
 
-    private isGerman(): boolean {
-        return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    private isSpanish(): boolean {
+        return this.value.match(new RegExp(SPA_PATTERN)) !== null;
     }
 
-    private isFrench(): boolean {
-        return this.value.match(new RegExp(FRA_PATTERN)) !== null;
+    private isSwedish(): boolean {
+        return this.value.match(new RegExp(SWE_PATTERN)) !== null;
     }
 }

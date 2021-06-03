@@ -45,8 +45,8 @@ export abstract class Guard<T extends Rule> {
      * Adds a rule to the rule list.
      * @remarks Method has two different behaviors, depending on the 'options.overriding' flag:
      * ```ts
-     * false: Adds a rule to the list. Default behavior.
-     * -true: Adds a rule type to the rule list, or replaces an already existing rule type. A single type of rule is therefore retained by the guard.
+     * - false: Adds a rule to the list. Default behavior.
+     * - true: Adds a rule type to the rule list, or replaces an already existing rule type. A single type of rule is therefore retained by the guard.
      * ```
      * @param rule
      */
