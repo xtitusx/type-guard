@@ -41,7 +41,7 @@ export type StringRule =
     | { type: 'notContains'; value: string }
     | { type: 'notEquals'; value: string };
 
-export type Alphabet = 'basic-latin' | 'precomposed-latin' | 'deu' | 'ita' | 'isl' | 'fra' | 'por' | 'spa';
+export type Alphabet = 'basic-latin' | 'precomposed-latin' | 'deu' | 'ita' | 'isl' | 'fra' | 'nor' | 'por' | 'spa';
 
 export type AlphaVersion = '2' | '3';
 
