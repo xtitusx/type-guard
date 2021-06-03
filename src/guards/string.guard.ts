@@ -121,14 +121,15 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string only contains alpha characters.
      * @remarks Chainable method.
      * @param alphabet - {@link https://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet | 'basic-latin'} |
-     *  {@link https://en.wikipedia.org/wiki/List_of_precomposed_Latin_characters_in_Unicode | 'precomposed-latin'} |
-     *  {@link https://en.wikipedia.org/wiki/German_orthography | 'deu'} |
-     *  {@link https://en.wikipedia.org/wiki/French_orthography | 'fra'} |
-     *  {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
-     *  {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
-     *  {@link https://en.wikipedia.org/wiki/Norwegian_orthography | 'nor'} |
-     *  {@link https://en.wikipedia.org/wiki/Portuguese_orthography | 'por'} |
-     *  {@link https://en.wikipedia.org/wiki/Spanish_orthography | 'spa'}. Default is 'basic-latin'.
+     * {@link https://en.wikipedia.org/wiki/List_of_precomposed_Latin_characters_in_Unicode | 'precomposed-latin'} |
+     * {@link https://en.wikipedia.org/wiki/German_orthography | 'deu'} |
+     * {@link https://en.wikipedia.org/wiki/French_orthography | 'fra'} |
+     * {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
+     * {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
+     * {@link https://en.wikipedia.org/wiki/Norwegian_orthography | 'nor'} |
+     * {@link https://en.wikipedia.org/wiki/Portuguese_orthography | 'por'} |
+     * {@link https://en.wikipedia.org/wiki/Spanish_orthography | 'spa'}
+     * {@link https://en.wikipedia.org/wiki/Swedish_orthography | 'swe'}. Default is 'basic-latin'.
      * ```ts
      * alphabet:
      * - basic-latin: Basic latin consists of two sets of 26 letters. They are the same letters that comprise the English alphabet.
