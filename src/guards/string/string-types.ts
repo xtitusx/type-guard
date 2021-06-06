@@ -50,6 +50,7 @@ export type Alphabet =
     | 'isl'
     | 'ita'
     | 'nor'
+    | 'pol'
     | 'por'
     | 'spa'
     | 'swe';

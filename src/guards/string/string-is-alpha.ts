@@ -56,6 +56,7 @@ export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔô
 export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
 export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
 export const NOR_PATTERN = '^[a-zA-ZÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē]+$';
+export const POL_PATTERN = '^[a-zA-ZĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$';
 export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
 export const SPA_PATTERN = '^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+$';
 export const SWE_PATTERN = '^[a-zA-ZÅåÄäÖöÁáÉéÈèÜü]+$';
@@ -123,6 +124,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain norwegian characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'pol':
+                return this.isPolish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain polish characters but does not: ${this.value}`
                           )
                           .build();
             case 'por':
@@ -200,6 +210,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isNorwegian(): boolean {
         return this.value.match(new RegExp(NOR_PATTERN)) !== null;
+    }
+
+    private isPolish(): boolean {
+        return this.value.match(new RegExp(POL_PATTERN)) !== null;
     }
 
     private isPortuguese(): boolean {

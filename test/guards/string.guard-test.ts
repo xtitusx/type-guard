@@ -283,6 +283,13 @@ describe('String-Guard', () => {
                 );
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains polish characters 'ÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ĄąĆćĘęŁłŃńÓóŚśŹźŻż').isSuccess(),
+                    true
+                );
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value contains portuguese characters 'ÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('ÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù').isSuccess(),
@@ -1591,6 +1598,28 @@ describe('String-Guard', () => {
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(new StringGuard().isAlpha('nor').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
+        describe("#isAlpha('pol')", () => {
+            it("should return true when param is 'pol' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(new StringGuard().isAlpha('pol').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'pol' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(new StringGuard().isAlpha('pol').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'pol' and tested value is 'ĄąĆćĘęŁłŃńÓóŚśŹźŻż'", () => {
+                assert.equal(new StringGuard().isAlpha('pol').guard('ĄąĆćĘęŁłŃńÓóŚśŹźŻż').isSuccess(), true);
+            });
+
+            it("should return false when param is 'pol' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('pol').guard(str.charAt(pos)).isSuccess(), false);
                 }
             });
         });

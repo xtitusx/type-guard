@@ -128,6 +128,7 @@ export class StringGuard extends Guard<StringRule> {
      * {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
      * {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
      * {@link https://en.wikipedia.org/wiki/Norwegian_orthography | 'nor'} |
+     * {@link https://en.wikipedia.org/wiki/Polish_orthography | 'pol'} |
      * {@link https://en.wikipedia.org/wiki/Portuguese_orthography | 'por'} |
      * {@link https://en.wikipedia.org/wiki/Spanish_orthography | 'spa'}
      * {@link https://en.wikipedia.org/wiki/Swedish_orthography | 'swe'}. Default is 'basic-latin'.
