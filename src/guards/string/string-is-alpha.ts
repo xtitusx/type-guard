@@ -51,9 +51,10 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
+export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
-export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
 export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
+export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
 export const NOR_PATTERN = '^[a-zA-ZÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē]+$';
 export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
 export const SPA_PATTERN = '^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+$';
@@ -76,6 +77,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain german characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'fin':
+                return this.isFinnish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain finnish characters but does not: ${this.value}`
                           )
                           .build();
             case 'fra':
@@ -166,6 +176,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isBasicLatin(): boolean {
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
+    }
+
+    private isFinnish(): boolean {
+        return this.value.match(new RegExp(FIN_PATTERN)) !== null;
     }
 
     private isFrench(): boolean {

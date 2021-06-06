@@ -45,6 +45,7 @@ export type Alphabet =
     | 'basic-latin'
     | 'precomposed-latin'
     | 'deu'
+    | 'fin'
     | 'fra'
     | 'isl'
     | 'ita'

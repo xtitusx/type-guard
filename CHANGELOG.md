@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2021-06-06
+
+### Added
+
+-   Add optional parameters 'fin' to Tyr.string().isAlpha() method.
+
 ## [2.4.0] - 2021-06-03
 
 ### Added
