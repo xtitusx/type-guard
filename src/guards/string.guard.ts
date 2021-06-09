@@ -127,6 +127,7 @@ export class StringGuard extends Guard<StringRule> {
      * {@link https://en.wikipedia.org/wiki/French_orthography | 'fra'} |
      * {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
      * {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
+     * {@link https://en.wikipedia.org/wiki/Dutch_orthography | 'nld'} |
      * {@link https://en.wikipedia.org/wiki/Norwegian_orthography | 'nor'} |
      * {@link https://en.wikipedia.org/wiki/Polish_orthography | 'pol'} |
      * {@link https://en.wikipedia.org/wiki/Portuguese_orthography | 'por'} |

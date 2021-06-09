@@ -241,15 +241,15 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('äÖöÜüẞß').isSuccess(), true);
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains finnish characters 'ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ÅåÄäÖöŠšŽž').isSuccess(), true);
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value contains french characters 'àâæçéèêëîïôœùûüÿ'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('àâæçéèêëîïôœùûüÿ').isSuccess(),
                     true
                 );
-            });
-
-            it("should return true when param is 'precomposed-latin' and tested value contains finnish characters 'ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ'", () => {
-                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ÅåÄäÖöŠšŽž').isSuccess(), true);
             });
 
             it("should return true when param is 'precomposed-latin' and tested value contains french characters 'ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ'", () => {
@@ -259,7 +259,7 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when param is 'precomposed-latin' and tested value contains icelandic characters 'ÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value contains icelandic characters 'AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö'", () => {
                 assert.equal(
                     new StringGuard()
                         .isAlpha('precomposed-latin')
@@ -276,14 +276,21 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when param is 'precomposed-latin' and tested value contains norwegian characters 'ÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value contains dutch characters 'ÁáÉéËëÍíÏïÓóÖöÚúÜü'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ÁáÉéËëÍíÏïÓóÖöÚúÜü').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value contains norwegian characters 'ÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('ÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when param is 'precomposed-latin' and tested value contains polish characters 'ÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value contains polish characters 'ĄąĆćĘęŁłŃńÓóŚśŹźŻż'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('ĄąĆćĘęŁłŃńÓóŚśŹźŻż').isSuccess(),
                     true
@@ -1576,6 +1583,28 @@ describe('String-Guard', () => {
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(new StringGuard().isAlpha('ita').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
+        describe("#isAlpha('nld')", () => {
+            it("should return true when param is 'nld' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(new StringGuard().isAlpha('nld').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'nld' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(new StringGuard().isAlpha('nld').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'nld' and tested value is 'ÁáÉéËëÍíÏïÓóÖöÚúÜü'", () => {
+                assert.equal(new StringGuard().isAlpha('nld').guard('ÁáÉéËëÍíÏïÓóÖöÚúÜü').isSuccess(), true);
+            });
+
+            it("should return false when param is 'nld' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('nor').guard(str.charAt(pos)).isSuccess(), false);
                 }
             });
         });

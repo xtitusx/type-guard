@@ -55,6 +55,7 @@ export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
 export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
 export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
+export const NLD_PATTERN = '^[a-zA-ZÁáÉéËëÍíÏïÓóÖöÚúÜü]+$';
 export const NOR_PATTERN = '^[a-zA-ZÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē]+$';
 export const POL_PATTERN = '^[a-zA-ZĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$';
 export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
@@ -117,6 +118,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           )
                           .build();
 
+            case 'nld':
+                return this.isDutch()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain dutch characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'nor':
                 return this.isNorwegian()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -186,6 +196,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isBasicLatin(): boolean {
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
+    }
+
+    private isDutch(): boolean {
+        return this.value.match(new RegExp(NLD_PATTERN)) !== null;
     }
 
     private isFinnish(): boolean {
