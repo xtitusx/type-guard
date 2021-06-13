@@ -237,6 +237,10 @@ describe('String-Guard', () => {
                 );
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains danish characters 'ÆæØøÅåÉéǾǿ'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ÆæØøÅåÉéǾǿ').isSuccess(), true);
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value contains german characters 'äÖöÜüẞß'", () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('äÖöÜüẞß').isSuccess(), true);
             });
@@ -1456,6 +1460,28 @@ describe('String-Guard', () => {
                 it("should return true when param is 'precomposed-latin' and tested value is 'Ṵṵ'", () => {
                     assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('Ṵṵ').isSuccess(), true);
                 });
+            });
+        });
+
+        describe("#isAlpha('dan')", () => {
+            it("should return true when param is 'dan' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+                assert.equal(new StringGuard().isAlpha('dan').guard('abcdefghijklmnopqrstwxyz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'dan' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+                assert.equal(new StringGuard().isAlpha('dan').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'dan' and tested value is 'ÆæØøÅåÉéǾǿ'", () => {
+                assert.equal(new StringGuard().isAlpha('dan').guard('ÆæØøÅåÉéǾǿ').isSuccess(), true);
+            });
+
+            it("should return false when param is 'dan' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('dan').guard(str.charAt(pos)).isSuccess(), false);
+                }
             });
         });
 

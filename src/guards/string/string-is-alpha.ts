@@ -50,6 +50,7 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
  */
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
+export const DAN_PATTERN = '^[a-zA-ZÆæØøÅåÉéǾǿ]+$';
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
@@ -72,6 +73,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
      */
     public exec(): GuardResult {
         switch (this.rule.alphabet) {
+            case 'dan':
+                return this.isDanish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain danish characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'deu':
                 return this.isGerman()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -196,6 +206,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isBasicLatin(): boolean {
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
+    }
+
+    private isDanish(): boolean {
+        return this.value.match(new RegExp(DAN_PATTERN)) !== null;
     }
 
     private isDutch(): boolean {
