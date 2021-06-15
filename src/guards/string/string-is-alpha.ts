@@ -54,6 +54,7 @@ export const DAN_PATTERN = '^[a-zA-ZÆæØøÅåÉéǾǿ]+$';
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
+export const GLE_PATTERN = '^[a-il-pr-vA-IL-PR-VÁáÉéÍíÓóÚú]+$';
 export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
 export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
 export const NLD_PATTERN = '^[a-zA-ZÁáÉéËëÍíÏïÓóÖöÚúÜü]+$';
@@ -107,6 +108,16 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain french characters but does not: ${this.value}`
+                          )
+                          .build();
+
+            case 'gle':
+                return this.isIrish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain irish characters but does not: ${this.value}`
                           )
                           .build();
             case 'isl':
@@ -226,6 +237,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isGerman(): boolean {
         return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
+    private isIrish(): boolean {
+        return this.value.match(new RegExp(GLE_PATTERN)) !== null;
     }
 
     private isIcelandic(): boolean {

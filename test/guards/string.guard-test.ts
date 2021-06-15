@@ -263,6 +263,10 @@ describe('String-Guard', () => {
                 );
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains irish characters 'ÁáÉéÍíÓóÚú'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ÁáÉéÍíÓóÚú').isSuccess(), true);
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value contains icelandic characters 'AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö'", () => {
                 assert.equal(
                     new StringGuard()
@@ -1551,6 +1555,32 @@ describe('String-Guard', () => {
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(new StringGuard().isAlpha('fra').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
+        describe("#isAlpha('gle')", () => {
+            it("should return true when param is 'gle' and tested value is 'abcdefghilmnoprstu'", () => {
+                assert.equal(new StringGuard().isAlpha('gle').guard('abcdefghilmnoprstu').isSuccess(), true);
+            });
+
+            it("should return true when param is 'gle' and tested value is 'ABCDEFGHILMNOPRSTUV'", () => {
+                assert.equal(new StringGuard().isAlpha('gle').guard('ABCDEFGHILMNOPRSTUV').isSuccess(), true);
+            });
+
+            it("should return true when param is 'gle' and tested value is 'ÁáÉéÍíÓóÚú'", () => {
+                assert.equal(new StringGuard().isAlpha('gle').guard('ÁáÉéÍíÓóÚú').isSuccess(), true);
+            });
+
+            it("should return false when param is 'gle' and tested value is 'jJkKqQwWxXyYzZ'", () => {
+                assert.equal(new StringGuard().isAlpha('gle').guard('jJkKqQwWxXyYzZ').isSuccess(), false);
+            });
+
+            it("should return false when param is 'gle' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('gle').guard(str.charAt(pos)).isSuccess(), false);
                 }
             });
         });

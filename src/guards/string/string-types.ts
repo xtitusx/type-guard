@@ -48,6 +48,7 @@ export type Alphabet =
     | 'deu'
     | 'fin'
     | 'fra'
+    | 'gle'
     | 'isl'
     | 'ita'
     | 'nld'
