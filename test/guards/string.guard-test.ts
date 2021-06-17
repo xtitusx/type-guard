@@ -245,6 +245,10 @@ describe('String-Guard', () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('äÖöÜüẞß').isSuccess(), true);
             });
 
+            it("should return true when param is 'precomposed-latin' and tested value contains estonian characters 'ŠšŽžÕõÄäÖöÜ'", () => {
+                assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ŠšŽžÕõÄäÖöÜ').isSuccess(), true);
+            });
+
             it("should return true when param is 'precomposed-latin' and tested value contains finnish characters 'ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ'", () => {
                 assert.equal(new StringGuard().isAlpha('precomposed-latin').guard('ÅåÄäÖöŠšŽž').isSuccess(), true);
             });
@@ -1507,6 +1511,32 @@ describe('String-Guard', () => {
 
                 for (let pos = 0; pos < str.length; pos++) {
                     assert.equal(new StringGuard().isAlpha('deu').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
+        describe("#isAlpha('est')", () => {
+            it("should return true when param is 'est' and tested value is 'abdefghijklmnoprstuvz'", () => {
+                assert.equal(new StringGuard().isAlpha('est').guard('abdefghijklmnoprstuvz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'est' and tested value is 'ABDEFGHIJKLMNOPRSTUVZ'", () => {
+                assert.equal(new StringGuard().isAlpha('est').guard('ABDEFGHIJKLMNOPRSTUVZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'est' and tested value is 'ŠšŽžÕõÄäÖöÜ'", () => {
+                assert.equal(new StringGuard().isAlpha('est').guard('ŠšŽžÕõÄäÖöÜ').isSuccess(), true);
+            });
+
+            it("should return false when param is 'est' and tested value is 'cCqQwWxXyY'", () => {
+                assert.equal(new StringGuard().isAlpha('est').guard('cCqQwWxXyY').isSuccess(), false);
+            });
+
+            it("should return false when param is 'est' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('est').guard(str.charAt(pos)).isSuccess(), false);
                 }
             });
         });

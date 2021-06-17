@@ -46,6 +46,7 @@ export type Alphabet =
     | 'precomposed-latin'
     | 'dan'
     | 'deu'
+    | 'est'
     | 'fin'
     | 'fra'
     | 'gle'

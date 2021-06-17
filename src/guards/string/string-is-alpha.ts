@@ -52,6 +52,7 @@ const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT
 
 export const DAN_PATTERN = '^[a-zA-ZÆæØøÅåÉéǾǿ]+$';
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
+export const EST_PATTERN = '^[abd-pr-vzABD-PR-VZŠšŽžÕõÄäÖöÜü]+$';
 export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
 export const GLE_PATTERN = '^[a-il-pr-vA-IL-PR-VÁáÉéÍíÓóÚú]+$';
@@ -90,6 +91,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain german characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'est':
+                return this.isEstonian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain estonian characters but does not: ${this.value}`
                           )
                           .build();
             case 'fin':
@@ -225,6 +235,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isDutch(): boolean {
         return this.value.match(new RegExp(NLD_PATTERN)) !== null;
+    }
+
+    private isEstonian(): boolean {
+        return this.value.match(new RegExp(EST_PATTERN)) !== null;
     }
 
     private isFinnish(): boolean {
