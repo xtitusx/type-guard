@@ -128,6 +128,7 @@ export class StringGuard extends Guard<StringRule> {
      * {@link https://en.wikipedia.org/wiki/Finnish_orthography | 'fin'} |
      * {@link https://en.wikipedia.org/wiki/French_orthography | 'fra'} |
      * {@link https://en.wikipedia.org/wiki/Irish_orthography | 'gle'} |
+     * {@link https://www.lingvozone.com/Hungarian | 'hun'} |
      * {@link https://en.wikipedia.org/wiki/Icelandic_orthography | 'isl'} |
      * {@link https://en.wikipedia.org/wiki/Italian_orthography | 'ita'} |
      * {@link https://en.wikipedia.org/wiki/Dutch_orthography | 'nld'} |
