@@ -50,11 +50,18 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
  */
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
+export const DAN_PATTERN = '^[a-zA-ZÆæØøÅåÉéǾǿ]+$';
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
+export const EST_PATTERN = '^[abd-pr-vzABD-PR-VZŠšŽžÕõÄäÖöÜü]+$';
+export const FIN_PATTERN = '^[a-zA-ZÅåÄäÖöŠšŽž]+$';
 export const FRA_PATTERN = '^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$';
-export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
+export const GLE_PATTERN = '^[a-il-pr-vA-IL-PR-VÁáÉéÍíÓóÚú]+$';
+export const HUN_PATTERN = '^[a-zA-ZÁáÉéÍíÓóÖöŐőÚúÜüŰű]+$';
 export const ISL_PATTERN = '^[AaÁáBbDdÐðEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóPpRrSsTtUuÚúVvXxYyÝýÞþÆæÖö]+$';
+export const ITA_PATTERN = '^[a-zA-ZÀàÉéÈèÍíÌìÎîÓóÒòÚúÙù]+$';
+export const NLD_PATTERN = '^[a-zA-ZÁáÉéËëÍíÏïÓóÖöÚúÜü]+$';
 export const NOR_PATTERN = '^[a-zA-ZÆæØøÅåÉéÈèÊêÓóÒòÂâÔôŪūĀāĒē]+$';
+export const POL_PATTERN = '^[a-zA-ZĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$';
 export const POR_PATTERN = '^[a-zA-ZÁáÀàÂâÃãÉéÊêÈèÍíÌìÓóÔôÕõÒòÚúÙù]+$';
 export const SPA_PATTERN = '^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+$';
 export const SWE_PATTERN = '^[a-zA-ZÅåÄäÖöÁáÉéÈèÜü]+$';
@@ -69,6 +76,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
      */
     public exec(): GuardResult {
         switch (this.rule.alphabet) {
+            case 'dan':
+                return this.isDanish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain danish characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'deu':
                 return this.isGerman()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -78,6 +94,24 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain german characters but does not: ${this.value}`
                           )
                           .build();
+            case 'est':
+                return this.isEstonian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain estonian characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'fin':
+                return this.isFinnish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain finnish characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'fra':
                 return this.isFrench()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -85,6 +119,25 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain french characters but does not: ${this.value}`
+                          )
+                          .build();
+
+            case 'gle':
+                return this.isIrish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain irish characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'hun':
+                return this.isHungarian()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain hungarian characters but does not: ${this.value}`
                           )
                           .build();
             case 'isl':
@@ -106,6 +159,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           )
                           .build();
 
+            case 'nld':
+                return this.isDutch()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain dutch characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'nor':
                 return this.isNorwegian()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -113,6 +175,15 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           .withSuccess(false)
                           .withMessage(
                               `string is expected to only contain norwegian characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'pol':
+                return this.isPolish()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain polish characters but does not: ${this.value}`
                           )
                           .build();
             case 'por':
@@ -168,12 +239,36 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
     }
 
+    private isDanish(): boolean {
+        return this.value.match(new RegExp(DAN_PATTERN)) !== null;
+    }
+
+    private isDutch(): boolean {
+        return this.value.match(new RegExp(NLD_PATTERN)) !== null;
+    }
+
+    private isEstonian(): boolean {
+        return this.value.match(new RegExp(EST_PATTERN)) !== null;
+    }
+
+    private isFinnish(): boolean {
+        return this.value.match(new RegExp(FIN_PATTERN)) !== null;
+    }
+
     private isFrench(): boolean {
         return this.value.match(new RegExp(FRA_PATTERN)) !== null;
     }
 
     private isGerman(): boolean {
         return this.value.match(new RegExp(DEU_PATTERN)) !== null;
+    }
+
+    private isHungarian(): boolean {
+        return this.value.match(new RegExp(HUN_PATTERN)) !== null;
+    }
+
+    private isIrish(): boolean {
+        return this.value.match(new RegExp(GLE_PATTERN)) !== null;
     }
 
     private isIcelandic(): boolean {
@@ -186,6 +281,10 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
 
     private isNorwegian(): boolean {
         return this.value.match(new RegExp(NOR_PATTERN)) !== null;
+    }
+
+    private isPolish(): boolean {
+        return this.value.match(new RegExp(POL_PATTERN)) !== null;
     }
 
     private isPortuguese(): boolean {

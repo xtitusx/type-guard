@@ -44,11 +44,18 @@ export type StringRule =
 export type Alphabet =
     | 'basic-latin'
     | 'precomposed-latin'
+    | 'dan'
     | 'deu'
+    | 'est'
+    | 'fin'
     | 'fra'
+    | 'hun'
+    | 'gle'
     | 'isl'
     | 'ita'
+    | 'nld'
     | 'nor'
+    | 'pol'
     | 'por'
     | 'spa'
     | 'swe';

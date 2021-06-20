@@ -317,7 +317,7 @@ The Jsøns were devious and manipulative, and the Northerners never knew if they
 
 Fortunately, they could rely on Tyr, the deity of order and law, to gauge each suspected Jsøn, and validate his claims.
 
-Tyr was accompanied by seven guards, each representing an aspect of the order ....
+Tyr was accompanied by seven guards, each representing an aspect of the order ...
 
 ## Maintainer
 
