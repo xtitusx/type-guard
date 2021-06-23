@@ -43,6 +43,7 @@ export type StringRule =
 
 export type Alphabet =
     | 'basic-latin'
+    | 'gajs-latin'
     | 'precomposed-latin'
     | 'dan'
     | 'deu'

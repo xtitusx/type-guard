@@ -121,6 +121,7 @@ export class StringGuard extends Guard<StringRule> {
      * Checks if string only contains alpha characters.
      * @remarks Chainable method.
      * @param alphabet - {@link https://en.wikipedia.org/wiki/ISO_basic_Latin_alphabet | 'basic-latin'} |
+     * {@link https://en.wikipedia.org/wiki/Gaj%27s_Latin_alphabet | 'gajs-latin'} |
      * {@link https://en.wikipedia.org/wiki/List_of_precomposed_Latin_characters_in_Unicode | 'precomposed-latin'} |
      * {@link https://en.wikipedia.org/wiki/Danish_orthography | 'dan'} |
      * {@link https://en.wikipedia.org/wiki/German_orthography | 'deu'} |

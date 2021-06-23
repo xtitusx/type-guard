@@ -222,17 +222,64 @@ describe('String-Guard', () => {
             });
         });
 
+        describe("#isAlpha('gajs-latin')", () => {
+            it("should return true when param is 'gajs-latin' and tested value is 'abcdefghijklmnoprstuvz'", () => {
+                assert.equal(new StringGuard().isAlpha('gajs-latin').guard('abcdefghijklmnoprstuvz').isSuccess(), true);
+            });
+
+            it("should return true when param is 'gajs-latin' and tested value is 'ABCDEFGHIJKLMNOPRSTUVZ'", () => {
+                assert.equal(new StringGuard().isAlpha('gajs-latin').guard('ABCDEFGHIJKLMNOPRSTUVZ').isSuccess(), true);
+            });
+
+            it("should return true when param is 'gajs-latin' and tested value is 'ČčĆćǄǅĐđǇǉǊǌŠšŽž'", () => {
+                assert.equal(new StringGuard().isAlpha('gajs-latin').guard('ČčĆćǄǅĐđǇǉǊǌŠšŽž').isSuccess(), true);
+            });
+
+            it("should return false when param is 'gajs-latin' and tested value is 'qQwW'", () => {
+                assert.equal(new StringGuard().isAlpha('gajs-latin').guard('qQwW').isSuccess(), false);
+            });
+
+            it("should return false when param is 'gajs-latin' and tested value is '0123456789+-*/,?;.:/!§&~\"#'{([-|`_^@)]=}¨$£%µ<>'", () => {
+                const str = '0123456789+-*/,?;.:/!§&~"#\'{([-|`_^@)]=}¨$£%µ<>';
+
+                for (let pos = 0; pos < str.length; pos++) {
+                    assert.equal(new StringGuard().isAlpha('gajs-latin').guard(str.charAt(pos)).isSuccess(), false);
+                }
+            });
+        });
+
         describe("#isAlpha('precomposed-latin')", () => {
-            it("should return true when param is 'precomposed-latin' and tested value is 'abcdefghijklmnopqrstwxyz'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value contains basic-latin characters 'abcdefghijklmnopqrstwxyz'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('abcdefghijklmnopqrstwxyz').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when param is 'precomposed-latin' and tested value is 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
+            it("should return true when param is 'precomposed-latin' and tested value contains basic-latin characters 'ABCDEFGHIJKLMNOPQRSTWXYZ'", () => {
                 assert.equal(
                     new StringGuard().isAlpha('precomposed-latin').guard('ABCDEFGHIJKLMNOPQRSTWXYZ').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value contains gajs-latin characters 'abcdefghijklmnoprstuvz'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('abcdefghijklmnoprstuvz').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value contains gajs-latin characters 'ABCDEFGHIJKLMNOPRSTUVZ'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ABCDEFGHIJKLMNOPRSTUVZ').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return true when param is 'precomposed-latin' and tested value contains gajs-latin characters 'ČčĆćǄǅĐđǇǉǊǌŠšŽž'", () => {
+                assert.equal(
+                    new StringGuard().isAlpha('precomposed-latin').guard('ČčĆćǄǅĐđǇǉǊǌŠšŽž').isSuccess(),
                     true
                 );
             });

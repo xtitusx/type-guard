@@ -50,6 +50,11 @@ const LATIN_TRIGRAM_LETTERS = `CʼH|Cʼh|cʼh`;
  */
 const PARTIAL_PRECOMPOSED_LATIN_PATTERN = `^([${BASIC_LATIN}${LATIN_1_SUPPLEMENT}${LATIN_EXTENDED_A}${LATIN_EXTENDED_B}${LATIN_EXTENDED_ADDITIONAL}${IPA_EXTENSIONS_LETTERS}]|${LATIN_TRIGRAM_LETTERS})+$`;
 
+/**
+ * Gaj's Latin pattern.
+ * @see {@link https://en.wikipedia.org/wiki/Gaj%27s_Latin_alphabet}
+ */
+export const GAJS_LATIN_PATTERN = '^[a-pr-vzA-PR-VZČčĆćǄǅĐđǇǉǊǌŠšŽž]+$';
 export const DAN_PATTERN = '^[a-zA-ZÆæØøÅåÉéǾǿ]+$';
 export const DEU_PATTERN = '^[a-zA-ZÄäÖöÜüẞß]+$';
 export const EST_PATTERN = '^[abd-pr-vzABD-PR-VZŠšŽžÕõÄäÖöÜü]+$';
@@ -195,15 +200,7 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain portuguese characters but does not: ${this.value}`
                           )
                           .build();
-            case 'precomposed-latin':
-                return this.isPrecomposedLatin()
-                    ? new GuardResult.Builder().withSuccess(true).build()
-                    : new GuardResult.Builder()
-                          .withSuccess(false)
-                          .withMessage(
-                              `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
-                          )
-                          .build();
+
             case 'spa':
                 return this.isSpanish()
                     ? new GuardResult.Builder().withSuccess(true).build()
@@ -222,6 +219,24 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                               `string is expected to only contain swedish characters but does not: ${this.value}`
                           )
                           .build();
+            case 'gajs-latin':
+                return this.isGajsLatin()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain gaj's Latin characters but does not: ${this.value}`
+                          )
+                          .build();
+            case 'precomposed-latin':
+                return this.isPrecomposedLatin()
+                    ? new GuardResult.Builder().withSuccess(true).build()
+                    : new GuardResult.Builder()
+                          .withSuccess(false)
+                          .withMessage(
+                              `string is expected to only contain precomposed Latin characters but does not: ${this.value}`
+                          )
+                          .build();
             case 'basic-latin':
             default:
                 return this.isBasicLatin()
@@ -233,10 +248,6 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                           )
                           .build();
         }
-    }
-
-    private isBasicLatin(): boolean {
-        return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
     }
 
     private isDanish(): boolean {
@@ -291,6 +302,22 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
         return this.value.match(new RegExp(POR_PATTERN)) !== null;
     }
 
+    private isSpanish(): boolean {
+        return this.value.match(new RegExp(SPA_PATTERN)) !== null;
+    }
+
+    private isSwedish(): boolean {
+        return this.value.match(new RegExp(SWE_PATTERN)) !== null;
+    }
+
+    private isBasicLatin(): boolean {
+        return this.value.match(new RegExp(`^[${BASIC_LATIN}]+$`)) !== null;
+    }
+
+    private isGajsLatin(): boolean {
+        return this.value.match(new RegExp(GAJS_LATIN_PATTERN)) !== null;
+    }
+
     private isPrecomposedLatin(): boolean {
         return (
             this.value
@@ -298,13 +325,5 @@ export class StringIsAlpha extends StringRuleChecker<{ type: 'isAlpha'; alphabet
                 .replace(/[\u0300-\u036f]/g, '')
                 .match(new RegExp(PARTIAL_PRECOMPOSED_LATIN_PATTERN)) !== null
         );
-    }
-
-    private isSpanish(): boolean {
-        return this.value.match(new RegExp(SPA_PATTERN)) !== null;
-    }
-
-    private isSwedish(): boolean {
-        return this.value.match(new RegExp(SWE_PATTERN)) !== null;
     }
 }
