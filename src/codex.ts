@@ -9,7 +9,7 @@ export class Codex {
      * ISO 3166-1 alpha-2 codes are two-letter country codes defined in ISO 3166-1, part of the ISO 3166 standard.
      * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2}
      */
-    public static iso3166Part1Alpha2(): Iso3166Part1Alpha2[] {
+    public static iso3166Part1Alpha2Codes(): Iso3166Part1Alpha2[] {
         return iso3166Part1Alpha2Codes();
     }
 
@@ -17,7 +17,7 @@ export class Codex {
      * ISO 3166-1 alpha-3 codes are three-letter country codes defined in ISO 3166-1, part of the ISO 3166 standard.
      * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}
      */
-    public static iso3166Part1Alpha3(): Iso3166Part1Alpha3[] {
+    public static iso3166Part1Alpha3Codes(): Iso3166Part1Alpha3[] {
         return iso3166Part1Alpha3Codes();
     }
 

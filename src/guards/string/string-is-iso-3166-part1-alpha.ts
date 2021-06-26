@@ -50,11 +50,11 @@ export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
     }
 
     private isIso3166Part1Alpha2(): boolean {
-        return Codex.iso3166Part1Alpha2().includes(this.value as Iso3166Part1Alpha2);
+        return Codex.iso3166Part1Alpha2Codes().includes(this.value as Iso3166Part1Alpha2);
     }
 
     private isIso3166Part1Alpha3(): boolean {
-        return Codex.iso3166Part1Alpha3().includes(this.value as Iso3166Part1Alpha3);
+        return Codex.iso3166Part1Alpha3Codes().includes(this.value as Iso3166Part1Alpha3);
     }
 
     private isIso3166Part1Alpha(): boolean {
