@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2021-06-26
+
+### Added
+
+-   Add optional parameter 'gajs-latin' to Tyr.string().isAlpha() method.
+
+### Changed
+
+-   Convert Codex Enums to readonly Arrays (Breaking Change).
+
 ## [2.5.0] - 2021-06-20
 
 ### Added

@@ -1,7 +1,8 @@
 import { StringRuleChecker } from './string-rule-checker';
 
+import { Codex } from '../../codex';
 import { GuardResult } from '../../core/guard-result';
-import { Iso639Part1Alpha2Enum } from '../../dictionaries/iso-639-part1-alpha-2.enum';
+import { Iso639Part1Alpha2 } from '../../dictionaries/iso-639-part1-alpha-2.enum';
 
 export class StringIsIso639Part1Alpha2 extends StringRuleChecker<{ type: 'isIso639Part1Alpha2' }> {
     constructor(rule: { type: 'isIso639Part1Alpha2' }, value: string) {
@@ -21,6 +22,6 @@ export class StringIsIso639Part1Alpha2 extends StringRuleChecker<{ type: 'isIso6
     }
 
     private isIso639Part1Alpha2(): boolean {
-        return (Object.values(Iso639Part1Alpha2Enum) as any).includes(this.value);
+        return Codex.iso639Part1Alpha2Codes().includes(this.value as Iso639Part1Alpha2);
     }
 }
