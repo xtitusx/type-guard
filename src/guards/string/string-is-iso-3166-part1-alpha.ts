@@ -1,9 +1,10 @@
 import { StringRuleChecker } from './string-rule-checker';
 import { AlphaVersion } from './string-types';
 
+import { Codex } from '../../codex';
 import { GuardResult } from '../../core/guard-result';
-import { Iso3166Part1Alpha2Enum } from '../../dictionaries/iso-3166-part1-alpha-2.enum';
-import { Iso3166Part1Alpha3Enum } from '../../dictionaries/iso-3166-part1-alpha-3.enum';
+import { Iso3166Part1Alpha2 } from '../../dictionaries/iso-3166-part1-alpha-2.enum';
+import { Iso3166Part1Alpha3 } from '../../dictionaries/iso-3166-part1-alpha-3.enum';
 
 export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
     type: 'isIso3166Part1Alpha';
@@ -49,11 +50,11 @@ export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
     }
 
     private isIso3166Part1Alpha2(): boolean {
-        return (Object.values(Iso3166Part1Alpha2Enum) as any).includes(this.value);
+        return Codex.iso3166Part1Alpha2().includes(this.value as Iso3166Part1Alpha2);
     }
 
     private isIso3166Part1Alpha3(): boolean {
-        return (Object.values(Iso3166Part1Alpha3Enum) as any).includes(this.value);
+        return Codex.iso3166Part1Alpha3().includes(this.value as Iso3166Part1Alpha3);
     }
 
     private isIso3166Part1Alpha(): boolean {

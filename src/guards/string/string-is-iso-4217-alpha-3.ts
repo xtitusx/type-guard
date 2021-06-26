@@ -1,7 +1,8 @@
 import { StringRuleChecker } from './string-rule-checker';
 
+import { Codex } from '../../codex';
 import { GuardResult } from '../../core/guard-result';
-import { Iso4217Alpha3Enum } from '../../dictionaries/iso-4217-alpha-3.enum';
+import { Iso4217Alpha3 } from '../../dictionaries/iso-4217-alpha-3.enum';
 
 export class StringIsIso4217Alpha3 extends StringRuleChecker<{ type: 'isIso4217Alpha3' }> {
     constructor(rule: { type: 'isIso4217Alpha3' }, value: string) {
@@ -21,6 +22,6 @@ export class StringIsIso4217Alpha3 extends StringRuleChecker<{ type: 'isIso4217A
     }
 
     private isIso4217Alpha3(): boolean {
-        return (Object.values(Iso4217Alpha3Enum) as any).includes(this.value);
+        return Codex.iso4217Alpha3Codes().includes(this.value as Iso4217Alpha3);
     }
 }
