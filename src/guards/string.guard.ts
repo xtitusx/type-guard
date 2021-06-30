@@ -349,10 +349,10 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Case sensitive.
      * ```
-     * @param value - An array of allowed string values.
+     * @param values - An array of allowed string values.
      */
-    public isIn(value: string[]): this {
-        this.addRule({ type: 'isIn', value: value });
+    public isIn(values: string[]): this {
+        this.addRule({ type: 'isIn', values: values });
         return this;
     }
 

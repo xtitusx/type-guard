@@ -17,7 +17,7 @@ export type StringRule =
     | { type: 'isEmpty' }
     | { type: 'isHex' }
     | { type: 'isHexColor'; digits?: HexColorDigits }
-    | { type: 'isIn'; value: string[] }
+    | { type: 'isIn'; values: string[] }
     | { type: 'isIpAddress'; version?: IpVersion }
     | { type: 'isIso3166Part1Alpha'; version?: AlphaVersion }
     | { type: 'isIso4217Alpha3' }

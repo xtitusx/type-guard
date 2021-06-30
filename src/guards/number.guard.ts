@@ -2,6 +2,7 @@ import { NumberRule, NetworkPortRange } from './number/number-types';
 
 import { NumberEquals } from './number/number-equals';
 import { NumberHasMaxFractionDigits } from './number/number-has-max-fraction-digits';
+import { NumberIsBetween } from './number/number-is-between';
 import { NumberIsComposite } from './number/number-is-composite';
 import { NumberIsEven } from './number/number-is-even';
 import { NumberIsFibonacci } from './number/number-is-fibonacci';
@@ -45,6 +46,17 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * Checks if number is within a closed interval.
+     * @remarks Chainable method.
+     * @param min
+     * @param max
+     */
+    public isBetween(min: number, max: number): this {
+        this.addRule({ type: 'isBetween', min: min, max: max });
+        return this;
+    }
+
+    /**
      * Checks if number is a composite number.
      * @remarks Chainable method.
      * @see {@link https://en.wikipedia.org/wiki/Composite_number}
@@ -76,13 +88,12 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
-     * Checks if number is within a closed interval.
+     * Checks if number is in an array of allowed number values.
      * @remarks Chainable method.
-     * @param min
-     * @param max
+     * @param values - An array of allowed number values.
      */
-    public isIn(min: number, max: number): this {
-        this.addRule({ type: 'isIn', min: min, max: max });
+    public isIn(values: number[]): this {
+        this.addRule({ type: 'isIn', values: values });
         return this;
     }
 
@@ -183,6 +194,8 @@ export class NumberGuard extends Guard<NumberRule> {
                 return new NumberEquals(rule, value).exec();
             case 'hasMaxFractionDigits':
                 return new NumberHasMaxFractionDigits(rule, value).exec();
+            case 'isBetween':
+                return new NumberIsBetween(rule, value).exec();
             case 'isComposite':
                 return new NumberIsComposite(rule, value).exec();
             case 'isEven':

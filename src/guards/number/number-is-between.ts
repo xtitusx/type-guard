@@ -1,9 +1,9 @@
-import { StringRuleChecker } from './string-rule-checker';
+import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-export class StringIsIn extends StringRuleChecker<{ type: 'isIn'; values: string[] }> {
-    constructor(rule: { type: 'isIn'; values: string[] }, value: string) {
+export class NumberIsBetween extends NumberRuleChecker<{ type: 'isBetween'; min: number; max: number }> {
+    constructor(rule: { type: 'isBetween'; min: number; max: number }, value: number) {
         super(rule, value);
     }
 
@@ -16,12 +16,12 @@ export class StringIsIn extends StringRuleChecker<{ type: 'isIn'; values: string
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(
-                      `string is expected to be in an array of allowed string values but is not: ${this.value}`
+                      `number is expected to be within range ${this.rule.min} to ${this.rule.max} but is not: ${this.value}`
                   )
                   .build();
     }
 
     private isIn(): boolean {
-        return this.rule.values.includes(this.value);
+        return this.value >= this.rule.min && this.value <= this.rule.max;
     }
 }

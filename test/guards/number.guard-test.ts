@@ -103,6 +103,44 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#isBetween()', () => {
+        it('should return true when params are 1 and 3, and tested value is 2', () => {
+            assert.equal(new NumberGuard().isBetween(1, 3).guard(2).isSuccess(), true);
+        });
+
+        it('should return true when params are 1.1 and 3.1, and tested value is 2.1', () => {
+            assert.equal(new NumberGuard().isBetween(1.1, 3.1).guard(2.1).isSuccess(), true);
+        });
+
+        it('should return true when params are 1 and 3, and tested value is 1', () => {
+            assert.equal(new NumberGuard().isBetween(1, 3).guard(1).isSuccess(), true);
+        });
+
+        it('should return true when params are 1 and 3, and tested value is 3', () => {
+            assert.equal(new NumberGuard().isBetween(1, 3).guard(3).isSuccess(), true);
+        });
+
+        it('should return true when params are 1 and 1, and tested value is 1', () => {
+            assert.equal(new NumberGuard().isBetween(1, 1).guard(1).isSuccess(), true);
+        });
+
+        it('should return false when params are 1 and 1, and tested value is 2', () => {
+            assert.equal(new NumberGuard().isBetween(1, 1).guard(2).isSuccess(), false);
+        });
+
+        it('should return false when params are 1 and 3, and tested value is 4', () => {
+            assert.equal(new NumberGuard().isBetween(1, 3).guard(4).isSuccess(), false);
+        });
+
+        it('should return false when param  are 1 and 1, and tested value is null', () => {
+            assert.equal(new NumberGuard().isBetween(1, 1).guard(null).isSuccess(), false);
+        });
+
+        it('should return false when param  are 1 and 1, and tested value is undefined', () => {
+            assert.equal(new NumberGuard().isBetween(1, 1).guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isComposite()', () => {
         it('should return true when tested value is 4', () => {
             assert.equal(new NumberGuard().isComposite().guard(4).isSuccess(), true);
@@ -398,40 +436,32 @@ describe('Number-Guard', () => {
     });
 
     describe('#isIn()', () => {
-        it('should return true when params are 1 and 3, and tested value is 2', () => {
-            assert.equal(new NumberGuard().isIn(1, 3).guard(2).isSuccess(), true);
+        it('should return true when param is [1], and tested value is 1', () => {
+            assert.equal(new NumberGuard().isIn([1]).guard(1).isSuccess(), true);
         });
 
-        it('should return true when params are 1.1 and 3.1, and tested value is 2.1', () => {
-            assert.equal(new NumberGuard().isIn(1.1, 3.1).guard(2.1).isSuccess(), true);
+        it('should return true when param is [1, 2, 3], and tested value is 2', () => {
+            assert.equal(new NumberGuard().isIn([1, 2, 3]).guard(2).isSuccess(), true);
         });
 
-        it('should return true when params are 1 and 3, and tested value is 1', () => {
-            assert.equal(new NumberGuard().isIn(1, 3).guard(1).isSuccess(), true);
+        it('should return true when param is [1.1], and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isIn([1.1]).guard(1.1).isSuccess(), true);
         });
 
-        it('should return true when params are 1 and 3, and tested value is 3', () => {
-            assert.equal(new NumberGuard().isIn(1, 3).guard(3).isSuccess(), true);
+        it('should return true when param is [-1], and tested value is -1', () => {
+            assert.equal(new NumberGuard().isIn([-1]).guard(-1).isSuccess(), true);
         });
 
-        it('should return true when params are 1 and 1, and tested value is 1', () => {
-            assert.equal(new NumberGuard().isIn(1, 1).guard(1).isSuccess(), true);
+        it('should return false when param is [1], and tested value is 2', () => {
+            assert.equal(new NumberGuard().isIn([1]).guard(2).isSuccess(), false);
         });
 
-        it('should return false when params are 1 and 1, and tested value is 2', () => {
-            assert.equal(new NumberGuard().isIn(1, 1).guard(2).isSuccess(), false);
+        it('should return false when param is [1], and tested value is null', () => {
+            assert.equal(new NumberGuard().isIn([1]).guard(null).isSuccess(), false);
         });
 
-        it('should return false when params are 1 and 3, and tested value is 4', () => {
-            assert.equal(new NumberGuard().isIn(1, 3).guard(4).isSuccess(), false);
-        });
-
-        it('should return false when param  are 1 and 1, and tested value is null', () => {
-            assert.equal(new NumberGuard().isIn(1, 1).guard(null).isSuccess(), false);
-        });
-
-        it('should return false when param  are 1 and 1, and tested value is undefined', () => {
-            assert.equal(new NumberGuard().isIn(1, 1).guard(undefined).isSuccess(), false);
+        it('should return false when param is [1], and tested value is undefined', () => {
+            assert.equal(new NumberGuard().isIn([1]).guard(undefined).isSuccess(), false);
         });
     });
 

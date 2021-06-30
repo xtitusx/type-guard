@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2021-06-30
+
+### Added
+
+-   Add Tyr.number().isBetween() method, with the same behavior as the old Tyr.number().isIn() method.
+
+### Changed
+
+-   Rewrite Tyr.number().isIn() method, in order to check if a number is in an array of allowed number values. (Breaking Change).
+
+### Fixed
+
+-   Fix Tyr.string().isIn() method signature.
+
 ## [3.0.0] - 2021-06-26
 
 ### Added
