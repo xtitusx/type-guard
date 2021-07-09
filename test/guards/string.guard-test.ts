@@ -3135,11 +3135,11 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isIn([]).guard('foo').isSuccess(), false);
         });
 
-        it("should return false when param ['foo'] and tested value is null", () => {
+        it("should return false when param is ['foo'] and tested value is null", () => {
             assert.equal(new StringGuard().isIn(['foo']).guard(null).isSuccess(), false);
         });
 
-        it("should return false when param ['foo'] and tested value is undefined", () => {
+        it("should return false when param is ['foo'] and tested value is undefined", () => {
             assert.equal(new StringGuard().isIn(['foo']).guard(undefined).isSuccess(), false);
         });
     });
