@@ -183,7 +183,8 @@ const guardResult2 = stringGuard
 | equals(value: number)                   | Checks if two numbers are equals.                                                      |
 | isMin(min: number)                      | Checks if number is equal or greater than to the specified number.                     |
 | isMax(max: number)                      | Checks if number is equal or smaller than to the specified number.                     |
-| isIn(min: number, max: number)          | Checks if number is within a closed interval.                                          |
+| isBetween(min: number, max: number)     | Checks if number is within a closed interval.                                          |
+| isIn(values: number[])                  | Checks if number is in an array of allowed number values.                              |
 | isPositive()                            | Checks if number is greater than zero.                                                 |
 | isNegative()                            | Checks if number is smaller than zero.                                                 |
 | isWhole()                               | Checks if number is a whole number.                                                    |

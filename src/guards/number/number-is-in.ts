@@ -2,8 +2,8 @@ import { NumberRuleChecker } from './number-rule-checker';
 
 import { GuardResult } from '../../core/guard-result';
 
-export class NumberIsIn extends NumberRuleChecker<{ type: 'isIn'; min: number; max: number }> {
-    constructor(rule: { type: 'isIn'; min: number; max: number }, value: number) {
+export class NumberIsIn extends NumberRuleChecker<{ type: 'isIn'; values: number[] }> {
+    constructor(rule: { type: 'isIn'; values: number[] }, value: number) {
         super(rule, value);
     }
 
@@ -16,12 +16,12 @@ export class NumberIsIn extends NumberRuleChecker<{ type: 'isIn'; min: number; m
             : new GuardResult.Builder()
                   .withSuccess(false)
                   .withMessage(
-                      `number is expected to be within range ${this.rule.min} to ${this.rule.max} but is not: ${this.value}`
+                      `number is expected to be in an array of allowed number values but is not: ${this.value}`
                   )
                   .build();
     }
 
     private isIn(): boolean {
-        return this.value >= this.rule.min && this.value <= this.rule.max;
+        return this.rule.values.includes(this.value);
     }
 }
