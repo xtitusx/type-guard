@@ -2,17 +2,18 @@ import { IIsDecimalOptions } from './string/string-options';
 
 import {
     StringRule,
-    CapitalizationStyle,
-    EmailAddressDefinition,
-    TrimmedSide,
-    HexColorDigits,
-    ProgrammingConvention,
-    IpVersion,
-    GeoCoordinatesFormat,
+    Alphabet,
     AlphaVersion,
     Base64Implementation,
+    CapitalizationStyle,
+    EmailAddressDefinition,
+    GeoCoordinatesFormat,
+    HexColorDigits,
+    IpVersion,
     JsonFormat,
-    Alphabet,
+    MacAddressDefinition,
+    ProgrammingConvention,
+    TrimmedSide,
 } from './string/string-types';
 
 import { StringContains } from './string/string-contains';
@@ -567,12 +568,13 @@ export class StringGuard extends Guard<StringRule> {
      * - IEEE802-types definition: dash separator, uppercase.
      * - IETF-yang-types definition: colon separator, lowercase.
      * ```
+     * @param def - {@link IEEE_MAC_ADDRESS_PATTERN | 'IEEE'} | {@link IETF_MAC_ADDRESS_PATTERN | 'IETF'}.
      * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
      * @example IEEE802-types definition: 00-0A-95-9D-68-16
      * @example IETF-yang-types definition: 00:0a:95:9d:68:16
      */
-    public isMacAddress(): this {
-        this.addRule({ type: 'isMacAddress' });
+    public isMacAddress(def?: MacAddressDefinition): this {
+        this.addRule({ type: 'isMacAddress', def: def });
         return this;
     }
 

@@ -28,7 +28,7 @@ export type StringRule =
     | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLongitude'; format?: GeoCoordinatesFormat }
     | { type: 'isLowerCase' }
-    | { type: 'isMacAddress' }
+    | { type: 'isMacAddress'; def?: MacAddressDefinition }
     | { type: 'isNotEmpty' }
     | { type: 'isNumeric' }
     | { type: 'isObjectId' }
@@ -76,6 +76,8 @@ export type HexColorDigits = '3' | '6';
 export type IpVersion = '4' | '6';
 
 export type JsonFormat = 'array' | 'object' | 'string';
+
+export type MacAddressDefinition = 'IEEE' | 'IETF';
 
 export type ProgrammingConvention =
     | 'PascalCase'
