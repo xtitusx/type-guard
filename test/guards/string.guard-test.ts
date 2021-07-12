@@ -4486,6 +4486,32 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isNotIn()', () => {
+        it("should return true when param is ['foo', 'bar'] and tested value is 'foobar'", () => {
+            assert.equal(new StringGuard().isNotIn(['foo', 'bar']).guard('foobar').isSuccess(), true);
+        });
+
+        it("should return true when param is [] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isNotIn([]).guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when param is [''] and tested value is ''", () => {
+            assert.equal(new StringGuard().isNotIn(['']).guard('').isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo', 'bar'] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isNotIn(['foo', 'bar']).guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo'] and tested value is null", () => {
+            assert.equal(new StringGuard().isNotIn(['foo']).guard(null).isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo'] and tested value is undefined", () => {
+            assert.equal(new StringGuard().isNotIn(['foo']).guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isNumeric()', () => {
         it("should return true when tested value is '1'", () => {
             assert.equal(new StringGuard().isNumeric().guard('1').isSuccess(), true);

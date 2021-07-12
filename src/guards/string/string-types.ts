@@ -30,6 +30,7 @@ export type StringRule =
     | { type: 'isLowerCase' }
     | { type: 'isMacAddress'; def?: MacAddressDefinition }
     | { type: 'isNotEmpty' }
+    | { type: 'isNotIn'; values: string[] }
     | { type: 'isNumeric' }
     | { type: 'isObjectId' }
     | { type: 'isOctal' }

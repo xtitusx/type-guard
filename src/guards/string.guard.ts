@@ -45,6 +45,7 @@ import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsLowercase } from './string/string-is-lowercase';
 import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsNotEmpty } from './string/string-is-not-empty';
+import { StringIsNotIn } from './string/string-is-not-in';
 import { StringIsNumeric } from './string/string-is-numeric';
 import { StringIsObjectId } from './string/string-is-object-id';
 import { StringIsOctal } from './string/string-is-octal';
@@ -592,6 +593,20 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
+     * Checks if string is not in an array of disallowed string values.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Case sensitive.
+     * ```
+     * @param values - An array of disallowed string values.
+     */
+    public isNotIn(values: string[]): this {
+        this.addRule({ type: 'isNotIn', values: values });
+        return this;
+    }
+
+    /**
      * Checks if string only contains numbers.
      * @remarks Chainable method.
      */
@@ -784,6 +799,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsMacAddress(rule, value).exec();
             case 'isNotEmpty':
                 return new StringIsNotEmpty(rule, value).exec();
+            case 'isNotIn':
+                return new StringIsNotIn(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
             case 'isObjectId':
