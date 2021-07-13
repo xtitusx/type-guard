@@ -734,6 +734,36 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#isNotIn()', () => {
+        it('should return true when param is [1], and tested value is 2', () => {
+            assert.equal(new NumberGuard().isNotIn([1]).guard(2).isSuccess(), true);
+        });
+
+        it('should return true when param is [], and tested value is 1', () => {
+            assert.equal(new NumberGuard().isNotIn([]).guard(1).isSuccess(), true);
+        });
+
+        it('should return false when param is [1, 2], and tested value is 2', () => {
+            assert.equal(new NumberGuard().isNotIn([1, 2]).guard(2).isSuccess(), false);
+        });
+
+        it('should return false when param is [1.1], and tested value is 1.1', () => {
+            assert.equal(new NumberGuard().isNotIn([1.1]).guard(1.1).isSuccess(), false);
+        });
+
+        it('should return false when param is [-1], and tested value is -1', () => {
+            assert.equal(new NumberGuard().isNotIn([-1]).guard(-1).isSuccess(), false);
+        });
+
+        it('should return false when param is [1], and tested value is null', () => {
+            assert.equal(new NumberGuard().isNotIn([1]).guard(null).isSuccess(), false);
+        });
+
+        it('should return false when param is [1], and tested value is undefined', () => {
+            assert.equal(new NumberGuard().isNotIn([1]).guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isPositive()', () => {
         it('should return true when tested value is 1', () => {
             assert.equal(new NumberGuard().isPositive().guard(1).isSuccess(), true);

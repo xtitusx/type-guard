@@ -11,6 +11,7 @@ export type NumberRule =
     | { type: 'isMultiple'; value: number }
     | { type: 'isNegative' }
     | { type: 'isNetworkPort'; range?: NetworkPortRange }
+    | { type: 'isNotIn'; values: number[] }
     | { type: 'isOdd' }
     | { type: 'isPositive' }
     | { type: 'isPrime' }
