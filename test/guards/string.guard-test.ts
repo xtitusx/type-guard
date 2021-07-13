@@ -1958,31 +1958,31 @@ describe('String-Guard', () => {
 
     describe('#isBase64()', () => {
         describe("#isBase64('standard')", () => {
-            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+            it("should return true when param is 'standard' and tested value is 'SGkh' (decoded: 'Hi!')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGkh').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk=' (decoded: 'Hi')", () => {
+            it("should return true when param is 'standard' and  tested value is 'SGk=' (decoded: 'Hi')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk=').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk+' (decoded: 'Hi>')", () => {
+            it("should return true when param is 'standard' and tested value is 'SGk+' (decoded: 'Hi>')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk+').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk/' (decoded: 'Hi?')", () => {
+            it("should return true when param is 'standard' and tested value is 'SGk/' (decoded: 'Hi?')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk/').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk=' (decoded: 'H')", () => {
+            it("should return true when param is 'standard' and tested value is 'SGk=' (decoded: 'H')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk=').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'YG==' (decoded: 'a')", () => {
+            it("should return true when param is 'standard' and tested value is 'YG==' (decoded: 'a')", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('YG==').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
+            it("should return true when param is 'standard' and tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
                 assert.equal(
                     new StringGuard()
                         .isBase64('standard')
@@ -1992,73 +1992,73 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return false when tested value is 'SGk'", () => {
+            it("should return false when param is 'standard' and tested value is 'SGk'", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk-'", () => {
+            it("should return false when param is 'standard' and tested value is 'SGk-'", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk-').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk_'", () => {
+            it("should return false when param is 'standard' and tested value is 'SGk_'", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGk_').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh'", () => {
+            it("should return false when param is 'standard' and tested value is ' SGkh'", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard(' SGkh').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh '", () => {
+            it("should return false when param is 'standard' and tested value is ' SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard(' SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGkh '", () => {
+            it("should return false when param is 'standard' and tested value is 'SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'standard' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard(' ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ''", () => {
+            it("should return false when param is 'standard' and tested value is ''", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard('').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'standard' and tested value is null", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard(null).isSuccess(), false);
             });
 
-            it('should return false when tested value is undefined', () => {
+            it("should return false when param is 'standard' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isBase64('standard').guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isBase64('fileName')", () => {
-            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+            it("should return true when param is 'fileName' and tested value is 'SGkh' (decoded: 'Hi!')", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGkh').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk=' (decoded: 'Hi')", () => {
+            it("should return true when param is 'fileName' and tested value is 'SGk=' (decoded: 'Hi')", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk=').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk+' (decoded: 'Hi>')", () => {
+            it("should return true when param is 'fileName' and tested value is 'SGk+' (decoded: 'Hi>')", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk+').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk-'", () => {
+            it("should return true when param is 'fileName' and tested value is 'SGk-'", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk-').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk=' (decoded: 'H')", () => {
+            it("should return true when param is 'fileName' and tested value is 'SGk=' (decoded: 'H')", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk=').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'YG==' (decoded: 'a')", () => {
+            it("should return true when param is 'fileName' and tested value is 'YG==' (decoded: 'a')", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('YG==').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
+            it("should return true when param is 'fileName' and tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw==' (decoded: 'What happens when you base64()?)'", () => {
                 assert.equal(
                     new StringGuard()
                         .isBase64('fileName')
@@ -2068,63 +2068,63 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return false when tested value is 'SGk'", () => {
+            it("should return false when param is 'fileName' and tested value is 'SGk'", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk/'", () => {
+            it("should return false when param is 'fileName' and tested value is 'SGk/'", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk/').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk_'", () => {
+            it("should return false when param is 'fileName' and tested value is 'SGk_'", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGk_').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh'", () => {
+            it("should return false when param is 'fileName' and tested value is ' SGkh'", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard(' SGkh').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh '", () => {
+            it("should return false when param is 'fileName' and tested value is ' SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard(' SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGkh '", () => {
+            it("should return false when param is 'fileName' and tested value is 'SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'fileName' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard(' ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ''", () => {
+            it("should return false when param is 'fileName' and tested value is ''", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard('').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'fileName' and tested value is null", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard(null).isSuccess(), false);
             });
 
-            it('should return false when tested value is undefined', () => {
+            it("should return false when param is 'fileName' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isBase64('fileName').guard(undefined).isSuccess(), false);
             });
         });
 
         describe("#isBase64('urlSafe')", () => {
-            it("should return true when tested value is 'aHR0cHM6Ly93d3cuZ29vZ2xlLmZy' (decoded: 'http://www.google.fr')", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'aHR0cHM6Ly93d3cuZ29vZ2xlLmZy' (decoded: 'http://www.google.fr')", () => {
                 assert.equal(
                     new StringGuard().isBase64('urlSafe').guard('aHR0cHM6Ly93d3cuZ29vZ2xlLmZy').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'aHR0cHM6Ly93d3cuYmFzZTY0ZW5jb2RlLm9yZy8' (decoded: 'https://www.base64encode.org/')", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'aHR0cHM6Ly93d3cuYmFzZTY0ZW5jb2RlLm9yZy8' (decoded: 'https://www.base64encode.org/')", () => {
                 assert.equal(
                     new StringGuard().isBase64('urlSafe').guard('aHR0cHM6Ly93d3cuYmFzZTY0ZW5jb2RlLm9yZy8').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is 'aHR0cHM6Ly9wYTEubmFydmlpLmNvbS82MzY4L2NkMGQyZmIyNmJhYzRmZmViNjRkNTQwNWQ4NjM2Zjg3MGZmYmJkOGZfaHEuZ2lm' (decoded: 'https://pa1.narvii.com/6368/cd0d2fb26bac4ffeb64d5405d8636f870ffbbd8f_hq.gif')", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'aHR0cHM6Ly9wYTEubmFydmlpLmNvbS82MzY4L2NkMGQyZmIyNmJhYzRmZmViNjRkNTQwNWQ4NjM2Zjg3MGZmYmJkOGZfaHEuZ2lm' (decoded: 'https://pa1.narvii.com/6368/cd0d2fb26bac4ffeb64d5405d8636f870ffbbd8f_hq.gif')", () => {
                 assert.equal(
                     new StringGuard()
                         .isBase64('urlSafe')
@@ -2136,39 +2136,39 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return true when tested value is 'SGkh' (decoded: 'Hi!')", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'SGkh' (decoded: 'Hi!')", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGkh').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk-'", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'SGk-'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk-').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk_'", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'SGk_'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGK_').isSuccess(), true);
             });
 
-            it("should return true when tested value is 'SGk'", () => {
+            it("should return true when param is 'urlSafe' and tested value is 'SGk'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk').isSuccess(), true);
             });
 
-            it("should return false when tested value is 'SGk='", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'SGk='", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk=').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk+'", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'SGk+'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk+').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGk='", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'SGk='", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGk=').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'YG=='", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'YG=='", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('YG==').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw=='", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'V2hhdCBoYXBwZW5zIHdoZW4geW91IGJhc2U2NCgpPw=='", () => {
                 assert.equal(
                     new StringGuard()
                         .isBase64('urlSafe')
@@ -2178,35 +2178,35 @@ describe('String-Guard', () => {
                 );
             });
 
-            it("should return false when tested value is 'SGk/'", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'SGk/'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGK/').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh'", () => {
+            it("should return false when param is 'urlSafe' and tested value is ' SGkh'", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(' SGkh').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' SGkh '", () => {
+            it("should return false when param is 'urlSafe' and tested value is ' SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(' SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is 'SGkh '", () => {
+            it("should return false when param is 'urlSafe' and tested value is 'SGkh '", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('SGkh ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ' '", () => {
+            it("should return false when param is 'urlSafe' and tested value is ' '", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(' ').isSuccess(), false);
             });
 
-            it("should return false when tested value is ''", () => {
+            it("should return false when param is 'urlSafe' and tested value is ''", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard('').isSuccess(), false);
             });
 
-            it('should return false when tested value is null', () => {
+            it("should return false when param is 'urlSafe' and tested value is null", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(null).isSuccess(), false);
             });
 
-            it('should return false when tested value is undefined', () => {
+            it("should return false when param is 'urlSafe' and tested value is undefined", () => {
                 assert.equal(new StringGuard().isBase64('urlSafe').guard(undefined).isSuccess(), false);
             });
         });
@@ -3062,61 +3062,61 @@ describe('String-Guard', () => {
         });
 
         describe("#isHexColor('3')", () => {
-            it("should return true when param is 3 and tested value is '#000'", () => {
+            it("should return true when param is '3' and tested value is '#000'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('#000').isSuccess(), true);
             });
 
-            it("should return true when param is 3 and tested value is '#FFF'", () => {
+            it("should return true when param is '3' and tested value is '#FFF'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('#FFF').isSuccess(), true);
             });
 
-            it("should return true when param is 3 and tested value is '#aa3'", () => {
+            it("should return true when param is '3' and tested value is '#aa3'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('#aa3').isSuccess(), true);
             });
 
-            it("should return false when param is 3 and tested value is '000'", () => {
+            it("should return false when param is '3' and tested value is '000'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('000').isSuccess(), false);
             });
 
-            it("should return false when param is 3 and tested value is '#AA33'", () => {
+            it("should return false when param is '3' and tested value is '#AA33'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('#AA33').isSuccess(), false);
             });
 
-            it("should return false when param is 3 and tested value is '#000000'", () => {
+            it("should return false when param is '3' and tested value is '#000000'", () => {
                 assert.equal(new StringGuard().isHexColor('3').guard('000000').isSuccess(), false);
             });
         });
 
         describe('#isHexColor(6)', () => {
-            it("should return true when param is 6 and tested value is '#000000'", () => {
+            it("should return true when param is '6' and tested value is '#000000'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#000000').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '#FFFFFF'", () => {
+            it("should return true when param is '6' and tested value is '#FFFFFF'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#FFFFFF').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '#AA33FF'", () => {
+            it("should return true when param is '6' and tested value is '#AA33FF'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#AA33FF').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '#aa33ff'", () => {
+            it("should return true when param is '6' and tested value is '#aa33ff'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#aa33ff').isSuccess(), true);
             });
 
-            it("should return false when param is 6 and tested value is '000000'", () => {
+            it("should return false when param is '6' and tested value is '000000'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('000000').isSuccess(), false);
             });
 
-            it("should return false when param is 6 and tested value is '#AA33FFA'", () => {
+            it("should return false when param is '6' and tested value is '#AA33FFA'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#AA33FFA').isSuccess(), false);
             });
 
-            it("should return false when param is 6 and tested value is '#AA3'", () => {
+            it("should return false when param is '6' and tested value is '#AA3'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('#AA3').isSuccess(), false);
             });
 
-            it("should return false when param is 6 and tested value is '#AA33FG'", () => {
+            it("should return false when param is '6' and tested value is '#AA33FG'", () => {
                 assert.equal(new StringGuard().isHexColor('6').guard('AA33FG').isSuccess(), false);
             });
         });
@@ -3166,93 +3166,93 @@ describe('String-Guard', () => {
         });
 
         describe("#isIpAddress('4')", () => {
-            it("should return true when param is 4 and tested value is '0.0.0.0'", () => {
+            it("should return true when param is '4' and tested value is '0.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('0.0.0.0').isSuccess(), true);
             });
 
-            it("should return true when param is 4 and tested value is '10.0.0.0'", () => {
+            it("should return true when param is '4' and tested value is '10.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('10.0.0.0').isSuccess(), true);
             });
 
-            it("should return true when param is 4 and tested value is '127.0.0.0'", () => {
+            it("should return true when param is '4' and tested value is '127.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('127.0.0.0').isSuccess(), true);
             });
 
-            it("should return true when param is 4 and tested value is '192.168.0.1'", () => {
+            it("should return true when param is '4' and tested value is '192.168.0.1'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('192.168.0.1').isSuccess(), true);
             });
 
-            it("should return true when param is 4 and tested value is '224.0.0.0'", () => {
+            it("should return true when param is '4' and tested value is '224.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('224.0.0.0').isSuccess(), true);
             });
 
-            it("should return true when param is 4 and tested value is '255.255.255.255'", () => {
+            it("should return true when param is '4' and tested value is '255.255.255.255'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('255.255.255.255').isSuccess(), true);
             });
 
-            it("should return false when param is 4 and tested value is '010.0.0.0'", () => {
+            it("should return false when param is '4' and tested value is '010.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('010.0.0.0').isSuccess(), false);
             });
 
-            it("should return false when param is 4 and tested value is '001.0.0.0'", () => {
+            it("should return false when param is '4' and tested value is '001.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('001.0.0.0').isSuccess(), false);
             });
 
-            it("should return false when param is 4 and tested value is 'x127.0.0.0'", () => {
+            it("should return false when param is '4' and tested value is 'x127.0.0.0'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('x127.0.0.0').isSuccess(), false);
             });
 
-            it("should return false when param is 4 and tested value is '127.0.0.0x'", () => {
+            it("should return false when param is '4' and tested value is '127.0.0.0x'", () => {
                 assert.equal(new StringGuard().isIpAddress('4').guard('127.0.0.0x').isSuccess(), false);
             });
         });
 
         describe("#isIpAddress('6')", () => {
-            it("should return true when param is 6 and tested value is '1:2:3:4:5:6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '1:2:3:4:5:6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1:2:3:4:5:6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::'", () => {
+            it("should return true when param is '6' and tested value is '1::'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::8'", () => {
+            it("should return true when param is '6' and tested value is '1::8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::7:8'", () => {
+            it("should return true when param is '6' and tested value is '1::7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '1::6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::5:6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '1::5:6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::5:6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::4:5:6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '1::4:5:6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::4:5:6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '1::3:4:5:6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '1::3:4:5:6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('1::3:4:5:6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '::2:3:4:5:6:7:8'", () => {
+            it("should return true when param is '6' and tested value is '::2:3:4:5:6:7:8'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('::2:3:4:5:6:7:8').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is 'fe80::7:8%eth0'", () => {
+            it("should return true when param is '6' and tested value is 'fe80::7:8%eth0'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('fe80::7:8%eth0').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '::255.255.255.255'", () => {
+            it("should return true when param is '6' and tested value is '::255.255.255.255'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('::255.255.255.255').isSuccess(), true);
             });
 
-            it("should return true when param is 6 and tested value is '2001:db8:3:4::192.0.2.33'", () => {
+            it("should return true when param is '6' and tested value is '2001:db8:3:4::192.0.2.33'", () => {
                 assert.equal(new StringGuard().isIpAddress('6').guard('2001:db8:3:4::192.0.2.33').isSuccess(), true);
             });
         });
@@ -3280,37 +3280,37 @@ describe('String-Guard', () => {
         });
 
         describe("#isIso3166Part1Alpha('2')", () => {
-            it("should return true when param is 2 and tested value is 'FR'", () => {
+            it("should return true when param is '2' and tested value is 'FR'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('FR').isSuccess(), true);
             });
 
-            it("should return true when param is 2 and tested value is 'DE'", () => {
+            it("should return true when param is '2' and tested value is 'DE'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('DE').isSuccess(), true);
             });
 
-            it("should return false when param is 2 and tested value is 'FRA'", () => {
+            it("should return false when param is '2' and tested value is 'FRA'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('FRA').isSuccess(), false);
             });
 
-            it("should return false when param is 2 and tested value is 'fr", () => {
+            it("should return false when param is '2' and tested value is 'fr", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('2').guard('fr').isSuccess(), false);
             });
         });
 
         describe("#isIso3166Part1Alpha('3')", () => {
-            it("should return true when param is 3 and tested value is 'FRA'", () => {
+            it("should return true when param is '3' and tested value is 'FRA'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('FRA').isSuccess(), true);
             });
 
-            it("should return true when param is 3 and tested value is 'DEU'", () => {
+            it("should return true when param is '3' and tested value is 'DEU'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('DEU').isSuccess(), true);
             });
 
-            it("should return false when param is 3 and tested value is 'FR'", () => {
+            it("should return false when param is '3' and tested value is 'FR'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('FR').isSuccess(), false);
             });
 
-            it("should return false when param is 3 and tested value is 'fra'", () => {
+            it("should return false when param is '3' and tested value is 'fra'", () => {
                 assert.equal(new StringGuard().isIso3166Part1Alpha('3').guard('fra').isSuccess(), false);
             });
         });
@@ -4430,6 +4430,42 @@ describe('String-Guard', () => {
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isMacAddress().guard(undefined).isSuccess(), false);
         });
+
+        describe("#isMacAddress('IEEE')", () => {
+            it("should return true when param is 'IEEE' and tested value is '00-0A-95-9D-68-16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IEEE').guard('00-0A-95-9D-68-16').isSuccess(), true);
+            });
+
+            it("should return false when param is 'IEEE' and tested value is '00:0a:95:9d:68:16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IEEE').guard('00:0a:95:9d:68:16').isSuccess(), false);
+            });
+
+            it("should return false when param is 'IEEE' and tested value is '00-0a-95-9D-68-16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IEEE').guard('00-0a-95-9D-68-16').isSuccess(), false);
+            });
+
+            it("should return false when param is 'IEEE' and tested value is '00:0A-95-9D-68-16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IEEE').guard('00:0A-95-9D-68-16').isSuccess(), false);
+            });
+        });
+
+        describe("#isMacAddress('IETF')", () => {
+            it("should return true when param is 'IETF' and tested value is '00:0a:95:9d:68:16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IETF').guard('00:0a:95:9d:68:16').isSuccess(), true);
+            });
+
+            it("should return false when param is 'IETF' and tested value is '00-0A-95-9D-68-16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IETF').guard('00-0A-95-9D-68-16').isSuccess(), false);
+            });
+
+            it("should return false when param is 'IETF' and tested value is '00:0A:95:9D:68:16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IETF').guard('00:0A:95:9D:68:16').isSuccess(), false);
+            });
+
+            it("should return false when param is 'IETF' and tested value is '00-0a-95-9d-68-16'", () => {
+                assert.equal(new StringGuard().isMacAddress('IETF').guard('00-0a-95-9d-68-16').isSuccess(), false);
+            });
+        });
     });
 
     describe('#isNotEmpty()', () => {
@@ -4447,6 +4483,32 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isNotEmpty().guard(undefined).isSuccess(), false);
+        });
+    });
+
+    describe('#isNotIn()', () => {
+        it("should return true when param is ['foo', 'bar'] and tested value is 'foobar'", () => {
+            assert.equal(new StringGuard().isNotIn(['foo', 'bar']).guard('foobar').isSuccess(), true);
+        });
+
+        it("should return true when param is [] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isNotIn([]).guard('foo').isSuccess(), true);
+        });
+
+        it("should return false when param is [''] and tested value is ''", () => {
+            assert.equal(new StringGuard().isNotIn(['']).guard('').isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo', 'bar'] and tested value is 'foo'", () => {
+            assert.equal(new StringGuard().isNotIn(['foo', 'bar']).guard('foo').isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo'] and tested value is null", () => {
+            assert.equal(new StringGuard().isNotIn(['foo']).guard(null).isSuccess(), false);
+        });
+
+        it("should return false when param is ['foo'] and tested value is undefined", () => {
+            assert.equal(new StringGuard().isNotIn(['foo']).guard(undefined).isSuccess(), false);
         });
     });
 

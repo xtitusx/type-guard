@@ -2,17 +2,18 @@ import { IIsDecimalOptions } from './string/string-options';
 
 import {
     StringRule,
-    CapitalizationStyle,
-    EmailAddressDefinition,
-    TrimmedSide,
-    HexColorDigits,
-    ProgrammingConvention,
-    IpVersion,
-    GeoCoordinatesFormat,
+    Alphabet,
     AlphaVersion,
     Base64Implementation,
+    CapitalizationStyle,
+    EmailAddressDefinition,
+    GeoCoordinatesFormat,
+    HexColorDigits,
+    IpVersion,
     JsonFormat,
-    Alphabet,
+    MacAddressDefinition,
+    ProgrammingConvention,
+    TrimmedSide,
 } from './string/string-types';
 
 import { StringContains } from './string/string-contains';
@@ -44,6 +45,7 @@ import { StringIsLongitude } from './string/string-is-longitude';
 import { StringIsLowercase } from './string/string-is-lowercase';
 import { StringIsMacAddress } from './string/string-is-mac-address';
 import { StringIsNotEmpty } from './string/string-is-not-empty';
+import { StringIsNotIn } from './string/string-is-not-in';
 import { StringIsNumeric } from './string/string-is-numeric';
 import { StringIsObjectId } from './string/string-is-object-id';
 import { StringIsOctal } from './string/string-is-octal';
@@ -567,12 +569,13 @@ export class StringGuard extends Guard<StringRule> {
      * - IEEE802-types definition: dash separator, uppercase.
      * - IETF-yang-types definition: colon separator, lowercase.
      * ```
+     * @param def - {@link IEEE_MAC_ADDRESS_PATTERN | 'IEEE'} | {@link IETF_MAC_ADDRESS_PATTERN | 'IETF'}.
      * @see {@link https://www.ieee802.org/1/files/public/docs2020/yangsters-smansfield-mac-address-format-0420-v01.pdf} for syntax.
      * @example IEEE802-types definition: 00-0A-95-9D-68-16
      * @example IETF-yang-types definition: 00:0a:95:9d:68:16
      */
-    public isMacAddress(): this {
-        this.addRule({ type: 'isMacAddress' });
+    public isMacAddress(def?: MacAddressDefinition): this {
+        this.addRule({ type: 'isMacAddress', def: def });
         return this;
     }
 
@@ -586,6 +589,20 @@ export class StringGuard extends Guard<StringRule> {
      */
     public isNotEmpty(): this {
         this.addRule({ type: 'isNotEmpty' });
+        return this;
+    }
+
+    /**
+     * Checks if string is not in an array of disallowed string values.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Case sensitive.
+     * ```
+     * @param values - An array of disallowed string values.
+     */
+    public isNotIn(values: string[]): this {
+        this.addRule({ type: 'isNotIn', values: values });
         return this;
     }
 
@@ -782,6 +799,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsMacAddress(rule, value).exec();
             case 'isNotEmpty':
                 return new StringIsNotEmpty(rule, value).exec();
+            case 'isNotIn':
+                return new StringIsNotIn(rule, value).exec();
             case 'isNumeric':
                 return new StringIsNumeric(rule, value).exec();
             case 'isObjectId':

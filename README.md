@@ -207,6 +207,7 @@ const guardResult2 = stringGuard
 | notContains(value: string)                                                  | Checks if string does not contain the specified substring.                      |
 | matches(value: RegExp)                                                      | Checks if string matches the specified regex.                                   |
 | isIn(value: string[])                                                       | Checks if string is in an array of allowed string values.                       |
+| isNotIn(value: string[])                                                    | Checks if string is not in an array of disallowed string values.                |
 | isEmpty()                                                                   | Checks if string is empty.                                                      |
 | isNotEmpty()                                                                | Checks if string is not empty.                                                  |
 | hasLength(value: number)                                                    | Checks if string's length is equal to the specified number.                     |
@@ -231,7 +232,7 @@ const guardResult2 = stringGuard
 | isObjectId()                                                                | Checks if string is a representation of a MongoDB ObjectId.                     |
 | isHexColor(digits?: HexColorDigits)                                         | Checks if string is a hexadecimal color.                                        |
 | isUuidv4()                                                                  | Checks if string is an Universally unique identifier v4.                        |
-| isMacAddress()                                                              | Checks if string is a MAC address.                                              |
+| isMacAddress(def?: MacAddressDefinition)                                    | Checks if string is a MAC address.                                              |
 | isIpAddress(version?: IpVersion)                                            | Checks if string is an IP address.                                              |
 | isLatitude(format?: GeoCoordinatesFormat)                                   | Checks if string is a latitude geographic coordinate.                           |
 | isLongitude(format?: GeoCoordinatesFormat)                                  | Checks if string is a longitude geographic coordinate.                          |
