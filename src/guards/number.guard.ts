@@ -13,6 +13,7 @@ import { NumberIsMultiple } from './number/number-is-multiple';
 import { NumberIsNegative } from './number/number-is-negative';
 import { NumberIsNetworkPort } from './number/number-is-network-port';
 import { NumberIsOdd } from './number/number-is-odd';
+import { NumberIsNotIn } from './number/number-is-not-in';
 import { NumberIsPositive } from './number/number-is-positive';
 import { NumberIsPrime } from './number/number-is-prime';
 import { NumberIsWhole } from './number/number-is-whole';
@@ -147,6 +148,20 @@ export class NumberGuard extends Guard<NumberRule> {
     }
 
     /**
+     * Checks if number is not in an array of disallowed number values.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Case sensitive.
+     * ```
+     * @param values - An array of disallowed number values.
+     */
+    public isNotIn(values: number[]): this {
+        this.addRule({ type: 'isNotIn', values: values });
+        return this;
+    }
+
+    /**
      * Checks if number is odd.
      * @remarks Chainable method.
      */
@@ -216,6 +231,8 @@ export class NumberGuard extends Guard<NumberRule> {
                 return new NumberIsNetworkPort(rule, value).exec();
             case 'isOdd':
                 return new NumberIsOdd(rule, value).exec();
+            case 'isNotIn':
+                return new NumberIsNotIn(rule, value).exec();
             case 'isPositive':
                 return new NumberIsPositive(rule, value).exec();
             case 'isPrime':
