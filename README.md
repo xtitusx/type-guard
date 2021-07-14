@@ -185,6 +185,7 @@ const guardResult2 = stringGuard
 | isMax(max: number)                      | Checks if number is equal or smaller than to the specified number.                     |
 | isBetween(min: number, max: number)     | Checks if number is within a closed interval.                                          |
 | isIn(values: number[])                  | Checks if number is in an array of allowed number values.                              |
+| isNotIn(values: number[])               | Checks if number is not in an array of disallowed number values.                       |
 | isPositive()                            | Checks if number is greater than zero.                                                 |
 | isNegative()                            | Checks if number is smaller than zero.                                                 |
 | isWhole()                               | Checks if number is a whole number.                                                    |
@@ -206,8 +207,8 @@ const guardResult2 = stringGuard
 | contains(value: string)                                                     | Checks if string contains the specified substring.                              |
 | notContains(value: string)                                                  | Checks if string does not contain the specified substring.                      |
 | matches(value: RegExp)                                                      | Checks if string matches the specified regex.                                   |
-| isIn(value: string[])                                                       | Checks if string is in an array of allowed string values.                       |
-| isNotIn(value: string[])                                                    | Checks if string is not in an array of disallowed string values.                |
+| isIn(values: string[])                                                      | Checks if string is in an array of allowed string values.                       |
+| isNotIn(values: string[])                                                   | Checks if string is not in an array of disallowed string values.                |
 | isEmpty()                                                                   | Checks if string is empty.                                                      |
 | isNotEmpty()                                                                | Checks if string is not empty.                                                  |
 | hasLength(value: number)                                                    | Checks if string's length is equal to the specified number.                     |
