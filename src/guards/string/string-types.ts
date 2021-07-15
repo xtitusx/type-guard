@@ -19,10 +19,10 @@ export type StringRule =
     | { type: 'isHexColor'; digits?: HexColorDigits }
     | { type: 'isIn'; values: string[] }
     | { type: 'isIpAddress'; version?: IpVersion }
-    | { type: 'isIso3166Part1Alpha'; version?: AlphaVersion }
+    | { type: 'isIso3166Part1Alpha'; version?: Iso3166Part1AlphaVersion }
     | { type: 'isIso4217Alpha3' }
     | { type: 'isIso639Part1Alpha2' }
-    | { type: 'isIso639Part2Alpha3' }
+    | { type: 'isIso639Part2Alpha3'; set?: Iso639Part2Alpha3Set }
     | { type: 'isJson'; format?: JsonFormat }
     | { type: 'isLatLong'; format?: GeoCoordinatesFormat }
     | { type: 'isLatitude'; format?: GeoCoordinatesFormat }
@@ -62,8 +62,6 @@ export type Alphabet =
     | 'spa'
     | 'swe';
 
-export type AlphaVersion = '2' | '3';
-
 export type Base64Implementation = 'standard' | 'fileName' | 'urlSafe';
 
 export type CapitalizationStyle = 'firstChar' | 'startCase';
@@ -75,6 +73,10 @@ export type GeoCoordinatesFormat = 'DMS' | 'DM' | 'DD';
 export type HexColorDigits = '3' | '6';
 
 export type IpVersion = '4' | '6';
+
+export type Iso3166Part1AlphaVersion = '2' | '3';
+
+export type Iso639Part2Alpha3Set = 'bibliographic' | 'terminologic';
 
 export type JsonFormat = 'array' | 'object' | 'string';
 

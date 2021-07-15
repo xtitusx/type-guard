@@ -239,8 +239,8 @@ const guardResult2 = stringGuard
 | isLongitude(format?: GeoCoordinatesFormat)                                  | Checks if string is a longitude geographic coordinate.                          |
 | isLatLong(format?: GeoCoordinatesFormat)                                    | Checks if string is a latitude-longitude geographic coordinate.                 |
 | isIso639Part1Alpha2()                                                       | Checks if string is an ISO 639-1 alpha-2 language code.                         |
-| isIso639Part2Alpha3()                                                       | Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code. |
-| isIso3166Part1Alpha(version?: AlphaVersion)                                 | Checks if string is an ISO 3166-1 alpha country code.                           |
+| isIso639Part2Alpha3(set?: Iso639Part2Alpha3Set)                             | Checks if string is an ISO 639-2 alpha-3 language code.                         |
+| isIso3166Part1Alpha(version?: Iso3166Part1AlphaVersion)                     | Checks if string is an ISO 3166-1 alpha country code.                           |
 | isIso4217Alpha3()                                                           | Checks if string is an ISO 4217 alpha-3 currency code.                          |
 
 ## GuardResultBulk
@@ -291,7 +291,7 @@ Refer to the Codex to directly access Enums containing some ISO values:
 | Codex.iso3166Part1Alpha3Codes() | List of ISO 3166-1 alpha-3 country codes. | Iso639Part1Alpha2[] |
 | Codex.iso4217Alpha3Codes() | List of active ISO 4217 alpha-3 currency codes. | Iso639Part2Alpha3[] |
 | Codex.iso639Part1Alpha2Codes() | List of 184 ISO 639-1 alpha-2 language codes. | Iso3166Part1Alpha2[] |
-| Codex.iso639Part2Alpha3Codes() | List of 487 ISO 639-2 alpha-3 language codes. | Iso3166Part1Alpha3[] |
+| Codex.iso639Part2Alpha3Codes(set?: Iso639Part2Alpha3Set) | List of 487 ISO 639-2 alpha-3 language codes. | Iso639Part2Alpha3B[] \| Iso639Part2Alpha3T[] \| Iso639Part2Alpha3[] |
 
 ## TypeDoc
 

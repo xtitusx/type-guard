@@ -3397,12 +3397,20 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isIso639Part2Alpha3().guard('spa').isSuccess(), true);
         });
 
+        it("should return true when tested value is 'alb'", () => {
+            assert.equal(new StringGuard().isIso639Part2Alpha3().guard('alb').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'sqi'", () => {
+            assert.equal(new StringGuard().isIso639Part2Alpha3().guard('sqi').isSuccess(), true);
+        });
+
         it("should return true when tested value is 'fre'", () => {
             assert.equal(new StringGuard().isIso639Part2Alpha3().guard('fre').isSuccess(), true);
         });
 
-        it("should return false when tested value is 'sqi'", () => {
-            assert.equal(new StringGuard().isIso639Part2Alpha3().guard('sqi').isSuccess(), false);
+        it("should return true when tested value is 'fra'", () => {
+            assert.equal(new StringGuard().isIso639Part2Alpha3().guard('fra').isSuccess(), true);
         });
 
         it("should return false when tested value is 'EN'", () => {
@@ -3423,6 +3431,26 @@ describe('String-Guard', () => {
 
         it('should return false when tested value is undefined', () => {
             assert.equal(new StringGuard().isIso639Part2Alpha3().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isIso639Part2Alpha3('bibliographic')", () => {
+            it("should return true when param is 'bibliographic' and tested value is 'alb'", () => {
+                assert.equal(new StringGuard().isIso639Part2Alpha3('bibliographic').guard('alb').isSuccess(), true);
+            });
+
+            it("should return false when param is 'bibliographic' and tested value is 'sqi'", () => {
+                assert.equal(new StringGuard().isIso639Part2Alpha3('bibliographic').guard('sqi').isSuccess(), false);
+            });
+        });
+
+        describe("#isIso639Part2Alpha3('terminologic')", () => {
+            it("should return true when param is 'terminologic' and tested value is 'sqi'", () => {
+                assert.equal(new StringGuard().isIso639Part2Alpha3('terminologic').guard('sqi').isSuccess(), true);
+            });
+
+            it("should return false when param is 'terminologic' and tested value is 'alb'", () => {
+                assert.equal(new StringGuard().isIso639Part2Alpha3('terminologic').guard('alb').isSuccess(), false);
+            });
         });
     });
 
@@ -3490,58 +3518,58 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isJson().guard(undefined).isSuccess(), false);
         });
 
-        describe("#isJson('array)", () => {
-            it('should return true when tested value is \'["foo"]\'', () => {
+        describe("#isJson('array')", () => {
+            it("should return true when param is 'array' and tested value is '[\"foo\"]'", () => {
                 assert.equal(new StringGuard().isJson('array').guard('["foo"]').isSuccess(), true);
             });
 
-            it("should return true when tested value is '[]'", () => {
+            it("should return true when param is 'array' and tested value is '[]'", () => {
                 assert.equal(new StringGuard().isJson('array').guard('[]').isSuccess(), true);
             });
 
-            it('should return false when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+            it('should return false when param is \'array\' and tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
                 assert.equal(
                     new StringGuard().isJson('array').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
                     false
                 );
             });
 
-            it('should return false when tested value is \'"foo"\'"', () => {
+            it("should return false when param is 'array' and tested value is '\"foo\"'\"", () => {
                 assert.equal(new StringGuard().isJson('array').guard('"foo"').isSuccess(), false);
             });
         });
 
-        describe("#isJson('object)", () => {
-            it('should return true when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+        describe("#isJson('object')", () => {
+            it('should return true when param is \'object\' and tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
                 assert.equal(
                     new StringGuard().isJson('object').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
                     true
                 );
             });
 
-            it("should return true when tested value is '{}'", () => {
+            it("should return true when param is 'object' and tested value is '{}'", () => {
                 assert.equal(new StringGuard().isJson('object').guard('{}').isSuccess(), true);
             });
 
-            it('should return false when tested value is \'["foo"]\'', () => {
+            it("should return false when param is 'object' and tested value is '[\"foo\"]'", () => {
                 assert.equal(new StringGuard().isJson('object').guard('["foo"]').isSuccess(), false);
             });
 
-            it('should return false when tested value is \'"foo"\'"', () => {
+            it("should return false when param is 'object' and tested value is '\"foo\"'\"", () => {
                 assert.equal(new StringGuard().isJson('object').guard('"foo"').isSuccess(), false);
             });
         });
 
-        describe("#isJson('string)", () => {
-            it('should return true when tested value is \'"foo"\'"', () => {
+        describe("#isJson('string')", () => {
+            it("should return true when param is 'string' and tested value is '\"foo\"'\"", () => {
                 assert.equal(new StringGuard().isJson('string').guard('"foo"').isSuccess(), true);
             });
 
-            it('should return false when tested value is \'["foo"]\'', () => {
+            it("should return false when param is 'string' and tested value is '[\"foo\"]'", () => {
                 assert.equal(new StringGuard().isJson('string').guard('["foo"]').isSuccess(), false);
             });
 
-            it('should return false when tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
+            it('should return false when param is \'string\' and tested value is \'{ "name":"John", "age":30, "car":null }\'', () => {
                 assert.equal(
                     new StringGuard().isJson('string').guard('{ "name":"John", "age":30, "car":null }').isSuccess(),
                     false
@@ -3580,7 +3608,7 @@ describe('String-Guard', () => {
         });
 
         describe("#isLatLong('DMS')", () => {
-            it("should return true when tested value is '49° 30′ 00″ N, 144° 57′ 48″ E'", () => {
+            it("should return true when param is 'DMS' and tested value is '49° 30′ 00″ N, 144° 57′ 48″ E'", () => {
                 assert.equal(
                     new StringGuard().isLatLong('DMS').guard('49° 30′ 00″ N, 144° 57′ 48″ E').isSuccess(),
                     true
@@ -3589,7 +3617,7 @@ describe('String-Guard', () => {
         });
 
         describe("#isLatLong('DM')", () => {
-            it("should return true when tested value is '49° 30.0000′ N, 144° 57.8022′ E'", () => {
+            it("should return true when param is 'DM' and tested value is '49° 30.0000′ N, 144° 57.8022′ E'", () => {
                 assert.equal(
                     new StringGuard().isLatLong('DM').guard('49° 30.0000′ N, 144° 57.8022′ E').isSuccess(),
                     true
@@ -3598,7 +3626,7 @@ describe('String-Guard', () => {
         });
 
         describe("#isLatLong('DD')", () => {
-            it("should return true when tested value is '49.508418°, 144.963375°'", () => {
+            it("should return true when param is 'DD' and tested value is '49.508418°, 144.963375°'", () => {
                 assert.equal(new StringGuard().isLatLong('DD').guard('49.508418°, 144.963375°').isSuccess(), true);
             });
         });

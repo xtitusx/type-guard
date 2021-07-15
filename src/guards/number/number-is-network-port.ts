@@ -37,7 +37,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `number is expected to be a private network port (1024-49151) but is not: ${this.value}`
+                              `number is expected to be a private network port (49152-65535) but is not: ${this.value}`
                           )
                           .build();
             default:
@@ -45,9 +45,7 @@ export class NumberIsNetworkPort extends NumberRuleChecker<{ type: 'isNetworkPor
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(
-                              `number is expected to be a private network port (49152-65535) but is not: ${this.value}`
-                          )
+                          .withMessage(`number is expected to be a network port (1-65535) but is not: ${this.value}`)
                           .build();
         }
     }

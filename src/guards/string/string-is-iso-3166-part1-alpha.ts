@@ -1,5 +1,5 @@
 import { StringRuleChecker } from './string-rule-checker';
-import { AlphaVersion } from './string-types';
+import { Iso3166Part1AlphaVersion } from './string-types';
 
 import { Codex } from '../../codex';
 import { GuardResult } from '../../core/guard-result';
@@ -8,9 +8,9 @@ import { Iso3166Part1Alpha3 } from '../../dictionaries/iso-3166-part1-alpha-3.en
 
 export class StringIsIso3166Part1Alpha extends StringRuleChecker<{
     type: 'isIso3166Part1Alpha';
-    version?: AlphaVersion;
+    version?: Iso3166Part1AlphaVersion;
 }> {
-    constructor(rule: { type: 'isIso3166Part1Alpha'; version?: AlphaVersion }, value: string) {
+    constructor(rule: { type: 'isIso3166Part1Alpha'; version?: Iso3166Part1AlphaVersion }, value: string) {
         super(rule, value);
     }
 

@@ -7,14 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.0.0] - 2021-07-13
+## [4.0.0] - 2021-07-15
 
 ### Added
 
 -   Add Tyr.number().isBetween() method, with the same behavior as the old Tyr.number().isIn() method.
 -   Add Tyr.number().isNotIn() method.
 -   Add Tyr.string().isNotIn() method.
+-   Add an optional parameter to Tyr.string().isIso639Part2Alpha3() method, accepted values are 'bibliographic' or 'terminologic'.
 -   Add an optional parameter to Tyr.string().isMacAddress() method, accepted values are 'IEEE' or 'IETF'.
+-   Add an optional parameter to Codex.iso639Part2Alpha3Codes()) method, accepted values are 'bibliographic' or 'terminologic'.
 
 ### Changed
 
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   Fix Tyr.number().isNetworkPort() error messages.
 -   Fix Tyr.string().isIn() method signature.
 
 ## [3.0.0] - 2021-06-26
