@@ -2,7 +2,15 @@ import { Iso3166Part1Alpha2, iso3166Part1Alpha2Codes } from './dictionaries/iso-
 import { Iso3166Part1Alpha3, iso3166Part1Alpha3Codes } from './dictionaries/iso-3166-part1-alpha-3.enum';
 import { Iso4217Alpha3, iso4217Alpha3Codes } from './dictionaries/iso-4217-alpha-3.enum';
 import { Iso639Part1Alpha2, iso639Part1Alpha2Codes } from './dictionaries/iso-639-part1-alpha-2.enum';
-import { Iso639Part2Alpha3, iso639Part2Alpha3Codes } from './dictionaries/iso-639-part2-alpha-3.enum';
+import {
+    Iso639Part2Alpha3B,
+    Iso639Part2Alpha3T,
+    Iso639Part2Alpha3,
+    iso639Part2Alpha3BCodes,
+    iso639Part2Alpha3TCodes,
+    iso639Part2Alpha3Codes,
+} from './dictionaries/iso-639-part2-alpha-3.enum';
+import { Iso639Part2Alpha3Set } from './guards/string/string-types';
 
 export class Codex {
     /**
@@ -51,9 +59,19 @@ export class Codex {
      * The three-letter codes given for each language in this part of the standard are referred to as "Alpha-3" codes.
      *
      * There are 487 entries in the list of ISO 639-2 codes.
+     * @param set - One set is for bibliographic applications, often referred to as ISO 639-2/B, and the other for terminology applications, referred to as ISO 639-2/T.
      * @see {@link https://en.wikipedia.org/wiki/ISO_639-2}
      */
-    public static iso639Part2Alpha3Codes(): Iso639Part2Alpha3[] {
-        return iso639Part2Alpha3Codes();
+    public static iso639Part2Alpha3Codes(
+        set?: Iso639Part2Alpha3Set
+    ): Iso639Part2Alpha3B[] | Iso639Part2Alpha3T[] | Iso639Part2Alpha3[] {
+        switch (set) {
+            case 'bibliographic':
+                return iso639Part2Alpha3BCodes();
+            case 'terminologic':
+                return iso639Part2Alpha3TCodes();
+            default:
+                return iso639Part2Alpha3Codes();
+        }
     }
 }

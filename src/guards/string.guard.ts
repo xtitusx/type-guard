@@ -3,13 +3,14 @@ import { IIsDecimalOptions } from './string/string-options';
 import {
     StringRule,
     Alphabet,
-    AlphaVersion,
+    Iso3166Part1AlphaVersion,
     Base64Implementation,
     CapitalizationStyle,
     EmailAddressDefinition,
     GeoCoordinatesFormat,
     HexColorDigits,
     IpVersion,
+    Iso639Part2Alpha3Set,
     JsonFormat,
     MacAddressDefinition,
     ProgrammingConvention,
@@ -388,13 +389,13 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Uppercase.
      * ```
-     * @param version - {@link Iso3166Part1Alpha2Enum | '2'} | {@link Iso3166Part1Alpha3Enum | '3'}.
+     * @param version - {@link Iso3166Part1Alpha2 | '2'} | {@link Iso3166Part1Alpha3 | '3'}.
      * @see {@link https://en.wikipedia.org/wiki/ISO_3166-1}
      * @see {@link http://inmyownterms.com/take-note-languages-codes-versus-country-codes/} for syntax.
      * @example ISO 3166-1 alpha-2: DE, FR
      * @example ISO 3166-1 alpha-3: DEU, FRA
      */
-    public isIso3166Part1Alpha(version?: AlphaVersion): this {
+    public isIso3166Part1Alpha(version?: Iso3166Part1AlphaVersion): this {
         this.addRule({ type: 'isIso3166Part1Alpha', version: version });
         return this;
     }
@@ -408,7 +409,7 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Uppercase.
      * ```
-     * @see {@link Iso4217Alpha3Enum | List of active ISO 4217 alpha-3 currency codes}
+     * @see {@link Iso4217Alpha3 | List of active ISO 4217 alpha-3 currency codes}
      * @see {@link https://en.wikipedia.org/wiki/ISO_4217}
      * @example EUR, USD, CHF, XAU
      */
@@ -424,7 +425,7 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Lowercase.
      * ```
-     * @see {@link Iso639Part1Alpha2Enum | List of 184 ISO 639-1 alpha-2 language codes}
+     * @see {@link Iso639Part1Alpha2 | List of 184 ISO 639-1 alpha-2 language codes}
      * @see {@link https://en.wikipedia.org/wiki/ISO_639-1}
      * @example en, es, fr
      */
@@ -434,18 +435,19 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code.
+     * Checks if string is an ISO 639-2 alpha-3 language code.
      * @remarks Chainable method.
      * ```ts
      * Rule:
      * - Lowercase.
      * ```
-     * @see {@link Iso639Part2Alpha3Enum | List of 487 ISO 639-2 alpha-3 language codes}
+     * @param set - One set is for bibliographic applications, often referred to as ISO 639-2/B, and the other for terminology applications, referred to as ISO 639-2/T.
+     * @see {@link Iso639Part2Alpha3 | List of 487 ISO 639-2 alpha-3 language codes}
      * @see {@link https://en.wikipedia.org/wiki/ISO_639-2}
      * @example eng, spa, fre
      */
-    public isIso639Part2Alpha3(): this {
-        this.addRule({ type: 'isIso639Part2Alpha3' });
+    public isIso639Part2Alpha3(set?: Iso639Part2Alpha3Set): this {
+        this.addRule({ type: 'isIso639Part2Alpha3', set });
         return this;
     }
 

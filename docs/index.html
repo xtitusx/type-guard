@@ -2967,8 +2967,16 @@ img {
 						<td align="left">Checks if number is equal or smaller than to the specified number.</td>
 					</tr>
 					<tr>
-						<td>isIn(min: number, max: number)</td>
+						<td>isBetween(min: number, max: number)</td>
 						<td align="left">Checks if number is within a closed interval.</td>
+					</tr>
+					<tr>
+						<td>isIn(values: number[])</td>
+						<td align="left">Checks if number is in an array of allowed number values.</td>
+					</tr>
+					<tr>
+						<td>isNotIn(values: number[])</td>
+						<td align="left">Checks if number is not in an array of disallowed number values.</td>
 					</tr>
 					<tr>
 						<td>isPositive()</td>
@@ -3046,8 +3054,12 @@ img {
 						<td align="left">Checks if string matches the specified regex.</td>
 					</tr>
 					<tr>
-						<td>isIn(value: string[])</td>
+						<td>isIn(values: string[])</td>
 						<td align="left">Checks if string is in an array of allowed string values.</td>
+					</tr>
+					<tr>
+						<td>isNotIn(values: string[])</td>
+						<td align="left">Checks if string is not in an array of disallowed string values.</td>
 					</tr>
 					<tr>
 						<td>isEmpty()</td>
@@ -3146,7 +3158,7 @@ img {
 						<td align="left">Checks if string is an Universally unique identifier v4.</td>
 					</tr>
 					<tr>
-						<td>isMacAddress()</td>
+						<td>isMacAddress(def?: MacAddressDefinition)</td>
 						<td align="left">Checks if string is a MAC address.</td>
 					</tr>
 					<tr>
@@ -3170,11 +3182,11 @@ img {
 						<td align="left">Checks if string is an ISO 639-1 alpha-2 language code.</td>
 					</tr>
 					<tr>
-						<td>isIso639Part2Alpha3()</td>
-						<td align="left">Checks if string is an ISO 639-2 alpha-3 (bibliographic version) language code.</td>
+						<td>isIso639Part2Alpha3(set?: Iso639Part2Alpha3Set)</td>
+						<td align="left">Checks if string is an ISO 639-2 alpha-3 language code.</td>
 					</tr>
 					<tr>
-						<td>isIso3166Part1Alpha(version?: AlphaVersion)</td>
+						<td>isIso3166Part1Alpha(version?: Iso3166Part1AlphaVersion)</td>
 						<td align="left">Checks if string is an ISO 3166-1 alpha country code.</td>
 					</tr>
 					<tr>
@@ -3226,7 +3238,7 @@ img {
 				| Codex.iso3166Part1Alpha3Codes() | List of ISO 3166-1 alpha-3 country codes. | Iso639Part1Alpha2[] |
 				| Codex.iso4217Alpha3Codes() | List of active ISO 4217 alpha-3 currency codes. | Iso639Part2Alpha3[] |
 				| Codex.iso639Part1Alpha2Codes() | List of 184 ISO 639-1 alpha-2 language codes. | Iso3166Part1Alpha2[] |
-			| Codex.iso639Part2Alpha3Codes() | List of 487 ISO 639-2 alpha-3 language codes. | Iso3166Part1Alpha3[] |</p>
+			| Codex.iso639Part2Alpha3Codes(set?: Iso639Part2Alpha3Set) | List of 487 ISO 639-2 alpha-3 language codes. | Iso639Part2Alpha3B[] | Iso639Part2Alpha3T[] | Iso639Part2Alpha3[] |</p>
 			<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
 				<h2>TypeDoc</h2>
 			</a>
@@ -3332,6 +3344,7 @@ img {
 							<li class="tsd-kind-module"><a href="modules/guards_number_guard.html" class="tsd-kind-icon">guards/number.guard</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_equals.html" class="tsd-kind-icon">guards/number/number-<wbr>equals</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_has_max_fraction_digits.html" class="tsd-kind-icon">guards/number/number-<wbr>has-<wbr>max-<wbr>fraction-<wbr>digits</a></li>
+							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_between.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>between</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_composite.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>composite</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_even.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>even</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_fibonacci.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>fibonacci</a></li>
@@ -3341,6 +3354,7 @@ img {
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_multiple.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>multiple</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_negative.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>negative</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_network_port.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>network-<wbr>port</a></li>
+							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_not_in.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>not-<wbr>in</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_odd.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>odd</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_positive.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>positive</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_number_number_is_prime.html" class="tsd-kind-icon">guards/number/number-<wbr>is-<wbr>prime</a></li>
@@ -3377,6 +3391,7 @@ img {
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_lowercase.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>lowercase</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_mac_address.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>mac-<wbr>address</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_not_empty.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>not-<wbr>empty</a></li>
+							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_not_in.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>not-<wbr>in</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_numeric.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>numeric</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_object_id.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>object-<wbr>id</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_octal.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>octal</a></li>

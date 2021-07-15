@@ -1,4 +1,4 @@
-const ISO_639_PART2_ALPHA_3_CODES = [
+const ISO_639_PART2_ALPHA_3_COMMON_CODES = [
     'aar',
     'abk',
     'ace',
@@ -11,7 +11,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'ain',
     'aka',
     'akk',
-    'alb',
     'ale',
     'alg',
     'alt',
@@ -22,7 +21,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'ara',
     'arc',
     'arg',
-    'arm',
     'arn',
     'arp',
     'art',
@@ -42,7 +40,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'bal',
     'bam',
     'ban',
-    'baq',
     'bas',
     'bat',
     'bej',
@@ -64,7 +61,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'bua',
     'bug',
     'bul',
-    'bur',
     'byn',
     'cad',
     'cai',
@@ -77,7 +73,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'chb',
     'che',
     'chg',
-    'chi',
     'chk',
     'chm',
     'chn',
@@ -100,7 +95,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'crp',
     'csb',
     'cus',
-    'cze',
     'dak',
     'dan',
     'dar',
@@ -115,7 +109,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'dsb',
     'dua',
     'dum',
-    'dut',
     'dyu',
     'dzo',
     'efi',
@@ -136,7 +129,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'fin',
     'fiu',
     'fon',
-    'fre',
     'frm',
     'fro',
     'frr',
@@ -148,8 +140,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'gay',
     'gba',
     'gem',
-    'geo',
-    'ger',
     'gez',
     'gil',
     'gla',
@@ -163,7 +153,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'got',
     'grb',
     'grc',
-    'gre',
     'grn',
     'gsw',
     'guj',
@@ -186,7 +175,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'hup',
     'iba',
     'ibo',
-    'ice',
     'ido',
     'iii',
     'ijo',
@@ -261,7 +249,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'lun',
     'luo',
     'lus',
-    'mac',
     'mad',
     'mag',
     'mah',
@@ -269,11 +256,9 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'mak',
     'mal',
     'man',
-    'mao',
     'map',
     'mar',
     'mas',
-    'may',
     'mdf',
     'mdr',
     'men',
@@ -341,7 +326,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'pap',
     'pau',
     'peo',
-    'per',
     'phi',
     'phn',
     'pli',
@@ -359,7 +343,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'roa',
     'roh',
     'rom',
-    'rum',
     'run',
     'rup',
     'rus',
@@ -384,7 +367,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'sio',
     'sit',
     'sla',
-    'slo',
     'slv',
     'sma',
     'sme',
@@ -426,7 +408,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'tgk',
     'tgl',
     'tha',
-    'tib',
     'tig',
     'tir',
     'tiv',
@@ -465,7 +446,6 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'wal',
     'war',
     'was',
-    'wel',
     'wen',
     'wln',
     'wol',
@@ -488,8 +468,77 @@ const ISO_639_PART2_ALPHA_3_CODES = [
     'zza',
 ] as const;
 
-export type Iso639Part2Alpha3 = typeof ISO_639_PART2_ALPHA_3_CODES[number];
+const ISO_639_PART2_ALPHA_3_BIBLIOGRAPHIC_CODES = [
+    'alb',
+    'arm',
+    'baq',
+    'bur',
+    'chi',
+    'cze',
+    'dut',
+    'fre',
+    'geo',
+    'ger',
+    'gre',
+    'ice',
+    'mac',
+    'mao',
+    'may',
+    'per',
+    'rum',
+    'slo',
+    'tib',
+    'wel',
+] as const;
+
+const ISO_639_PART2_ALPHA_3_TERMINOLOGIC_CODES = [
+    'sqi',
+    'hye',
+    'eus',
+    'mya',
+    'zho',
+    'ces',
+    'nld',
+    'fra',
+    'kat',
+    'deu',
+    'ell',
+    'isl',
+    'mkd',
+    'mri',
+    'msa',
+    'fas',
+    'ron',
+    'slk',
+    'bod',
+    'cym',
+] as const;
+
+export type Iso639Part2Alpha3B =
+    | typeof ISO_639_PART2_ALPHA_3_COMMON_CODES[number]
+    | typeof ISO_639_PART2_ALPHA_3_BIBLIOGRAPHIC_CODES[number];
+
+export type Iso639Part2Alpha3T =
+    | typeof ISO_639_PART2_ALPHA_3_COMMON_CODES[number]
+    | typeof ISO_639_PART2_ALPHA_3_TERMINOLOGIC_CODES[number];
+
+export type Iso639Part2Alpha3 =
+    | typeof ISO_639_PART2_ALPHA_3_COMMON_CODES[number]
+    | typeof ISO_639_PART2_ALPHA_3_BIBLIOGRAPHIC_CODES[number]
+    | typeof ISO_639_PART2_ALPHA_3_TERMINOLOGIC_CODES[number];
+
+export function iso639Part2Alpha3BCodes(): Iso639Part2Alpha3B[] {
+    return [...ISO_639_PART2_ALPHA_3_COMMON_CODES, ...ISO_639_PART2_ALPHA_3_BIBLIOGRAPHIC_CODES];
+}
+
+export function iso639Part2Alpha3TCodes(): Iso639Part2Alpha3T[] {
+    return [...ISO_639_PART2_ALPHA_3_COMMON_CODES, ...ISO_639_PART2_ALPHA_3_TERMINOLOGIC_CODES];
+}
 
 export function iso639Part2Alpha3Codes(): Iso639Part2Alpha3[] {
-    return [...ISO_639_PART2_ALPHA_3_CODES];
+    return [
+        ...ISO_639_PART2_ALPHA_3_COMMON_CODES,
+        ...ISO_639_PART2_ALPHA_3_BIBLIOGRAPHIC_CODES,
+        ...ISO_639_PART2_ALPHA_3_TERMINOLOGIC_CODES,
+    ];
 }

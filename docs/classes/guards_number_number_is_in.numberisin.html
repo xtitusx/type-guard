@@ -2710,7 +2710,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<a href="guards_number_number_rule_checker.numberrulechecker.html" class="tsd-signature-type" data-tsd-kind="Class">NumberRuleChecker</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span>
+					<a href="guards_number_number_rule_checker.numberrulechecker.html" class="tsd-signature-type" data-tsd-kind="Class">NumberRuleChecker</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol">; </span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">NumberIsIn</span>
@@ -2752,29 +2752,26 @@ img {
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Number<wbr>IsIn<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol"> }</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="guards_number_number_is_in.numberisin.html" class="tsd-signature-type" data-tsd-kind="Class">NumberIsIn</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Number<wbr>IsIn<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol">; </span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="guards_number_number_is_in.numberisin.html" class="tsd-signature-type" data-tsd-kind="Class">NumberIsIn</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="guards_number_number_rule_checker.numberrulechecker.html">NumberRuleChecker</a>.<a href="guards_number_number_rule_checker.numberrulechecker.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/386692f/src/guards/number/number-is-in.ts#L5">guards/number/number-is-in.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/22b4190/src/guards/number/number-is-in.ts#L5">guards/number/number-is-in.ts:5</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>rule: <span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol"> }</span></h5>
+								<h5>rule: <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol">; </span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter">
-										<h5>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-									</li>
-									<li class="tsd-parameter">
 										<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span></h5>
+									</li>
+									<li class="tsd-parameter">
+										<h5>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 								</ul>
 							</li>
@@ -2792,24 +2789,21 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 				<a name="rule" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagProtected">Protected</span> rule</h3>
-				<div class="tsd-signature tsd-kind-icon">rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol"> }</span></div>
+				<div class="tsd-signature tsd-kind-icon">rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol">; </span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="guards_number_number_rule_checker.numberrulechecker.html">NumberRuleChecker</a>.<a href="guards_number_number_rule_checker.numberrulechecker.html#rule">rule</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/386692f/src/core/rule-checker.ts#L5">core/rule-checker.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/22b4190/src/core/rule-checker.ts#L5">core/rule-checker.ts:5</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
 					<h4>Type declaration</h4>
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter">
-							<h5>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-						</li>
-						<li class="tsd-parameter">
-							<h5>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-						</li>
-						<li class="tsd-parameter">
 							<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;isIn&quot;</span></h5>
+						</li>
+						<li class="tsd-parameter">
+							<h5>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
 						</li>
 					</ul>
 				</div>
@@ -2821,7 +2815,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="guards_number_number_rule_checker.numberrulechecker.html">NumberRuleChecker</a>.<a href="guards_number_number_rule_checker.numberrulechecker.html#value">value</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/386692f/src/guards/number/number-rule-checker.ts#L6">guards/number/number-rule-checker.ts:6</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/22b4190/src/guards/number/number-rule-checker.ts#L6">guards/number/number-rule-checker.ts:6</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2839,7 +2833,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="guards_number_number_rule_checker.numberrulechecker.html">NumberRuleChecker</a>.<a href="guards_number_number_rule_checker.numberrulechecker.html#exec">exec</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/386692f/src/guards/number/number-is-in.ts#L13">guards/number/number-is-in.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/22b4190/src/guards/number/number-is-in.ts#L13">guards/number/number-is-in.ts:13</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2862,7 +2856,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/386692f/src/guards/number/number-is-in.ts#L24">guards/number/number-is-in.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/type-guard/blob/22b4190/src/guards/number/number-is-in.ts#L24">guards/number/number-is-in.ts:24</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
