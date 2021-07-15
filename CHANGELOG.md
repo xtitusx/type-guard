@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Add Tyr.string().isNotIn() method.
 -   Add an optional parameter to Tyr.string().isIso639Part2Alpha3() method, accepted values are 'bibliographic' or 'terminologic'.
 -   Add an optional parameter to Tyr.string().isMacAddress() method, accepted values are 'IEEE' or 'IETF'.
--   Add an optional parameter to Codex.iso639Part2Alpha3Codes()) method, accepted values are 'bibliographic' or 'terminologic'.
+-   Add an optional parameter to Codex.iso639Part2Alpha3Codes() method, accepted values are 'bibliographic' or 'terminologic'.
 
 ### Changed
 
