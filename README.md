@@ -91,7 +91,7 @@ Tyr.number().isMultiple(2).isMultiple(3).isMultiple(4).guard(12);
 -   A fast validation returning simply a boolean:
 
 ```
-Tyr.number().isIn(10, 20).isEven().guard(14).isSuccess();
+Tyr.number().isBetween(10, 20).isEven().guard(14).isSuccess();
 ```
 
 -   A thrown exception with a `GuardResult` instance message:
@@ -262,7 +262,7 @@ const guardResult = new GuardResultBulk()
     .add([
         Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
         Tyr.string().equals('foo').guard('foo'),
-        Tyr.number().isIn(10, 20).isEven().guard(14),
+        Tyr.number().isBetween(10, 20).isEven().guard(14),
     ])
     .combine();
 
@@ -277,7 +277,7 @@ const guardResult = new GuardResultBulk()
     .add([
         Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
         Tyr.string().equals('foo').guard('foo'),
-        Tyr.number().isIn(10, 20).isEven().guard(14),
+        Tyr.number().isBetween(10, 20).isEven().guard(14),
     ])
     .stack();
 ```

@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Rewrite Tyr.number().isIn() method, in order to check if a number is in an array of allowed number values. (Breaking Change).
+-   Rewrite Tyr.number().isIn() method, in order to check if a number is in an array of allowed number values (BREAKING CHANGE).
 
 ### Fixed
 
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Convert Codex Enums to readonly Arrays (Breaking Change).
+-   Convert Codex Enums to readonly Arrays (BREAKING CHANGE).
 
 ## [2.5.0] - 2021-06-20
 
