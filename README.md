@@ -60,7 +60,7 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 7. [Changelog](#changelog)
 8. [The true story](#the-true-story)
 9. [Maintainer](#maintainer)
-10. [Licence](#licence)
+10. [License](#license)
 
 ## Installation
 
@@ -326,7 +326,7 @@ Tyr was accompanied by seven guards, each representing an aspect of the order ..
 
 -   [xtitusx](https://github.com/xtitusx) - **Benjamin Tussac** (author)
 
-## Licence
+## License
 
 ```
 MIT License
