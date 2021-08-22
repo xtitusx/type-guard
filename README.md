@@ -14,8 +14,8 @@
 [![NPM version][npm-image]][npm-url]
 ![CI][ci-image]
 [![Coverage][codecov-image]][codecov-url]
-![Security Badge][snyk-security-image]
-[![Known Vulnerabilities][snyk-url]][snyk-image]
+![Security badge][snyk-security-image]
+[![Known vulnerabilities][snyk-url]][snyk-image]
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
 
