@@ -25,7 +25,7 @@
     "build": "rimraf build && tsc",
     "test": "mocha ./build/test/**/**/*-test.js",
     "test:nyc": "nyc mocha ./build/test/**/**/*-test.js",
-    "test:ci": "nyc --reporter=lcov mocha ./build/test/**/**/*-test.js && codecov && snyk test",
+    "test:ci": "nyc --reporter=lcov mocha ./build/test/**/**/*-test.js && codecov --disable=gcov && snyk test",
     "lint:check": "eslint --max-warnings 0 --ext .ts src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "prettier:check": "prettier --check  './**/*.{ts,md}'",
