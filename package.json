@@ -40,7 +40,7 @@
     "url": "git+https://github.com/xtitusx/type-guard.git"
   },
   "dependencies": {
-    "dayjs": "^1.10.6"
+    "dayjs": "^1.10.7"
   },
   "devDependencies": {
     "@types/chai": "^4.2.6",
