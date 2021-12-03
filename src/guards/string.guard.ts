@@ -27,6 +27,7 @@ import { StringIsAlphaNumeric } from './string/string-is-alpha-numeric';
 import { StringIsAscii } from './string/string-is-ascii';
 import { StringIsBase64 } from './string/string-is-base64';
 import { StringIsBinary } from './string/string-is-binary';
+import { StringIsBoolean } from './string/string-is-boolean';
 import { StringIsCapitalized } from './string/string-is-capitalized';
 import { StringIsDecimal } from './string/string-is-decimal';
 import { StringIsEmailAddress } from './string/string-is-email-address';
@@ -208,6 +209,20 @@ export class StringGuard extends Guard<StringRule> {
      */
     public isBinary(): this {
         this.addRule({ type: 'isBinary' });
+        return this;
+    }
+
+    /**
+     * Checks if string is a boolean string.
+     * @remarks Chainable method.
+     * ```ts
+     * Rule:
+     * - Case sensitive.
+     * ```
+     * @example "true" or "false"
+     */
+    public isBoolean(): this {
+        this.addRule({ type: 'isBoolean' });
         return this;
     }
 
@@ -763,6 +778,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsBase64(rule, value).exec();
             case 'isBinary':
                 return new StringIsBinary(rule, value).exec();
+            case 'isBoolean':
+                return new StringIsBoolean(rule, value).exec();
             case 'isCapitalized':
                 return new StringIsCapitalized(rule, value).exec();
             case 'isDecimal':

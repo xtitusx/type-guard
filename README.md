@@ -224,6 +224,7 @@ const guardResult2 = stringGuard
 | isNumeric()                                                                 | Checks if string only contains numbers.                                         |
 | isAscii()                                                                   | Checks if string only contains printable ASCII characters.                      |
 | isBinary()                                                                  | Checks if string is a binary number (base-2).                                   |
+| isBoolean()                                                                 | Checks if string is a boolean string.                                           |
 | isOctal()                                                                   | Checks if string is an octal number (base-8).                                   |
 | isHex()                                                                     | Checks if string is a hexadecimal number (base-16).                             |
 | isBase64(impl: Base64Implementation)                                        | Checks if string is Base64 encoded.                                             |

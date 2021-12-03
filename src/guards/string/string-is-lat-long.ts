@@ -23,7 +23,7 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DMS latitude-longitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DMS latitude-longitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             case 'DM':
@@ -32,7 +32,7 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DM latitude-longitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DM latitude-longitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             case 'DD':
@@ -41,7 +41,7 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DD latitude-longitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DD latitude-longitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             default:
@@ -50,7 +50,7 @@ export class StringIsLatLong extends StringRuleChecker<{ type: 'isLatLong'; form
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DMS, DM, or DD latitude-longitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DMS, DM, or DD latitude-longitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
         }

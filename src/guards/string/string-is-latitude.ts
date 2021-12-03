@@ -61,7 +61,7 @@ export class StringIsLatitude extends StringRuleChecker<{ type: 'isLatitude'; fo
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DMS latitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DMS latitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             case 'DM':
@@ -70,7 +70,7 @@ export class StringIsLatitude extends StringRuleChecker<{ type: 'isLatitude'; fo
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DM latitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DM latitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             case 'DD':
@@ -79,7 +79,7 @@ export class StringIsLatitude extends StringRuleChecker<{ type: 'isLatitude'; fo
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DD latitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DD latitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
             default:
@@ -88,7 +88,7 @@ export class StringIsLatitude extends StringRuleChecker<{ type: 'isLatitude'; fo
                     : new GuardResult.Builder()
                           .withSuccess(false)
                           .withMessage(
-                              `string is expected to be a DMS, DM, or DD latitude geographic coordinate. but is not: ${this.value}`
+                              `string is expected to be a DMS, DM, or DD latitude geographic coordinate but is not: ${this.value}`
                           )
                           .build();
         }

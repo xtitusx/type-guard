@@ -2274,6 +2274,56 @@ describe('String-Guard', () => {
         });
     });
 
+    describe('#isBoolean()', () => {
+        it("should return true when tested value is 'true'", () => {
+            assert.equal(new StringGuard().isBoolean().guard('true').isSuccess(), true);
+        });
+
+        it("should return true when tested value is 'false'", () => {
+            assert.equal(new StringGuard().isBoolean().guard('false').isSuccess(), true);
+        });
+
+        it("should return false when tested value is 'truefalse'", () => {
+            assert.equal(new StringGuard().isBoolean().guard('truefalse').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'truetrue'", () => {
+            assert.equal(new StringGuard().isBoolean().guard('truetrue').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'true '", () => {
+            assert.equal(new StringGuard().isBoolean().guard('true ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'false '", () => {
+            assert.equal(new StringGuard().isBoolean().guard('false ').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' true'", () => {
+            assert.equal(new StringGuard().isBoolean().guard(' true').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' false'", () => {
+            assert.equal(new StringGuard().isBoolean().guard(' false').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' '", () => {
+            assert.equal(new StringGuard().isBoolean().guard('').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ''", () => {
+            assert.equal(new StringGuard().isBoolean().guard('').isSuccess(), false);
+        });
+
+        it('should return false when tested value is null', () => {
+            assert.equal(new StringGuard().isBoolean().guard(null).isSuccess(), false);
+        });
+
+        it('should return false when tested value is undefined', () => {
+            assert.equal(new StringGuard().isBoolean().guard(undefined).isSuccess(), false);
+        });
+    });
+
     describe('#isCapitalized()', () => {
         describe("#isCapitalized('firstChar', true)", () => {
             it("should return true when params are 'firstChar' and true, and tested value is 'Foo'", () => {

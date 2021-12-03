@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2021-12-03
+
+### Added
+
+-   Add Tyr.string().isBoolean() method.
+
+### Fixed
+
+-   Fix Tyr.string().isLatLong() error messages.
+-   Fix Tyr.string().isLatitude() error messages.
+-   Fix Tyr.string().isLongitude() error messages.
+
 ## [4.0.0] - 2021-07-15
 
 ### Added

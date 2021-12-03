@@ -11,6 +11,7 @@ export type StringRule =
     | { type: 'isAscii' }
     | { type: 'isBase64'; impl: Base64Implementation }
     | { type: 'isBinary' }
+    | { type: 'isBoolean' }
     | { type: 'isCapitalized'; style: CapitalizationStyle; checkFirstCharIsLetter?: boolean }
     | { type: 'isDecimal'; options?: IIsDecimalOptions }
     | { type: 'isEmailAddress'; def?: EmailAddressDefinition }

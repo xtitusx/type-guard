@@ -2693,8 +2693,8 @@ img {
 			<p><a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/v/@xtitusx/type-guard" alt="NPM version"></a>
 				<img src="https://img.shields.io/travis/com/xtitusx/type-guard" alt="CI">
 				<a href="https://codecov.io/gh/xtitusx/type-guard"><img src="https://codecov.io/gh/xtitusx/type-guard/branch/master/graph/badge.svg?token=6WEWL2D8DB" alt="Coverage"></a>
-				<img src="https://snyk-widget.herokuapp.com/badge/npm/%40xtitusx%2Ftype-guard/badge.svg" alt="Security Badge">
-				<a href="https://snyk.io/test/github/xtitusx/type-guard"><img src="https://snyk.io/test/github/xtitusx/type-guard/badge.svg" alt="Known Vulnerabilities"></a>
+				<img src="https://snyk-widget.herokuapp.com/badge/npm/%40xtitusx%2Ftype-guard/badge.svg" alt="Security badge">
+				<a href="https://snyk.io/test/github/xtitusx/type-guard"><img src="https://snyk.io/test/github/xtitusx/type-guard/badge.svg" alt="Known vulnerabilities"></a>
 				<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/npm/dm/@xtitusx/type-guard" alt="Downloads"></a>
 			<a href="https://www.npmjs.com/package/@xtitusx/type-guard"><img src="https://img.shields.io/bundlephobia/min/@xtitusx/type-guard" alt="Minified size"></a></p>
 			<p><strong>type-guard</strong> performs a runtime check that guarantees the type and value of properties in some scopes.</p>
@@ -2742,7 +2742,7 @@ img {
 				<li><a href="#changelog">Changelog</a></li>
 				<li><a href="#the-true-story">The true story</a></li>
 				<li><a href="#maintainer">Maintainer</a></li>
-				<li><a href="#licence">Licence</a></li>
+				<li><a href="#license">License</a></li>
 			</ol>
 			<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 				<h2>Installation</h2>
@@ -2768,7 +2768,7 @@ img {
 			<ul>
 				<li>  A fast validation returning simply a boolean:</li>
 			</ul>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
 </code></pre>
 			<ul>
 				<li>  A thrown exception with a <code>GuardResult</code> instance message:</li>
@@ -3122,6 +3122,10 @@ img {
 						<td align="left">Checks if string is a binary number (base-2).</td>
 					</tr>
 					<tr>
+						<td>isBoolean()</td>
+						<td align="left">Checks if string is a boolean string.</td>
+					</tr>
+					<tr>
 						<td>isOctal()</td>
 						<td align="left">Checks if string is an octal number (base-8).</td>
 					</tr>
@@ -3211,7 +3215,7 @@ img {
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
 
@@ -3224,7 +3228,7 @@ img {
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isIn</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
 </code></pre>
@@ -3267,8 +3271,8 @@ img {
 			<ul>
 				<li>  <a href="https://github.com/xtitusx">xtitusx</a> - <strong>Benjamin Tussac</strong> (author)</li>
 			</ul>
-			<a href="#licence" id="licence" style="color: inherit; text-decoration: none;">
-				<h2>Licence</h2>
+			<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+				<h2>License</h2>
 			</a>
 			<pre><code><span style="color: #0070C1">MIT</span><span style="color: #000000"> </span><span style="color: #001080">License</span>
 
@@ -3372,6 +3376,7 @@ img {
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_ascii.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>ascii</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_base64.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>base64</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_binary.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>binary</a></li>
+							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_boolean.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>boolean</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_capitalized.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>capitalized</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_decimal.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>decimal</a></li>
 							<li class="tsd-kind-module"><a href="modules/guards_string_string_is_email_address.html" class="tsd-kind-icon">guards/string/string-<wbr>is-<wbr>email-<wbr>address</a></li>
