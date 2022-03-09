@@ -14,6 +14,7 @@ import {
     JsonFormat,
     MacAddressDefinition,
     ProgrammingConvention,
+    StringPosition,
     TrimmedSide,
 } from './string/string-types';
 
@@ -75,9 +76,10 @@ export class StringGuard extends Guard<StringRule> {
      * - Case sensitive.
      * ```
      * @param value
+     * @param pos - 'start' | 'end'
      */
-    public contains(value: string): this {
-        this.addRule({ type: 'contains', value: value });
+    public contains(value: string, pos?: StringPosition): this {
+        this.addRule({ type: 'contains', value: value, pos: pos });
         return this;
     }
 

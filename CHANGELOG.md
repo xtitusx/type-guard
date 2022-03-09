@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2022-03-09
+
+### Added
+
+-   Add an optional parameter to Tyr.string().contains() method, accepted values are 'start' or 'end'.
+
 ## [4.1.0] - 2021-12-03
 
 ### Added
