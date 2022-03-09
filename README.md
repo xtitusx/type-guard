@@ -204,7 +204,7 @@ const guardResult2 = stringGuard
 | --------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | equals(value: string)                                                       | Checks if two string are equals.                                                |
 | notEquals(value: string)                                                    | Checks if two string are not equals.                                            |
-| contains(value: string)                                                     | Checks if string contains the specified substring.                              |
+| contains(value: string, pos?: StringPosition)                               | Checks if string contains the specified substring.                              |
 | notContains(value: string)                                                  | Checks if string does not contain the specified substring.                      |
 | matches(value: RegExp)                                                      | Checks if string matches the specified regex.                                   |
 | isIn(values: string[])                                                      | Checks if string is in an array of allowed string values.                       |
