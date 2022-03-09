@@ -8,8 +8,8 @@ import { GuardResult } from '../../core/guard-result';
  */
 export const ASCII_PATTERN = '^[\x20-\x7E]+$';
 
-export class StringIsAscii extends StringRuleChecker<{ type: 'isAscii'; extended?: boolean }> {
-    constructor(rule: { type: 'isAscii'; extended?: boolean }, value: string) {
+export class StringIsAscii extends StringRuleChecker<{ type: 'isAscii' }> {
+    constructor(rule: { type: 'isAscii' }, value: string) {
         super(rule, value);
     }
 

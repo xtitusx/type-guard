@@ -55,6 +55,58 @@ describe('String-Guard', () => {
         it("should return false when param 'foo' and tested value is undefined", () => {
             assert.equal(new StringGuard().contains('foo').guard(undefined).isSuccess(), false);
         });
+
+        describe("#contains('start')", () => {
+            it("should return true when params are 'foo' and 'start', and tested value is 'foo'", () => {
+                assert.equal(new StringGuard().contains('foo', 'start').guard('foo').isSuccess(), true);
+            });
+
+            it("should return true when params are 'foo' and 'start', and tested value is 'foobar'", () => {
+                assert.equal(new StringGuard().contains('foo', 'start').guard('foobar').isSuccess(), true);
+            });
+
+            it("should return false when params are 'bar' and 'start', and tested value is 'foobar'", () => {
+                assert.equal(new StringGuard().contains('bar', 'start').guard('foobar').isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'start', and tested value is ''", () => {
+                assert.equal(new StringGuard().contains('foo', 'start').guard('').isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'start', and tested value is null", () => {
+                assert.equal(new StringGuard().contains('foo', 'start').guard(null).isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'start', and tested value is undefined", () => {
+                assert.equal(new StringGuard().contains('foo', 'start').guard(undefined).isSuccess(), false);
+            });
+        });
+
+        describe("#contains('end')", () => {
+            it("should return true when params are 'foo' and 'end', and tested value is 'foo'", () => {
+                assert.equal(new StringGuard().contains('foo', 'end').guard('foo').isSuccess(), true);
+            });
+
+            it("should return true when params are 'bar' and 'end', and tested value is 'foobar'", () => {
+                assert.equal(new StringGuard().contains('bar', 'end').guard('foobar').isSuccess(), true);
+            });
+
+            it("should return false when params are 'foo' and 'end', and tested value is 'foobar'", () => {
+                assert.equal(new StringGuard().contains('foo', 'end').guard('foobar').isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'end', and tested value is ''", () => {
+                assert.equal(new StringGuard().contains('foo', 'end').guard('').isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'end', and tested value is null", () => {
+                assert.equal(new StringGuard().contains('foo', 'end').guard(null).isSuccess(), false);
+            });
+
+            it("should return false when params are 'foo' and 'end', and tested value is undefined", () => {
+                assert.equal(new StringGuard().contains('foo', 'end').guard(undefined).isSuccess(), false);
+            });
+        });
     });
 
     describe('#equals()', () => {

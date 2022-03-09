@@ -1,7 +1,7 @@
 import { IIsDecimalOptions } from './string-options';
 
 export type StringRule =
-    | { type: 'contains'; value: string }
+    | { type: 'contains'; value: string; pos?: StringPosition }
     | { type: 'equals'; value: string }
     | { type: 'hasLength'; value: number }
     | { type: 'hasMaxLength'; max: number }
@@ -82,6 +82,8 @@ export type Iso639Part2Alpha3Set = 'bibliographic' | 'terminologic';
 export type JsonFormat = 'array' | 'object' | 'string';
 
 export type MacAddressDefinition = 'IEEE' | 'IETF';
+
+export type StringPosition = 'start' | 'end';
 
 export type ProgrammingConvention =
     | 'PascalCase'
