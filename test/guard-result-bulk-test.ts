@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 
 import { GuardResultBulk } from '../src/core/guard-result-bulk';
-import { GuardResult } from '../src/core/guard-result';
 import { Tyr } from '../src/tyr';
 
 describe('Guard-Result-Bulk', () => {
@@ -91,9 +90,10 @@ describe('Guard-Result-Bulk', () => {
 
         it('should return [ false ]', () => {
             assert.equal(
-                (new GuardResultBulk()
-                    .add([Tyr.string().equals('foo').guard('bar', 'toto')])
-                    .stack() as GuardResult[])[0].isSuccess(),
+                new GuardResultBulk()
+                    .add([Tyr.string().equals('foo').guard('bar', 'bar')])
+                    .stack()[0]
+                    .isSuccess(),
                 false
             );
         });
@@ -104,6 +104,7 @@ describe('Guard-Result-Bulk', () => {
                 .stack();
 
             assert.equal(guardResultBulk[0].isSuccess(), false);
+            assert.equal(guardResultBulk[0].getMessage(), 'string is expected to be equal to foo but is not: bar');
         });
 
         it('should return [ false, false ]', () => {
@@ -111,11 +112,13 @@ describe('Guard-Result-Bulk', () => {
                 .add([
                     Tyr.string().equals('foo').guard('foo'),
                     Tyr.string().equals('foo').guard('bar'),
-                    Tyr.string().equals('foo').guard('bar'),
+                    Tyr.string().equals('bar').guard('foo'),
                 ])
                 .stack();
             assert.equal(guardResultBulk[0].isSuccess(), false);
+            assert.equal(guardResultBulk[0].getMessage(), 'string is expected to be equal to foo but is not: bar');
             assert.equal(guardResultBulk[1].isSuccess(), false);
+            assert.equal(guardResultBulk[1].getMessage(), 'string is expected to be equal to bar but is not: foo');
         });
     });
 });
