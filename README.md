@@ -113,12 +113,12 @@ export interface IGuardOptions {
      * A single type of rule, the last called in the chain, is retained by the guard.
      * @defaultValue false
      */
-    overriding?: boolean;
+    overrideRule?: boolean;
 }
 ```
 
 ```
-const stringGuard = Tyr.string({ overriding: true }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
+const stringGuard = Tyr.string({ overrideRule: true }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
 
 const guardResult1 = stringGuard.contains('dummy').guard('Lorem Ipsum is simply dummy text');
 
