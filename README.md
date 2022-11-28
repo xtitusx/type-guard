@@ -309,7 +309,7 @@ const guardResultBulk = new GuardResultBulk().add(Tyr.string().equals('foo').gua
 Adds multiple `GuardResult` instances in bulk:
 
 ```
-const guardResultBulk1 = new GuardResultBulk()
+const guardResultBulk = new GuardResultBulk()
                 .add([
                     Tyr.string().equals('foo').guard('foo'),
                     Tyr.string().hasMinLength(4).guard('bar'),
