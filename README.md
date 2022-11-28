@@ -75,32 +75,54 @@ In order to check and return a `GuardResult` instance, just invoke `Tyr`, call a
 -   A simple type property check:
 
 ```
-Tyr.string().guard("foo");
+const guardResult = Tyr.string().guard("Lorem ipsum", "lipsum");
+
+console.log(guardResult);
+// => GuardResult { success: true, propertyName: 'lipsum' }
 ```
 
 -   Multiple chained rule checkers:
 
 ```
-Tyr.string().isAlpha().contains('foo').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum foo");
+const guardResult = Tyr.string().isAlpha().contains('ipsum').hasMaxLength(100).isTrimmed('left').guard("Lorem ipsum");
+
+console.log(guardResult);
+// => GuardResult {
+//      success: false,
+//      propertyName: undefined,
+//      message: 'string is expected to only contain basic Latin characters but does not: Lorem ipsum'
+//    }
 ```
 
 ```
-Tyr.number().isMultiple(2).isMultiple(3).isMultiple(4).guard(12);
+const guardResult = Tyr.number().isMultiple(2).isMultiple(3).isMultiple(4).guard(12);
+
+console.log(guardResult);
+// => GuardResult { success: true, propertyName: undefined }
 ```
 
 -   A fast validation returning simply a boolean:
 
 ```
-Tyr.number().isBetween(10, 20).isEven().guard(14).isSuccess();
+const success = Tyr.number().isBetween(10, 20).isEven().guard(14).isSuccess();
+
+console.log(success);
+// => true
 ```
 
 -   A thrown exception with a `GuardResult` instance message:
 
 ```
- const guardResult = Tyr.dateString().isIso8601Date().guard('29-02-2021');
+const guardResult = Tyr.dateString().isIso8601Date().guard('29-02-2021');
 if (!guardResult.isSuccess()) {
     throw new Error(guardResult.getMessage());
 }
+
+// =>     throw new Error(guardResult.getMessage());
+//     ^
+//
+// Error: DateStringGuard expected a date string but received: string
+// ...
 ```
 
 ### Guard Options
@@ -117,14 +139,44 @@ export interface IGuardOptions {
 }
 ```
 
+-   overrideRule: false
+
+```
+const stringGuard = Tyr.string({ overrideRule: false }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
+
+const guardResult1 = stringGuard.contains('dummy').guard('Lorem Ipsum is simply dummy text');
+
+console.log(guardResult1);
+// => GuardResult { success: true, propertyName: undefined }
+
+const guardResult2 = stringGuard
+    .contains('random')
+    .guard('Contrary to popular belief, Lorem Ipsum is not simply random text');
+
+console.log(guardResult2);
+// => GuardResult {
+//      success: false,
+//      propertyName: undefined,
+//      message: 'string is expected to contain dummy but does not: Contrary to popular belief, Lorem Ipsum is not simply random text'
+//    }
+```
+
+-   overrideRule: true
+
 ```
 const stringGuard = Tyr.string({ overrideRule: true }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
 
 const guardResult1 = stringGuard.contains('dummy').guard('Lorem Ipsum is simply dummy text');
 
+console.log(guardResult1);
+// => GuardResult { success: true, propertyName: undefined }
+
 const guardResult2 = stringGuard
     .contains('random')
     .guard('Contrary to popular belief, Lorem Ipsum is not simply random text');
+
+console.log(guardResult2);
+// => GuardResult { success: true, propertyName: undefined }
 ```
 
 ## Tyr
@@ -248,10 +300,20 @@ const guardResult2 = stringGuard
 
 ### add()
 
-Adds `GuardResult` instance(s) in bulk:
+Adds one `GuardResult` instance in bulk:
 
 ```
 const guardResultBulk = new GuardResultBulk().add(Tyr.string().equals('foo').guard('foo'));
+```
+
+Adds multiple `GuardResult` instances in bulk:
+
+```
+const guardResultBulk1 = new GuardResultBulk()
+                .add([
+                    Tyr.string().equals('foo').guard('foo'),
+                    Tyr.string().hasMinLength(4).guard('bar'),
+                ])
 ```
 
 ### combine()
@@ -261,12 +323,31 @@ Returns either the first fail in bulk, or only one success:
 ```
 const guardResult = new GuardResultBulk()
     .add([
-        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
         Tyr.string().equals('foo').guard('foo'),
+        Tyr.string().hasMinLength(4).guard('bar'),
         Tyr.number().isBetween(10, 20).isEven().guard(14),
     ])
     .combine();
 
+console.log(guardResult);
+// => GuardResult {
+//      success: false,
+//      propertyName: undefined,
+//      message: 'string is expected to have min length of 4 but has length of: 3'
+//    }
+```
+
+```
+const guardResult = new GuardResultBulk()
+    .add([
+        Tyr.string().equals('foo').guard('foo'),
+        Tyr.string().hasMinLength(3).guard('bar'),
+        Tyr.number().isBetween(10, 20).isEven().guard(14),
+    ])
+    .combine();
+
+console.log(guardResult);
+// => GuardResult { success: true }
 ```
 
 ### stack()
@@ -274,13 +355,40 @@ const guardResult = new GuardResultBulk()
 Returns all fails in bulk, or only one success:
 
 ```
-const guardResult = new GuardResultBulk()
+const guardResults = new GuardResultBulk()
     .add([
-        Tyr.array().hasMinSize(2).contains("foo").guard(['foo', 'bar'],
+        Tyr.array().hasMinSize(2).contains('foo').guard(['foo', 'bar']),
+        Tyr.string().equals('foo').guard('bar'),
+        Tyr.number().isBetween(10, 20).isEven().guard(15),
+    ])
+    .stack();
+
+console.log(guardResults);
+// => [
+//     GuardResult {
+//       success: false,
+//       propertyName: undefined,
+//       message: 'string is expected to be equal to foo but is not: bar'
+//     },
+//     GuardResult {
+//       success: false,
+//       propertyName: undefined,
+//       message: 'number is expected to be even but is not: 15'
+//     }
+//   ]
+```
+
+```
+const guardResults = new GuardResultBulk()
+    .add([
+        Tyr.array().hasMinSize(2).contains('foo').guard(['foo', 'bar']),
         Tyr.string().equals('foo').guard('foo'),
         Tyr.number().isBetween(10, 20).isEven().guard(14),
     ])
     .stack();
+
+console.log(guardResults);
+// => [ GuardResult { success: true } ]
 ```
 
 ## Codex
