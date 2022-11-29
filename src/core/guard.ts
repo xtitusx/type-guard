@@ -7,7 +7,7 @@ export interface IGuardOptions {
      * A single type of rule, the last called in the chain, is retained by the guard.
      * @defaultValue false
      */
-    overriding?: boolean;
+    overrideRule?: boolean;
 }
 
 export abstract class Guard<T extends Rule> {
@@ -43,7 +43,7 @@ export abstract class Guard<T extends Rule> {
 
     /**
      * Adds a rule to the rule list.
-     * @remarks Method has two different behaviors, depending on the 'options.overriding' flag:
+     * @remarks Method has two different behaviors, depending on the 'options.overrideRule' flag:
      * ```ts
      * - false: Adds a rule to the list. Default behavior.
      * - true: Adds a rule type to the rule list, or replaces an already existing rule type. A single type of rule is therefore retained by the guard.
@@ -52,7 +52,7 @@ export abstract class Guard<T extends Rule> {
      */
     protected addRule(rule: T): void {
         this.rules =
-            this.options?.overriding === true
+            this.options?.overrideRule === true
                 ? [...this.rules.filter((r) => r.type !== rule.type), rule]
                 : [...this.rules, rule];
     }
