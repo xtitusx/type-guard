@@ -1,6 +1,6 @@
 {
   "name": "@xtitusx/type-guard",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
   "keywords": [
     "typescript",
@@ -23,6 +23,7 @@
   "typings": "./build/src/index.d.ts",
   "scripts": {
     "build": "rimraf build && tsc",
+    "prepublish": "gulp",
     "test": "mocha ./build/test/**/**/*-test.js",
     "test:nyc": "nyc mocha ./build/test/**/**/*-test.js",
     "test:ci": "nyc --reporter=lcov mocha ./build/test/**/**/*-test.js && codecov --disable=gcov && snyk test",
@@ -53,6 +54,9 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-terser": "^2.1.0",
     "mocha": "^6.1.4",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",

@@ -2756,27 +2756,49 @@ img {
 			<ul>
 				<li>  A simple type property check:</li>
 			</ul>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">);</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;lipsum&quot;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: &#039;lipsum&#039; }</span>
 </code></pre>
 			<ul>
 				<li>  Multiple chained rule checkers:</li>
 			</ul>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum foo&quot;</span><span style="color: #000000">);</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">isAlpha</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ipsum&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;left&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult {</span>
+<span style="color: #008000">//      success: false,</span>
+<span style="color: #008000">//      propertyName: undefined,</span>
+<span style="color: #008000">//      message: &#039;string is expected to only contain basic Latin characters but does not: Lorem ipsum&#039;</span>
+<span style="color: #008000">//    }</span>
 </code></pre>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">12</span><span style="color: #000000">);</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">).</span><span style="color: #795E26">isMultiple</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">12</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: undefined }</span>
 </code></pre>
 			<ul>
 				<li>  A fast validation returning simply a boolean:</li>
 			</ul>
-			<pre><code><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">success</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">).</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">success</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; true</span>
 </code></pre>
 			<ul>
 				<li>  A thrown exception with a <code>GuardResult</code> instance message:</li>
 			</ul>
-			<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;29-02-2021&#039;</span><span style="color: #000000">);</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">dateString</span><span style="color: #000000">().</span><span style="color: #795E26">isIso8601Date</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;29-02-2021&#039;</span><span style="color: #000000">);</span>
 <span style="color: #AF00DB">if</span><span style="color: #000000"> (!</span><span style="color: #001080">guardResult</span><span style="color: #000000">.</span><span style="color: #795E26">isSuccess</span><span style="color: #000000">()) {</span>
 <span style="color: #000000">    </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Error</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">.</span><span style="color: #795E26">getMessage</span><span style="color: #000000">());</span>
 <span style="color: #000000">}</span>
+
+<span style="color: #008000">// =&gt;     throw new Error(guardResult.getMessage());</span>
+<span style="color: #008000">//     ^</span>
+<span style="color: #008000">//</span>
+<span style="color: #008000">// Error: DateStringGuard expected a date string but received: string</span>
+<span style="color: #008000">// ...</span>
 </code></pre>
 			<a href="#guard-options" id="guard-options" style="color: inherit; text-decoration: none;">
 				<h3>Guard Options</h3>
@@ -2787,16 +2809,46 @@ img {
 <span style="color: #008000">     * A single type of rule, the last called in the chain, is retained by the guard.</span>
 <span style="color: #008000">     * </span><span style="color: #0000FF">@defaultValue</span><span style="color: #008000"> false</span>
 <span style="color: #008000">     */</span>
-<span style="color: #000000">    </span><span style="color: #001080">overriding</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">overrideRule</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
 <span style="color: #000000">}</span>
 </code></pre>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overriding:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
+			<ul>
+				<li>  overrideRule: false</li>
+			</ul>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overrideRule:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult1</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span><span style="color: #000000">.</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dummy&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Lorem Ipsum is simply dummy text&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult1</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: undefined }</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult2</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;random&#039;</span><span style="color: #000000">)</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Contrary to popular belief, Lorem Ipsum is not simply random text&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult2</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult {</span>
+<span style="color: #008000">//      success: false,</span>
+<span style="color: #008000">//      propertyName: undefined,</span>
+<span style="color: #008000">//      message: &#039;string is expected to contain dummy but does not: Contrary to popular belief, Lorem Ipsum is not simply random text&#039;</span>
+<span style="color: #008000">//    }</span>
+</code></pre>
+			<ul>
+				<li>  overrideRule: true</li>
+			</ul>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overrideRule:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult1</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span><span style="color: #000000">.</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dummy&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Lorem Ipsum is simply dummy text&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult1</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: undefined }</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult2</span><span style="color: #000000"> = </span><span style="color: #001080">stringGuard</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;random&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Contrary to popular belief, Lorem Ipsum is not simply random text&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult2</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: undefined }</span>
 </code></pre>
 			<a href="#tyr" id="tyr" style="color: inherit; text-decoration: none;">
 				<h2>Tyr</h2>
@@ -3204,8 +3256,15 @@ img {
 			<a href="#add" id="add" style="color: inherit; text-decoration: none;">
 				<h3>add()</h3>
 			</a>
-			<p>Adds <code>GuardResult</code> instance(s) in bulk:</p>
+			<p>Adds one <code>GuardResult</code> instance in bulk:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResultBulk</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">().</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">));</span>
+</code></pre>
+			<p>Adds multiple <code>GuardResult</code> instances in bulk:</p>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResultBulk</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+<span style="color: #000000">                .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
+<span style="color: #000000">                    </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">                    </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">                ])</span>
 </code></pre>
 			<a href="#combine" id="combine" style="color: inherit; text-decoration: none;">
 				<h3>combine()</h3>
@@ -3213,24 +3272,66 @@ img {
 			<p>Returns either the first fail in bulk, or only one success:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">),</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
 
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult {</span>
+<span style="color: #008000">//      success: false,</span>
+<span style="color: #008000">//      propertyName: undefined,</span>
+<span style="color: #008000">//      message: &#039;string is expected to have min length of 4 but has length of: 3&#039;</span>
+<span style="color: #008000">//    }</span>
+</code></pre>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
+<span style="color: #000000">    ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">combine</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; GuardResult { success: true }</span>
 </code></pre>
 			<a href="#stack" id="stack" style="color: inherit; text-decoration: none;">
 				<h3>stack()</h3>
 			</a>
 			<p>Returns all fails in bulk, or only one success:</p>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResults</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
-<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">]),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">15</span><span style="color: #000000">),</span>
+<span style="color: #000000">    ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResults</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [</span>
+<span style="color: #008000">//     GuardResult {</span>
+<span style="color: #008000">//       success: false,</span>
+<span style="color: #008000">//       propertyName: undefined,</span>
+<span style="color: #008000">//       message: &#039;string is expected to be equal to foo but is not: bar&#039;</span>
+<span style="color: #008000">//     },</span>
+<span style="color: #008000">//     GuardResult {</span>
+<span style="color: #008000">//       success: false,</span>
+<span style="color: #008000">//       propertyName: undefined,</span>
+<span style="color: #008000">//       message: &#039;number is expected to be even but is not: 15&#039;</span>
+<span style="color: #008000">//     }</span>
+<span style="color: #008000">//   ]</span>
+</code></pre>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResults</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GuardResultBulk</span><span style="color: #000000">()</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">add</span><span style="color: #000000">([</span>
+<span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">array</span><span style="color: #000000">().</span><span style="color: #795E26">hasMinSize</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">]),</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">equals</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">),</span>
 <span style="color: #000000">        </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">number</span><span style="color: #000000">().</span><span style="color: #795E26">isBetween</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #098658">20</span><span style="color: #000000">).</span><span style="color: #795E26">isEven</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #098658">14</span><span style="color: #000000">),</span>
 <span style="color: #000000">    ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">stack</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResults</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [ GuardResult { success: true } ]</span>
 </code></pre>
 			<a href="#codex" id="codex" style="color: inherit; text-decoration: none;">
 				<h2>Codex</h2>
