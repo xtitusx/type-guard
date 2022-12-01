@@ -8,8 +8,8 @@ function cleanSourceMaps() {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function minifyJS() {
+function minifyJs() {
     return src('./build/src/**/*.js').pipe(terser()).pipe(dest('./build/src'));
 }
 
-exports.default = series(cleanSourceMaps, minifyJS);
+exports.default = series(cleanSourceMaps, minifyJs);
