@@ -16,6 +16,7 @@ import {
     ProgrammingConvention,
     StringPosition,
     TrimmedSide,
+    UuidVersion,
 } from './string/string-types';
 
 import { StringContains } from './string/string-contains';
@@ -55,7 +56,7 @@ import { StringIsOctal } from './string/string-is-octal';
 import { StringIsProgrammingCase } from './string/string-is-programming-case';
 import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsUppercase } from './string/string-is-uppercase';
-import { StringIsUuidv4 } from './string/string-is-uuid-v4';
+import { StringIsUuid } from './string/string-is-uuid';
 import { StringMatches } from './string/string-matches';
 import { StringNotContains } from './string/string-not-contains';
 import { StringNotEquals } from './string/string-not-equals';
@@ -705,17 +706,20 @@ export class StringGuard extends Guard<StringRule> {
     }
 
     /**
-     * Checks if string is an Universally unique identifier v4.
+     * Checks if string is an Universally unique identifier.
      * @remarks Chainable method.
      * ```ts
      * Rule:
      * - Lowercase.
      * ```
-     * @see {@link https://tools.ietf.org/html/rfc4122#section-3} for syntax.
-     * @example 9ad086df-061d-490c-8224-7e8ac292eeaf
+     * @param version - {@link UUIDV1_PATTERN | 'v1'} | {@link UUIDV4_PATTERN | 'v4'} | {@link UUIDV5_PATTERN | 'v5'}.
+     * @see {@link https://www.rfc-editor.org/rfc/rfc4122} for specification.
+     * @example UUID v1: dea10800-89b3-11ed-919c-cd2bbe2f3c35
+     * @example UUID v4: 9ad086df-061d-490c-8224-7e8ac292eeaf
+     * @example UUID v5: 1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50
      */
-    public isUuidv4(): this {
-        this.addRule({ type: 'isUuidv4' });
+    public isUuid(version?: UuidVersion): this {
+        this.addRule({ type: 'isUuid', version: version });
         return this;
     }
 
@@ -834,8 +838,8 @@ export class StringGuard extends Guard<StringRule> {
                 return new StringIsTrimmed(rule, value).exec();
             case 'isUpperCase':
                 return new StringIsUppercase(rule, value).exec();
-            case 'isUuidv4':
-                return new StringIsUuidv4(rule, value).exec();
+            case 'isUuid':
+                return new StringIsUuid(rule, value).exec();
             case 'matches':
                 return new StringMatches(rule, value).exec();
             case 'notContains':

@@ -38,7 +38,7 @@ export type StringRule =
     | { type: 'isProgrammingCase'; convention: ProgrammingConvention }
     | { type: 'isTrimmed'; side: TrimmedSide }
     | { type: 'isUpperCase' }
-    | { type: 'isUuidv4' }
+    | { type: 'isUuid'; version?: UuidVersion }
     | { type: 'matches'; value: RegExp }
     | { type: 'notContains'; value: string }
     | { type: 'notEquals'; value: string };
@@ -94,3 +94,5 @@ export type ProgrammingConvention =
     | 'dot.case';
 
 export type TrimmedSide = 'both' | 'left' | 'right';
+
+export type UuidVersion = 'v1' | 'v4' | 'v5';

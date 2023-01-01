@@ -7,11 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0] - 2023-01-01
+
+### Changed
+
+-   Rewrite Tyr.string().isUuid() method, in order to check multiple UUID versions (BREAKING CHANGE).
+
+### Fixed
+
+-   Fix Tyr.string().isMacAddress() error messages.
+
 ## [5.0.0] - 2022-11-29
 
 ### Changed
 
--   Rename IGuardOptions overriding parameter to overrideRule.
+-   Rename IGuardOptions overriding parameter to overrideRule (BREAKING CHANGE).
 
 ## [4.2.0] - 2022-03-09
 
