@@ -285,7 +285,7 @@ console.log(guardResult2);
 | isEmailAddress(def?: EmailAddressDefinition)                                | Checks if string is an email address.                                           |
 | isObjectId()                                                                | Checks if string is a representation of a MongoDB ObjectId.                     |
 | isHexColor(digits?: HexColorDigits)                                         | Checks if string is a hexadecimal color.                                        |
-| isUuidv4()                                                                  | Checks if string is an Universally unique identifier v4.                        |
+| isUuid(version?: UuidVersion)                                                                  | Checks if string is an Universally unique identifier.                        |
 | isMacAddress(def?: MacAddressDefinition)                                    | Checks if string is a MAC address.                                              |
 | isIpAddress(version?: IpVersion)                                            | Checks if string is an IP address.                                              |
 | isLatitude(format?: GeoCoordinatesFormat)                                   | Checks if string is a latitude geographic coordinate.                           |

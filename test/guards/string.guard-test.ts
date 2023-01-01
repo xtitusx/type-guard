@@ -4537,16 +4537,24 @@ describe('String-Guard', () => {
             assert.equal(new StringGuard().isMacAddress().guard('00-0A-95-9G-68-16').isSuccess(), false);
         });
 
-        it("should return false when tested value is ''00:0a:95:9d:68:1'", () => {
+        it("should return false when tested value is '00:0a:95:9d:68:1'", () => {
             assert.equal(new StringGuard().isMacAddress().guard('00:0a:95:9d:68:1').isSuccess(), false);
         });
 
-        it("should return false when testedvalue is '000a959d6816'", () => {
+        it("should return false when tested value is '000a959d6816'", () => {
             assert.equal(new StringGuard().isMacAddress().guard('000a959d6816').isSuccess(), false);
         });
 
         it("should return false when tested value is '00:0a:95:9d:68-16'", () => {
             assert.equal(new StringGuard().isMacAddress().guard('00:0a:95:9d:68-16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is ' 00-0A-95-9D-68-16'", () => {
+            assert.equal(new StringGuard().isMacAddress().guard(' 00-0A-95-9D-68-16').isSuccess(), false);
+        });
+
+        it("should return false when tested value is '00-0A-95-9D-68-16 '", () => {
+            assert.equal(new StringGuard().isMacAddress().guard('00-0A-95-9D-68-16 ').isSuccess(), false);
         });
 
         it("should return false when tested value is ''", () => {
@@ -5471,29 +5479,146 @@ describe('String-Guard', () => {
         });
     });
 
-    describe('#isUuidv4()', () => {
+    describe('#isUuid()', () => {
+        it("should return true when tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c35'", () => {
+            assert.equal(new StringGuard().isUuid().guard('dea10800-89b3-11ed-919c-cd2bbe2f3c35').isSuccess(), true);
+        });
+
         it("should return true when tested value is '9b8d710e-8a83-4a6f-ac58-500ab7e4d302'", () => {
-            assert.equal(new StringGuard().isUuidv4().guard('9b8d710e-8a83-4a6f-ac58-500ab7e4d302').isSuccess(), true);
+            assert.equal(new StringGuard().isUuid().guard('9b8d710e-8a83-4a6f-ac58-500ab7e4d302').isSuccess(), true);
         });
 
-        it("should return false when tested value is '9B8D710E-8A83-4A6F-aC58-500AB7E4D302'", () => {
-            assert.equal(new StringGuard().isUuidv4().guard('9B8D710E-8A83-4A6F-aC58-500AB7E4D302').isSuccess(), false);
+        it("should return true when tested value is '1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50'", () => {
+            assert.equal(new StringGuard().isUuid().guard('1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50').isSuccess(), true);
         });
 
-        it("should return false when tested value is '123e4567-e89b-12d3-a456-426614174000'", () => {
-            assert.equal(new StringGuard().isUuidv4().guard('123e4567-e89b-12d3-a456-426614174000').isSuccess(), false);
+        it("should return false when tested value is 'dea10800-89b3-21ed-919c-cd2bbe2f3c35'", () => {
+            assert.equal(new StringGuard().isUuid().guard('dea10800-89b3-21ed-919c-cd2bbe2f3c35').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'dea10800-89b3-31ed-919c-cd2bbe2f3c35'", () => {
+            assert.equal(new StringGuard().isUuid().guard('dea10800-89b3-31ed-919c-cd2bbe2f3c35').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'dea10800-89b3-61ed-919c-cd2bbe2f3c35'", () => {
+            assert.equal(new StringGuard().isUuid().guard('dea10800-89b3-61ed-919c-cd2bbe2f3c35').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c3'", () => {
+            assert.equal(
+                new StringGuard().isUuid('v1').guard('dea10800-89b3-11ed-919c-cd2bbe2f3c3').isSuccess(),
+                false
+            );
+        });
+
+        it("should return false when tested value is ' dea10800-89b3-11ed-919c-cd2bbe2f3c35'", () => {
+            assert.equal(new StringGuard().isUuid().guard(' dea10800-89b3-11ed-919c-cd2bbe2f3c35').isSuccess(), false);
+        });
+
+        it("should return false when tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c35 '", () => {
+            assert.equal(new StringGuard().isUuid().guard(' dea10800-89b3-11ed-919c-cd2bbe2f3c35 ').isSuccess(), false);
         });
 
         it("should return false when tested value is ''", () => {
-            assert.equal(new StringGuard().isUuidv4().guard('').isSuccess(), false);
+            assert.equal(new StringGuard().isUuid().guard('').isSuccess(), false);
         });
 
         it('should return false when tested value is null', () => {
-            assert.equal(new StringGuard().isUuidv4().guard(null).isSuccess(), false);
+            assert.equal(new StringGuard().isUuid().guard(null).isSuccess(), false);
         });
 
         it('should return false when tested value is undefined', () => {
-            assert.equal(new StringGuard().isUuidv4().guard(undefined).isSuccess(), false);
+            assert.equal(new StringGuard().isUuid().guard(undefined).isSuccess(), false);
+        });
+
+        describe("#isUuid('v1')", () => {
+            it("should return true when param is 'v1' and tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c35'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v1').guard('dea10800-89b3-11ed-919c-cd2bbe2f3c35').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when param is 'v1' and tested value is 'DEA10800-89B3-11ED-919C-CD2BBE2F3C35'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v1').guard('DEA10800-89B3-11ED-919C-CD2BBE2F3C35').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v1' and tested value is '9ad086df-061d-490c-8224-7e8ac292eeaf'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v1').guard('9ad086df-061d-490c-8224-7e8ac292eeaf').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v1' and tested value is '1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v1').guard('1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50').isSuccess(),
+                    false
+                );
+            });
+        });
+
+        describe("#isUuid('v4')", () => {
+            it("should return true when param is 'v4' and tested value is '9b8d710e-8a83-4a6f-ac58-500ab7e4d302'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v4').guard('9b8d710e-8a83-4a6f-ac58-500ab7e4d302').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when param is 'v4' and tested value is '9B8D710E-8A83-4A6F-aC58-500AB7E4D302'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v4').guard('9B8D710E-8A83-4A6F-aC58-500AB7E4D302').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v4' and tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c35'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v4').guard('dea10800-89b3-11ed-919c-cd2bbe2f3c35').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v4' and tested value is '1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v4').guard('1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50').isSuccess(),
+                    false
+                );
+            });
+        });
+
+        describe("#isUuid('v5')", () => {
+            it("should return true when param is 'v5' and tested value is '1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v5').guard('1c3c43e1-e9bb-52d3-be4f-d718c7ab1d50').isSuccess(),
+                    true
+                );
+            });
+
+            it("should return false when param is 'v5' and tested value is '1C3C43E1-E9BB-52D3-BE4F-D718C7AB1D50'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v5').guard('1C3C43E1-E9BB-52D3-BE4F-D718C7AB1D50').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v5' and tested value is 'dea10800-89b3-11ed-919c-cd2bbe2f3c35'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v5').guard('dea10800-89b3-11ed-919c-cd2bbe2f3c35').isSuccess(),
+                    false
+                );
+            });
+
+            it("should return false when param is 'v5' and tested value is '9ad086df-061d-490c-8224-7e8ac292eeaf'", () => {
+                assert.equal(
+                    new StringGuard().isUuid('v5').guard('9ad086df-061d-490c-8224-7e8ac292eeaf').isSuccess(),
+                    false
+                );
+            });
         });
     });
 

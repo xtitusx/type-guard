@@ -28,21 +28,21 @@ export class StringIsMacAddress extends StringRuleChecker<{ type: 'isMacAddress'
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to be a MAC address but is not: ${this.value}`)
+                          .withMessage(`string is expected to be an IEEE MAC address but is not: ${this.value}`)
                           .build();
             case 'IETF':
                 return this.isIetfMacAddress()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to be an IEEE MAC address but is not: ${this.value}`)
+                          .withMessage(`string is expected to be an IETF MAC address but is not: ${this.value}`)
                           .build();
             default:
                 return this.isMacAddress()
                     ? new GuardResult.Builder().withSuccess(true).build()
                     : new GuardResult.Builder()
                           .withSuccess(false)
-                          .withMessage(`string is expected to be an IETF MAC address but is not: ${this.value}`)
+                          .withMessage(`string is expected to be a MAC address but is not: ${this.value}`)
                           .build();
         }
     }
