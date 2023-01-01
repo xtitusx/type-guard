@@ -56,7 +56,7 @@ import { StringIsOctal } from './string/string-is-octal';
 import { StringIsProgrammingCase } from './string/string-is-programming-case';
 import { StringIsTrimmed } from './string/string-is-trimmed';
 import { StringIsUppercase } from './string/string-is-uppercase';
-import { StringIsUuidv4 } from './string/string-is-uuid';
+import { StringIsUuid } from './string/string-is-uuid';
 import { StringMatches } from './string/string-matches';
 import { StringNotContains } from './string/string-not-contains';
 import { StringNotEquals } from './string/string-not-equals';
@@ -712,7 +712,7 @@ export class StringGuard extends Guard<StringRule> {
      * Rule:
      * - Lowercase.
      * ```
-     * @param version - {@link UUIDV1_PATTERN | 'v1'} | {@link UUIDV4_PATTERN | 'v4'| {@link UUIDV5_PATTERN | 'v5'}.
+     * @param version - {@link UUIDV1_PATTERN | 'v1'} | {@link UUIDV4_PATTERN | 'v4'} | {@link UUIDV5_PATTERN | 'v5'}.
      * @see {@link https://www.rfc-editor.org/rfc/rfc4122} for specification.
      * @example UUID v1: dea10800-89b3-11ed-919c-cd2bbe2f3c35
      * @example UUID v4: 9ad086df-061d-490c-8224-7e8ac292eeaf
@@ -839,7 +839,7 @@ export class StringGuard extends Guard<StringRule> {
             case 'isUpperCase':
                 return new StringIsUppercase(rule, value).exec();
             case 'isUuid':
-                return new StringIsUuidv4(rule, value).exec();
+                return new StringIsUuid(rule, value).exec();
             case 'matches':
                 return new StringMatches(rule, value).exec();
             case 'notContains':

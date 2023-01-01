@@ -24,7 +24,7 @@ export const UUIDV4_PATTERN = '^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a
  */
 export const UUIDV5_PATTERN = '^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$';
 
-export class StringIsUuidv4 extends StringRuleChecker<{ type: 'isUuid'; version?: UuidVersion }> {
+export class StringIsUuid extends StringRuleChecker<{ type: 'isUuid'; version?: UuidVersion }> {
     constructor(rule: { type: 'isUuid'; version?: UuidVersion }, value: string) {
         super(rule, value);
     }
