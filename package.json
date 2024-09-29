@@ -1,6 +1,6 @@
 {
   "name": "@xtitusx/type-guard",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "Performs a runtime check that guarantees the type and value of properties in some scopes",
   "keywords": [
     "typescript",

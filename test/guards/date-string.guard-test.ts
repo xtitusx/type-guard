@@ -25,26 +25,23 @@ describe('DateString-Guard', () => {
             assert.equal(guardResult.isSuccess(), false);
             assert.equal(guardResult.getMessage(), 'DateStringGuard expected a date string but received: string');
         });
-    });
 
-    describe('#customizeMessage()', () => {
         it('should return false when tested value is 0', () => {
             const value = 0;
 
             assert.equal(
-                new DateStringGuard().customizeMessage('La valeur doit être une date').guard(value).isSuccess(),
+                new DateStringGuard().guard(value, { customMessage: 'La valeur doit être une date' }).isSuccess(),
                 false
             );
 
             assert.equal(
-                new DateStringGuard().customizeMessage('La valeur doit être une date').guard(value).getMessage(),
+                new DateStringGuard().guard(value, { customMessage: 'La valeur doit être une date' }).getMessage(),
                 'La valeur doit être une date'
             );
 
             assert.equal(
                 new DateStringGuard()
-                    .customizeMessage('La valeur doit être une date')
-                    .guard(value, 'valeur')
+                    .guard(value, { propertyName: 'valeur', customMessage: 'La valeur doit être une date' })
                     .getMessage(),
                 'Property valeur has failed the guard validation: La valeur doit être une date'
             );
@@ -56,8 +53,7 @@ describe('DateString-Guard', () => {
             assert.equal(
                 new DateStringGuard()
                     .isIso8601Date()
-                    .customizeMessage('La valeur doit être une date ISO 8601')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une date ISO 8601' })
                     .isSuccess(),
                 true
             );
@@ -65,8 +61,7 @@ describe('DateString-Guard', () => {
             assert.equal(
                 new DateStringGuard()
                     .isIso8601Date()
-                    .customizeMessage('La valeur doit être une date ISO 8601')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une date ISO 8601' })
                     .getMessage(),
                 undefined
             );
@@ -78,8 +73,7 @@ describe('DateString-Guard', () => {
             assert.equal(
                 new DateStringGuard()
                     .isIso8601Date()
-                    .customizeMessage('La valeur doit être une date ISO 8601')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une date ISO 8601' })
                     .isSuccess(),
                 false
             );
@@ -87,8 +81,7 @@ describe('DateString-Guard', () => {
             assert.equal(
                 new DateStringGuard()
                     .isIso8601Date()
-                    .customizeMessage('La valeur doit être une date ISO 8601')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une date ISO 8601' })
                     .getMessage(),
                 'La valeur doit être une date ISO 8601'
             );
@@ -96,8 +89,7 @@ describe('DateString-Guard', () => {
             assert.equal(
                 new DateStringGuard()
                     .isIso8601Date()
-                    .customizeMessage('La valeur doit être une date ISO 8601')
-                    .guard(value, 'valeur')
+                    .guard(value, { propertyName: 'valeur', customMessage: 'La valeur doit être une date ISO 8601' })
                     .getMessage(),
                 'Property valeur has failed the guard validation: La valeur doit être une date ISO 8601'
             );

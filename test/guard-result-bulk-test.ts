@@ -91,7 +91,7 @@ describe('Guard-Result-Bulk', () => {
         it('should return [ false ]', () => {
             assert.equal(
                 new GuardResultBulk()
-                    .add([Tyr.string().equals('foo').guard('bar', 'bar')])
+                    .add([Tyr.string().equals('foo').guard('bar', { propertyName: 'bar' })])
                     .stack()[0]
                     .isSuccess(),
                 false

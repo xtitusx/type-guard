@@ -63,32 +63,30 @@ describe('Class-Guard', () => {
                 'ClassGuard expected an Object class instance but received: boolean'
             );
         });
-    });
 
-    describe('#customizeMessage()', () => {
         it('should return false when tested value is 0', () => {
             const value = 0;
 
             assert.equal(
                 new ClassGuard()
-                    .customizeMessage('La valeur doit être une instance de classe Object')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Object' })
                     .isSuccess(),
                 false
             );
 
             assert.equal(
                 new ClassGuard()
-                    .customizeMessage('La valeur doit être une instance de classe Object')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Object' })
                     .getMessage(),
                 'La valeur doit être une instance de classe Object'
             );
 
             assert.equal(
                 new ClassGuard()
-                    .customizeMessage('La valeur doit être une instance de classe Object')
-                    .guard(value, 'valeur')
+                    .guard(value, {
+                        propertyName: 'valeur',
+                        customMessage: 'La valeur doit être une instance de classe Object',
+                    })
                     .getMessage(),
                 'Property valeur has failed the guard validation: La valeur doit être une instance de classe Object'
             );
@@ -100,8 +98,7 @@ describe('Class-Guard', () => {
             assert.equal(
                 new ClassGuard()
                     .isInstanceOf(Array)
-                    .customizeMessage('La valeur doit être une instance de classe Array')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Array' })
                     .isSuccess(),
                 true
             );
@@ -109,8 +106,7 @@ describe('Class-Guard', () => {
             assert.equal(
                 new ClassGuard()
                     .isInstanceOf(Array)
-                    .customizeMessage('La valeur doit être une instance de classe Array')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Array' })
                     .getMessage(),
                 undefined
             );
@@ -122,8 +118,7 @@ describe('Class-Guard', () => {
             assert.equal(
                 new ClassGuard()
                     .isInstanceOf(Array)
-                    .customizeMessage('La valeur doit être une instance de classe Array')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Array' })
                     .isSuccess(),
                 false
             );
@@ -131,8 +126,7 @@ describe('Class-Guard', () => {
             assert.equal(
                 new ClassGuard()
                     .isInstanceOf(Array)
-                    .customizeMessage('La valeur doit être une instance de classe Array')
-                    .guard(value)
+                    .guard(value, { customMessage: 'La valeur doit être une instance de classe Array' })
                     .getMessage(),
                 'La valeur doit être une instance de classe Array'
             );
@@ -140,8 +134,10 @@ describe('Class-Guard', () => {
             assert.equal(
                 new ClassGuard()
                     .isInstanceOf(Array)
-                    .customizeMessage('La valeur doit être une instance de classe Array')
-                    .guard('foo', 'valeur')
+                    .guard('foo', {
+                        propertyName: 'valeur',
+                        customMessage: 'La valeur doit être une instance de classe Array',
+                    })
                     .getMessage(),
                 'Property valeur has failed the guard validation: La valeur doit être une instance de classe Array'
             );

@@ -3,24 +3,23 @@ import { assert } from 'chai';
 import { ArrayGuard } from '../../src/guards/array.guard';
 
 describe('Array-Guard', () => {
-    describe('#customizeMessage()', () => {
+    describe('#guard()', () => {
         it('should return false when tested value is 0', () => {
             const value = 0;
 
             assert.equal(
-                new ArrayGuard().customizeMessage('La valeur doit être de type array').guard(value).isSuccess(),
+                new ArrayGuard().guard(value, { customMessage: 'La valeur doit être de type array' }).isSuccess(),
                 false
             );
 
             assert.equal(
-                new ArrayGuard().customizeMessage('La valeur doit être de type array').guard(value).getMessage(),
+                new ArrayGuard().guard(value, { customMessage: 'La valeur doit être de type array' }).getMessage(),
                 'La valeur doit être de type array'
             );
 
             assert.equal(
                 new ArrayGuard()
-                    .customizeMessage('La valeur doit être de type array')
-                    .guard(value, 'valeur')
+                    .guard(value, { propertyName: 'valeur', customMessage: 'La valeur doit être de type array' })
                     .getMessage(),
                 'Property valeur has failed the guard validation: La valeur doit être de type array'
             );
@@ -33,8 +32,7 @@ describe('Array-Guard', () => {
             assert.equal(
                 new ArrayGuard()
                     .contains(param)
-                    .customizeMessage(`La valeur doit contenir ${param}`)
-                    .guard(value)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
                     .isSuccess(),
                 true
             );
@@ -42,8 +40,7 @@ describe('Array-Guard', () => {
             assert.equal(
                 new ArrayGuard()
                     .contains(param)
-                    .customizeMessage(`La valeur doit contenir ${param}`)
-                    .guard(value)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
                     .getMessage(),
                 undefined
             );
@@ -56,8 +53,7 @@ describe('Array-Guard', () => {
             assert.equal(
                 new ArrayGuard()
                     .contains(param)
-                    .customizeMessage(`La valeur doit contenir ${param}`)
-                    .guard(value)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
                     .isSuccess(),
                 false
             );
@@ -65,8 +61,7 @@ describe('Array-Guard', () => {
             assert.equal(
                 new ArrayGuard()
                     .contains(param)
-                    .customizeMessage(`La valeur doit contenir ${param}`)
-                    .guard(value)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
                     .getMessage(),
                 `La valeur doit contenir ${param}`
             );
@@ -74,8 +69,7 @@ describe('Array-Guard', () => {
             assert.equal(
                 new ArrayGuard()
                     .contains(param)
-                    .customizeMessage(`La valeur doit contenir ${param}`)
-                    .guard(value, 'valeur')
+                    .guard(value, { propertyName: 'valeur', customMessage: `La valeur doit contenir ${param}` })
                     .getMessage(),
                 `Property valeur has failed the guard validation: La valeur doit contenir ${param}`
             );
