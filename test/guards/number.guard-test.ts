@@ -27,6 +27,85 @@ describe('Number-Guard', () => {
         });
     });
 
+    describe('#customizeMessage()', () => {
+        it("should return false when tested value is 'foo'", () => {
+            const value = 'foo';
+
+            assert.equal(
+                new NumberGuard().customizeMessage('La valeur doit être de type number').guard(value).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new NumberGuard().customizeMessage('La valeur doit être de type number').guard(value).getMessage(),
+                'La valeur doit être de type number'
+            );
+
+            assert.equal(
+                new NumberGuard()
+                    .customizeMessage('La valeur doit être de type number')
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être de type number'
+            );
+        });
+
+        it('should return true when param is 1 and tested value is 1', () => {
+            const param = 1;
+            const value = 1;
+
+            assert.equal(
+                new NumberGuard()
+                    .equals(param)
+                    .customizeMessage(`La valeur doit être égale à ${param}`)
+                    .guard(value)
+                    .isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new NumberGuard()
+                    .equals(param)
+                    .customizeMessage(`La valeur doit être égale à ${value}`)
+                    .guard(1)
+                    .getMessage(),
+                undefined
+            );
+        });
+
+        it('should return false when param is 0 and tested value is 1', () => {
+            const param = 0;
+            const value = 1;
+
+            assert.equal(
+                new NumberGuard()
+                    .equals(param)
+                    .customizeMessage(`La valeur doit être égale à ${value}`)
+                    .guard(value)
+                    .isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new NumberGuard()
+                    .equals(param)
+                    .customizeMessage(`La valeur doit être égale à ${value}`)
+                    .guard(value)
+                    .getMessage(),
+                `La valeur doit être égale à ${value}`
+            );
+
+            assert.equal(
+                new NumberGuard()
+                    .equals(value)
+                    .customizeMessage(`La valeur doit être égale à ${value}`)
+                    .guard('foo', 'valeur')
+                    .getMessage(),
+                `Property valeur has failed the guard validation: La valeur doit être égale à ${value}`
+            );
+        });
+    });
+
     describe('#equals()', () => {
         it('should return true when param is 1 and tested value is 1', () => {
             assert.equal(new NumberGuard().equals(1).guard(1).isSuccess(), true);

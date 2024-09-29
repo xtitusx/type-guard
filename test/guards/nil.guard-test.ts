@@ -3,6 +3,45 @@ import { assert } from 'chai';
 import { NilGuard } from '../../src/guards/nil.guard';
 
 describe('Nil-Guard', () => {
+    describe('#customizeMessage()', () => {
+        it('should return true when param tested value is null', () => {
+            const value = null;
+
+            assert.equal(
+                new NilGuard().isNull().customizeMessage('La valeur doit être nulle').guard(value).isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new NilGuard().isNull().customizeMessage('La valeur doit être nulle').guard(value).getMessage(),
+                undefined
+            );
+        });
+
+        it("should return false when tested value is 'foo'", () => {
+            const value = 'foo';
+
+            assert.equal(
+                new NilGuard().isNull().customizeMessage('La valeur doit être nulle').guard(value).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new NilGuard().isNull().customizeMessage('La valeur doit être nulle').guard(value).getMessage(),
+                'La valeur doit être nulle'
+            );
+
+            assert.equal(
+                new NilGuard()
+                    .isNull()
+                    .customizeMessage('La valeur doit être nulle')
+                    .guard('foo', 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être nulle'
+            );
+        });
+    });
+
     describe('#isNil()', () => {
         it('should return true when tested value is undefined', () => {
             assert.equal(new NilGuard().isNil().guard(undefined).isSuccess(), true);

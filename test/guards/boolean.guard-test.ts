@@ -3,6 +3,67 @@ import { assert } from 'chai';
 import { BooleanGuard } from '../../src/guards/boolean.guard';
 
 describe('Boolean-Guard', () => {
+    describe('#customizeMessage()', () => {
+        it('should return false when tested value is 0', () => {
+            const value = 0;
+
+            assert.equal(
+                new BooleanGuard().customizeMessage('La valeur doit être de type boolean').guard(value).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new BooleanGuard().customizeMessage('La valeur doit être de type boolean').guard(value).getMessage(),
+                'La valeur doit être de type boolean'
+            );
+
+            assert.equal(
+                new BooleanGuard()
+                    .customizeMessage('La valeur doit être de type boolean')
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être de type boolean'
+            );
+        });
+
+        it('should return true when tested value is true', () => {
+            const value = true;
+
+            assert.equal(
+                new BooleanGuard().isTrue().customizeMessage('La valeur doit être vraie').guard(value).isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new BooleanGuard().isTrue().customizeMessage('La valeur doit être vraie').guard(value).getMessage(),
+                undefined
+            );
+        });
+
+        it('should return false when tested value is false', () => {
+            const value = false;
+
+            assert.equal(
+                new BooleanGuard().isTrue().customizeMessage('La valeur doit être vraie').guard(value).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new BooleanGuard().isTrue().customizeMessage('La valeur doit être vraie').guard(value).getMessage(),
+                'La valeur doit être vraie'
+            );
+
+            assert.equal(
+                new BooleanGuard()
+                    .isTrue()
+                    .customizeMessage('La valeur doit être vraie')
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être vraie'
+            );
+        });
+    });
+
     describe('#isFalse()', () => {
         it('should return true when tested value is false', () => {
             assert.equal(new BooleanGuard().isFalse().guard(false).isSuccess(), true);

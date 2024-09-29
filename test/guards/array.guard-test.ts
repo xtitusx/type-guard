@@ -3,6 +3,85 @@ import { assert } from 'chai';
 import { ArrayGuard } from '../../src/guards/array.guard';
 
 describe('Array-Guard', () => {
+    describe('#customizeMessage()', () => {
+        it('should return false when tested value is 0', () => {
+            const value = 0;
+
+            assert.equal(
+                new ArrayGuard().customizeMessage('La valeur doit être de type array').guard(value).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new ArrayGuard().customizeMessage('La valeur doit être de type array').guard(value).getMessage(),
+                'La valeur doit être de type array'
+            );
+
+            assert.equal(
+                new ArrayGuard()
+                    .customizeMessage('La valeur doit être de type array')
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être de type array'
+            );
+        });
+
+        it("should return true when param is 'foo' and tested value is ['foo']", () => {
+            const param = 'foo';
+            const value = ['foo'];
+
+            assert.equal(
+                new ArrayGuard()
+                    .contains(param)
+                    .customizeMessage(`La valeur doit contenir ${param}`)
+                    .guard(value)
+                    .isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new ArrayGuard()
+                    .contains(param)
+                    .customizeMessage(`La valeur doit contenir ${param}`)
+                    .guard(value)
+                    .getMessage(),
+                undefined
+            );
+        });
+
+        it("should return false when param is 'bar' and tested value is ['foo']", () => {
+            const param = 'bar';
+            const value = ['foo'];
+
+            assert.equal(
+                new ArrayGuard()
+                    .contains(param)
+                    .customizeMessage(`La valeur doit contenir ${param}`)
+                    .guard(value)
+                    .isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new ArrayGuard()
+                    .contains(param)
+                    .customizeMessage(`La valeur doit contenir ${param}`)
+                    .guard(value)
+                    .getMessage(),
+                `La valeur doit contenir ${param}`
+            );
+
+            assert.equal(
+                new ArrayGuard()
+                    .contains(param)
+                    .customizeMessage(`La valeur doit contenir ${param}`)
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                `Property valeur has failed the guard validation: La valeur doit contenir ${param}`
+            );
+        });
+    });
+
     describe('#contains()', () => {
         it("should return true when param is 'foo' and tested value is ['foo']", () => {
             assert.equal(new ArrayGuard().contains('foo').guard(['foo']).isSuccess(), true);

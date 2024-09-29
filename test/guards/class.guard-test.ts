@@ -65,6 +65,89 @@ describe('Class-Guard', () => {
         });
     });
 
+    describe('#customizeMessage()', () => {
+        it('should return false when tested value is 0', () => {
+            const value = 0;
+
+            assert.equal(
+                new ClassGuard()
+                    .customizeMessage('La valeur doit être une instance de classe Object')
+                    .guard(value)
+                    .isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new ClassGuard()
+                    .customizeMessage('La valeur doit être une instance de classe Object')
+                    .guard(value)
+                    .getMessage(),
+                'La valeur doit être une instance de classe Object'
+            );
+
+            assert.equal(
+                new ClassGuard()
+                    .customizeMessage('La valeur doit être une instance de classe Object')
+                    .guard(value, 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être une instance de classe Object'
+            );
+        });
+
+        it('should return true when param is Array and tested value is new Array([1])', () => {
+            const value = new Array(['1']);
+
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .customizeMessage('La valeur doit être une instance de classe Array')
+                    .guard(value)
+                    .isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .customizeMessage('La valeur doit être une instance de classe Array')
+                    .guard(value)
+                    .getMessage(),
+                undefined
+            );
+        });
+
+        it("should return false when param is Array and tested value is 'foo'", () => {
+            const value = 'foo';
+
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .customizeMessage('La valeur doit être une instance de classe Array')
+                    .guard(value)
+                    .isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .customizeMessage('La valeur doit être une instance de classe Array')
+                    .guard(value)
+                    .getMessage(),
+                'La valeur doit être une instance de classe Array'
+            );
+
+            assert.equal(
+                new ClassGuard()
+                    .isInstanceOf(Array)
+                    .customizeMessage('La valeur doit être une instance de classe Array')
+                    .guard('foo', 'valeur')
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être une instance de classe Array'
+            );
+        });
+    });
+
     describe('#isInstanceOf()', () => {
         it('should return true when param is Number and when tested value is new Number(1)', () => {
             assert.equal(new ClassGuard().isInstanceOf(Number).guard(new Number(1)).isSuccess(), true);

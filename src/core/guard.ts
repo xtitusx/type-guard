@@ -15,6 +15,7 @@ export abstract class Guard<T extends Rule> {
     protected options?: IGuardOptions;
     protected propertyValue: unknown;
     protected combinedGuardResult: GuardResult;
+    private customMessage: string;
 
     constructor(options?: IGuardOptions) {
         this.rules = [];
@@ -71,6 +72,10 @@ export abstract class Guard<T extends Rule> {
         this.typeGuard();
 
         if (!this.getCombinedGuardResult().isSuccess()) {
+            if (this.customMessage) {
+                this.getCombinedGuardResult().setMessage(this.customMessage);
+            }
+
             return this.getCombinedGuardResult();
         }
 
@@ -78,11 +83,23 @@ export abstract class Guard<T extends Rule> {
             const guardResult = this.checkRule(rule, propertyValue);
             if (!guardResult.isSuccess()) {
                 this.getCombinedGuardResult().setSuccess(false);
-                this.getCombinedGuardResult().setMessage(guardResult.getMessage());
+                this.getCombinedGuardResult().setMessage(
+                    this.customMessage ? this.customMessage : guardResult.getMessage()
+                );
                 return this.getCombinedGuardResult();
             }
         }
 
         return this.getCombinedGuardResult();
+    }
+
+    /**
+     * Customizes the reason for the failure of the guard.
+     * @param message
+     */
+    public customizeMessage(message: string): this {
+        this.customMessage = message;
+
+        return this;
     }
 }
