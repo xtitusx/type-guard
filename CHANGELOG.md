@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [7.0.0] - 2024-09-29
+## [7.0.0] - 2024-10-01
 
 ### Changed
 
--   Add an IGuardOptions parameter to Guard.guard() method, including propertyName, customMessage parameters (BREAKING CHANGE).
+-   Add an IGuardOptions parameter to Guard.guard() method, including propertyName and customMessage parameters (BREAKING CHANGE).
 
 ## [6.0.0] - 2023-01-01
 

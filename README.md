@@ -43,6 +43,7 @@ It also relies on `GuardResultBulk` to manage multiple `Tyr` invocations:
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
     - [Guard Options](#guard-options)
+    - [Guard Result Options](#guard-result-options)
 3. [Tyr](#tyr)
     - [array()](#array)
     - [boolean()](#boolean)
@@ -70,12 +71,12 @@ npm install @xtitusx/type-guard
 
 ## Basic Usage
 
-In order to check and return a `GuardResult` instance, just invoke `Tyr`, call a specific Guard, and finish by calling `guard(propertyValue: unknown, propertyName?: string)` method which contains the property value and optionaly a property name.
+In order to check and return a `GuardResult` instance, just invoke `Tyr`, call a specific Guard, and finish by calling `guard(propertyValue: unknown, options?: IGuardResultOptions)` method which contains the property value and options.
 
 -   A simple type property check:
 
 ```
-const guardResult = Tyr.string().guard("Lorem ipsum", "lipsum");
+const guardResult = Tyr.string().guard("Lorem ipsum", { propertyName = "lipsum" });
 
 console.log(guardResult);
 // => GuardResult { success: true, propertyName: 'lipsum' }
@@ -139,7 +140,9 @@ export interface IGuardOptions {
 }
 ```
 
--   overrideRule: false
+#### override
+
+-   overrideRule = false (default)
 
 ```
 const stringGuard = Tyr.string({ overrideRule: false }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
@@ -161,7 +164,7 @@ console.log(guardResult2);
 //    }
 ```
 
--   overrideRule: true
+-   overrideRule = true
 
 ```
 const stringGuard = Tyr.string({ overrideRule: true }).isTrimmed('right').hasMinLength(2).hasMaxLength(100);
@@ -177,6 +180,52 @@ const guardResult2 = stringGuard
 
 console.log(guardResult2);
 // => GuardResult { success: true, propertyName: undefined }
+```
+
+### Guard Result Options
+
+`guard()` method expects an `IGuardResultOptions` object optionaly:
+
+```
+interface IGuardResultOptions {
+    propertyName?: string;
+    /**
+     * The custom message used instead of the default message.
+     */
+    customMessage?: string;
+}
+```
+
+#### propertyName
+
+```
+const guardResult = Tyr.string().contains('bar').guard('foo', { propertyName: 'prop'});
+
+console.log(guardResult);                
+// => GuardResult {
+//      success: false,
+//      propertyName: 'prop',
+//      message: 'string is expected to contain bar but does not: foo'
+//    }
+```
+
+The message provided by `getMessage()` method is also automatically prefixed with the name of the property if available:
+```
+console.log(guardResult.getMessage());
+// => Property prop has failed the guard validation: string is expected to contain bar but does not: foo
+```
+
+#### customMessage
+
+```
+const guardResult = Tyr.string().contains('bar').guard('foo', { customMessage: 'The input field must contain bar' });
+
+console.log(guardResult); 
+// => GuardResult {
+//      success: false,
+//      propertyName: undefined,
+//      message: 'The input field must contain bar'
+//}
 ```
 
 ## Tyr

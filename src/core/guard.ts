@@ -12,6 +12,9 @@ export interface IGuardOptions {
 
 interface IGuardResultOptions {
     propertyName?: string;
+    /**
+     * The custom message used instead of the default message.
+     */
     customMessage?: string;
 }
 
