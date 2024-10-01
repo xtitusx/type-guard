@@ -25,6 +25,77 @@ describe('String-Guard', () => {
             assert.equal(guardResult.isSuccess(), false);
             assert.equal(guardResult.getMessage(), 'StringGuard expected a string but received: number');
         });
+
+        it('should return false when tested value is 0', () => {
+            const value = 0;
+
+            assert.equal(
+                new StringGuard().guard(value, { customMessage: 'La valeur doit être de type string' }).isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new StringGuard().guard(value, { customMessage: 'La valeur doit être de type string' }).getMessage(),
+                'La valeur doit être de type string'
+            );
+
+            assert.equal(
+                new StringGuard()
+                    .guard(value, { propertyName: 'valeur', customMessage: 'La valeur doit être de type string' })
+                    .getMessage(),
+                'Property valeur has failed the guard validation: La valeur doit être de type string'
+            );
+        });
+
+        it("should return true when param is 'foo' and tested value is 'foo'", () => {
+            const param = 'foo';
+            const value = 'foo';
+
+            assert.equal(
+                new StringGuard()
+                    .contains(param)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
+                    .isSuccess(),
+                true
+            );
+
+            assert.equal(
+                new StringGuard()
+                    .contains(param)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
+                    .getMessage(),
+                undefined
+            );
+        });
+
+        it("should return false when param is 'bar' and tested value is 'foo'", () => {
+            const param = 'bar';
+            const value = 'foo';
+
+            assert.equal(
+                new StringGuard()
+                    .contains(param)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
+                    .isSuccess(),
+                false
+            );
+
+            assert.equal(
+                new StringGuard()
+                    .contains(param)
+                    .guard(value, { customMessage: `La valeur doit contenir ${param}` })
+                    .getMessage(),
+                `La valeur doit contenir ${param}`
+            );
+
+            assert.equal(
+                new StringGuard()
+                    .contains(param)
+                    .guard(value, { propertyName: 'valeur', customMessage: `La valeur doit contenir ${param}` })
+                    .getMessage(),
+                `Property valeur has failed the guard validation: La valeur doit contenir ${param}`
+            );
+        });
     });
 
     describe('#contains()', () => {

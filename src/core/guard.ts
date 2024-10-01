@@ -10,6 +10,14 @@ export interface IGuardOptions {
     overrideRule?: boolean;
 }
 
+interface IGuardResultOptions {
+    propertyName?: string;
+    /**
+     * The custom message used instead of the default message.
+     */
+    customMessage?: string;
+}
+
 export abstract class Guard<T extends Rule> {
     protected rules?: T[];
     protected options?: IGuardOptions;
@@ -62,15 +70,22 @@ export abstract class Guard<T extends Rule> {
      * - Type.
      * - The set of chained rules.
      * @param propertyValue
-     * @param propertyName
+     * @param options
      */
-    public guard(propertyValue: unknown, propertyName?: string): GuardResult {
+    public guard(propertyValue: unknown, options?: IGuardResultOptions): GuardResult {
         this.propertyValue = propertyValue;
-        this.combinedGuardResult = new GuardResult.Builder().withSuccess(true).withPropertyName(propertyName).build();
+        this.combinedGuardResult = new GuardResult.Builder()
+            .withSuccess(true)
+            .withPropertyName(options?.propertyName)
+            .build();
 
         this.typeGuard();
 
         if (!this.getCombinedGuardResult().isSuccess()) {
+            if (options?.customMessage) {
+                this.getCombinedGuardResult().setMessage(options.customMessage);
+            }
+
             return this.getCombinedGuardResult();
         }
 
@@ -78,7 +93,7 @@ export abstract class Guard<T extends Rule> {
             const guardResult = this.checkRule(rule, propertyValue);
             if (!guardResult.isSuccess()) {
                 this.getCombinedGuardResult().setSuccess(false);
-                this.getCombinedGuardResult().setMessage(guardResult.getMessage());
+                this.getCombinedGuardResult().setMessage(options?.customMessage ?? guardResult.getMessage());
                 return this.getCombinedGuardResult();
             }
         }

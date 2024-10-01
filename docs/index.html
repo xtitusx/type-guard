@@ -2719,6 +2719,7 @@ img {
 				<li><a href="#installation">Installation</a></li>
 				<li><a href="#basic-usage">Basic Usage</a><ul>
 						<li><a href="#guard-options">Guard Options</a></li>
+						<li><a href="#guard-result-options">Guard Result Options</a></li>
 					</ul>
 				</li>
 				<li><a href="#tyr">Tyr</a><ul>
@@ -2752,11 +2753,11 @@ img {
 			<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
 				<h2>Basic Usage</h2>
 			</a>
-			<p>In order to check and return a <code>GuardResult</code> instance, just invoke <code>Tyr</code>, call a specific Guard, and finish by calling <code>guard(propertyValue: unknown, propertyName?: string)</code> method which contains the property value and optionaly a property name.</p>
+			<p>In order to check and return a <code>GuardResult</code> instance, just invoke <code>Tyr</code>, call a specific Guard, and finish by calling <code>guard(propertyValue: unknown, options?: IGuardResultOptions)</code> method which contains the property value and options.</p>
 			<ul>
 				<li>  A simple type property check:</li>
 			</ul>
-			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;lipsum&quot;</span><span style="color: #000000">);</span>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem ipsum&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">propertyName</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;lipsum&quot;</span><span style="color: #000000"> });</span>
 
 <span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);</span>
 <span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: &#039;lipsum&#039; }</span>
@@ -2812,8 +2813,11 @@ img {
 <span style="color: #000000">    </span><span style="color: #001080">overrideRule</span><span style="color: #000000">?: </span><span style="color: #267F99">boolean</span><span style="color: #000000">;</span>
 <span style="color: #000000">}</span>
 </code></pre>
+			<a href="#override" id="override" style="color: inherit; text-decoration: none;">
+				<h4>override</h4>
+			</a>
 			<ul>
-				<li>  overrideRule: false</li>
+				<li>  overrideRule = false (default)</li>
 			</ul>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overrideRule:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
 
@@ -2834,7 +2838,7 @@ img {
 <span style="color: #008000">//    }</span>
 </code></pre>
 			<ul>
-				<li>  overrideRule: true</li>
+				<li>  overrideRule = true</li>
 			</ul>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">stringGuard</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">({ </span><span style="color: #001080">overrideRule:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }).</span><span style="color: #795E26">isTrimmed</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;right&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">hasMinLength</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">).</span><span style="color: #795E26">hasMaxLength</span><span style="color: #000000">(</span><span style="color: #098658">100</span><span style="color: #000000">);</span>
 
@@ -2849,6 +2853,46 @@ img {
 
 <span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult2</span><span style="color: #000000">);</span>
 <span style="color: #008000">// =&gt; GuardResult { success: true, propertyName: undefined }</span>
+</code></pre>
+			<a href="#guard-result-options" id="guard-result-options" style="color: inherit; text-decoration: none;">
+				<h3>Guard Result Options</h3>
+			</a>
+			<p><code>guard()</code> method expects an <code>IGuardResultOptions</code> object optionaly:</p>
+			<pre><code><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">IGuardResultOptions</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">propertyName</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * The custom message used instead of the default message.</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #001080">customMessage</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<a href="#propertyname" id="propertyname" style="color: inherit; text-decoration: none;">
+				<h4>propertyName</h4>
+			</a>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">propertyName:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;prop&#039;</span><span style="color: #000000">});</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">);                </span>
+<span style="color: #008000">// =&gt; GuardResult {</span>
+<span style="color: #008000">//      success: false,</span>
+<span style="color: #008000">//      propertyName: &#039;prop&#039;,</span>
+<span style="color: #008000">//      message: &#039;string is expected to contain bar but does not: foo&#039;</span>
+<span style="color: #008000">//    }</span>
+</code></pre>
+			<p>The message provided by <code>getMessage()</code> method is also automatically prefixed with the name of the property if available:</p>
+			<pre><code><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">.</span><span style="color: #795E26">getMessage</span><span style="color: #000000">());</span>
+<span style="color: #008000">// =&gt; Property prop has failed the guard validation: string is expected to contain bar but does not: foo</span>
+</code></pre>
+			<a href="#custommessage" id="custommessage" style="color: inherit; text-decoration: none;">
+				<h4>customMessage</h4>
+			</a>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guardResult</span><span style="color: #000000"> = </span><span style="color: #001080">Tyr</span><span style="color: #000000">.</span><span style="color: #795E26">string</span><span style="color: #000000">().</span><span style="color: #795E26">contains</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bar&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">guard</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;foo&#039;</span><span style="color: #000000">, { </span><span style="color: #001080">customMessage:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;The input field must contain bar&#039;</span><span style="color: #000000"> });</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">guardResult</span><span style="color: #000000">); </span>
+<span style="color: #008000">// =&gt; GuardResult {</span>
+<span style="color: #008000">//      success: false,</span>
+<span style="color: #008000">//      propertyName: undefined,</span>
+<span style="color: #008000">//      message: &#039;The input field must contain bar&#039;</span>
+<span style="color: #008000">//}</span>
 </code></pre>
 			<a href="#tyr" id="tyr" style="color: inherit; text-decoration: none;">
 				<h2>Tyr</h2>
