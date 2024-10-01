@@ -201,7 +201,7 @@ interface IGuardResultOptions {
 ```
 const guardResult = Tyr.string().contains('bar').guard('foo', { propertyName: 'prop'});
 
-console.log(guardResult);                
+console.log(guardResult);
 // => GuardResult {
 //      success: false,
 //      propertyName: 'prop',
@@ -210,6 +210,7 @@ console.log(guardResult);
 ```
 
 The message provided by `getMessage()` method is also automatically prefixed with the name of the property if available:
+
 ```
 console.log(guardResult.getMessage());
 // => Property prop has failed the guard validation: string is expected to contain bar but does not: foo
@@ -220,7 +221,7 @@ console.log(guardResult.getMessage());
 ```
 const guardResult = Tyr.string().contains('bar').guard('foo', { customMessage: 'The input field must contain bar' });
 
-console.log(guardResult); 
+console.log(guardResult);
 // => GuardResult {
 //      success: false,
 //      propertyName: undefined,
